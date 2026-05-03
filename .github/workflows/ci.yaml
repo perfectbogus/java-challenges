@@ -45,4 +45,4 @@ jobs:
         if: always()                        # runs even if tests fail
         with:
           name: test-report
-          path: build/reports/tests/test/
+          path: app/build/reports/tests/test/
