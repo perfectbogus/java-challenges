@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "java-challenges"
-include("app")
+//include("app")
