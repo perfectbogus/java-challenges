@@ -8,37 +8,37 @@ class ValidParenthesisSeniorTest {
 
     @Test
     void testSinglePair() {
-        assertTrue(ValidParenthesisSenior.solve("()"));
+        assertTrue(ValidParenthesisSenior.isValid("()"));
     }
 
     @Test
     void testMultiplePairs() {
-        assertTrue(ValidParenthesisSenior.solve("()[]{}"));
+        assertTrue(ValidParenthesisSenior.isValid("()[]{}"));
     }
 
     @Test
     void testNested() {
-        assertTrue(ValidParenthesisSenior.solve("{[]}"));
+        assertTrue(ValidParenthesisSenior.isValid("{[]}"));
     }
 
     @Test
     void testMismatchedPairs() {
-        assertFalse(ValidParenthesisSenior.solve("(]"));
+        assertFalse(ValidParenthesisSenior.isValid("(]"));
     }
 
     @Test
     void testWrongOrder() {
-        assertFalse(ValidParenthesisSenior.solve("([)]"));
+        assertFalse(ValidParenthesisSenior.isValid("([)]"));
     }
 
     @Test
     void testOnlyClosingBracket() {
-        assertFalse(ValidParenthesisSenior.solve("]"));
+        assertFalse(ValidParenthesisSenior.isValid("]"));
     }
 
     @Test
     void testEmptyString() {
-        assertTrue(ValidParenthesisSenior.solve(""));
+        assertTrue(ValidParenthesisSenior.isValid(""));
     }
 
 }
