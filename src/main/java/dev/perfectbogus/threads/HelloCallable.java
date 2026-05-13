@@ -7,9 +7,15 @@ import java.util.concurrent.Future;
 public class HelloCallable {
 
     public static String greet(String name) throws Exception {
+        if (name == null) throw new IllegalArgumentException("Name cannot be null");
+
         try (ExecutorService executor = Executors.newSingleThreadExecutor()) {
             Future<String> future = executor.submit(() -> "Hello from " + name + " on " + Thread.currentThread().getName());
             return future.get();
         }
+    }
+
+    public static void main(String[] args) throws Exception{
+        System.out.println(greet("Eduardo"));
     }
 }
