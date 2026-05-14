@@ -11,25 +11,24 @@ public class FirstResultWins {
     private final static int NUMBER_TASKS = 3;
 
     public static String race() throws Exception {
+        List<Callable<String>> tasks = new ArrayList<>(NUMBER_TASKS);
+
+        tasks.add(() -> {
+            Thread.sleep(3000);
+            return "A";
+        });
+
+        tasks.add(() -> {
+            Thread.sleep(1000);
+            return "B";
+        });
+
+        tasks.add(() -> {
+            Thread.sleep(2000);
+            return "C";
+        });
+
         try (ExecutorService executorService = Executors.newFixedThreadPool(NUMBER_TASKS)) {
-
-            List<Callable<String>> tasks = new ArrayList<>(NUMBER_TASKS);
-
-            tasks.add(() -> {
-                Thread.sleep(3000);
-                return "A";
-            });
-
-            tasks.add(() -> {
-                Thread.sleep(1000);
-                return "B";
-            });
-
-            tasks.add(() -> {
-                Thread.sleep(2000);
-                return "C";
-            });
-
             return executorService.invokeAny(tasks);
         }
     }

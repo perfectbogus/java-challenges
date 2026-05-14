@@ -34,10 +34,27 @@ class FirstResultWinsTest {
         assertThrows(ExecutionException.class, () -> {
             try (ExecutorService executorService = Executors.newFixedThreadPool(3)) {
                 List<Callable<String>> tasks = List.of(
-                        () -> throw
+                        () -> { throw new RuntimeException("Task A failed"); },
+                        () -> { throw new RuntimeException("Task B failed"); },
+                        () -> { throw new RuntimeException("Task C failed"); }
                 );
+
+                executorService.invokeAny(tasks);
             }
         } );
+    }
+
+    @Test
+    void testOneFailOtherSucceed() throws Exception {
+        try (ExecutorService executorService = Executors.newFixedThreadPool(3)) {
+            List<Callable<String>> tasks = List.of(
+                    () -> { throw new RuntimeException("Task A failed"); },
+                    () -> { Thread.sleep(500); return "winner"; },
+                    () -> { Thread.sleep(1000); return "second"; }
+            );
+            String result = executorService.invokeAny(tasks);
+            assertEquals("winner", result);
+        }
     }
 
 }
