@@ -2,8 +2,6 @@ package dev.perfectbogus.threads;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.TimeoutException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TimeoutFutureTest {
