@@ -16,6 +16,11 @@ public class CustomerRecords implements Iterable<Customer> {
         this.records.put(c.getName(), c);
     }
 
+    // Return a copy
+    public Map<String, Customer> getCustomers() {
+        return new HashMap<>(this.records);
+    }
+
     @Override
     public Iterator<Customer> iterator() {
         return records.values().iterator();
