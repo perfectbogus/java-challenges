@@ -1,6 +1,6 @@
 package dev.perfectbogus.performance.escaping_reference;
 
-public class Customer {
+public class Customer implements ReadOnlyCustomer {
 
     private String name;
 
@@ -11,6 +11,11 @@ public class Customer {
         this.name = c.getName();
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
     public String getName() {
         return name;
     }

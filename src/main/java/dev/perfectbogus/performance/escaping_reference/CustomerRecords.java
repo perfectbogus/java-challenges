@@ -32,7 +32,7 @@ public class CustomerRecords implements Iterable<Customer> {
         return Map.copyOf(records);
     }
 
-    public Customer find(String name) {
+    public ReadOnlyCustomer find(String name) {
         return new Customer(records.get(name));
     }
 

@@ -28,6 +28,13 @@ public class Main {
 //        System.out.println("Cannot modified");
 //        records.getCustomerImmutableCopy().clear();
 
-        System.out.println(records.find("John"));
+//        System.out.println(records.find("John"));
+
+        ReadOnlyCustomer rc = records.find("John");
+        Customer newCustomer = (Customer) rc;
+        newCustomer.setName("Jane");
+
+        System.out.println(newCustomer);
+
     }
 }
