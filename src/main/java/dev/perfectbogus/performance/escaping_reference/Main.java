@@ -7,7 +7,7 @@ public class Main {
     static void main(String[] args) {
         CustomerRecords records = new CustomerRecords();
 
-        records.addCustomer(new Customer("Jonh"));
+        records.addCustomer(new Customer("John"));
         records.addCustomer(new Customer("Simon"));
 
         System.out.println("All records");
@@ -24,5 +24,10 @@ public class Main {
         for (Customer next : records) {
             System.out.println(next);
         }
+
+//        System.out.println("Cannot modified");
+//        records.getCustomerImmutableCopy().clear();
+
+        System.out.println(records.find("John"));
     }
 }

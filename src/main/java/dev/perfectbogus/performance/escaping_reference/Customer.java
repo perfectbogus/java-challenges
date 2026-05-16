@@ -7,6 +7,9 @@ public class Customer {
     public Customer(String name) {
         this.name = name;
     }
+    public Customer(Customer c) {
+        this.name = c.getName();
+    }
 
     public String getName() {
         return name;

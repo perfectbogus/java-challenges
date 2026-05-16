@@ -1,5 +1,6 @@
 package dev.perfectbogus.performance.escaping_reference;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,6 +20,20 @@ public class CustomerRecords implements Iterable<Customer> {
     // Return a copy
     public Map<String, Customer> getCustomers() {
         return new HashMap<>(this.records);
+    }
+
+    // Return immutable
+    public Map<String, Customer> getCustomersImmutable() {
+        return Collections.unmodifiableMap(this.records);
+    }
+
+    // Return Immutable Copy
+    public Map<String, Customer> getCustomerImmutableCopy() {
+        return Map.copyOf(records);
+    }
+
+    public Customer find(String name) {
+        return new Customer(records.get(name));
     }
 
     @Override
