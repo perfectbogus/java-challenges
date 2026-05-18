@@ -26,10 +26,8 @@ public class RetryTask {
                     throw new RuntimeException("thread interrupted");
                 } catch (ExecutionException e) {
                     System.out.println("Attempt " + (i+1) + " failed, retrying...");
-                    if (i < maxRetries) {
-                        long delay = (long) Math.pow(2, i) * 100;
-                        Thread.sleep(delay);
-                    }
+                    long delay = (long) Math.pow(2, i) * 100;
+                    Thread.sleep(delay);
                 }
             }
         } catch (InterruptedException e) {
