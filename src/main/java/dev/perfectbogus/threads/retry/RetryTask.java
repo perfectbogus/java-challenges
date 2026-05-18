@@ -7,7 +7,7 @@ public class RetryTask {
 
     private static Random rand = new Random();
 
-    public static String executeWithRetry(int maxRetries) throws InterruptedException {
+    public static String executeWithRetry(int maxRetries) {
         if (maxRetries <= 0) throw new IllegalArgumentException("maxRetries must be positive, got: " + maxRetries);
 
         try (ExecutorService executor = Executors.newSingleThreadExecutor()){
@@ -26,11 +26,16 @@ public class RetryTask {
                     throw new RuntimeException("thread interrupted");
                 } catch (ExecutionException e) {
                     System.out.println("Attempt " + (i+1) + " failed, retrying...");
-                    long delay = (long) Math.pow(2, i) * 100;
-                    Thread.sleep(delay);
+                    if (i < maxRetries) {
+                        long delay = (long) Math.pow(2, i) * 100;
+                        Thread.sleep(delay);
+                    }
                 }
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Retry loop interrupted", e);
         }
-        throw new RuntimeException("Max retries reached");
+        throw new RuntimeException("Max retries reached (" + maxRetries + ")");
     }
 }
