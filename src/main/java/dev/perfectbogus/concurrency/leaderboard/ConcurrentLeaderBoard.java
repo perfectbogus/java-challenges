@@ -1,9 +1,9 @@
 package dev.perfectbogus.concurrency.leaderboard;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class ConcurrentLeaderBoard {
 
@@ -14,7 +14,11 @@ public class ConcurrentLeaderBoard {
     }
 
     public List<String> getTopN(int n) {
-
+        return scores.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(n)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 
     public int getScore(String player) {
