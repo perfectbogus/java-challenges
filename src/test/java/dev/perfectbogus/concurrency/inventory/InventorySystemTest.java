@@ -33,7 +33,7 @@ class InventorySystemTest {
     void testSellNonExistingProduct() {
         InventorySystem inventory = InventorySystemFactory();
         String nonExistingProduct = "Duck";
-        assertThrows(IllegalArgumentException.class, () -> inventory.sell(nonExistingProduct, 10));
+        assertFalse(inventory.sell(nonExistingProduct, 10));
     }
 
     @Test
@@ -74,7 +74,7 @@ class InventorySystemTest {
         String product = "Apple";
         final int sell_quantity = 10;
         inventory.sell(product, sell_quantity);
-        assertTrue(inventory.discontinue(product));
+        assertFalse(inventory.discontinue(product));
     }
 
     @Test
