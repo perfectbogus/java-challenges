@@ -51,7 +51,7 @@ public class SalaryReport {
 
     // 5. Total salary budget per department
     public static Map<String, Double> totalSalaryByDepartment(List<Employee> employees) {
-        if (employees == null) throw new IllegalArgumentException("Employee cannot be null");
+        if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
 
         return employees.stream()
                 .collect(Collectors.groupingBy(
@@ -63,15 +63,16 @@ public class SalaryReport {
     // 6. Departments with average salary above threshold
     public static List<String> departmentsAboveAverageSalary(List<Employee> employees, double threshold) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+        if (threshold < 0) throw new IllegalArgumentException("Threshold cannot be negative");
 
         return employees.stream()
                 .collect(Collectors.groupingBy(
                         Employee::getDepartment,
                         Collectors.averagingDouble(Employee::getSalary)
                 )).entrySet().stream()
-                .filter(e -> e.getValue() >= threshold)
+                .filter(e -> e.getValue() > threshold)
                 .map(Map.Entry::getKey)
-                .toList();
+                .sorted().toList();
     }
 
     // 7. Names of employees per department sorted alphabetically
