@@ -1,6 +1,5 @@
 package dev.perfectbogus.functional.order.analytics;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,7 +32,7 @@ public class OrderAnalytics {
         return orders.stream()
                 .collect(Collectors.groupingBy(
                         Order::customer,
-                        Collectors.summingDouble(Order::value)
+                        Collectors.summingDouble(o -> o.value() + o.quantity())
                 )).entrySet().stream()
                 .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
                 .limit(n)
