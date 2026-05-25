@@ -195,7 +195,6 @@ public class BankingAnalytics {
                                 ),
                                 s -> String.format("%.2f%%", (s / grandTotal) * 100)
                         )
-
                 ));
     }
 
@@ -209,7 +208,23 @@ public class BankingAnalytics {
     public static Map<String, Integer> bestMonthByCategoryApprovedSpend(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::category,
+                        Collectors.collectingAndThen(
+                                Collectors.filtering(
+                                        APPROVED,
+                                        Collectors.groupingBy(
+                                                Transaction::month,
+                                                Collectors.summingDouble(Transaction::amount)
+                                        )
+                                ),
+                                monthMap -> monthMap.entrySet().stream()
+                                        .max(Map.Entry.comparingByValue())
+                                        .map(Map.Entry::getKey)
+                                        .orElse(-1)
+                        )
+                ));
     }
 
     // 12. Total APPROVED spend: currency → TransactionType → customerId → total amount
@@ -221,6 +236,19 @@ public class BankingAnalytics {
     public static Map<String, Map<TransactionType, Map<String, Double>>> approvedSpendByCurrencyTypeAndCustomer(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        var result = transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::currency,
+                        Collectors.groupingBy(Transaction::type,
+                                Collectors.groupingBy(Transaction::customerId,
+                                        Collectors.filtering(APPROVED, Collectors.summingDouble(Transaction::amount))
+                                        )
+                        )
+                ));
+
+        result.values().forEach(typeMap ->
+                typeMap.values().forEach(customerMap ->
+                        customerMap.entrySet().removeIf(e -> e.getValue() == 0.0)));
+
+        return result;
     }
 }
