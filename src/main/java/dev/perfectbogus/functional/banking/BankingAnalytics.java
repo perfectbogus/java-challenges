@@ -1,9 +1,6 @@
 package dev.perfectbogus.functional.banking;
 
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -42,10 +39,15 @@ public class BankingAnalytics {
     //   true  → DoubleSummaryStatistics of amount for all DEBIT transactions
     //   false → DoubleSummaryStatistics of amount for all CREDIT transactions
     // Use partitioningBy(type == DEBIT) with summarizingDouble as downstream.
+    private static final Predicate<Transaction> IS_DEBIT = (t -> t.type() == TransactionType.DEBIT);
     public static Map<Boolean, DoubleSummaryStatistics> partitionByTypeWithStats(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.partitioningBy(
+                        IS_DEBIT,
+                        Collectors.summarizingDouble(Transaction::amount)
+                ));
     }
 
     // 4. Most recent APPROVED transaction ID per category
@@ -56,7 +58,20 @@ public class BankingAnalytics {
     public static Map<String, String> mostRecentApprovedByCategory(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::category,
+                        Collectors.collectingAndThen(
+                                Collectors.filtering(
+                                        APPROVED,
+                                        Collectors.maxBy(
+                                                Comparator.comparingInt(Transaction::year)
+                                                        .thenComparingInt(Transaction::month)
+                                        )
+                                ),
+                                opt -> opt.map(Transaction::transactionId).orElse("N/A")
+                        )
+                ));
     }
 
     // 5. Accounts where all transactions are APPROVED and total amount exceeds threshold
