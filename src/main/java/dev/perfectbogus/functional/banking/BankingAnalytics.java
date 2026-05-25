@@ -123,7 +123,15 @@ public class BankingAnalytics {
     public static Map<Integer, String> yearlyTransactionSummary(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::year,
+                        Collectors.teeing(
+                                Collectors.counting(),
+                                Collectors.summingDouble(Transaction::amount),
+                                (c, s) -> String.format("transactions=%d, total=$%.2f",c, s)
+                        )
+                ));
     }
 
     // 8. APPROVED amount statistics per category per account
@@ -135,7 +143,17 @@ public class BankingAnalytics {
     public static Map<String, Map<String, DoubleSummaryStatistics>> approvedStatsByCategoryAndAccount(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::category,
+                        Collectors.groupingBy(
+                                Transaction::accountId,
+                                Collectors.filtering(
+                                        APPROVED,
+                                        Collectors.summarizingDouble(Transaction::amount)
+                                )
+                        )
+                ));
     }
 
     // 9. Classify accounts as "healthy" or "at-risk"
