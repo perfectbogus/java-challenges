@@ -464,10 +464,10 @@ class BankingAnalyticsTest {
             // Grand total = 650+1050+480+1050+9500+100 = 12830
 
             assertEquals("5.07%",  result.get("Food"));          // 650/12830
-            assertEquals("8.19%",  result.get("Travel"));        // 1050/12830
+            assertEquals("8.18%",  result.get("Travel"));        // 1050/12830
             assertEquals("3.74%",  result.get("Shopping"));      // 480/12830
-            assertEquals("8.19%",  result.get("Entertainment")); // 1050/12830
-            assertEquals("74.04%", result.get("Salary"));        // 9500/12830
+            assertEquals("8.18%",  result.get("Entertainment")); // 1050/12830
+            assertEquals("74.05%", result.get("Salary"));        // 9500/12830
             assertEquals("0.78%",  result.get("Refund"));        // 100/12830
         }
 

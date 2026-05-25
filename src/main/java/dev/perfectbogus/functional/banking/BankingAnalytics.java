@@ -184,7 +184,19 @@ public class BankingAnalytics {
     public static Map<String, String> approvedRevenueShareByCategory(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        double grandTotal = transactions.stream().filter(APPROVED).mapToDouble(Transaction::amount).sum();
+        return transactions.stream().filter(APPROVED)
+                .collect(Collectors.groupingBy(
+                        Transaction::category,
+                        Collectors.collectingAndThen(
+                                Collectors.filtering(
+                                        APPROVED,
+                                        Collectors.summingDouble(Transaction::amount)
+                                ),
+                                s -> String.format("%.2f%%", (s / grandTotal) * 100)
+                        )
+
+                ));
     }
 
     // 11. Best month per category by APPROVED spend
