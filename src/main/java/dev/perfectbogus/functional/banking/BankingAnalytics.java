@@ -80,7 +80,21 @@ public class BankingAnalytics {
     public static List<String> fullyApprovedAccountsAboveThreshold(List<Transaction> transactions, double threshold) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::accountId,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> {
+                                    boolean allApproved = list.stream().allMatch(APPROVED);
+                                    double sum = list.stream().mapToDouble(Transaction::amount).sum();
+                                    return allApproved && sum > threshold;
+                                }
+                        )
+                )).entrySet().stream().filter(Map.Entry::getValue)
+                .map(Map.Entry::getKey)
+                .sorted()
+                .toList();
     }
 
     // 6. Unique labels per currency as an unmodifiable Set
