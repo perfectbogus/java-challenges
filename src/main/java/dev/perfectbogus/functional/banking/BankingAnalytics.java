@@ -103,7 +103,17 @@ public class BankingAnalytics {
     public static Map<String, Set<String>> labelsByCurrency(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::currency,
+                        Collectors.collectingAndThen(
+                                Collectors.flatMapping(
+                                        t -> t.labels().stream(),
+                                        Collectors.toSet()
+                                ),
+                                Collections::unmodifiableSet
+                        )
+                ));
     }
 
     // 7. Monthly spend summary per year using teeing
