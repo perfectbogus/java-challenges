@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class BankingAnalytics {
 
     private static final Predicate<Transaction> APPROVED = (t -> t.status() == TransactionStatus.APPROVED);
-
+    private static final Predicate<Transaction> DECLINED = (t -> t.status() == TransactionStatus.DECLINED);
     // 1. APPROVED amount statistics per category
     // Returns Map<category, DoubleSummaryStatistics> — statistics computed only over APPROVED transactions.
     // Use Collectors.filtering as the downstream inside groupingBy. Do NOT pre-filter the stream.
@@ -30,7 +30,11 @@ public class BankingAnalytics {
     public static Map<String, Long> declinedCountByAccount(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::accountId,
+                        Collectors.filtering(DECLINED, Collectors.counting())
+                ));
     }
 
     // 3. Partition by transaction type with summary statistics
