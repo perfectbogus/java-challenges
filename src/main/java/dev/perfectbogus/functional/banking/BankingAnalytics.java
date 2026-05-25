@@ -161,10 +161,18 @@ public class BankingAnalytics {
     //   "healthy"  → every transaction has status != DECLINED (may include PENDING or REVERSED)
     //   "at-risk"  → at least one transaction has status == DECLINED
     // Use groupingBy(accountId) + collectingAndThen(toList, list -> string).
+    private static final Predicate<Transaction> NO_DECLINED = (t -> t.status() != TransactionStatus.DECLINED);
     public static Map<String, String> classifyAccounts(List<Transaction> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
-        return null;
+        return transactions.stream()
+                .collect(Collectors.groupingBy(
+                        Transaction::accountId,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream().allMatch(NO_DECLINED) ? "healthy" : "at-risk"
+                        )
+                ));
     }
 
     // 10. APPROVED revenue share per category as a formatted percentage
