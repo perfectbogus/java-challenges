@@ -1,7 +1,5 @@
 package dev.perfectbogus.design.patterns.behavioral.template.report;
 
-import java.util.Arrays;
-
 // Task 3 — HTML concrete implementation of ReportGenerator.
 // formatData wraps each comma-separated entry in <li> tags inside a <ul>.
 public class HtmlReportGenerator extends ReportGenerator {
