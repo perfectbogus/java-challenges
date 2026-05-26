@@ -50,6 +50,12 @@ public class AccountValidationService {
     // Re-throws any RuntimeException thrown by process after cleanup runs
     public static void processWithCleanup(Runnable process, Runnable cleanup) {
         // TODO: implement
+        if (process == null || cleanup == null) throw new ValidationException("Process and cleanup cannot be null");
+        try {
+            process.run();
+        } finally {
+            cleanup.run();
+        }
     }
 
     // Task 6 — Process a payment with checked exceptions
@@ -60,7 +66,19 @@ public class AccountValidationService {
     public static double processPayment(PaymentRequest request, double balance)
             throws InsufficientFundsException, PaymentProcessingException {
         // TODO: implement
-        return 0;
+        if (request == null) throw new ValidationException("Request cannot be null");
+        if (request.amount() <= 0) throw new ValidationException("Request Amount cannot be negative");
+        if (request.currency().isBlank()) throw new ValidationException("Request Currency cannot be blank");
+        if (balance < request.amount()) throw new InsufficientFundsException("Insufficient funds: required " + request.amount() + ", available " + balance);
+        if (!isSupportedCurrency(request.currency())) {
+            throw new PaymentProcessingException("Unsupported currency: " + request.currency());
+        }
+
+        return balance - request.amount();
+    }
+
+    private static boolean isSupportedCurrency(String currency) {
+        return currency.equals("USD") || currency.equals("EUR") || currency.equals("BGP");
     }
 
     // Task 7 — Wrap low-level exceptions (exception chaining)
