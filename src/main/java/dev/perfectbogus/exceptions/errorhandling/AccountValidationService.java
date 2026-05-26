@@ -11,7 +11,7 @@ public class AccountValidationService {
     public static void validateUsername(String username) {
         // TODO:
         if (username == null) throw new ValidationException("Username cannot be null");
-        if (username.isBlank()) throw new ValidationException("Username cannot be black");
+        if (username.isBlank()) throw new ValidationException("Username cannot be blank");
         if (username.length() < 3 || username.length() > 20)
             throw new ValidationException("Username length must be between 3 and 20");
     }
@@ -78,7 +78,7 @@ public class AccountValidationService {
     }
 
     private static boolean isSupportedCurrency(String currency) {
-        return currency.equals("USD") || currency.equals("EUR") || currency.equals("BGP");
+        return currency.equals("USD") || currency.equals("EUR") || currency.equals("GBP");
     }
 
     // Task 7 — Wrap low-level exceptions (exception chaining)
@@ -147,7 +147,7 @@ public class AccountValidationService {
         // TODO: implement
         try {
             UserAccount user = validateAccount(account);
-            UserAccount exists = registry.get(user);
+            UserAccount exists = registry.get(user.username());
             if (exists != null) {
                 return Result.failure("Username already taken: " + exists.username());
             }

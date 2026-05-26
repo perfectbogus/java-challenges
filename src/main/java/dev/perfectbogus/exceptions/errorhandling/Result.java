@@ -10,7 +10,7 @@ public class Result<T> {
     private final String errorMessage;
 
     // TODO: private constructor (force usage of static factories below)
-    public Result(T value, String errorMessage) {
+    private Result(T value, String errorMessage) {
         this.value = value;
         this.errorMessage = errorMessage;
     }
