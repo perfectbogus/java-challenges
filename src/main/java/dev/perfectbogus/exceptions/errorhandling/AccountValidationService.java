@@ -102,10 +102,12 @@ public class AccountValidationService {
     // Returns Optional.empty() if accounts or accountId is null
     // Returns Optional.empty() if accountId is not found
     // Returns Optional.of(account) if found
-    public static Optional<UserAccount> findAccountSafe(
-            Map<String, UserAccount> accounts, String accountId) {
+    public static Optional<UserAccount> findAccountSafe(Map<String, UserAccount> accounts, String accountId) {
         // TODO: implement
-        return Optional.empty();
+        if (accounts == null || accountId == null) return Optional.empty();
+        var acc = accounts.get(accountId);
+        if (acc == null) return Optional.empty();
+        return Optional.of(acc);
     }
 
     // Task 9 — Validate a full UserAccount (check fields in order, throw on first failure)
