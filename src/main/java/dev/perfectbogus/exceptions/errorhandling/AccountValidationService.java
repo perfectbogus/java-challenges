@@ -89,7 +89,13 @@ public class AccountValidationService {
     // Returns the parsed int age if valid
     public static int parseAndValidateAge(String rawAge) throws PaymentProcessingException {
         // TODO: implement
-        return 0;
+        try {
+            final int age = Integer.parseInt(rawAge);
+            if (age < 0 || age > 150) throw new ValidationException("Age out of range: " + age);
+            return age;
+        } catch (NumberFormatException e) {
+            throw new PaymentProcessingException("Failed to parse age: " + rawAge, e);
+        }
     }
 
     // Task 8 — Safe lookup returning Optional (must never throw)
