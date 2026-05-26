@@ -6,22 +6,27 @@ package dev.perfectbogus.design.patterns.behavioral.pricing;
 public class PricingContext {
 
     // TODO: add a private field to hold the current PricingStrategy
+    private PricingStrategy strategy;
 
     // TODO: constructor that accepts a PricingStrategy
     //       throw IllegalArgumentException("Strategy cannot be null") if null
     public PricingContext(PricingStrategy strategy) {
         // TODO: implement
+        if (strategy == null) throw new IllegalArgumentException("Strategy cannot be null");
+        this.strategy = strategy;
     }
 
     // TODO: swap the current strategy at runtime
     //       throw IllegalArgumentException("Strategy cannot be null") if null
     public void setStrategy(PricingStrategy strategy) {
         // TODO: implement
+        if (strategy == null) throw new IllegalArgumentException("Strategy cannot be null");
+        this.strategy = strategy;
     }
 
     // TODO: delegate the price calculation to the current strategy
     public double calculatePrice(double basePrice) {
         // TODO: implement
-        return 0;
+        return strategy.calculate(basePrice);
     }
 }
