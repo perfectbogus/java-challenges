@@ -11,7 +11,7 @@ public class BulkDiscountStrategy implements PricingStrategy {
 
     // TODO: constructor that accepts int quantity
     public BulkDiscountStrategy(int quantity) {
-        if (quantity < 1) throw new IllegalArgumentException("Quantity cannot be negative");
+        if (quantity < 0) throw new IllegalArgumentException("Quantity cannot be negative");
         // TODO: store quantity
         this.quantity = quantity;
     }
