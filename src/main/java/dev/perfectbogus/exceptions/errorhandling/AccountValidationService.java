@@ -37,7 +37,11 @@ public class AccountValidationService {
     // Returns the UserAccount if found
     public static UserAccount findAccount(Map<String, UserAccount> accounts, String accountId) {
         // TODO: implement
-        return null;
+        if (accounts == null || accountId == null) throw new ValidationException("Arguments cannot be null");
+
+        var account = accounts.get(accountId);
+        if (account == null) throw new AccountNotFoundException("Account not found: " + accountId);
+        return account;
     }
 
     // Task 5 — Process with guaranteed cleanup
