@@ -94,7 +94,10 @@ public class BankingAnalytics {
                 )).entrySet().stream().filter(Map.Entry::getValue)
                 .map(Map.Entry::getKey)
                 .sorted()
-                .toList();
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        Collections::unmodifiableList
+                ));
     }
 
     // 6. Unique labels per currency as an unmodifiable Set
@@ -185,7 +188,7 @@ public class BankingAnalytics {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO: implement
         double grandTotal = transactions.stream().filter(APPROVED).mapToDouble(Transaction::amount).sum();
-        return transactions.stream().filter(APPROVED)
+        return transactions.stream()
                 .collect(Collectors.groupingBy(
                         Transaction::category,
                         Collectors.collectingAndThen(
