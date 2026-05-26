@@ -152,5 +152,22 @@ public class Usage {
         Function<String, String> greet = prefix::concat;
         // Constructor
         Supplier<List<String>> create = ArrayList::new;
+
+        // Reduce Examples:
+
+        int sumResult = List.of(1,2,3,4,5).stream().reduce(0, Integer::sum);
+        System.out.println("Reduce: " + sumResult);
+
+        List<Integer> reduceNumbers = List.copyOf(numbers);
+
+        int sumR = reduceNumbers.stream().reduce(0, (a, b) -> Integer.sum(a, b));
+        int sum2R = reduceNumbers.stream().reduce(0, Integer::sum);
+
+        int prod = reduceNumbers.stream().reduce(1, (a, b) -> a * b);
+        System.out.println("Product: " + prod);
+        int maxR = reduceNumbers.stream().reduce(Integer.MIN_VALUE, (a, b) -> a > b ? a : b);
+        System.out.println("Max Reduced: " + maxR);
+
+
     }
 }

@@ -9,17 +9,27 @@ import java.util.List;
 public class CompositePricingStrategy implements PricingStrategy {
 
     // TODO: add a private List<PricingStrategy> field
+    private final List<PricingStrategy> strategies;
 
     // TODO: constructor that accepts List<PricingStrategy> strategies
     //       throw IllegalArgumentException("Strategies cannot be null or empty") if null or empty
     public CompositePricingStrategy(List<PricingStrategy> strategies) {
         // TODO: implement
+        if (strategies == null || strategies.isEmpty())
+            throw new IllegalArgumentException("Strategies cannot be null or empty");
+
+        this.strategies = strategies;
     }
 
     // TODO: apply each strategy in sequence — output of one feeds into the next
     @Override
     public double calculate(double basePrice) {
         // TODO: implement
-        return 0;
+        return strategies.stream()
+                .reduce(
+                        basePrice,
+                        (price, strategy) -> strategy.calculate(price),
+                        (a, b) -> b
+                );
     }
 }
