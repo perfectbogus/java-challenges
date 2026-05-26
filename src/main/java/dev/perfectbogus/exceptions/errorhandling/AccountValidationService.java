@@ -12,7 +12,8 @@ public class AccountValidationService {
         // TODO:
         if (username == null) throw new ValidationException("Username cannot be null");
         if (username.isBlank()) throw new ValidationException("Username cannot be black");
-        if (username.length() < 3 || username.length() > 20) throw new ValidationException("Username length must be between 3 and 20");
+        if (username.length() < 3 || username.length() > 20)
+            throw new ValidationException("Username length must be between 3 and 20");
     }
 
     // Task 3 — Safe integer parsing
@@ -22,7 +23,12 @@ public class AccountValidationService {
     // Returns the parsed int if successful
     public static int safeParseInt(String value) {
         // TODO: implement
-        return 0;
+        if (value == null) throw new ValidationException("Value cannot be null");
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new ValidationException("Invalid number: " + value);
+        }
     }
 
     // Task 4 — Safe account lookup
