@@ -118,8 +118,24 @@ public class AccountValidationService {
     //   password is null or shorter than 8 characters
     //   age < 18 or age > 120
     // Returns normally if all checks pass
-    public static void validateAccount(UserAccount account) {
+    public static UserAccount validateAccount(UserAccount account) {
         // TODO: implement
+        if (account == null) throw new ValidationException("Account cannot be null");
+        if (account.username() == null
+                || account.username().isBlank()
+                || !validateLength(account.username().length()))
+            throw new ValidationException("Username cannot be null or blank or not between 3 and 20 chars");
+        if (account.email() == null || account.email().isBlank() || !account.email().contains("@"))
+            throw  new ValidationException("Email cannot be null or blank or must contain @");
+        if (account.password() == null || account.password().length() < 8)
+            throw new ValidationException("Password cannot be null or shorer than 8 characters");
+        if (account.age() < 18 || account.age() > 120)
+            throw new ValidationException("Age must be between 18 and 120, age:" + account.age());
+        return account;
+    }
+
+    private static boolean validateLength(int length) {
+        return length >= 3 && length <= 20;
     }
 
     // Task 11 — Register an account using Result (must never throw)
@@ -129,6 +145,16 @@ public class AccountValidationService {
     public static Result<UserAccount> registerAccount(
             UserAccount account, Map<String, UserAccount> registry) {
         // TODO: implement
-        return null;
+        try {
+            UserAccount user = validateAccount(account);
+            UserAccount exists = registry.get(user);
+            if (exists != null) {
+                return Result.failure("Username already taken: " + exists.username());
+            }
+            registry.put(user.username(), account);
+            return Result.success(account);
+        } catch (ValidationException e) {
+            return Result.failure(e.getMessage());
+        }
     }
 }
