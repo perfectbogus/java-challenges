@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.behavioral.pricing;
+package dev.perfectbogus.design.patterns.behavioral.strategy.pricing;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

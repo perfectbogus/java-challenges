@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.behavioral.pricing;
+package dev.perfectbogus.design.patterns.behavioral.strategy.pricing;
 
 // Task 1 — The Strategy interface.
 // Defines the contract that every pricing algorithm must fulfill.

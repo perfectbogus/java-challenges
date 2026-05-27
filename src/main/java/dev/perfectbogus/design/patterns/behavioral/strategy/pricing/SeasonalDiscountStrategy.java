@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.behavioral.pricing;
+package dev.perfectbogus.design.patterns.behavioral.strategy.pricing;
 
 // Task 2b — Applies a flat 10% discount to the base price
 public class SeasonalDiscountStrategy implements PricingStrategy {

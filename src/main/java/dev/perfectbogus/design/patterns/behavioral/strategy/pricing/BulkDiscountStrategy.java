@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.behavioral.pricing;
+package dev.perfectbogus.design.patterns.behavioral.strategy.pricing;
 
 // Task 2d — Applies a quantity-based tiered discount:
 //   quantity < 10  → no discount

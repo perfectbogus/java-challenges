@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.behavioral.pricing;
+package dev.perfectbogus.design.patterns.behavioral.strategy.pricing;
 
 // Task 3 — The Context class.
 // Holds a reference to a PricingStrategy and delegates pricing work to it.

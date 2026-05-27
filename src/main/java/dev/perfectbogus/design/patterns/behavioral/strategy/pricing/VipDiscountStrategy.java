@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.behavioral.pricing;
+package dev.perfectbogus.design.patterns.behavioral.strategy.pricing;
 
 // Task 2c — Applies a flat 20% discount to the base price
 public class VipDiscountStrategy implements PricingStrategy {
