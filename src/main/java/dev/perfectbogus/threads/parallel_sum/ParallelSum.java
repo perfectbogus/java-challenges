@@ -54,4 +54,39 @@ public class ParallelSum {
         Long result = sum(array);
         System.out.println(result);
     }
+
+    public static void miniMaxSum(List<Integer> arr) {
+        if (arr == null) throw new IllegalArgumentException("arr cannot be null");
+        if (arr.isEmpty()) throw new IllegalArgumentException("arr cannot be empty");
+
+        // Write your code here
+        long all = arr.stream().mapToLong(Integer::intValue).sum();
+        long min = Long.MAX_VALUE;
+        long max = Long.MIN_VALUE;
+        for (long current : arr) {
+            long diff = all - current;
+            if (diff < min) {
+                min = diff;
+            }
+            if (diff > max) {
+                max = diff;
+            }
+        }
+        System.out.println(min + " " + max);
+    }
+
+    public static int count(List<Integer> arr) {
+        if (arr == null || arr.size() <= 1) return 0;
+
+        int count = 0;
+        double runningSum = arr.get(0);
+
+        for (int i = 1; i < arr.size(); i++) {
+            double avg = runningSum / i;
+            if (arr.get(i) > avg) count++;
+            runningSum += arr.get(i);
+        }
+        return count;
+    }
+
 }
