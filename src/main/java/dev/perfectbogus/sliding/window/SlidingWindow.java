@@ -33,8 +33,25 @@ public class SlidingWindow {
     // Result length = arr.length - k + 1.
     // Return empty array if arr.length < k.
     public static double[] averageSubarrays(int[] arr, int k) {
+        if (arr.length < k) return new double[0];
+        if (k < 1) throw new IllegalArgumentException("K must be positive");
         // TODO: implement
-        return new double[0];
+        int windowSum = 0;
+        double[] result = new double[arr.length - k + 1];
+
+        for (int i = 0; i < k; i++) {
+            windowSum += arr[i];
+        }
+
+        result[0] = (double) windowSum / k;
+
+        for (int i = k; i < arr.length ; i++) {
+            windowSum += arr[i];
+            windowSum -= arr[i - k];
+            result[i - k + 1] = (double) windowSum / k;
+        }
+
+        return result;
     }
 
     // Task 3 — Fixed window
