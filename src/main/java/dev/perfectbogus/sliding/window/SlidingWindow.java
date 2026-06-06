@@ -1,6 +1,6 @@
 package dev.perfectbogus.sliding.window;
 
-import java.util.List;
+import java.util.*;
 
 public class SlidingWindow {
 
@@ -62,7 +62,7 @@ public class SlidingWindow {
         if (arr.length < k) return List.of(0);
         if (k < 1) throw new IllegalArgumentException("K must be positive");
 
-        Deque<Integer> deque = new Deque<>();
+        Deque<Integer> deque = new ArrayDeque<>();
         List<Integer> result = new ArrayList<>();
 
         for (int right = 0; right < arr.length; right++) {
@@ -75,7 +75,7 @@ public class SlidingWindow {
             }
 
             if (right >= k - 1) {
-                result.add(deque.isEmpty() ? 0 : arr[deque.peekFirst()])
+                result.add(deque.isEmpty() ? 0 : arr[deque.peekFirst()]);
             }
         }
         return result;

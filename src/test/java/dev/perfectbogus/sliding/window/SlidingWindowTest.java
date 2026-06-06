@@ -115,7 +115,7 @@ class SlidingWindowTest {
         @Test
         @DisplayName("Should handle multiple negatives in window — return first")
         void shouldReturnFirstOfMultipleNegatives() {
-            assertEquals(List.of(-3, -3),
+            assertEquals(List.of(-3, -5),
                     SlidingWindow.firstNegativeInWindow(new int[]{-3, -5, 1}, 2));
         }
 
