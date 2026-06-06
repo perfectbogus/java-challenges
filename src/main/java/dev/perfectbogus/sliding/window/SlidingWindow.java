@@ -59,8 +59,28 @@ public class SlidingWindow {
     // in each window of size k, or 0 if the window has no negatives.
     public static List<Integer> firstNegativeInWindow(int[] arr, int k) {
         // TODO: implement
-        return List.of();
+        if (arr.length < k) return List.of(0);
+        if (k < 1) throw new IllegalArgumentException("K must be positive");
+
+        Deque<Integer> deque = new Deque<>();
+        List<Integer> result = new ArrayList<>();
+
+        for (int right = 0; right < arr.length; right++) {
+            if (!deque.isEmpty() && deque.peekFirst() < right - k + 1) {
+                deque.pollFirst();
+            }
+
+            if (arr[right] < 0) {
+                deque.addLast(right);
+            }
+
+            if (right >= k - 1) {
+                result.add(deque.isEmpty() ? 0 : arr[deque.peekFirst()])
+            }
+        }
+        return result;
     }
+
 
     // Task 4 — Variable window
     // Return the length of the longest contiguous subarray with sum <= target.
