@@ -88,7 +88,26 @@ public class SlidingWindow {
     // Return 0 if no valid subarray exists.
     public static int longestSubarraySumAtMost(int[] arr, int target) {
         // TODO: implement
-        return 0;
+
+        if (target < 0) throw new IllegalArgumentException("Target cannot be negative");
+        if (arr.length == 0) return 0;
+
+        int left = 0;
+        int sum = 0;
+        int maxLen = 0;
+
+        for (int right = 0; right < arr.length; right++) {
+            sum += arr[right];
+
+            while (sum > target) {
+                sum -= arr[left];
+                left++;
+            }
+
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
     }
 
     // Task 5 — Variable window
