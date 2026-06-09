@@ -160,7 +160,32 @@ public class SlidingWindow {
     // Shrink from the left when the number of distinct characters exceeds k.
     public static int longestSubstringKDistinct(String s, int k) {
         // TODO: implement
-        return 0;
+        Map<Character, Integer> frequencies = new HashMap<>();
+        int left = 0;
+        int longest = 0;
+        for (int right = 0; right < s.length(); right++) {
+
+            char c = s.charAt(right);
+            if (frequencies.containsKey(c)) {
+                int freq = frequencies.get(c) + 1;
+                frequencies.put(c, freq);
+            } else {
+                frequencies.put(c, 1);
+            }
+
+            while (frequencies.size() > k) {
+                int frequency = frequencies.get(s.charAt(left)) - 1;
+                if (frequency == 0) {
+                    frequencies.remove(s.charAt(left));
+                } else {
+                    frequencies.put(s.charAt(left), frequency);
+                }
+                left++;
+            }
+
+            longest = Math.max(longest, right + 1 - left);
+        }
+        return longest;
     }
 
     // Task 8 — Fixed window on a string
