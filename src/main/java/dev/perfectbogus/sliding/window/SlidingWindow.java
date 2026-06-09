@@ -1,6 +1,7 @@
 package dev.perfectbogus.sliding.window;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class SlidingWindow {
 
@@ -194,6 +195,41 @@ public class SlidingWindow {
     // Return 0 if s.length() < k.
     public static int maxVowelsInSubstring(String s, int k) {
         // TODO: implement
-        return 0;
+        if (s.length() < k) return 0;
+
+        int count = 0;
+        for (int right = 0; right < k; right++) {
+            char c = s.charAt(right);
+            if (isVowel(c)) {
+                count++;
+            }
+        }
+
+        int right = k;
+        int left = 0;
+        int max = count;
+        while (right < s.length()) {
+            char rc = s.charAt(right);
+            if (isVowel(rc)) {
+                count++;
+            }
+
+            char lc = s.charAt(left);
+            if (isVowel(lc)) {
+                count--;
+            }
+
+            right++;
+            left++;
+            max = Math.max(max, count);
+        }
+        return max;
+    }
+
+    private static boolean isVowel(char c) {
+        return switch (c) {
+            case 'a', 'e', 'i', 'o', 'u' -> true;
+            default -> false;
+        };
     }
 }
