@@ -116,7 +116,19 @@ public class SlidingWindow {
     // When a duplicate is found, move left to max(left, lastSeen + 1).
     public static int longestSubstringNoRepeat(String s) {
         // TODO: implement
-        return 0;
+        Map<Character, Integer> seen = new HashMap<>();
+        int left = 0;
+        int maxLen = 0;
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            if (seen.containsKey(c)) {
+                int lastSeen = seen.get(c);
+                left = Math.max(left, lastSeen + 1);
+            }
+            seen.put(c, right);
+            maxLen = Math.max(maxLen, right + 1 - left);
+        }
+        return maxLen;
     }
 
     // Task 6 — Variable window
@@ -125,7 +137,21 @@ public class SlidingWindow {
     // Return 0 if no such subarray exists.
     public static int smallestSubarraySumAtLeast(int[] arr, int target) {
         // TODO: implement
-        return 0;
+        int left = 0;
+        int sum = 0;
+        int minLen = Integer.MAX_VALUE;
+
+        for (int right = 0; right < arr.length; right++) {
+            sum += arr[right];
+
+            while (sum >= target) {
+                minLen = Math.min(minLen, right + 1 - left);
+                sum -= arr[left];
+                left++;
+            }
+
+        }
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
     }
 
     // Task 7 — Variable window

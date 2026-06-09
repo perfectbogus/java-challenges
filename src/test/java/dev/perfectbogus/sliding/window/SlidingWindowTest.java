@@ -137,10 +137,6 @@ class SlidingWindowTest {
         @Test
         @DisplayName("Should return length of longest valid subarray")
         void shouldReturnLongestSubarray() {
-            // [1,2,3,4,5] target=9
-            // [1,2,3]=6 ✅ len=3, [1,2,3,4]=10 ❌
-            // [2,3,4]=9 ✅ len=3
-            // [3,4,5]=12 ❌ [4,5]=9 ✅ len=2
             assertEquals(3, SlidingWindow.longestSubarraySumAtMost(
                     new int[]{1, 2, 3, 4, 5}, 9));
         }
@@ -221,15 +217,13 @@ class SlidingWindowTest {
         @Test
         @DisplayName("Should return smallest subarray length")
         void shouldReturnSmallestLength() {
-            assertEquals(2, SlidingWindow.smallestSubarraySumAtLeast(
-                    new int[]{2, 1, 5, 2, 3, 2}, 7));
+            assertEquals(2, SlidingWindow.smallestSubarraySumAtLeast(new int[]{2, 1, 5, 2, 3, 2}, 7));
         }
 
         @Test
         @DisplayName("Should return 1 when single element >= target")
         void shouldReturnOneForLargeElement() {
-            assertEquals(1, SlidingWindow.smallestSubarraySumAtLeast(
-                    new int[]{2, 1, 5, 2, 8}, 7));
+            assertEquals(1, SlidingWindow.smallestSubarraySumAtLeast(new int[]{2, 1, 5, 2, 8}, 7));
         }
 
         @Test
