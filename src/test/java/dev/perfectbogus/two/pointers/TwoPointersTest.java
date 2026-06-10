@@ -114,7 +114,7 @@ class TwoPointersTest {
         @Test
         @DisplayName("Should handle increasing heights")
         void shouldHandleIncreasingHeights() {
-            assertEquals(6,
+            assertEquals(4,
                     TwoPointers.maxWaterContainer(new int[]{1, 2, 3, 4}));
         }
 

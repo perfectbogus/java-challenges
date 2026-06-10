@@ -33,7 +33,9 @@ public class TwoPointers {
     public static boolean isPalindrome(String s) {
         // TODO: implement
         if (s.isBlank()) return true;
-        String trimmed = s.replaceAll("\\W", " ").replaceAll("\\s", "").toLowerCase().trim();
+        String trimmed = s.replaceAll("\\W", " ")
+                .replaceAll("\\s", "")
+                .toLowerCase().trim();
 
         int left = 0;
         int right = trimmed.length() - 1;
@@ -54,7 +56,24 @@ public class TwoPointers {
     // Move the pointer with the smaller height inward.
     public static int maxWaterContainer(int[] heights) {
         // TODO: implement
-        return 0;
+        int left = 0;
+        int right = heights.length - 1;
+        int maxVolume = 0;
+
+        while (left < right) {
+            int lVal = heights[left];
+            int rVal = heights[right];
+            int minVal = Math.min(lVal, rVal);
+            int volume = minVal * (right - left);
+            maxVolume = Math.max(maxVolume, volume);
+            if (lVal > rVal) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+
+        return maxVolume;
     }
 
     // Task 4 — Converging pointers
