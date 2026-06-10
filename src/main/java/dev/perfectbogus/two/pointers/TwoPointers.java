@@ -32,7 +32,20 @@ public class TwoPointers {
     // characters and case. Move left/right skipping non-alphanumeric chars.
     public static boolean isPalindrome(String s) {
         // TODO: implement
-        return false;
+        if (s.isBlank()) return true;
+        String trimmed = s.replaceAll("\\W", " ").replaceAll("\\s", "").toLowerCase().trim();
+
+        int left = 0;
+        int right = trimmed.length() - 1;
+
+        while (left < right) {
+            if (trimmed.charAt(left) != trimmed.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
     }
 
     // Task 3 — Converging pointers
