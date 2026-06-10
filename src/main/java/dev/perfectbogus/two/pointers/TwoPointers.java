@@ -1,5 +1,7 @@
 package dev.perfectbogus.two.pointers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TwoPointers {
@@ -82,7 +84,42 @@ public class TwoPointers {
     // Skip duplicate values for all three pointers.
     public static List<List<Integer>> threeSum(int[] arr) {
         // TODO: implement
-        return List.of();
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(arr);
+        int i = 0;
+
+        while (i < arr.length) {
+            if (i > 0 && arr[i] == arr[i - 1]) {
+                i++;
+                continue;
+            }
+
+            int target = -arr[i];
+            int left = i + 1;
+            int right = arr.length - 1;
+
+            while (left < right) {
+                int sum = arr[left] + arr[right];
+                if (sum < target) {
+                    left++;
+                } else if (sum > target) {
+                    right--;
+                } else {
+                    List<Integer> triplet = List.of(arr[i], arr[left], arr[right]);
+                    result.add(triplet);
+                    left++;
+                    right--;
+                    while (left < right && arr[left] == arr[left - 1]) {
+                        left++;
+                    }
+                    while (left < right && arr[right] == arr[right + 1]) {
+                        right--;
+                    }
+                }
+            }
+            i++;
+        }
+        return result;
     }
 
     // Task 5 — Same-direction pointers
