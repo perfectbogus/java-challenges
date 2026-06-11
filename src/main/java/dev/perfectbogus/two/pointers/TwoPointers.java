@@ -127,6 +127,7 @@ public class TwoPointers {
     // Return the count of unique elements.
     // slow tracks the last unique position, fast scans forward.
     public static int removeDuplicates(int[] arr) {
+        if (arr.length == 0) return 0;
         // TODO: implement
         int slow = 0;
         int fast = 0;
@@ -145,7 +146,17 @@ public class TwoPointers {
     // Move all zeros to the end while preserving order of non-zero elements.
     // In-place using swap: when fast finds non-zero, swap with slow and advance slow.
     public static void moveZeros(int[] arr) {
+        if (arr == null || arr.length == 0) throw new IllegalArgumentException("arr cannot be null");
         // TODO: implement
+        int slow = 0;
+        for (int fast = 0; fast < arr.length; fast++) {
+            if (arr[fast] != 0) {
+                int temp = arr[slow];
+                arr[slow] = arr[fast];
+                arr[fast] = temp;
+                slow++;
+            }
+        }
     }
 
     // Task 7 — Same-direction pointers (fill from the back)
