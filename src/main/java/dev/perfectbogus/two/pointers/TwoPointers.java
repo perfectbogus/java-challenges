@@ -128,7 +128,17 @@ public class TwoPointers {
     // slow tracks the last unique position, fast scans forward.
     public static int removeDuplicates(int[] arr) {
         // TODO: implement
-        return 0;
+        int slow = 0;
+        int fast = 0;
+        while (fast < arr.length) {
+            if (arr[slow] != arr[fast]) {
+                slow++;
+                arr[slow] = arr[fast];
+            } else {
+                fast++;
+            }
+        }
+        return slow + 1;
     }
 
     // Task 6 — Same-direction pointers
