@@ -28,7 +28,24 @@ public class HashMapProblems {
     // Then count upward: num+1, num+2... while present in the set.
     public static int longestConsecutiveSequence(int[] arr) {
         // TODO: implement
-        return 0;
+        Set<Integer> set = new HashSet<>(arr.length);
+        for (int i : arr) {
+            set.add(i);
+        }
+
+        int longest = 0;
+        for (int i : arr) {
+            if (!set.contains(i - 1)) {
+                int j = i;
+                int length = 1;
+                while (set.contains(j + 1)) {
+                    j++;
+                    length++;
+                }
+                longest = Math.max(longest, length);
+            }
+        }
+        return longest;
     }
 
     // Task 3 — Frequency map
