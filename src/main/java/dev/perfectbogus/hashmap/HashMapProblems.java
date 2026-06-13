@@ -1,8 +1,6 @@
 package dev.perfectbogus.hashmap;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class HashMapProblems {
 
@@ -54,6 +52,21 @@ public class HashMapProblems {
     // Return -1 if no such character exists.
     public static int firstNonRepeatingChar(String s) {
         // TODO: implement
+        if (s == null) throw new IllegalArgumentException("S cannot be null");
+        if (s.isBlank()) return -1;
+
+        Map<Character, Integer> freq = new HashMap<>(s.length());
+        for (char c : s.toCharArray()) {
+            freq.merge(c, 1, Integer::sum);
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            int n = freq.get(s.charAt(i));
+            if (n == 1) {
+                return i;
+            }
+        }
+
         return -1;
     }
 
