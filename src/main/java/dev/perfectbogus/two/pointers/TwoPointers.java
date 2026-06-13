@@ -164,7 +164,25 @@ public class TwoPointers {
     // Use pointers at both ends — place the larger square at the back of result.
     public static int[] sortedSquares(int[] arr) {
         // TODO: implement
-        return new int[0];
+        int[] squares = new int[arr.length];
+        int pos = arr.length - 1;
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left <= right) {
+            int lsquare = arr[left] * arr[left];
+            int rsquare = arr[right] * arr[right];
+
+            if (lsquare > rsquare) {
+                squares[pos] = lsquare;
+                left++;
+            } else {
+                squares[pos] = rsquare;
+                right--;
+            }
+            pos--;
+        }
+        return squares;
     }
 
     // Task 8 — Combined
