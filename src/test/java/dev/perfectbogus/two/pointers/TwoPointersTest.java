@@ -345,7 +345,8 @@ class TwoPointersTest {
         void shouldHandleNegativeTarget() {
             var result = TwoPointers.fourSum(new int[]{-3, -2, -1, 0, 0, 1, 2, 3}, -4);
             assertTrue(result.contains(List.of(-3, -2, 0, 1)));
-            assertTrue(result.contains(List.of(-3, -1, -1, 1)));
+            assertTrue(result.contains(List.of(-3, -2, -1, 2)));
+            assertTrue(result.contains(List.of(-3, -1, 0, 0)));
         }
 
         @Test
