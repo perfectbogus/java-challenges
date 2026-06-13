@@ -10,8 +10,7 @@ public class TwoPointers {
     // Return int[2] with the 0-based indices of two numbers that add up to target.
     // The array is already sorted. Exactly one solution exists.
     public static int[] twoSum(int[] arr, int target) {
-        if (arr == null) throw new IllegalArgumentException("Arr cannot be null" );
-        if (arr.length == 0) throw new IllegalArgumentException("Arr cannot be empty");
+        if (arr == null || arr.length < 2) return new int[0];
         // TODO: implement
         int left = 0;
         int right = arr.length - 1;
@@ -130,13 +129,10 @@ public class TwoPointers {
         if (arr.length == 0) return 0;
         // TODO: implement
         int slow = 0;
-        int fast = 0;
-        while (fast < arr.length) {
-            if (arr[slow] != arr[fast]) {
+        for (int fast = 1; fast < arr.length; fast++) {
+            if (arr[fast] != arr[slow]) {
                 slow++;
                 arr[slow] = arr[fast];
-            } else {
-                fast++;
             }
         }
         return slow + 1;
