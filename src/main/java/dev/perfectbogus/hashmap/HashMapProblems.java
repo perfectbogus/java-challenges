@@ -1,6 +1,7 @@
 package dev.perfectbogus.hashmap;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class HashMapProblems {
 
@@ -89,8 +90,10 @@ public class HashMapProblems {
             freq.merge(c, -1, Integer::sum);
         }
 
-        return freq.values().stream().noneMatch(value -> value < 0);
+        return freq.values().stream().allMatch(ZERO);
     }
+
+    private static final Predicate<Integer> ZERO = (v) -> v == 0;
 
     // Task 5 — Frequency map + PriorityQueue
     // Return the k most frequent elements in any order.
@@ -134,7 +137,7 @@ public class HashMapProblems {
             map.put(arr[i], i);
         }
 
-        throw new IllegalArgumentException("No valid pair found");
+        return new int[0];
     }
 
     // Task 7 — Prefix sum + HashMap
