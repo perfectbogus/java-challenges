@@ -76,7 +76,20 @@ public class HashMapProblems {
     // Return false if any count goes below zero or lengths differ.
     public static boolean isAnagram(String s, String t) {
         // TODO: implement
-        return false;
+        if (s == null || t == null) throw new IllegalArgumentException("S and T cannot be null");
+        if (s.isBlank() && t.isBlank()) return true;
+        if (s.length() != t.length()) return false;
+
+        Map<Character, Integer> freq = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            freq.merge(c, 1, Integer::sum);
+        }
+
+        for (char c : t.toCharArray()) {
+            freq.merge(c, -1, Integer::sum);
+        }
+
+        return freq.values().stream().noneMatch(value -> value < 0);
     }
 
     // Task 5 — Frequency map + PriorityQueue
@@ -84,7 +97,23 @@ public class HashMapProblems {
     // Build frequency map first, then use a min-heap of size k.
     public static List<Integer> topKFrequent(int[] arr, int k) {
         // TODO: implement
-        return List.of();
+        Map<Integer, Integer> freq = new HashMap<>();
+        for (int i : arr) {
+            freq.merge(i, 1, Integer::sum);
+        }
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(
+                Comparator.comparingInt(freq::get)
+        );
+
+        for (int num : freq.keySet()) {
+            minHeap.add(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+
+        return new ArrayList<>(minHeap);
     }
 
     // Task 6 — Complement lookup
@@ -94,7 +123,18 @@ public class HashMapProblems {
     // Assume exactly one solution exists.
     public static int[] twoSum(int[] arr, int target) {
         // TODO: implement
-        return new int[0];
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            int complement = target - arr[i];
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+
+            map.put(arr[i], i);
+        }
+
+        throw new IllegalArgumentException("No valid pair found");
     }
 
     // Task 7 — Prefix sum + HashMap
