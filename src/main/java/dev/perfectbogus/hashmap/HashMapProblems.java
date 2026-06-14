@@ -144,7 +144,21 @@ public class HashMapProblems {
     // Initialise map with {0: 1}.
     public static int subarraySumEqualsK(int[] arr, int k) {
         // TODO: implement
-        return 0;
+        Map<Integer, Integer> map = new HashMap<>(Map.of(0, 1));
+        int prefixSum = 0;
+        int count = 0;
+        for (int num : arr) {
+            prefixSum += num;
+
+            int needed = prefixSum - k;
+
+            if (map.containsKey(needed)) {
+                count += map.get(needed);
+            }
+
+            map.merge(prefixSum, 1, Integer::sum);
+        }
+        return count;
     }
 
     // Task 8 — Prefix sum + HashMap (combined)
@@ -154,6 +168,24 @@ public class HashMapProblems {
     // has sum 0 (equal 0s and 1s). Initialise map with {0: -1}.
     public static int longestEqualZerosAndOnes(int[] arr) {
         // TODO: implement
-        return 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 0) arr[i] = -1;
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
+
+        int prefixSum = 0;
+        int longest = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            prefixSum += arr[i];
+            if (map.containsKey(prefixSum)) {
+                longest = Math.max(longest, i - map.get(prefixSum));
+            } else {
+                map.put(prefixSum, i);
+            }
+        }
+        return longest;
     }
 }

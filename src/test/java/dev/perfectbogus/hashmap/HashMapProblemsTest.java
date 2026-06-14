@@ -275,7 +275,7 @@ class HashMapProblemsTest {
         @Test
         @DisplayName("Should handle negative numbers")
         void shouldHandleNegativeNumbers() {
-            assertEquals(3,
+            assertEquals(6,
                     HashMapProblems.subarraySumEqualsK(new int[]{1, -1, 1, -1, 1}, 0));
         }
 
