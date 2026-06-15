@@ -8,10 +8,54 @@ public class RotationSum {
         int[] nums1 = {5, 8, 3, 11};
         int[] nums2 = {12, 6, 7, 8};
 
-        int[] result = solve(nums1, nums2);
-        for (int r : result) {
-            System.out.println(r);
+//        int[] result = solve(nums1, nums2);
+//        for (int r : result) {
+//            System.out.println(r);
+//        }
+
+        int[] result = new int[nums1.length];
+        for (int shift = 0; shift < nums1.length; shift++) {
+            int[] shifted = shiftToRight(nums1, shift);
+
+            int sum = 0;
+            for (int i = 0; i < nums1.length; i++) {
+                sum += Math.abs(shifted[i] - nums2[i]);
+            }
+            result[shift] = sum;
         }
+
+        for (int i : result) {
+            System.out.println(i);
+        }
+
+        Arrays.sort(result);
+        for (int i : result) {
+            System.out.println(i);
+        }
+
+    }
+
+    public static int[] shiftToLeft(int[] nums, int shift) {
+        int[] shifted = new int[nums.length];
+        int n = nums.length;
+
+        for (int i = 0; i < n; i++) {
+            int index = Math.abs(i - shift) % n;
+            shifted[index] = nums[i];
+        }
+
+        return shifted;
+    }
+
+    public static int[] shiftToRight(int[] nums1, int shift) {
+        int[] shifted = new int[nums1.length];
+        int n = nums1.length;
+
+        for (int i = 0; i < nums1.length; i++) {
+            int index = (i + shift)%n;
+            shifted[index] = nums1[i];
+        }
+        return shifted;
     }
 
     public static int[] solve(int[] nums1, int[] nums2) {
