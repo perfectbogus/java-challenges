@@ -1,7 +1,5 @@
 package dev.perfectbogus.leetcode.arrays;
 
-import java.util.Arrays;
-
 public class ReverseVowels {
 
     public static void main(String[] args) {
