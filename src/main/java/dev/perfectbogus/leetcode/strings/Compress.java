@@ -11,7 +11,7 @@ public class Compress {
         char[] data = {'a','a','b','b','c','c','c'};
         char[] data2 = {'a','a','a','b','b','a','a'};
         //compress(data);
-        System.out.println(compress2(data2));
+        System.out.println(compress(data2));
         System.out.println(Arrays.toString(data2));
     }
 
