@@ -3,10 +3,10 @@ package dev.perfectbogus.leetcode.stack;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class AsteroidCollition {
+public class AsteroidCollision {
 
     public static void main(String[] args) {
-        int[] data = {1, 2, -3, 5, 3};
+        int[] data = {3,5,-6,2,-1,4};
         int[] result = asteroidCollision(data);
         for (int x : result) {
             System.out.println(x);
