@@ -2,7 +2,7 @@ package dev.perfectbogus.leetcode.binary.tree.dfs;
 
 public class LongestZigZag {
 
-    static enum FROM {
+    static enum DIRECTION {
         LEFT, RIGHT
     }
 
@@ -14,22 +14,22 @@ public class LongestZigZag {
     }
 
     public static int longestZigZag(TreeNode root) {
-        helper(root.left, 1, FROM.LEFT);
-        helper(root.right, 1, FROM.RIGHT);
+        helper(root.left, 1, DIRECTION.LEFT);
+        helper(root.right, 1, DIRECTION.RIGHT);
         return res;
     }
 
-    public static void helper(TreeNode node, int len, FROM from) {
+    public static void helper(TreeNode node, int len, DIRECTION from) {
         if (node == null) return;
 
         res = Math.max(res, len);
 
-        if (from.equals(FROM.LEFT)) {
-            helper(node.right, len + 1, FROM.RIGHT);
-            helper(node.left, 1, FROM.LEFT);
+        if (from.equals(DIRECTION.LEFT)) {
+            helper(node.right, len + 1, DIRECTION.RIGHT);
+            helper(node.left, 1, DIRECTION.LEFT);
         } else {
-            helper(node.right, 1, FROM.RIGHT);
-            helper(node.left, len + 1, FROM.LEFT);
+            helper(node.right, 1, DIRECTION.RIGHT);
+            helper(node.left, len + 1, DIRECTION.LEFT);
         }
     }
 }
