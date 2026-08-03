@@ -1,7 +1,5 @@
 package dev.perfectbogus.leetcode.graphs;
 
-import dev.perfectbogus.leetcode.binary.tree.dfs.TreeNode;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
