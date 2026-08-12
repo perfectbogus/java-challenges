@@ -572,6 +572,38 @@ public class ComparatorChallenges {
         if (cities == null)
             throw new IllegalArgumentException("Cities cannot be null");
         // TODO
-        return new ArrayList<>();
+        int i = 0;
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "Europe", i++,
+                "Asia", i++,
+                "Americas", i++,
+                "Africa", i++
+        ));
+
+        Comparator<City> byPriority = Comparator.comparingInt(c -> priorityMap.get(c.continent()));
+        Comparator<City> byPopulationDesc = Comparator.comparingInt(City::population).reversed();
+        Comparator<City> byName = Comparator.comparing(City::name);
+
+        cities.sort(byPriority.thenComparing(byPopulationDesc).thenComparing(byName));
+        return cities;
+    }
+
+    public static List<City> challenge10_2(List<City> cities) {
+        if (cities == null)
+            throw new IllegalArgumentException("Cities cannot be null");
+        // TODO
+        int i = 0;
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "Europe", i++,
+                "Asia", i++,
+                "Americas", i++,
+                "Africa", i++
+        ));
+
+        cities.sort(Comparator.<City>comparingInt(c -> priorityMap.get(c.continent()))
+                .thenComparing(Comparator.comparingInt(City::population).reversed())
+                .thenComparing(City::name));
+
+        return cities;
     }
 }

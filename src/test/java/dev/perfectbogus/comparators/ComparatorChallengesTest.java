@@ -769,6 +769,21 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void continentOrder10_2() {
+            List<ComparatorChallenges.City> result =
+                    ComparatorChallenges.challenge10_2(cities);
+
+            assertEquals("Europe",   result.get(0).continent());
+            assertEquals("Europe",   result.get(1).continent());
+            assertEquals("Asia",     result.get(2).continent());
+            assertEquals("Asia",     result.get(3).continent());
+            assertEquals("Americas", result.get(4).continent());
+            assertEquals("Americas", result.get(5).continent());
+            assertEquals("Africa",   result.get(6).continent());
+            assertEquals("Africa",   result.get(7).continent());
+        }
+
+        @Test
         void populationWithinContinent() {
             List<ComparatorChallenges.City> result =
                     ComparatorChallenges.challenge10(cities);
