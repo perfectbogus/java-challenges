@@ -445,8 +445,38 @@ public class ComparatorChallenges {
     public static List<Task> challenge8(List<Task> tasks) {
         if (tasks == null)
             throw new IllegalArgumentException("Tasks cannot be null");
+
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "HIGH", 0,
+                "MEDIUM", 1,
+                "LOW", 2
+        ));
+
         // TODO
-        return new ArrayList<>();
+        tasks.sort(
+                Comparator.comparingInt((Task t) -> priorityMap.get(t.priority()))
+                        .thenComparingInt(Task::deadline)
+                        .thenComparing(Task::name));
+        return tasks;
+    }
+
+    public static List<Task> challenge8_2(List<Task> tasks) {
+        if (tasks == null)
+            throw new IllegalArgumentException("Tasks cannot be null");
+
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "HIGH", 0,
+                "MEDIUM", 1,
+                "LOW", 2
+        ));
+
+        Comparator<Task> byPriority = Comparator.comparingInt(t -> priorityMap.get(t.priority()));
+        Comparator<Task> byDeadline = Comparator.comparingInt(Task::deadline);
+        Comparator<Task> byName = Comparator.comparing(Task::name);
+
+        // TODO
+        tasks.sort(byPriority.thenComparing(byDeadline).thenComparing(byName));
+        return tasks;
     }
 
     // ─────────────────────────────────────────────────────────────

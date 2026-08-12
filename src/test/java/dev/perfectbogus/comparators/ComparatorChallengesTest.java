@@ -604,6 +604,19 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void priorityOrder8_2() {
+            List<ComparatorChallenges.Task> result =
+                    ComparatorChallenges.challenge8_2(tasks);
+
+            assertEquals("HIGH",   result.get(0).priority());
+            assertEquals("HIGH",   result.get(1).priority());
+            assertEquals("HIGH",   result.get(2).priority());
+            assertEquals("MEDIUM", result.get(3).priority());
+            assertEquals("MEDIUM", result.get(4).priority());
+            assertEquals("LOW",    result.get(5).priority());
+        }
+
+        @Test
         void deadlineWithinPriority() {
             List<ComparatorChallenges.Task> result =
                     ComparatorChallenges.challenge8(tasks);
