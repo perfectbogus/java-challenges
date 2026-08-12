@@ -20,7 +20,22 @@ public class ComparatorChallenges {
     public static int[][] challenge1(int[][] matrix) {
         if (matrix == null)
             throw new IllegalArgumentException("Matrix cannot be null");
+
         // TODO
+        Arrays.sort(matrix, Comparator.comparingInt((int[] a) -> a[1])
+                .thenComparing(Comparator.comparingInt((int[] a) -> a[0]).reversed()));
+
+        return matrix;
+    }
+
+    public static int[][] challenge1_2(int[][] matrix) {
+        if (matrix == null) throw new IllegalArgumentException("matrix is null");
+
+        Arrays.sort(matrix, (a, b) -> {
+            if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
+            return Integer.compare(b[0], a[0]);
+        });
+
         return matrix;
     }
 
