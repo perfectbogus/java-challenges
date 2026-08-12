@@ -159,6 +159,19 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void gradeOrder2() {
+            List<ComparatorChallenges.Student> result =
+                    ComparatorChallenges.challenge3_2(students);
+
+            assertEquals('A', result.get(0).grade());
+            assertEquals('A', result.get(1).grade());
+            assertEquals('B', result.get(2).grade());
+            assertEquals('B', result.get(3).grade());
+            assertEquals('C', result.get(4).grade());
+        }
+
+
+        @Test
         void nameOrderWithinGrade() {
             List<ComparatorChallenges.Student> result =
                     ComparatorChallenges.challenge3(students);

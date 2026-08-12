@@ -1,6 +1,7 @@
 package dev.perfectbogus.comparators;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ComparatorChallenges {
 
@@ -57,12 +58,16 @@ public class ComparatorChallenges {
     // Hint: comparingByKey(comparingInt(length))
     //       .thenComparing(comparingByValue().reversed())
     // ─────────────────────────────────────────────────────────────
-    public static List<Map.Entry<String, Integer>> challenge2(
-            Map<String, Integer> map) {
+    public static List<Map.Entry<String, Integer>> challenge2(Map<String, Integer> map) {
         if (map == null)
             throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Map.Entry<String, Integer>> cKeyLength = Map.Entry.comparingByKey(Comparator.comparingInt(String::length));
+        Comparator<Map.Entry<String, Integer>> cValue = Map.Entry.<String, Integer>comparingByValue().reversed();
+
+        return map.entrySet().stream().sorted(
+                cKeyLength.thenComparing(cValue)
+        ).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -91,8 +96,49 @@ public class ComparatorChallenges {
     public static List<Student> challenge3(List<Student> students) {
         if (students == null)
             throw new IllegalArgumentException("Students cannot be null");
+
         // TODO
-        return new ArrayList<>();
+        Map<Character, Integer> gradesMap = new HashMap<>(Map.of(
+                'A', 0,
+                'B', 1,
+                'C', 2,
+                'D', 3,
+                'E', 4,
+                'F', 5
+        ));
+//          You need to define the withness by Type Comparator or
+//        students.sort(
+//                Comparator.<Student>comparingInt( a -> gradesMap.get(a.grade()))
+//                        .thenComparing(Student::name)
+//        );
+
+        // By type in the lambda
+        students.sort(
+                Comparator.comparingInt((Student a) -> gradesMap.get(a.grade()))
+                        .thenComparing(Student::name)
+        );
+
+        return students;
+    }
+
+    public static List<Student> challenge3_2(List<Student> students) {
+        if (students == null) throw new IllegalArgumentException("students is null");
+
+        Map<Character, Integer> gradesMap = new HashMap<>(Map.of(
+                'A', 0,
+                'B', 1,
+                'C', 2,
+                'D', 3,
+                'E', 4,
+                'F', 5
+        ));
+
+        Comparator<Student> byGrade = Comparator.comparingInt(a -> gradesMap.get(a.grade()));
+        Comparator<Student> byName = Comparator.comparing(Student::name);
+
+        students.sort(byGrade.thenComparing(byName));
+
+        return students;
     }
 
     // ─────────────────────────────────────────────────────────────
