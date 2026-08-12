@@ -420,12 +420,19 @@ public class TypeWitnessChallenges {
     // );
     // sorted.putAll(map);
     // ─────────────────────────────────────────────────────────────
-    public static Map<String, Integer> challenge8(
-            Map<String, Integer> map) {
+    public static Map<String, Integer> challenge8(Map<String, Integer> map) {
         if (map == null)
             throw new IllegalArgumentException("Map cannot be null");
-        // TODO
-        return new TreeMap<>();
+
+        Map<String, Integer> treeMap = new TreeMap<>(
+                Comparator.<String>comparingInt(map::get)
+                        .reversed()
+                        .thenComparing(Comparator.naturalOrder())
+        );
+
+        treeMap.putAll(map);
+
+        return treeMap;
     }
 
     // ─────────────────────────────────────────────────────────────
