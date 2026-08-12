@@ -504,6 +504,28 @@ public class ComparatorChallenges {
         if (matrix == null)
             throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Arrays.sort(matrix, (a, b) -> {
+            if (a[0] != b[0]) return Integer.compare(a[0], b[0]);
+            if (a[1] != b[1]) return Integer.compare(a[1], b[1]);
+            return Integer.compare(a[2], b[2]);
+        });
+        return matrix;
+    }
+
+    public static int[][] challenge9_2(int[][] matrix) {
+        if (matrix == null)
+            throw new IllegalArgumentException("Matrix cannot be null");
+        // TODO
+        Arrays.sort(matrix, (a, b) -> {
+            int minLen = Math.min(a.length, b.length);
+            int i = 0;
+            while (i < minLen) {
+                if (a[i] != b[i])
+                    return Integer.compare(a[i], b[i]);
+                i++;
+            }
+            return Integer.compare(a.length, b.length);
+        });
         return matrix;
     }
 

@@ -676,6 +676,18 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void basicCase9_2() {
+            int[][] result = ComparatorChallenges.challenge9_2(
+                    new int[][]{{3,1,4},{1,5,9},{1,5,2},{2,6,5},{1,5,9}});
+
+            assertArrayEquals(new int[]{1, 5, 2}, result[0]);
+            assertArrayEquals(new int[]{1, 5, 9}, result[1]);
+            assertArrayEquals(new int[]{1, 5, 9}, result[2]);
+            assertArrayEquals(new int[]{2, 6, 5}, result[3]);
+            assertArrayEquals(new int[]{3, 1, 4}, result[4]);
+        }
+
+        @Test
         void firstElementDiffers() {
             int[][] result = ComparatorChallenges.challenge9(
                     new int[][]{{3,1},{1,9},{2,5}});
