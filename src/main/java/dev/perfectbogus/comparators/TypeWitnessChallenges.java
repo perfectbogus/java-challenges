@@ -420,6 +420,21 @@ public class TypeWitnessChallenges {
     // );
     // sorted.putAll(map);
     // ─────────────────────────────────────────────────────────────
+    public static Map<String, Integer> challenge8_2(Map<String, Integer> map) {
+        if (map == null)
+            throw new IllegalArgumentException("Map cannot be null");
+
+        //Comparator<String> byValueDesc = Comparator.<String>comparingInt(map::get).reversed();
+        Comparator<String> byValueDesc = Comparator.comparingInt((String s) -> map.get(s)).reversed();
+        Comparator<String> byName = Comparator.naturalOrder();
+
+        Map<String, Integer> treeMap = new TreeMap<>(byValueDesc.thenComparing(byName));
+
+        treeMap.putAll(map);
+
+        return treeMap;
+    }
+
     public static Map<String, Integer> challenge8(Map<String, Integer> map) {
         if (map == null)
             throw new IllegalArgumentException("Map cannot be null");
