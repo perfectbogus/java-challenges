@@ -29,7 +29,22 @@ public class TypeWitnessChallenges {
         if (words == null)
             throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        words.sort(
+                Comparator.comparingInt(String::length).reversed()
+                        .thenComparing(String::compareTo)
+        );
+        return words;
+    }
+
+    public static List<String> challenge1_2(List<String> words) {
+        if (words == null)
+            throw new IllegalArgumentException("Words cannot be null");
+        // TODO
+        words.sort(
+                Comparator.comparingInt((String s) -> s.length()).reversed()
+                        .thenComparing(Comparator.naturalOrder())
+        );
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────

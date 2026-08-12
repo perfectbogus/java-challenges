@@ -32,6 +32,19 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void basicCase1_2() {
+            List<String> result = TypeWitnessChallenges.challenge1_2(
+                    new ArrayList<>(List.of(
+                            "fig","banana","kiwi","apple","plum","date")));
+
+            assertEquals("banana", result.get(0)); // len=6
+            assertEquals("apple",  result.get(1)); // len=5
+            assertEquals("date",   result.get(2)); // len=4, d<k<p
+            assertEquals("kiwi",   result.get(3)); // len=4
+            assertEquals("plum",   result.get(4)); // len=4
+            assertEquals("fig",    result.get(5)); // len=3
+        }
+        @Test
         void allSameLength() {
             List<String> result = TypeWitnessChallenges.challenge1(
                     new ArrayList<>(List.of("dog","cat","ant")));
