@@ -482,10 +482,28 @@ public class TypeWitnessChallenges {
     //       .thenComparing(comparingInt(length).reversed())
     //       .thenComparingInt(firstElement)
     // ─────────────────────────────────────────────────────────────
+    public static int[][] challenge9_2(int[][] matrix) {
+        if (matrix == null)
+            throw new IllegalArgumentException("Matrix cannot be null");
+
+        Comparator<int[]> bySumDesc = Comparator.comparingInt((int[] row) -> Arrays.stream(row).sum()).reversed();
+        Comparator<int[]> byLengthDesc = Comparator.comparingInt((int[] row) -> row.length).reversed();
+        Comparator<int[]> byFirstElem = Comparator.comparingInt((int[] row) -> row[0]);
+        // TODO
+        Arrays.sort(matrix, bySumDesc.thenComparing(byLengthDesc).thenComparing(byFirstElem));
+
+        return matrix;
+    }
     public static int[][] challenge9(int[][] matrix) {
         if (matrix == null)
             throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Arrays.sort(matrix,
+                Comparator.comparingInt((int[] row) -> Arrays.stream(row).sum()).reversed()
+                .thenComparing(Comparator.comparingInt((int[] row) -> row.length).reversed())
+                .thenComparingInt((int[] row) -> row[0]));
+
+        System.out.println(Arrays.deepToString(matrix));
         return matrix;
     }
 

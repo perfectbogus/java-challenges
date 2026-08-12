@@ -706,6 +706,23 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void basicCase9_2() {
+            int[][] result = TypeWitnessChallenges.challenge9_2(
+                    new int[][]{{1,2,3},{4,1},{2,3,1},{6},{1,2,3,0}});
+
+            // Sums: [6,5,6,6,6]
+            // sum=6: [1,2,3,0] len=4, [1,2,3] len=3, [2,3,1] len=3, [6] len=1
+            //   len DESC: 4,3,3,1
+            //   len=3 tie: first elem ASC: [1,2,3](1) before [2,3,1](2)
+            // sum=5: [4,1] len=2
+            assertArrayEquals(new int[]{1, 2, 3, 0}, result[0]); // sum=6 len=4
+            assertArrayEquals(new int[]{1, 2, 3},    result[1]); // sum=6 len=3 first=1
+            assertArrayEquals(new int[]{2, 3, 1},    result[2]); // sum=6 len=3 first=2
+            assertArrayEquals(new int[]{6},           result[3]); // sum=6 len=1
+            assertArrayEquals(new int[]{4, 1},        result[4]); // sum=5
+        }
+
+        @Test
         void allSameSum() {
             int[][] result = TypeWitnessChallenges.challenge9(
                     new int[][]{{3,0},{1,2},{2,1}});
