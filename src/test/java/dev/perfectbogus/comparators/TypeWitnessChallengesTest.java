@@ -206,6 +206,18 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void salaryOrder3_2() {
+            List<TypeWitnessChallenges.Employee> result =
+                    TypeWitnessChallenges.challenge3_2(employees);
+
+            assertEquals(95000, result.get(0).salary(), 0.01);
+            assertEquals(95000, result.get(1).salary(), 0.01);
+            assertEquals(85000, result.get(2).salary(), 0.01);
+            assertEquals(85000, result.get(3).salary(), 0.01);
+            assertEquals(72000, result.get(4).salary(), 0.01);
+        }
+
+        @Test
         void experienceWithinSalary() {
             List<TypeWitnessChallenges.Employee> result =
                     TypeWitnessChallenges.challenge3(employees);

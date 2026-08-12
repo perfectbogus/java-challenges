@@ -129,7 +129,24 @@ public class TypeWitnessChallenges {
         if (employees == null)
             throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        employees.sort(
+                Comparator.comparingDouble(Employee::salary).reversed()
+                        .thenComparing(Comparator.comparingInt(Employee::yearsExp).reversed())
+                        .thenComparing(Employee::name)
+        );
+        return employees;
+    }
+
+    public static List<Employee> challenge3_2(List<Employee> employees) {
+        if (employees == null)
+            throw new IllegalArgumentException("Employees cannot be null");
+        // TODO
+        employees.sort(
+                Comparator.comparingDouble((Employee e) -> e.salary()).reversed()
+                        .thenComparing(Comparator.comparingInt((Employee e) -> e.yearsExp()).reversed())
+                        .thenComparing(e -> e.name())
+        );
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
