@@ -342,6 +342,19 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void categoryOrder5_2() {
+            List<ComparatorChallenges.Product> result =
+                    ComparatorChallenges.challenge5_2(products);
+
+            assertEquals("Electronics", result.get(0).category());
+            assertEquals("Electronics", result.get(1).category());
+            assertEquals("Electronics", result.get(2).category());
+            assertEquals("Clothing",    result.get(3).category());
+            assertEquals("Clothing",    result.get(4).category());
+            assertEquals("Food",        result.get(5).category());
+        }
+
+        @Test
         void priceWithinCategory() {
             List<ComparatorChallenges.Product> result =
                     ComparatorChallenges.challenge5(products);

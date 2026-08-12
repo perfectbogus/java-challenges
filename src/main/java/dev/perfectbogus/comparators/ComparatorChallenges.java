@@ -241,8 +241,39 @@ public class ComparatorChallenges {
     public static List<Product> challenge5(List<Product> products) {
         if (products == null)
             throw new IllegalArgumentException("Products cannot be null");
+
         // TODO
-        return new ArrayList<>();
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "Electronics", 0,
+                "Clothing", 1,
+                "Food", 2
+        ));
+
+        Comparator<Product> byPriority = Comparator.comparing( e -> priorityMap.get(e.category()));
+        Comparator<Product> byPrice = Comparator.comparingDouble(Product::price);
+        Comparator<Product> byName = Comparator.comparing(Product::name);
+
+        products.sort(byPriority.thenComparing(byPrice).thenComparing(byName));
+
+        return products;
+    }
+
+    public static List<Product> challenge5_2(List<Product> products) {
+        if (products == null) throw new IllegalArgumentException("products cannot be null");
+
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "Electronics", 0,
+                "Clothing", 1,
+                "Food", 2
+        ));
+
+        products.sort(
+                Comparator.comparing((Product e) -> priorityMap.get(e.category()))
+                        .thenComparingDouble(Product::price)
+                        .thenComparing(Product::name)
+        );
+
+        return products;
     }
 
     // ─────────────────────────────────────────────────────────────
