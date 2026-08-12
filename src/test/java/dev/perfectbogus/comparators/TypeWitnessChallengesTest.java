@@ -800,6 +800,19 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void ratingOrder10_2() {
+            List<TypeWitnessChallenges.Book> result =
+                    TypeWitnessChallenges.challenge10_2(books);
+
+            assertEquals(4.8, result.get(0).rating(), 0.001);
+            assertEquals(4.7, result.get(1).rating(), 0.001);
+            assertEquals(4.5, result.get(2).rating(), 0.001);
+            assertEquals(4.5, result.get(3).rating(), 0.001);
+            assertEquals(4.5, result.get(4).rating(), 0.001);
+            assertEquals(4.5, result.get(5).rating(), 0.001);
+        }
+
+        @Test
         void pagesWithinRating() {
             List<TypeWitnessChallenges.Book> result =
                     TypeWitnessChallenges.challenge10(books);

@@ -482,6 +482,24 @@ public class TypeWitnessChallenges {
     //       .thenComparing(comparingInt(length).reversed())
     //       .thenComparingInt(firstElement)
     // ─────────────────────────────────────────────────────────────
+    public static int[][] challenge9_3(int[][] matrix) {
+        if (matrix == null)
+            throw new IllegalArgumentException("Matrix cannot be null");
+
+        Map<int[], Integer> cache = new IdentityHashMap<>();
+        for (int[] row : matrix) {
+            int sum = Arrays.stream(row).sum();
+            cache.put(row, sum);
+        }
+
+        Comparator<int[]> bySumDesc = Comparator.comparingInt((int[] row) -> cache.get(row)).reversed();
+        Comparator<int[]> byLengthDesc = Comparator.comparingInt((int[] row) -> row.length).reversed();
+        Comparator<int[]> byFirstElem = Comparator.comparingInt((int[] row) -> row[0]);
+        // TODO
+        Arrays.sort(matrix, bySumDesc.thenComparing(byLengthDesc).thenComparing(byFirstElem));
+
+        return matrix;
+    }
     public static int[][] challenge9_2(int[][] matrix) {
         if (matrix == null)
             throw new IllegalArgumentException("Matrix cannot be null");
@@ -494,6 +512,7 @@ public class TypeWitnessChallenges {
 
         return matrix;
     }
+
     public static int[][] challenge9(int[][] matrix) {
         if (matrix == null)
             throw new IllegalArgumentException("Matrix cannot be null");
@@ -502,8 +521,6 @@ public class TypeWitnessChallenges {
                 Comparator.comparingInt((int[] row) -> Arrays.stream(row).sum()).reversed()
                 .thenComparing(Comparator.comparingInt((int[] row) -> row.length).reversed())
                 .thenComparingInt((int[] row) -> row[0]));
-
-        System.out.println(Arrays.deepToString(matrix));
         return matrix;
     }
 
@@ -547,10 +564,30 @@ public class TypeWitnessChallenges {
     // ─────────────────────────────────────────────────────────────
     record Book(String title, String author, double rating, int pages) {}
 
+    public static List<Book> challenge10_2(List<Book> books) {
+        if (books == null)
+            throw new IllegalArgumentException("Books cannot be null");
+        // TODO
+        Comparator<Book> byRatingDesc = Comparator.comparingDouble(Book::rating).reversed();
+        Comparator<Book> byPagesDesc = Comparator.comparingInt(Book::pages).reversed();
+        Comparator<Book> byTitle = Comparator.comparing(Book::title);
+        Comparator<Book> byAuthor = Comparator.comparing(Book::author);
+
+        books.sort(byRatingDesc.thenComparing(byPagesDesc).thenComparing(byTitle).thenComparing(byAuthor));
+
+        return books;
+    }
+
     public static List<Book> challenge10(List<Book> books) {
         if (books == null)
             throw new IllegalArgumentException("Books cannot be null");
         // TODO
-        return new ArrayList<>();
+        books.sort(
+                Comparator.comparingDouble(Book::rating).reversed()
+                        .thenComparing(Comparator.comparingInt(Book::pages).reversed())
+                        .thenComparing(Book::title)
+                        .thenComparing(Book::author)
+        );
+        return books;
     }
 }
