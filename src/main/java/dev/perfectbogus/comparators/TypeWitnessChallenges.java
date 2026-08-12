@@ -5,6 +5,8 @@ import java.util.stream.*;
 
 public class TypeWitnessChallenges {
 
+    private static Comparator<Map.Entry<String, Integer>> byLengthKey;
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 1 — Sort Strings by Length DESC then Alpha ASC
     //
@@ -240,12 +242,29 @@ public class TypeWitnessChallenges {
     //       .thenComparing(comparingByValue())
     //       .thenComparing(comparingByKey())
     // ─────────────────────────────────────────────────────────────
-    public static List<Map.Entry<String, Integer>> challenge5(
-            Map<String, Integer> map) {
+    public static List<Map.Entry<String, Integer>> challenge5(Map<String, Integer> map) {
         if (map == null)
             throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        return map.entrySet().stream()
+                .sorted(
+                        Map.Entry.<String, Integer>comparingByKey(Comparator.<String>comparingInt(s -> s.length()).reversed())
+                                .thenComparing(Map.Entry.comparingByValue())
+                                .thenComparing(Map.Entry.comparingByKey())
+                ).toList();
+    }
+
+    public static List<Map.Entry<String, Integer>> challenge5_2(Map<String, Integer> map) {
+        if (map == null)
+            throw new IllegalArgumentException("Map cannot be null");
+
+        Comparator<Map.Entry<String, Integer>> byLengthKey =
+                Map.Entry.<String, Integer>comparingByKey(Comparator.comparingInt(String::length)).reversed();
+        Comparator<Map.Entry<String, Integer>> byValue = Map.Entry.comparingByValue();
+        Comparator<Map.Entry<String, Integer>> byKey = Map.Entry.comparingByKey();
+        // TODO
+        return map.entrySet().stream()
+                .sorted(byLengthKey.thenComparing(byValue).thenComparing(byKey)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────

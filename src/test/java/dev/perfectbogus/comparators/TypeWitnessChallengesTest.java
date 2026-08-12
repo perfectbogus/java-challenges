@@ -364,6 +364,31 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void basicCase5_2() {
+            Map<String, Integer> map = new HashMap<>(Map.of(
+                    "cat",      3,
+                    "elephant", 1,
+                    "dog",      5,
+                    "ant",      2,
+                    "bear",     4,
+                    "eel",      5
+            ));
+            List<Map.Entry<String, Integer>> result =
+                    TypeWitnessChallenges.challenge5_2(map);
+
+            // len=8: elephant(1)
+            assertEquals("elephant", result.get(0).getKey());
+            // len=4: bear(4)
+            assertEquals("bear",     result.get(1).getKey());
+            // len=3: ant(2),cat(3),dog(5),eel(5)
+            // val ASC: ant(2),cat(3),dog(5),eel(5) → dog=eel tie → alpha
+            assertEquals("ant",      result.get(2).getKey()); // val=2
+            assertEquals("cat",      result.get(3).getKey()); // val=3
+            assertEquals("dog",      result.get(4).getKey()); // val=5, d<e
+            assertEquals("eel",      result.get(5).getKey()); // val=5, e>d
+        }
+
+        @Test
         void allSameLength() {
             Map<String, Integer> map = new HashMap<>(Map.of(
                     "cat", 3,
