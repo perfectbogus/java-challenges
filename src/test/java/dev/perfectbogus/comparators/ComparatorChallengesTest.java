@@ -264,6 +264,26 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void allSameDuration2() {
+            int[][] result = ComparatorChallenges.challenge4_2(
+                    new int[][]{{3,5},{1,3},{2,4}});
+
+            assertArrayEquals(new int[]{1, 3}, result[0]);
+            assertArrayEquals(new int[]{2, 4}, result[1]);
+            assertArrayEquals(new int[]{3, 5}, result[2]);
+        }
+
+        @Test
+        void allSameDuration3() {
+            int[][] result = ComparatorChallenges.challenge4_3(
+                    new int[][]{{3,5},{1,3},{2,4}});
+
+            assertArrayEquals(new int[]{1, 3}, result[0]);
+            assertArrayEquals(new int[]{2, 4}, result[1]);
+            assertArrayEquals(new int[]{3, 5}, result[2]);
+        }
+
+        @Test
         void singleInterval() {
             int[][] result = ComparatorChallenges.challenge4(
                     new int[][]{{1, 5}});

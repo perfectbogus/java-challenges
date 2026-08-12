@@ -162,10 +162,45 @@ public class ComparatorChallenges {
     //
     // Hint: comparingInt(end-start) + thenComparingInt(start)
     // ─────────────────────────────────────────────────────────────
+
     public static int[][] challenge4(int[][] intervals) {
         if (intervals == null)
             throw new IllegalArgumentException("Intervals cannot be null");
+
         // TODO
+        Arrays.sort(intervals,
+                Comparator.comparingInt((int[] a) -> a[1] - a[0])
+                        .thenComparingInt((int[] a) -> a[0])
+        );
+
+        return intervals;
+    }
+
+    public static int[][] challenge4_2(int[][] intervals) {
+        if (intervals == null)
+            throw new IllegalArgumentException("Intervals cannot be null");
+
+        // TODO
+        Arrays.sort(intervals, (a, b) -> {
+            int durationA = a[1] - a[0];
+            int durationB = b[1] - b[0];
+            if (durationA != durationB) return Integer.compare(durationA, durationB);
+            return Integer.compare(a[0], b[0]);
+
+        });
+
+        return intervals;
+    }
+
+    public static int[][] challenge4_3(int[][] intervals) {
+        if (intervals == null)
+            throw new IllegalArgumentException("Intervals cannot be null");
+
+        Comparator<int[]> byDuration = Comparator.comparingInt(a -> a[1] - a[0]);
+        Comparator<int[]> byStart = Comparator.comparingInt(a -> a[0]);
+
+        Arrays.sort(intervals, byDuration.thenComparing(byStart));
+
         return intervals;
     }
 
