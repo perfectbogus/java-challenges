@@ -509,6 +509,32 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void basicCase7_2() {
+            int[][] result = ComparatorChallenges.challenge7_2(
+                    new int[][]{{1,2,4},{3,5,7},{2,4,6},{1,3,5},{1,2,3}});
+
+            // Even counts: 2,0,3,0,1
+            assertArrayEquals(new int[]{2, 4, 6}, result[0]); // 3 evens
+            assertArrayEquals(new int[]{1, 2, 4}, result[1]); // 2 evens
+            assertArrayEquals(new int[]{1, 2, 3}, result[2]); // 1 even
+            assertArrayEquals(new int[]{1, 3, 5}, result[3]); // 0 evens sum=9
+            assertArrayEquals(new int[]{3, 5, 7}, result[4]); // 0 evens sum=15
+        }
+
+        @Test
+        void basicCase7_3() {
+            int[][] result = ComparatorChallenges.challenge7_3(
+                    new int[][]{{1,2,4},{3,5,7},{2,4,6},{1,3,5},{1,2,3}});
+
+            // Even counts: 2,0,3,0,1
+            assertArrayEquals(new int[]{2, 4, 6}, result[0]); // 3 evens
+            assertArrayEquals(new int[]{1, 2, 4}, result[1]); // 2 evens
+            assertArrayEquals(new int[]{1, 2, 3}, result[2]); // 1 even
+            assertArrayEquals(new int[]{1, 3, 5}, result[3]); // 0 evens sum=9
+            assertArrayEquals(new int[]{3, 5, 7}, result[4]); // 0 evens sum=15
+        }
+
+        @Test
         void allOdd() {
             int[][] result = ComparatorChallenges.challenge7(
                     new int[][]{{3,5,7},{1,3,5},{9,11,13}});

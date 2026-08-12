@@ -356,7 +356,55 @@ public class ComparatorChallenges {
     public static int[][] challenge7(int[][] matrix) {
         if (matrix == null)
             throw new IllegalArgumentException("Matrix cannot be null");
+
         // TODO
+        Arrays.sort(matrix, (int[] a, int[] b) -> {
+            long aEvens = Arrays.stream(a).filter(d -> d % 2 == 0).count();
+            long bEvens = Arrays.stream(b).filter(d -> d % 2 == 0).count();
+            if (aEvens != bEvens) return Long.compare(bEvens, aEvens);
+            return Integer.compare(Arrays.stream(a).sum(), Arrays.stream(b).sum());
+        });
+        return matrix;
+    }
+
+    public static int[][] challenge7_2(int[][] matrix) {
+        if (matrix == null)
+            throw new IllegalArgumentException("Matrix cannot be null");
+
+        // TODO
+        Comparator<int[]> byEven =
+                Comparator.comparingLong((int[] a) ->
+                        Arrays.stream(a).filter(d -> d % 2 == 0).count())
+                        .reversed();
+
+        Comparator<int[]> bySum =
+                Comparator.comparingInt(a ->
+                        Arrays.stream(a).sum());
+
+        Arrays.sort(matrix, byEven.thenComparing(bySum));
+        return matrix;
+    }
+
+    public static int[][] challenge7_3(int[][] matrix) {
+        if (matrix == null)
+            throw new IllegalArgumentException("Matrix cannot be null");
+
+        // TODO
+        // Optimization to calculate one time all sums and even count
+        Map<int[], long[]> cache = new IdentityHashMap<>();
+        for (int[] row : matrix) {
+            long evenCount = Arrays.stream(row).filter(n -> n % 2 == 0).count();
+            long sumRow = Arrays.stream(row).sum();
+            cache.put(row, new long[]{evenCount, sumRow});
+        }
+
+        Arrays.sort(matrix, (a, b) -> {
+            long[] cacheA = cache.get(a);
+            long[] cacheB = cache.get(b);
+            if (cacheA[0] != cacheB[0]) return Long.compare(cacheB[0], cacheA[0]);
+            return Long.compare(cacheA[1], cacheB[1]);
+        });
+
         return matrix;
     }
 
