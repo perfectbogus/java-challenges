@@ -175,10 +175,37 @@ public class TypeWitnessChallenges {
     //       .thenComparingInt(minElement)
     //       .thenComparingInt(firstElement)
     // ─────────────────────────────────────────────────────────────
+    public static int[][] challenge4_2(int[][] matrix) {
+        if (matrix == null)
+            throw new IllegalArgumentException("Matrix cannot be null");
+        // TODO
+        Arrays.sort(matrix,
+                Comparator.comparingInt((int[] row) -> Arrays.stream(row).max().orElse(0)).reversed()
+                        .thenComparingInt((int[] row) -> Arrays.stream(row).min().orElse(0))
+                        .thenComparingInt((int[] row) -> row[0]));
+        return matrix;
+    }
+
     public static int[][] challenge4(int[][] matrix) {
         if (matrix == null)
             throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Map<int[], int[]> cache = new IdentityHashMap<>();
+
+        for (int[] row : matrix) {
+            int max = Arrays.stream(row).max().orElse(0);
+            int min = Arrays.stream(row).min().orElse(0);
+            cache.put(row, new int[]{min, max});
+        }
+
+        Arrays.sort(matrix, (int[] a, int[] b) -> {
+            int[] cacheA = cache.get(a);
+            int[] cacheB = cache.get(b);
+            if (cacheA[1] != cacheB[1]) return Integer.compare(cacheB[1], cacheA[1]);
+            if (cacheA[0] != cacheB[0]) return Integer.compare(cacheA[0], cacheB[0]);
+            return Integer.compare(a[0], b[0]);
+        });
+
         return matrix;
     }
 

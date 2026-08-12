@@ -289,6 +289,23 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void basicCase4_2() {
+            int[][] result = TypeWitnessChallenges.challenge4_2(
+                    new int[][]{{3,1,4},{5,2,1},{3,1,2},{5,0,3},{2,6,1}});
+
+            // Max values: [4,5,3,5,6]
+            // max=6: [2,6,1]
+            // max=5: [5,0,3] min=0, [5,2,1] min=1 → min ASC
+            // max=4: [3,1,4]
+            // max=3: [3,1,2]
+            assertArrayEquals(new int[]{2, 6, 1}, result[0]); // max=6
+            assertArrayEquals(new int[]{5, 0, 3}, result[1]); // max=5, min=0
+            assertArrayEquals(new int[]{5, 2, 1}, result[2]); // max=5, min=1
+            assertArrayEquals(new int[]{3, 1, 4}, result[3]); // max=4
+            assertArrayEquals(new int[]{3, 1, 2}, result[4]); // max=3
+        }
+
+        @Test
         void allSameMax() {
             int[][] result = TypeWitnessChallenges.challenge4(
                     new int[][]{{5,1,3},{5,0,2},{5,2,4}});
