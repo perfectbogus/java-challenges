@@ -424,6 +424,27 @@ class ComparatorChallengesTest {
         }
 
         @Test
+        void basicCase6_2() {
+            Map<String, Integer> map = new HashMap<>(Map.of(
+                    "banana", 2,
+                    "fig",    2,
+                    "apple",  5,
+                    "cat",    2,
+                    "kiwi",   5
+            ));
+            List<Map.Entry<String, Integer>> result =
+                    ComparatorChallenges.challenge6_2(map);
+
+            // val=2: cat(3),fig(3),banana(6) → len then alpha
+            assertEquals("cat",    result.get(0).getKey()); // val=2, len=3
+            assertEquals("fig",    result.get(1).getKey()); // val=2, len=3
+            assertEquals("banana", result.get(2).getKey()); // val=2, len=6
+            // val=5: kiwi(4) before apple(5) by length
+            assertEquals("kiwi",   result.get(3).getKey()); // val=5, len=4
+            assertEquals("apple",  result.get(4).getKey()); // val=5, len=5
+        }
+
+        @Test
         void allSameValue() {
             Map<String, Integer> map = new HashMap<>(Map.of(
                     "bb",  1,

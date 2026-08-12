@@ -295,12 +295,31 @@ public class ComparatorChallenges {
     //       .thenComparing(comparingByKey(comparingInt(length)))
     //       .thenComparing(comparingByKey())
     // ─────────────────────────────────────────────────────────────
-    public static List<Map.Entry<String, Integer>> challenge6(
-            Map<String, Integer> map) {
+    public static List<Map.Entry<String, Integer>> challenge6(Map<String, Integer> map) {
         if (map == null)
             throw new IllegalArgumentException("Map cannot be null");
+
         // TODO
-        return new ArrayList<>();
+        return map.entrySet().stream()
+                .sorted(
+                        Map.Entry.<String, Integer>comparingByValue()
+                                .thenComparing(Map.Entry.comparingByKey(Comparator.comparingInt(String::length)))
+                                .thenComparing(Map.Entry.comparingByKey()))
+                .toList();
+    }
+
+    public static List<Map.Entry<String, Integer>> challenge6_2(Map<String, Integer> map) {
+        if (map == null)
+            throw new IllegalArgumentException("Map cannot be null");
+
+        Comparator<Map.Entry<String, Integer>> byValue = Map.Entry.comparingByValue();
+        Comparator<Map.Entry<String, Integer>> byLengthKey = Map.Entry.comparingByKey(Comparator.comparingInt(String::length));
+        Comparator<Map.Entry<String, Integer>> byKey = Map.Entry.comparingByKey();
+
+        // TODO
+        return map.entrySet().stream()
+                .sorted(byValue.thenComparing(byLengthKey).thenComparing(byKey))
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
