@@ -380,7 +380,12 @@ public class TypeWitnessChallenges {
         if (products == null)
             throw new IllegalArgumentException("Products cannot be null");
         // TODO
-        return new ArrayList<>();
+        products.sort(
+                Comparator.comparingInt(Product::stock).reversed()
+                        .thenComparing(Comparator.comparingDouble(Product::price).reversed())
+                        .thenComparing(Product::name)
+        );
+        return products;
     }
 
     // ─────────────────────────────────────────────────────────────
