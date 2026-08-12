@@ -302,11 +302,42 @@ public class TypeWitnessChallenges {
     // ─────────────────────────────────────────────────────────────
     record Player(String name, int score) {}
 
+    public static List<Player> challenge6_2(List<Player> players) {
+        if (players == null)
+            throw new IllegalArgumentException("Players cannot be null");
+        // TODO
+        Queue<Player> q = new PriorityQueue<>(
+                Comparator.comparingInt(Player::score).reversed()
+                        .thenComparing(Player::name)
+        );
+
+        q.addAll(players);
+
+        List<Player> result = new ArrayList<>();
+        while (!q.isEmpty()) {
+            result.add(q.poll());
+        }
+
+        return result;
+    }
+
     public static List<Player> challenge6(List<Player> players) {
         if (players == null)
             throw new IllegalArgumentException("Players cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Player> byScoreDesc = Comparator.comparingInt(Player::score).reversed();
+        Comparator<Player> byName = Comparator.comparing(Player::name);
+
+        Queue<Player> q = new PriorityQueue<>(byScoreDesc.thenComparing(byName));
+
+        q.addAll(players);
+
+        List<Player> result = new ArrayList<>();
+        while (!q.isEmpty()) {
+            result.add(q.poll());
+        }
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────

@@ -456,6 +456,18 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void scoreOrder6_2() {
+            List<TypeWitnessChallenges.Player> result =
+                    TypeWitnessChallenges.challenge6_2(players);
+
+            assertEquals(920, result.get(0).score());
+            assertEquals(920, result.get(1).score());
+            assertEquals(850, result.get(2).score());
+            assertEquals(850, result.get(3).score());
+            assertEquals(750, result.get(4).score());
+        }
+
+        @Test
         void nameWithinScore() {
             List<TypeWitnessChallenges.Player> result =
                     TypeWitnessChallenges.challenge6(players);
