@@ -117,6 +117,28 @@ class TypeWitnessChallengesTest {
         }
 
         @Test
+        void basicCase2_2() {
+            Map<String, Integer> map = new HashMap<>(Map.of(
+                    "apple",      5,
+                    "banana",     3,
+                    "cherry",     5,
+                    "date",       1,
+                    "elderberry", 3
+            ));
+            List<Map.Entry<String, Integer>> result =
+                    TypeWitnessChallenges.challenge2_2(map);
+
+            // val=5: cherry>apple DESC alpha
+            assertEquals("cherry",     result.get(0).getKey());
+            assertEquals("apple",      result.get(1).getKey());
+            // val=3: elderberry>banana DESC alpha
+            assertEquals("elderberry", result.get(2).getKey());
+            assertEquals("banana",     result.get(3).getKey());
+            // val=1
+            assertEquals("date",       result.get(4).getKey());
+        }
+
+        @Test
         void allSameValue() {
             Map<String, Integer> map = new HashMap<>(Map.of(
                     "cat", 2,

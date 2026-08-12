@@ -68,12 +68,27 @@ public class TypeWitnessChallenges {
     // Hint: comparingByValue().reversed()
     //       .thenComparing(comparingByKey().reversed())
     // ─────────────────────────────────────────────────────────────
-    public static List<Map.Entry<String, Integer>> challenge2(
-            Map<String, Integer> map) {
+    public static List<Map.Entry<String, Integer>> challenge2(Map<String, Integer> map) {
         if (map == null)
             throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        return map.entrySet().stream()
+                .sorted(
+                        Map.Entry.<String, Integer>comparingByValue().reversed()
+                                .thenComparing(Map.Entry.<String, Integer>comparingByKey().reversed())
+                ).toList();
+    }
+
+    public static List<Map.Entry<String, Integer>> challenge2_2(Map<String, Integer> map) {
+        if (map == null)
+            throw new IllegalArgumentException("Map cannot be null");
+        // TODO
+        Comparator<Map.Entry<String, Integer>> byValueDesc = Map.Entry.<String, Integer>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Integer>> byKeyDesc   = Map.Entry.<String, Integer>comparingByKey().reversed();
+
+        return map.entrySet().stream()
+                .sorted(byValueDesc.thenComparing(byKeyDesc))
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
