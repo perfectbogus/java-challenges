@@ -23,8 +23,8 @@ public class ComparatorChallenges {
             throw new IllegalArgumentException("Matrix cannot be null");
 
         // TODO
-        Arrays.sort(matrix, Comparator.comparingInt((int[] a) -> a[1])
-                .thenComparing(Comparator.comparingInt((int[] a) -> a[0]).reversed()));
+        Arrays.sort(matrix, Comparator.<int[]>comparingInt(a -> a[1])
+                .thenComparing(Comparator.<int[]>comparingInt(a -> a[0]).reversed()));
 
         return matrix;
     }
