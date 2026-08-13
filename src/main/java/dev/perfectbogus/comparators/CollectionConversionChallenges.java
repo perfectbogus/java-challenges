@@ -233,7 +233,17 @@ public class CollectionConversionChallenges {
     public static TreeMap<Integer, List<String>> challenge8(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new TreeMap<>();
+
+        return words.stream().collect(
+                Collectors.groupingBy(
+                        String::length,
+                        TreeMap::new,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream().sorted().toList()
+                        )
+                )
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
