@@ -90,8 +90,36 @@ public class SortingHardChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<String> challenge2(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
-        // TODO
-        return new ArrayList<>();
+
+        Map<Character, Integer> points = createMapPoints();
+
+        Comparator<String> byPointsInWordDesc =
+                Comparator.<String>comparingInt(
+                        w -> w.chars().map(c -> points.get((char) c)).sum()).reversed();
+        Comparator<String> byLengthDesc = Comparator.comparingInt(String::length).reversed();
+        Comparator<String> byWord = Comparator.naturalOrder();
+
+        words.sort(byPointsInWordDesc.thenComparing(byLengthDesc).thenComparing(byWord));
+
+        return words;
+    }
+
+    private static Map<Character, Integer> createMapPoints() {
+        Map<Character, Integer> points = new HashMap<>();
+        addScoreGroup(points, "aeioulnstr", 1);
+        addScoreGroup(points, "dg", 2);
+        addScoreGroup(points, "bcmp", 3);
+        addScoreGroup(points, "fhvwy", 4);
+        addScoreGroup(points, "k", 5);
+        addScoreGroup(points, "jx", 8);
+        addScoreGroup(points, "qz", 10);
+        return points;
+    }
+
+    private static void addScoreGroup(Map<Character, Integer> map, String letters, int score) {
+        for (char c : letters.toCharArray()) {
+            map.put(c, score);
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
