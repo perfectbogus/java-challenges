@@ -1,8 +1,7 @@
 package dev.perfectbogus.comparators;
 
 import java.util.*;
-import java.util.stream.*;
-import java.util.function.*;
+import java.util.stream.Collectors;
 
 public class CollectionConversionChallenges {
 
@@ -25,7 +24,14 @@ public class CollectionConversionChallenges {
     public static Map<Character, List<String>> challenge1(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new HashMap<>();
+        return words.stream()
+                .collect(Collectors.groupingBy(
+                        s -> s.charAt(0),
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream().sorted().toList()
+                        )
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
