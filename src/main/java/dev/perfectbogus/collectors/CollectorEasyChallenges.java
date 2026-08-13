@@ -68,7 +68,9 @@ public class CollectorEasyChallenges {
     public static Map<Boolean, List<Employee>> challenge3(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashMap<>();
+        return employees.stream().collect(
+                Collectors.partitioningBy(e -> e.yearsOfExperience() >= 5)
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
