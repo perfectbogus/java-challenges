@@ -187,7 +187,21 @@ public class SortingHardChallenges {
     public static List<String> challenge4(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, Long> freq = words.stream().collect(
+                Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                )
+        );
+
+        Comparator<String> byFreqDesc = Comparator.<String>comparingLong(c -> freq.get(c)).reversed();
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+
+        return words.stream()
+                .distinct()
+                .sorted(byFreqDesc.thenComparing(byLength).thenComparing(byAlpha))
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
