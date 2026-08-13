@@ -291,6 +291,17 @@ public class CollectionConversionChallenges {
     public static Map<String, Map<Character, Long>> challenge10(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new HashMap<>();
+        return words.stream().collect(
+                Collectors.toMap(
+                        Function.identity(),
+                        word -> word.chars().mapToObj(c -> (char) c).collect(
+                                Collectors.groupingBy(
+                                        Function.identity(),
+                                        Collectors.counting()
+                                )
+                        ),
+                        (existing, replacement) -> existing
+                )
+        );
     }
 }
