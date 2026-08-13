@@ -149,7 +149,15 @@ public class SortingHardChallenges {
     public static List<Map.Entry<String, List<Integer>>> challenge3(Map<String, List<Integer>> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Map.Entry<String, List<Integer>>> byListSizeDesc =
+                Map.Entry.<String, List<Integer>>comparingByValue(Comparator.comparingInt(List::size)).reversed();
+        Comparator<Map.Entry<String, List<Integer>>> byListSum =
+                Map.Entry.comparingByValue(Comparator.comparingInt(list -> list.stream().mapToInt(Integer::intValue).sum()));
+        Comparator<Map.Entry<String, List<Integer>>> byKey =
+                Map.Entry.comparingByKey();
+
+        return map.entrySet().stream()
+                .sorted(byListSizeDesc.thenComparing(byListSum).thenComparing(byKey)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
