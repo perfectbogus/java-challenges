@@ -226,10 +226,23 @@ public class SortingMixChallenges {
     // ─────────────────────────────────────────────────────────────
     record Employee(String name, double salary, int yearsOfExperience) {}
 
+    private static int getSeniority(int yoe) {
+        if (yoe >= 8) return 0;
+        if (yoe >= 4) return 1;
+        else return 2;
+    }
+
     public static List<Employee> challenge6(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Employee> byPrioritySeniority = Comparator.comparingInt(e ->
+                getSeniority(e.yearsOfExperience()));
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        employees.sort(byPrioritySeniority.thenComparing(bySalaryDesc).thenComparing(byName));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
