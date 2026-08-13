@@ -81,6 +81,24 @@ public class SortingMixChallenges {
         return words;
     }
 
+    public static List<String> challenge2_2(List<String> words) {
+        if (words == null) throw new IllegalArgumentException("Words cannot be null");
+        // TODO
+        boolean[] isVowel = new boolean[128];
+        isVowel['a'] = true;
+        isVowel['e'] = true;
+        isVowel['i'] = true;
+        isVowel['o'] = true;
+        isVowel['u'] = true;
+
+        Comparator<String> byCountVowels = Comparator.comparing(s -> s.chars().filter(c -> isVowel[c]).count());
+        Comparator<String> byFirstLetter = Comparator.comparing(s -> s.charAt(0));
+
+        words.sort(byCountVowels.thenComparing(byFirstLetter));
+
+        return words;
+    }
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 3 — 🟢 EASY
     // Sort Map entries by KEY last character ASC then by VALUE DESC for ties
@@ -279,6 +297,18 @@ public class SortingMixChallenges {
             }
             return countUpperLetters;
         }).reversed();
+        Comparator<String> byLengthDesc = Comparator.comparingInt(String::length);
+        Comparator<String> byName = Comparator.naturalOrder();
+
+        words.sort(byCapitalLetters.thenComparing(byLengthDesc).thenComparing(byName));
+
+        return words;
+    }
+
+    public static List<String> challenge7_2(List<String> words) {
+        if (words == null) throw new IllegalArgumentException("Words cannot be null");
+        // TODO
+        Comparator<String> byCapitalLetters = Comparator.<String>comparingLong(s -> s.chars().filter(Character::isUpperCase).count()).reversed();
         Comparator<String> byLengthDesc = Comparator.comparingInt(String::length);
         Comparator<String> byName = Comparator.naturalOrder();
 

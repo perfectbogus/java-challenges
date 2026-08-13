@@ -88,6 +88,23 @@ class SortingMixChallengesTest {
         }
 
         @Test
+        void basicCase2_2() {
+            List<String> result = SortingMixChallenges.challenge2_2(
+                    new ArrayList<>(List.of("hello","fig","apple","cat","rhythm","bee","cry")));
+
+            // vowels=0: cry, rhythm → alpha
+            assertEquals("cry",    result.get(0));
+            assertEquals("rhythm", result.get(1));
+            // vowels=1: cat(a), fig(i) → alpha
+            assertEquals("cat",    result.get(2));
+            assertEquals("fig",    result.get(3));
+            // vowels=2: apple(ae), bee(ee), hello(eo) → alpha
+            assertEquals("apple",  result.get(4));
+            assertEquals("bee",    result.get(5));
+            assertEquals("hello",  result.get(6));
+        }
+
+        @Test
         void allNoVowels() {
             List<String> result = SortingMixChallenges.challenge2(
                     new ArrayList<>(List.of("cry","gym","myth","why")));
@@ -347,6 +364,19 @@ class SortingMixChallengesTest {
         @Test
         void basicCase() {
             List<String> result = SortingMixChallenges.challenge7(
+                    new ArrayList<>(List.of("Hello","WORLD","java","Hi","JAVA","cat")));
+
+            assertEquals("WORLD", result.get(0)); // upper=5
+            assertEquals("JAVA",  result.get(1)); // upper=4
+            assertEquals("Hi",    result.get(2)); // upper=1, len=2
+            assertEquals("Hello", result.get(3)); // upper=1, len=5
+            assertEquals("cat",   result.get(4)); // upper=0, len=3
+            assertEquals("java",  result.get(5)); // upper=0, len=4
+        }
+
+        @Test
+        void basicCase7_2() {
+            List<String> result = SortingMixChallenges.challenge7_2(
                     new ArrayList<>(List.of("Hello","WORLD","java","Hi","JAVA","cat")));
 
             assertEquals("WORLD", result.get(0)); // upper=5
