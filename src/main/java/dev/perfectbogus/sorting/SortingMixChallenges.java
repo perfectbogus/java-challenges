@@ -382,7 +382,11 @@ public class SortingMixChallenges {
     public static List<Map.Entry<String, Integer>> challenge9(Map<String, Integer> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Map.Entry<String, Integer>> byValueMod3 = Map.Entry.comparingByValue(
+                Comparator.comparingInt(i -> i % 3));
+        Comparator<Map.Entry<String, Integer>> byKeyAlpha = Map.Entry.comparingByKey(Comparator.naturalOrder());
+
+        return map.entrySet().stream().sorted(byValueMod3.thenComparing(byKeyAlpha)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
