@@ -245,6 +245,13 @@ public class CollectorEasyChallenges {
     public static Set<String> challenge10(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashSet<>();
+        return employees.stream()
+                .map(Employee::department)
+                .collect(
+                        Collectors.collectingAndThen(
+                                Collectors.toCollection(TreeSet::new),
+                                Collections::unmodifiableNavigableSet
+                        )
+                );
     }
 }
