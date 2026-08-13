@@ -266,7 +266,9 @@ public class CollectionConversionChallenges {
         if (map1 == null) throw new IllegalArgumentException("Map1 cannot be null");
         if (map2 == null) throw new IllegalArgumentException("Map2 cannot be null");
         // TODO
-        return new HashMap<>();
+        Map<String, Integer> map = new HashMap<>(map1);
+        map2.forEach((k, v) -> map.merge(k, v, Integer::sum));
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
