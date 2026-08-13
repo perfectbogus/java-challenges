@@ -148,7 +148,7 @@ public class CollectorEasyChallenges {
     public static List<String> challenge6(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        return employees.stream().map(Employee::name).sorted(Comparator.naturalOrder()).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
