@@ -1,6 +1,7 @@
 package dev.perfectbogus.collectors;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CollectorEasyChallenges {
@@ -190,7 +191,15 @@ public class CollectorEasyChallenges {
     public static Map<String, Double> challenge8(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashMap<>();
+        return employees.stream().collect(
+                Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.collectingAndThen(
+                                Collectors.averagingDouble(Employee::salary),
+                                Function.identity()
+                        )
+                )
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
