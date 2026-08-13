@@ -76,7 +76,9 @@ public class SortingMixChallenges {
             return countVowels;
         });
 
-        return words.stream().sorted(byCountVowels.thenComparing(s -> s.charAt(0))).toList();
+        words.sort(byCountVowels.thenComparing(s -> s.charAt(0)));
+
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -141,8 +143,19 @@ public class SortingMixChallenges {
 
     public static List<Order> challenge4(List<Order> orders) {
         if (orders == null) throw new IllegalArgumentException("Orders cannot be null");
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "DELIVERED", 0,
+                "PENDING", 1,
+                "CANCELLED", 2
+        ));
+
+        Comparator<Order> byPriority = Comparator.comparingInt(o -> priorityMap.get(o.status()));
+        Comparator<Order> byTotalDesc = Comparator.<Order>comparingDouble(o -> o.quantity() * o.price()).reversed();
+        Comparator<Order> byId = Comparator.comparing(Order::id);
         // TODO
-        return new ArrayList<>();
+        orders.sort(byPriority.thenComparing(byTotalDesc).thenComparing(byId));
+
+        return orders;
     }
 
     // ─────────────────────────────────────────────────────────────
