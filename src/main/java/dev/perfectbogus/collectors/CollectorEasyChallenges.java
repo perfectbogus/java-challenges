@@ -41,7 +41,13 @@ public class CollectorEasyChallenges {
     public static String challenge2(List<Employee> employees, double threshold) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return "";
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        return employees.stream().filter(e ->
+                        e.salary() >= threshold)
+                .sorted(byName)
+                .map(Employee::name)
+                .collect(Collectors.joining(", ", "Employees: [", "]"));
     }
 
     // ─────────────────────────────────────────────────────────────
