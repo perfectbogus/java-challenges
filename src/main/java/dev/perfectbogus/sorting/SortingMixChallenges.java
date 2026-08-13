@@ -1,6 +1,8 @@
 package dev.perfectbogus.sorting;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
 import java.util.stream.*;
 
 public class SortingMixChallenges {
@@ -425,7 +427,20 @@ public class SortingMixChallenges {
 
     public static List<Product> challenge10(List<Product> products) {
         if (products == null) throw new IllegalArgumentException("Products cannot be null");
+
+        Map<String, Integer> priorityMap = new HashMap<>(Map.of(
+                "Electronics", 0,
+                "Clothing", 1,
+                "Food", 2
+        ));
+
+        Comparator<Product> byPriority = Comparator.comparingInt(p -> priorityMap.get(p.category()));
+        ToDoubleFunction<Product> percentage =
+                p -> (p.originalPrice() - p.currentPrice()) / (p.originalPrice() * 100);
+        Comparator<Product> byDiscountPercentageDesc = Comparator.comparingDouble(percentage).reversed();
         // TODO
-        return new ArrayList<>();
+        products.sort(byPriority.thenComparing(byDiscountPercentageDesc));
+
+        return products;
     }
 }
