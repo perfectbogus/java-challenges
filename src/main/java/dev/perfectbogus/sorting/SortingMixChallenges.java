@@ -272,7 +272,19 @@ public class SortingMixChallenges {
     public static List<String> challenge7(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<String> byCapitalLetters = Comparator.<String>comparingInt(s -> {
+            int countUpperLetters = 0;
+            for (char c : s.toCharArray()) {
+                if (Character.isUpperCase(c)) countUpperLetters++;
+            }
+            return countUpperLetters;
+        }).reversed();
+        Comparator<String> byLengthDesc = Comparator.comparingInt(String::length);
+        Comparator<String> byName = Comparator.naturalOrder();
+
+        words.sort(byCapitalLetters.thenComparing(byLengthDesc).thenComparing(byName));
+
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────
