@@ -1,6 +1,8 @@
 package dev.perfectbogus.comparators;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CollectionConversionChallenges {
@@ -56,7 +58,11 @@ public class CollectionConversionChallenges {
     public static Map<String, Integer> challenge2(Map<String, List<Integer>> salaries) {
         if (salaries == null) throw new IllegalArgumentException("Salaries cannot be null");
         // TODO
-        return new HashMap<>();
+        return salaries.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue().stream().mapToInt(Integer::intValue).sum()
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -81,7 +87,12 @@ public class CollectionConversionChallenges {
     public static Map<String, Employee> challenge3(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashMap<>();
+        return employees.stream()
+                .collect(Collectors.toMap(
+                        Employee::name,
+                        Function.identity(),
+                        (a, b) -> a.salary() >= b.salary() ? a : b
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -101,7 +112,10 @@ public class CollectionConversionChallenges {
     public static List<String> challenge4(Map<String, Integer> wordCount) {
         if (wordCount == null) throw new IllegalArgumentException("WordCount cannot be null");
         // TODO
-        return new ArrayList<>();
+        return wordCount.entrySet().stream()
+                .flatMap(e -> Collections.nCopies(e.getValue(), e.getKey()).stream())
+                .sorted()
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -127,7 +141,11 @@ public class CollectionConversionChallenges {
     public static LinkedHashMap<String, Long> challenge5(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new LinkedHashMap<>();
+        return words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                LinkedHashMap::new,
+                Collectors.counting()
+        ));
     }
 
     // ─────────────────────────────────────────────────────────────
