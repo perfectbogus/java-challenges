@@ -143,6 +143,7 @@ public class SortingMixChallenges {
 
     public static List<Order> challenge4(List<Order> orders) {
         if (orders == null) throw new IllegalArgumentException("Orders cannot be null");
+
         Map<String, Integer> priorityMap = new HashMap<>(Map.of(
                 "DELIVERED", 0,
                 "PENDING", 1,
@@ -175,7 +176,18 @@ public class SortingMixChallenges {
     // ─────────────────────────────────────────────────────────────
     public static int[][] challenge5(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
+
+        Map<int[], Integer> cache = new IdentityHashMap<>();
+        for (int[] row : matrix) {
+            int sum = Arrays.stream(row).sum();
+            cache.put(row, sum);
+        }
         // TODO
+        Comparator<int[]> byNumberCol = Comparator.comparingInt(row -> row.length);
+        Comparator<int[]> bySumRow = Comparator.<int[]>comparingInt(cache::get).reversed();
+
+        Arrays.sort(matrix, byNumberCol.thenComparing(bySumRow));
+
         return matrix;
     }
 
