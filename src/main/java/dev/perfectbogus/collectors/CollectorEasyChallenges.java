@@ -122,7 +122,15 @@ public class CollectorEasyChallenges {
     public static Map<String, String> challenge5(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashMap<>();
+        return employees.stream().collect(
+                Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.collectingAndThen(
+                                Collectors.maxBy(Comparator.comparingDouble(Employee::salary)),
+                                opt -> opt.map(Employee::name).orElse("NONE")
+                        )
+                )
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
