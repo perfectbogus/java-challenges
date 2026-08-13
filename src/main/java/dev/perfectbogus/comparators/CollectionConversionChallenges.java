@@ -172,7 +172,9 @@ public class CollectionConversionChallenges {
     public static Map<String, Integer> challenge6(Map<String, Map<String, Integer>> nested) {
         if (nested == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new HashMap<>();
+        return nested.values().stream()
+                .flatMap(innerMap -> innerMap.entrySet().stream())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -195,7 +197,17 @@ public class CollectionConversionChallenges {
     public static Map<Integer, List<String>> challenge7(Map<String, Integer> wordFreq) {
         if (wordFreq == null) throw new IllegalArgumentException("WordFreq cannot be null");
         // TODO
-        return new HashMap<>();
+        return wordFreq.entrySet().stream()
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getValue,
+                        Collectors.mapping(
+                                Map.Entry::getKey,
+                                Collectors.collectingAndThen(
+                                        Collectors.toList(),
+                                        list -> list.stream().sorted().toList()
+                                )
+                        )
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
