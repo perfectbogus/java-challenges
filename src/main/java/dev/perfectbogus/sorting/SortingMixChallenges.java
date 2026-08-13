@@ -346,8 +346,14 @@ public class SortingMixChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<Employee> challenge8(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+
+        Comparator<Employee> bySalaryPerYearRatioDesc = Comparator.<Employee>comparingDouble(e ->
+                e.salary() / e.yearsOfExperience()).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
         // TODO
-        return new ArrayList<>();
+        employees.sort(bySalaryPerYearRatioDesc.thenComparing(byName));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
