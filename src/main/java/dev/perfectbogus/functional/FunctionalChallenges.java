@@ -73,7 +73,12 @@ public class FunctionalChallenges {
     public static List<Employee> challenge2(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO — define Predicates, combine with and()/or(), filter stream
-        return new ArrayList<>();
+        Predicate<Employee> isEngineering = e -> e.department().equals("Engineering");
+        Predicate<Employee> highSalaryEng = isEngineering.and(e -> e.salary() > 80000);
+        Predicate<Employee> isMarketing = e -> e.department().equals("Marketing");
+        Predicate<Employee> highSalaryMkt = isMarketing.and(e -> e.salary() > 65000);
+
+        return employees.stream().filter(highSalaryEng.or(highSalaryMkt)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
