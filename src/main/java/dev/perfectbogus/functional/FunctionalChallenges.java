@@ -264,18 +264,18 @@ public class FunctionalChallenges {
     // ─────────────────────────────────────────────────────────────
     public static Function<Employee, Employee> createRaiseFunction(double percentage) {
         // TODO — return a Function that raises salary by percentage
-        return Function.identity();
+        return e -> new Employee(e.name(), e.department(), e.salary() * (1 + percentage));
     }
 
     public static Function<Employee, Employee> createDeptFilter(String dept, Function<Employee, Employee> fn) {
         // TODO — return a Function that applies fn only to employees in dept
-        return Function.identity();
+        return e -> e.department().equals(dept) ? fn.apply(e) : e;
     }
 
     public static List<Employee> challenge7(List<Employee> employees, String dept, double percentage) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO — use createRaiseFunction + createDeptFilter, apply with map()
-        return new ArrayList<>();
+        return employees.stream().map(createDeptFilter(dept, createRaiseFunction(percentage))).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
