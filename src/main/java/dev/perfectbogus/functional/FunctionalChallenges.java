@@ -109,6 +109,11 @@ public class FunctionalChallenges {
         List<String>   logged      = new ArrayList<>();
         List<Employee> highEarners = new ArrayList<>();
         // TODO — define two Consumers, chain with andThen(), apply with forEach()
+        Consumer<Employee> logName = e -> logged.add(e.name());
+        Consumer<Employee> trackHighEarner = e -> { if(e.salary() > 80000) highEarners.add(e);};
+
+        employees.forEach(logName.andThen(trackHighEarner));
+
         return Map.of("logged", logged, "highEarners", highEarners);
     }
 
@@ -139,8 +144,13 @@ public class FunctionalChallenges {
     public static List<Employee> challenge4(List<Employee> employees, String department) {
         if (employees == null)  throw new IllegalArgumentException("Employees cannot be null");
         if (department == null) throw new IllegalArgumentException("Department cannot be null");
+
         // TODO — define Supplier<Employee> defaultEmployee, use if no results found
-        return new ArrayList<>();
+        Supplier<Employee> defaultEmployee = () -> new Employee("Unknown", department, 0.0);
+        Predicate<Employee> isDepartment = e -> e.department().equals(department);
+        List<Employee> found = employees.stream().filter(isDepartment).toList();
+
+        return found.isEmpty() ? List.of(defaultEmployee.get()) : found;
     }
 
     // ─────────────────────────────────────────────────────────────
