@@ -302,20 +302,23 @@ public class FunctionalChallenges {
     public static Employee findHighestPaid(List<Employee> employees) {
         if (employees == null || employees.isEmpty()) throw new IllegalArgumentException("Employees cannot be null or empty");
         // TODO — declare BinaryOperator<Employee> keepHighest, use with reduce()
-        return null;
+        BinaryOperator<Employee> keepHighest = (a, b) -> a.salary() >= b.salary() ? a : b;
+        return employees.stream().reduce(keepHighest).orElseThrow();
     }
 
     public static Employee findLowestPaid(List<Employee> employees) {
         if (employees == null || employees.isEmpty()) throw new IllegalArgumentException("Employees cannot be null or empty");
         // TODO — declare BinaryOperator<Employee> keepLowest, use with reduce()
-        return null;
+        BinaryOperator<Employee> keepLowest = (a, b) -> a.salary() <= b.salary() ? a : b;
+        return employees.stream().reduce(keepLowest).orElseThrow();
     }
 
     public static Employee findMostExperienced(List<Employee> employees, Map<String, Integer> yearsMap) {
         if (employees == null || employees.isEmpty()) throw new IllegalArgumentException("Employees cannot be null or empty");
         if (yearsMap == null) throw new IllegalArgumentException("YearsMap cannot be null");
         // TODO — declare BinaryOperator<Employee> keepMostExp using yearsMap.get(name)
-        return null;
+        BinaryOperator<Employee> keepMostExp = (a, b) -> yearsMap.get(a.name()) >= yearsMap.get(b.name()) ? a : b;
+        return employees.stream().reduce(keepMostExp).orElseThrow();
     }
 
     // ─────────────────────────────────────────────────────────────
