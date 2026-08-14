@@ -214,7 +214,16 @@ public class FunctionalChallenges {
     public static List<String> challenge6(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO — declare 4 separate Functions, compose with andThen(), apply with map()
-        return new ArrayList<>();
+        Function<String, String> trim = s -> s.trim();
+        // String::trim
+        Function<String, String> upper = s -> s.toUpperCase();
+        // String::toUpperCase
+        Function<String, String> spacesToUnderscore = s -> s.replaceAll(" ", "_");
+        // String::replaceAll
+        Function<String, String> wrap = s -> "KEY_" + s + "_END";
+        Function<String, String> pipeline = trim.andThen(upper).andThen(spacesToUnderscore).andThen(wrap);
+
+        return words.stream().map(pipeline).toList();
     }
 
     // ══════════════════════════════════════════════════════════════════════
