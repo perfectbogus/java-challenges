@@ -359,7 +359,15 @@ public class FunctionalChallenges {
         if (map1 == null) throw new IllegalArgumentException("Map1 cannot be null");
         if (map2 == null) throw new IllegalArgumentException("Map2 cannot be null");
         // TODO — declare BiFunction mergeByDept, apply it
-        return new HashMap<>();
+        BiFunction<Map<String, List<Employee>>, Map<String, List<Employee>>, Map<String, List<Employee>>> merge =
+                (m1, m2) -> {
+                    Map<String, List<Employee>> result = new HashMap<>(m1);
+                    m2.forEach((dept, list) ->
+                            result.merge(dept, list, (l1, l2) ->
+                                    Stream.concat(l1.stream(), l2.stream()).toList()));
+                    return result;
+                };
+        return merge.apply(map1, map2);
     }
 
     // ══════════════════════════════════════════════════════════════════════
