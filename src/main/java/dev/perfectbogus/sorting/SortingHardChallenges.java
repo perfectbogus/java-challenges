@@ -231,8 +231,36 @@ public class SortingHardChallenges {
     // ─────────────────────────────────────────────────────────────
     public static int[][] challenge5(int[][] intervals) {
         if (intervals == null) throw new IllegalArgumentException("Intervals cannot be null");
+        Map<int[], Integer> overlaps = preComputeOverlaps(intervals);
+
+        Comparator<int[]> byOverlapCountDesc =
+                Comparator.<int[]>comparingInt(row -> overlaps.get(row)).reversed();
+        Comparator<int[]> byStart = Comparator.comparingInt(row -> row[0]);
+        Comparator<int[]> byEnd = Comparator.comparingInt(row -> row[1]);
         // TODO
+        Arrays.sort(intervals, byOverlapCountDesc.thenComparing(byStart).thenComparing(byEnd));
+
         return intervals;
+    }
+
+    private static Map<int[], Integer> preComputeOverlaps(int[][] intervals) {
+        Map<int[], Integer> countOverlaps = new IdentityHashMap<>();
+        for (int i = 0; i < intervals.length; i++) {
+            int count = 0;
+            for (int j = 0; j < intervals.length; j++) {
+                if (j == i)
+                    continue;
+                int a = intervals[i][0];
+                int b = intervals[i][1];
+                int c = intervals[j][0];
+                int d = intervals[j][1];
+                if (a <= d && c <= b) {
+                    count++;
+                }
+            }
+            countOverlaps.put(intervals[i], count);
+        }
+        return countOverlaps;
     }
 
     // ─────────────────────────────────────────────────────────────
