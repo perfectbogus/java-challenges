@@ -177,6 +177,10 @@ public class FunctionalChallenges {
     public static List<String> challenge5(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO — declare UnaryOperator<String> normalize, apply with replaceAll()
+        UnaryOperator<String> normalize = s -> s.trim().replaceAll("\\s+", " ").toLowerCase();
+
+        words.replaceAll(normalize);
+
         return words;
     }
 
