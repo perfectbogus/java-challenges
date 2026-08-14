@@ -293,7 +293,23 @@ public class SortingHardChallenges {
     public static List<Employee> challenge6(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, Double> deptAvg = employees.stream().collect(
+                Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.averagingDouble(Employee::salary)
+                )
+        );
+
+        Map<Employee, Double> diffsSalary = new IdentityHashMap<>();
+        employees.forEach(e -> diffsSalary.put(e, e.salary() - deptAvg.get(e.department())));
+
+        Comparator<Employee> byAboveAvg = Comparator.comparingInt(e -> diffsSalary.get(e) > 0 ? 0 : 1);
+        Comparator<Employee> byDiff = Comparator.<Employee>comparingDouble(e -> diffsSalary.get(e)).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        employees.sort(byAboveAvg.thenComparing(byDiff).thenComparing(byName));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
