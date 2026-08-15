@@ -436,6 +436,13 @@ public class FunctionalChallenges {
         // Step 3 — filter with filterAfter
         // Step 4 — format with formatter.apply(name, salary)
         // Step 5 — sorted().toList()
-        return new ArrayList<>();
+        Function<Employee, Employee> pipeline = transforms.stream().reduce(Function.identity(), (f, g) -> f.andThen(g));
+
+        return employees.stream()
+                .map(pipeline)
+                .filter(filterAfter)
+                .map(e -> formatter.apply(e.name(), e.salary()))
+                .sorted()
+                .toList();
     }
 }

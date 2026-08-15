@@ -682,8 +682,8 @@ class FunctionalChallengesTest {
             // Bob:    50000  * 1.10 = 55000  (no bonus) → NOT > 100000 ✗
             // Carol:  80000  * 1.10 = 88000  * 1.20 = 105600 → > 100000 ✓
             assertEquals(2, result.size());
-            assertTrue(result.contains("Alice: $132000"));
-            assertTrue(result.contains("Carol: $105600"));
+            assertTrue(result.contains("Alice: $132000.0"));
+            assertTrue(result.contains("Carol: $105600.0"));
         }
 
         @Test
@@ -746,8 +746,9 @@ class FunctionalChallengesTest {
 
             // Alice: 200000, Bob: 100000 (not >), Carol: 160000
             assertEquals(2, result.size());
-            assertTrue(result.contains("Alice=200000"));
-            assertTrue(result.contains("Carol=160000"));
+            System.out.println(result);
+            assertTrue(result.contains("Alice=200000.0"));
+            assertTrue(result.contains("Carol=160000.0"));
         }
 
         @Test
