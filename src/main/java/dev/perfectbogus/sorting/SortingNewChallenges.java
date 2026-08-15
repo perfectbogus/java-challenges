@@ -215,8 +215,17 @@ public class SortingNewChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<Map.Entry<String, List<Integer>>> challenge6(Map<String, List<Integer>> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
-        // TODO
-        return new ArrayList<>();
+
+        Comparator<Map.Entry<String, List<Integer>>> byMax =
+                Map.Entry.comparingByValue(
+                        Comparator.<List<Integer>>comparingInt( l ->
+                                l.stream().mapToInt(Integer::intValue).max().orElse(0)).reversed()
+                );
+        Comparator<Map.Entry<String, List<Integer>>> bySize =
+                Map.Entry.comparingByValue(Comparator.comparingInt(List::size));
+        Comparator<Map.Entry<String, List<Integer>>> byKeyAlpha = Map.Entry.comparingByKey();
+
+        return map.entrySet().stream().sorted(byMax.thenComparing(bySize).thenComparing(byKeyAlpha)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
