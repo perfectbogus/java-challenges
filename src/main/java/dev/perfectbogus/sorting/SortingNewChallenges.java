@@ -131,15 +131,15 @@ public class SortingNewChallenges {
         // TODO
         Map<Employee, Double> netSalaryMap = new IdentityHashMap<>();
         for (Employee e : employees) {
-            int taxRate = 20;
+            double taxRate = 0.80;
             if (e.salary() > 80000) {
-                taxRate = 30;
+                taxRate = 0.70;
             }
-            double rate = (double) taxRate / 100;
-            double netSalary = e.salary() * (1 - rate);
+            double netSalary = e.salary() * taxRate;
             netSalaryMap.put(e, netSalary);
         }
-
+//        Compute every comparison:
+//        Comparator<Employee> byNetSalaryWithout = Comparator.<Employee>comparingDouble(e -> e.salary() > 80000 ? e.salary() * 0.70 : e.salary() * 0.80).reversed();
         Comparator<Employee> byNetSalary = Comparator.<Employee>comparingDouble(netSalaryMap::get).reversed();
         Comparator<Employee> byName = Comparator.comparing(Employee::name);
 
@@ -178,7 +178,14 @@ public class SortingNewChallenges {
     public static List<String> challenge5(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<String> byCountDistinctDesc =
+                Comparator.<String>comparingInt(w -> (int) w.chars().distinct().count()).reversed();
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+
+        words.sort(byCountDistinctDesc.thenComparing(byLength).thenComparing(byAlpha));
+
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────
