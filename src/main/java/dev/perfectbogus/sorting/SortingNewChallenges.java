@@ -87,6 +87,18 @@ public class SortingNewChallenges {
     public static int[][] challenge3(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Map<int[], Integer> map = new IdentityHashMap<>();
+        for (int[] row : matrix) {
+            IntSummaryStatistics stats = Arrays.stream(row).summaryStatistics();
+            int range = stats.getMax() - stats.getMin();
+            map.put(row, range);
+        }
+
+        Comparator<int[]> byRange = Comparator.comparingInt(map::get);
+        Comparator<int[]> byFirstElem = Comparator.comparingInt(a -> a[0]);
+
+        Arrays.sort(matrix, byRange.thenComparing(byFirstElem));
+
         return matrix;
     }
 

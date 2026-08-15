@@ -146,12 +146,12 @@ class SortingNewChallengesTest {
         @Test
         void allSameRange() {
             int[][] result = SortingNewChallenges.challenge3(
-                    new int[][]{{5,1},{3,7},{2,8}});
+                    new int[][]{{5,1},{3,7},{2,6}});
 
             // All range=4 → first elem ASC: 2,3,5
-            assertArrayEquals(new int[]{2, 8}, result[0]);
-            assertArrayEquals(new int[]{3, 7}, result[1]);
-            assertArrayEquals(new int[]{5, 1}, result[2]);
+            assertArrayEquals(new int[]{2, 6}, result[0]); // first=2
+            assertArrayEquals(new int[]{3, 7}, result[1]); // first=3
+            assertArrayEquals(new int[]{5, 1}, result[2]); // first=5
         }
 
         @Test
