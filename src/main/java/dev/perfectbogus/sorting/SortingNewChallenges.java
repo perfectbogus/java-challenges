@@ -129,7 +129,23 @@ public class SortingNewChallenges {
     public static List<Employee> challenge4(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<Employee, Double> netSalaryMap = new IdentityHashMap<>();
+        for (Employee e : employees) {
+            int taxRate = 20;
+            if (e.salary() > 80000) {
+                taxRate = 30;
+            }
+            double rate = (double) taxRate / 100;
+            double netSalary = e.salary() * (1 - rate);
+            netSalaryMap.put(e, netSalary);
+        }
+
+        Comparator<Employee> byNetSalary = Comparator.<Employee>comparingDouble(netSalaryMap::get).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        employees.sort(byNetSalary.thenComparing(byName));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
