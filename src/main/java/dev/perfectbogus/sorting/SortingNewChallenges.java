@@ -265,8 +265,35 @@ public class SortingNewChallenges {
 
     public static List<Product> challenge7(List<Product> products) {
         if (products == null) throw new IllegalArgumentException("Products cannot be null");
+        Map<String, Integer> categoryPriorityMap = new HashMap<>(Map.of(
+                "Electronics", 0,
+                "Clothing", 1,
+                "Food", 2
+        ));
+        Map<String, Integer> ratingPriorityMap = new HashMap<>(Map.of(
+                "PREMIUM", 0,
+                "STANDARD", 1,
+                "BUDGET", 2
+        ));
+
+        System.out.println(products);
+
+        Comparator<Product> byCategory = Comparator.comparingInt(p -> categoryPriorityMap.get(p.category()));
+        Comparator<Product> byRating = Comparator.comparingInt(p -> {
+            System.out.println(p);
+            if (p.rating() >= 4.5) {
+                return ratingPriorityMap.get("PREMIUM");
+            } else if (p.rating() >= 3.0) {
+                return ratingPriorityMap.get("STANDARD");
+            } else {
+                return ratingPriorityMap.get("BUDGET");
+            }
+        });
+        Comparator<Product> byPrice = Comparator.comparingDouble(Product::price);
+
+        products.sort(byCategory.thenComparing(byRating).thenComparing(byPrice));
         // TODO
-        return new ArrayList<>();
+        return products;
     }
 
     // ─────────────────────────────────────────────────────────────
