@@ -47,7 +47,13 @@ public class CollectorChallenges {
     public static Map<Boolean, Integer> challenge2(List<Integer> numbers, int threshold) {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO
-        return new HashMap<>();
+        return numbers.stream().collect(
+                Collectors.partitioningBy(n -> n > threshold,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                l -> l.stream().mapToInt(Integer::intValue).sum()
+                        ))
+        );
     }
 
     // ══════════════════════════════════════════════════════════════════════
