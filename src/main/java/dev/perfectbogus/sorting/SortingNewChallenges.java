@@ -365,8 +365,15 @@ public class SortingNewChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<Employee> challenge9(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+
+        Comparator<Employee> byDeptNameLengthDesc =
+                Comparator.<Employee>comparingInt(e -> e.department().length()).reversed();
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
         // TODO
-        return new ArrayList<>();
+        employees.sort(byDeptNameLengthDesc.thenComparing(bySalaryDesc).thenComparing(byName));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
