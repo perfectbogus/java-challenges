@@ -276,11 +276,8 @@ public class SortingNewChallenges {
                 "BUDGET", 2
         ));
 
-        System.out.println(products);
-
         Comparator<Product> byCategory = Comparator.comparingInt(p -> categoryPriorityMap.get(p.category()));
         Comparator<Product> byRating = Comparator.comparingInt(p -> {
-            System.out.println(p);
             if (p.rating() >= 4.5) {
                 return ratingPriorityMap.get("PREMIUM");
             } else if (p.rating() >= 3.0) {
@@ -319,10 +316,24 @@ public class SortingNewChallenges {
     //       int aboveCount = (int) Arrays.stream(row).filter(v -> v > avg).count()
     //       Precompute with IdentityHashMap
     //       comparingInt(aboveCount).reversed() + thenComparingInt(sum) + thenComparingInt(first)
+    record Stats (IntSummaryStatistics inner, int count) {}
     // ─────────────────────────────────────────────────────────────
     public static int[][] challenge8(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Map<int[], Stats> map = new IdentityHashMap<>();
+        for (int[] row : matrix) {
+            IntSummaryStatistics stats = Arrays.stream(row).summaryStatistics();
+            int count = (int) Arrays.stream(row).filter(s -> s > stats.getAverage()).count();
+            map.put(row, new Stats(stats, count));
+        }
+
+        Comparator<int[]> byAboveAvgDesc = Comparator.<int[]>comparingInt(row -> map.get(row).count()).reversed();
+        Comparator<int[]> bySum = Comparator.comparingLong(row -> map.get(row).inner.getSum());
+        Comparator<int[]> byFirstElem = Comparator.comparingInt(row -> row[0]);
+
+        Arrays.sort(matrix, byAboveAvgDesc.thenComparing(bySum).thenComparing(byFirstElem));
+
         return matrix;
     }
 
