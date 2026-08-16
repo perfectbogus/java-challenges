@@ -432,7 +432,46 @@ public class SortingNewChallenges {
 
     public static List<Student> challenge10(List<Student> students) {
         if (students == null) throw new IllegalArgumentException("Students cannot be null");
-        // TODO
-        return new ArrayList<>();
+        Map<String, Double> weights = new HashMap<>(Map.of(
+                "Math", 0.4, "Science",0.3, "English", 0.2, "History", 0.1
+        ));
+
+        Map<Student, Double> gpas = new IdentityHashMap<>();
+        for (Student s : students) {
+            double stat = s.subjectScores().entrySet().stream()
+                    .mapToDouble(e ->
+                            e.getValue() * weights.getOrDefault(e.getKey(), 0.0)).sum();
+
+            gpas.put(s, stat);
+        }
+
+        Comparator<Student> byGPADesc = Comparator.<Student>comparingDouble(s -> gpas.get(s)).reversed();
+
+        Map<String, List<Student>> groupBySchool = students.stream().collect(
+                Collectors.groupingBy(
+                        Student::school,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream().sorted(byGPADesc).toList()
+                        )
+                )
+        );
+
+        Map<Student, Integer> ranks = new IdentityHashMap<>();
+        for (List<Student> schoolGroup : groupBySchool.values()) {
+            for (Student s : schoolGroup) {
+                int rank = (int) schoolGroup.stream()
+                        .filter(other -> gpas.get(other) > gpas.get(s))
+                        .count() + 1;
+                ranks.put(s, rank);
+            }
+        }
+
+        Comparator<Student> byRankAsc = Comparator.comparingInt(ranks::get);
+        Comparator<Student> byNameAsc = Comparator.comparing(Student::name);
+
+        return students.stream()
+                .sorted(byGPADesc.thenComparing(byRankAsc).thenComparing(byNameAsc))
+                .toList();
     }
 }
