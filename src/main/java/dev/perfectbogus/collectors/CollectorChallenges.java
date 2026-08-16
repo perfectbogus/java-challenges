@@ -134,7 +134,18 @@ public class CollectorChallenges {
     public static String challenge5(List<Employee> employees) {
         if (employees == null || employees.isEmpty()) throw new IllegalArgumentException("Employees cannot be null or empty");
         // TODO
-        return "";
+        Comparator<Map.Entry<String, Double>> byValue = Map.Entry.comparingByValue();
+        Comparator<Map.Entry<String, Double>> byNameDesc = Map.Entry.<String, Double>comparingByKey().reversed();
+
+        return employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.averagingDouble(Employee::salary)
+                ))
+                .entrySet().stream()
+                .max(byValue.thenComparing(byNameDesc))
+                .map(Map.Entry::getKey)
+                .orElseThrow();
     }
 
     // ─────────────────────────────────────────────────────────────
