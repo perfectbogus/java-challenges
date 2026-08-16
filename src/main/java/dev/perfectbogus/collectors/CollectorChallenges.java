@@ -80,7 +80,15 @@ public class CollectorChallenges {
     public static Map<String, List<String>> challenge3(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashMap<>();
+        return employees.stream().collect(
+                Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.collectingAndThen(
+                                Collectors.mapping(Employee::name, Collectors.toList()),
+                                names -> names.stream().sorted().toList()
+                        )
+                )
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -99,7 +107,12 @@ public class CollectorChallenges {
     public static Map<Character, String> challenge4(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new HashMap<>();
+        return words.stream().sorted().collect(
+                Collectors.groupingBy(
+                        s -> s.charAt(0),
+                        Collectors.joining(", ")
+                )
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
