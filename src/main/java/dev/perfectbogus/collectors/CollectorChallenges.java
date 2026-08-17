@@ -277,7 +277,32 @@ public class CollectorChallenges {
     public static LinkedHashMap<String, List<Employee>> challenge9(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new LinkedHashMap<>();
+        Map<String, List<Employee>> byDept = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream()
+                                        .sorted(Comparator.comparingDouble(Employee::salary).reversed())
+                                        .toList()
+                        )
+                ));
+
+        Comparator<Map.Entry<String, List<Employee>>> byDepthTotalSalaryDesc =
+                Map.Entry.comparingByValue(
+                        Comparator.comparingDouble(
+                                (List<Employee> list) -> list.stream().mapToDouble(Employee::salary).sum()
+                        ).reversed()
+                );
+
+        return byDept.entrySet().stream()
+                .sorted(byDepthTotalSalaryDesc)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (e1, e2) -> e1,
+                        LinkedHashMap::new
+                ));
     }
 
     // ══════════════════════════════════════════════════════════════════════
