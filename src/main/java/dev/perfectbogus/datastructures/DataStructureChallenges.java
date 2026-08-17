@@ -73,7 +73,21 @@ public class DataStructureChallenges {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         if (windowSize <= 0) throw new IllegalArgumentException("Window size must be positive");
         // TODO — use ArrayDeque<Integer> as sliding window queue
-        return new ArrayList<>();
+        ArrayDeque<Integer> window = new ArrayDeque<>();
+        List<Double> result = new ArrayList<>(numbers.size());
+
+        double sum = 0;
+        for (int i : numbers) {
+            if (window.size() >= windowSize) {
+                sum -= window.poll();
+            }
+            sum += i;
+            window.offer(i);
+            double avg = sum / window.size();
+            result.add(avg);
+        }
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
