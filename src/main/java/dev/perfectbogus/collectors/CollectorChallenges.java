@@ -363,6 +363,29 @@ public class CollectorChallenges {
     public static Map<String, DeptSummary> challenge10(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashMap<>();
+        Map<String, DeptSummary> byDept = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.teeing(
+                                Collectors.toList(),
+                                Collectors.toList(),
+                                (list1, list2) -> {
+                                    int count = list1.size();
+                                    double total = list1.stream().mapToDouble(Employee::salary).sum();
+                                    double avg = total / count;
+                                    String highest = list1.stream().max(
+                                            Comparator.comparingDouble(Employee::salary)
+                                    ).map(Employee::name).orElse("");
+                                    String lowest = list1.stream().min(
+                                            Comparator.comparingDouble(Employee::salary)
+                                    ).map(Employee::name).orElse("");
+                                    String byRank = list1.stream().sorted(
+                                            Comparator.comparingDouble(Employee::salary).reversed()
+                                    ).map(Employee::name).collect(Collectors.joining(", "));
+                                    return new DeptSummary(count, total, avg, highest, lowest, byRank);
+                                }
+                        )
+                ));
+        return byDept;
     }
 }
