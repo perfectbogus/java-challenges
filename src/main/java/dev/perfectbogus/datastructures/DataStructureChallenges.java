@@ -27,7 +27,25 @@ public class DataStructureChallenges {
     public static boolean challenge1(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO — use Deque<Character> as a stack
-        return false;
+        Deque<Character> q = new ArrayDeque<>();
+        Map<Character, Character> map = new HashMap<>(Map.of(
+                 ')', '(',
+                ']', '[',
+                '}', '{'
+        ));
+
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == '{' || c == '[') {
+                q.push(c);
+            } else {
+                if (q.isEmpty()) return false;
+                char p = q.peek();
+                if (p != map.get(c)) return false;
+                q.pop();
+            }
+        }
+
+        return q.isEmpty();
     }
 
     // ─────────────────────────────────────────────────────────────
