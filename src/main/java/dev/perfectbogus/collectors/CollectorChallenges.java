@@ -205,7 +205,19 @@ public class CollectorChallenges {
     public static Result challenge7(List<Employee> employees) {
         if (employees == null || employees.isEmpty()) throw new IllegalArgumentException("Employees cannot be null or empty");
         // TODO
-        return new Result(0, 0);
+        return employees.stream().collect(
+                Collectors.teeing(
+                        Collectors.summingDouble(Employee::salary),
+                        Collectors.toList(),
+                        (totalSalary, list) -> {
+                            double avg = totalSalary / list.size();
+                            long countAbove = list.stream()
+                                    .filter(e -> e.salary() > avg)
+                                    .count();
+                            return new Result(totalSalary, countAbove);
+                        }
+                )
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -230,7 +242,15 @@ public class CollectorChallenges {
     public static Map<String, Map<String, Long>> challenge8(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new HashMap<>();
+        return employees.stream().collect(
+                Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.groupingBy(
+                                e -> e.yearsOfExperience() >= 5 ? "SENIOR" : "JUNIOR",
+                                Collectors.counting()
+                        )
+                )
+        );
     }
 
     // ─────────────────────────────────────────────────────────────
