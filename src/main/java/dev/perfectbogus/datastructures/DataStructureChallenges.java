@@ -186,6 +186,24 @@ public class DataStructureChallenges {
         return '-';
     }
 
+    public static char challenge4_2(String s) {
+        if (s == null) throw new IllegalArgumentException("Input cannot be null");
+        if (s.isEmpty()) return '-';
+
+        Map<Character, Long> map = s.chars().mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        LinkedHashMap::new,
+                        Collectors.counting()
+                ));
+
+        return map.entrySet().stream()
+                .filter(e -> e.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse('-');
+    }
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 5
     // TreeMap Range Count — use a TreeMap to count how many keys
@@ -212,7 +230,19 @@ public class DataStructureChallenges {
         // TODO — use TreeMap<Integer, Integer>
         //        subMap(lo, true, hi, true).size() for count
         //        floorKey(query) and ceilingKey(query) for floor/ceiling
-        return new RangeResult(0, null, null);
+        TreeMap<Integer, Integer> map = keys.stream()
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        k -> 0,
+                        (a, b) -> a,
+                        TreeMap::new
+                ));
+
+        int count = map.subMap(lo, true, hi, true).size();
+        Integer floor = map.floorKey(query);
+        Integer ceiling = map.ceilingKey(query);
+
+        return new RangeResult(count, floor, ceiling);
     }
 
     // ══════════════════════════════════════════════════════════════════════
