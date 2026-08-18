@@ -1,6 +1,7 @@
 package dev.perfectbogus.datastructures;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.*;
 
 public class DataStructureChallenges {
@@ -145,6 +146,43 @@ public class DataStructureChallenges {
         if (s.isEmpty()) return '-';
         // TODO — use LinkedHashMap<Character, Integer> for frequency
         //        iterate in insertion order to find first with count=1
+        Map<Character, Integer> map = new LinkedHashMap<>();
+        for (char c : s.toCharArray()) {
+            map.merge(c, 1, Integer::sum);
+        }
+
+//        Map<Character, Long> map1 = s.chars().mapToObj(c -> (char) c)
+//                .collect(Collectors.groupingBy(
+//                        Function.identity(),
+//                        LinkedHashMap::new,
+//                        Collectors.counting()
+//                ));
+//
+//        Map<Character, Integer> map2 = s.chars()
+//                .mapToObj(c -> (char) c)
+//                .collect(Collectors.toMap(
+//                        Function.identity(),
+//                        c -> 1,           // ← each = 1
+//                        Integer::sum,     // ← merge sums
+//                        LinkedHashMap::new
+//                ));
+
+
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == 1) {
+                return entry.getKey();
+            }
+        }
+
+//        return map1.entrySet().stream()
+//                .filter(e -> e.getValue() == 1)
+//                .map(Map.Entry::getKey)
+//                .findFirst()
+//                .orElse('-');
+
+
+
+
         return '-';
     }
 
