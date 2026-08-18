@@ -357,7 +357,28 @@ public class DataStructureChallenges {
         if (tasks == null) throw new IllegalArgumentException("Tasks cannot be null");
         // TODO — use PriorityQueue<Task> with comparator: priority DESC then name ASC
         //        poll all tasks and format as "name(duration)"
-        return new ArrayList<>();
+        Comparator<Task> byHighestPriorityDesc = Comparator.comparingInt(Task::priority).reversed();
+        Comparator<Task> byName = Comparator.comparing(Task::name);
+        PriorityQueue<Task> q = new PriorityQueue<>(byHighestPriorityDesc.thenComparing(byName));
+
+        for (Task t : tasks) {
+            q.offer(t);
+        }
+
+        List<String> result = new ArrayList<>();
+        while (!q.isEmpty()) {
+            Task t = q.poll();
+            String tmp = t.name() + "(" + t.duration() + ")";
+            result.add(tmp);
+        }
+
+        return result;
+    }
+
+    public static List<String> challenge7_2(List<Task> tasks) {
+        Comparator<Task> byHighestPriorityDesc = Comparator.comparingInt(Task::priority).reversed();
+        Comparator<Task> byName = Comparator.comparing(Task::name);
+        return tasks.stream().sorted(byHighestPriorityDesc.thenComparing(byName)).map(t -> t.name() + "(" + t.duration() + ")").toList();
     }
 
     // ─────────────────────────────────────────────────────────────

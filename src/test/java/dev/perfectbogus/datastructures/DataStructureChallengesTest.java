@@ -444,6 +444,21 @@ class DataStructureChallengesTest {
         }
 
         @Test
+        void allSamePriority7_2() {
+            List<DataStructureChallenges.Task> tasks = new ArrayList<>(List.of(
+                    new DataStructureChallenges.Task("Zebra", 1, 3),
+                    new DataStructureChallenges.Task("Alpha", 1, 1),
+                    new DataStructureChallenges.Task("Mango", 1, 2)
+            ));
+            List<String> result = DataStructureChallenges.challenge7_2(tasks);
+
+            // Same priority → alpha ASC
+            assertEquals("Alpha(1)", result.get(0));
+            assertEquals("Mango(2)", result.get(1));
+            assertEquals("Zebra(3)", result.get(2));
+        }
+
+        @Test
         void highPriorityProcessedFirst() {
             List<DataStructureChallenges.Task> tasks = new ArrayList<>(List.of(
                     new DataStructureChallenges.Task("Low",  1, 10),
