@@ -277,7 +277,54 @@ public class DataStructureChallenges {
     public static List<Integer> challenge6(List<String> operations) {
         if (operations == null) throw new IllegalArgumentException("Operations cannot be null");
         // TODO — use two ArrayDeque<Integer>: mainStack and maxStack
-        return new ArrayList<>();
+        List<Integer> results = new ArrayList<>();
+        MaxStack stack = new MaxStack();
+        for (String s : operations) {
+            String[] split = s.split(":");
+            if (split[0].equals("push")) {
+                int val = Integer.parseInt(split[1]);
+                stack.push(val);
+            } else if (split[0].equals("getMax")) {
+                int max = stack.getMax();
+                results.add(max);
+            } else if (split[0].equals("pop")) {
+                stack.pop();
+            } else {
+                int val = stack.peek();
+                results.add(val);
+            }
+        }
+        return results;
+    }
+
+    private static class MaxStack {
+
+        ArrayDeque<Integer> main;
+        ArrayDeque<Integer> maxStack;
+
+        public MaxStack() {
+            main = new ArrayDeque<>();
+            maxStack = new ArrayDeque<>();
+        }
+
+        public void pop() {
+            main.pop();
+            maxStack.pop();
+        }
+
+        public Integer peek() {
+            return main.peek();
+        }
+
+        public void push(Integer i) {
+            main.push(i);
+            int val = maxStack.isEmpty() ? i : Math.max(maxStack.peek(), i);
+            maxStack.push(val);
+        }
+
+        public Integer getMax() {
+            return maxStack.peek();
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
