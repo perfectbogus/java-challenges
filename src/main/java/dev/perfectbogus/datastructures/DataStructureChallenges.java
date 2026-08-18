@@ -449,7 +449,65 @@ public class DataStructureChallenges {
         // TODO — use ArrayDeque<Integer> as stack
         //        for each token: if number → push; if operator → pop two, compute, push
         //        Set<String> operators = Set.of("+","-","*","/")
-        return 0;
+        ArrayDeque<Integer> stack = new ArrayDeque<>();
+        for (String s : tokens) {
+            switch (s) {
+                case "+" -> {
+                    int b = stack.pop();
+                    int a = stack.pop();
+                    stack.push(a + b);
+                }
+                case "-" -> {
+                    int b = stack.pop();
+                    int a = stack.pop();
+                    stack.push(a - b);
+                }
+                case "*" -> {
+                    int b = stack.pop();
+                    int a = stack.pop();
+                    stack.push(a * b);
+                }
+                case "/" -> {
+                    int b = stack.pop();
+                    int a = stack.pop();
+                    stack.push(a / b);
+                }
+                default -> {
+                    int a = Integer.parseInt(s);
+                    stack.push(a);
+                }
+            }
+        }
+
+        return stack.pop();
+    }
+
+    private static int challenge9_2(String[] tokens) {
+        if (tokens == null) throw new IllegalArgumentException("Tokens cannot be null");
+
+        Deque<Integer> stack = new ArrayDeque<>();
+
+        for (String s : tokens) {
+            if (Set.of("+", "-", "*", "/").contains(s)) {
+                applyOp(stack, s);
+            } else {
+                stack.push(Integer.parseInt(s));
+            }
+        }
+
+        return stack.pop();
+    }
+
+    private static void applyOp(Deque<Integer> stack, String op) {
+        int b = stack.pop();
+        int a = stack.pop();
+        stack.push(switch (op) {
+            case "+" -> a + b;
+            case "-" -> a - b;
+            case "*" -> a * b;
+            case "/" -> a / b;
+            default -> throw new IllegalArgumentException("Unknown op:" + op);
+        });
     }
 
     // ══════════════════════════════════════════════════════════════════════
