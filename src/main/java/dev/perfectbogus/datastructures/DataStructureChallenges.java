@@ -106,7 +106,24 @@ public class DataStructureChallenges {
         if (nums == null) throw new IllegalArgumentException("Array cannot be null");
         if (k <= 0 || k > nums.length) throw new IllegalArgumentException("Invalid k");
         // TODO — use PriorityQueue (min heap of size k)
-        return new ArrayList<>();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        for (int c : nums) {
+            minHeap.offer(c);
+
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+
+        List<Integer> results = new ArrayList<>(k);
+        while (!minHeap.isEmpty()) {
+            results.add(minHeap.poll());
+        }
+
+        results.sort(Comparator.reverseOrder());
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
