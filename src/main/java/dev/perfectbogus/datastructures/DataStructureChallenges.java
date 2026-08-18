@@ -407,7 +407,24 @@ public class DataStructureChallenges {
         // TODO — Step 1: HashMap<String,Integer> for frequencies
         //        Step 2: PriorityQueue with comparator freq DESC then alpha ASC
         //        Step 3: offer all entries, poll k times
-        return new ArrayList<>();
+        Map<String, Long> freq = words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ));
+
+        Comparator<Map.Entry<String, Long>> byFreqDesc = Map.Entry.<String, Long>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Long>> byKey = Map.Entry.comparingByKey();
+
+        PriorityQueue<Map.Entry<String, Long>> q = new PriorityQueue<>(byFreqDesc.thenComparing(byKey));
+
+        q.addAll(freq.entrySet());
+
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            result.add(q.poll().getKey());
+        }
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
