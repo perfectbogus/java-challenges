@@ -669,7 +669,7 @@ class DataStructureChallengesTest {
         @Test
         void withNegatives() {
             assertArrayEquals(
-                    new int[]{-1,-1,-2},
+                    new int[]{-1,-1,-1},
                     DataStructureChallenges.challenge10(
                             new int[]{-5,-3,-1,-2,-4}, 3));
         }

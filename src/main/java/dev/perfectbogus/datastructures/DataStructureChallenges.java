@@ -563,6 +563,32 @@ public class DataStructureChallenges {
         if (nums == null) throw new IllegalArgumentException("Array cannot be null");
         if (k <= 0 || k > nums.length) throw new IllegalArgumentException("Invalid k");
         // TODO — use ArrayDeque<Integer> storing INDICES (monotonic deque!)
-        return new int[]{};
+        Deque<Integer> q = new ArrayDeque<>();
+        List<Integer> results = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            while (!q.isEmpty() && q.peekFirst() < i - k + 1) {
+                q.pollFirst();
+            }
+
+            while (!q.isEmpty() && nums[q.peekLast()] < nums[i]) {
+                q.pollLast();
+            }
+
+            q.addLast(i);
+
+            if (i >= k - 1) {
+                results.add(nums[q.peekFirst()]);
+            }
+        }
+
+        int[] r = new int[results.size()];
+        for (int i = 0; i < results.size(); i++) {
+            r[i] = results.get(i);
+        }
+
+        System.out.println(results);;
+
+        return r;
     }
 }
