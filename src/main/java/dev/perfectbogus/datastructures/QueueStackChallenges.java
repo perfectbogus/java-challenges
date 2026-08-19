@@ -285,7 +285,39 @@ public class QueueStackChallenges {
         // TODO — use two ArrayDeque<String> as stacks: backStack and forwardStack
         //        current page starts as "home"
         //        only "current" operations add to result list
-        return new ArrayList<>();
+        ArrayDeque<String> back = new ArrayDeque<>();
+        ArrayDeque<String> forward = new ArrayDeque<>();
+        List<String> currents = new ArrayList<>();
+        String current = "home";
+
+        for (String op : operations) {
+            String[] split = op.split(":");
+            String cmd = split[0];
+            switch (cmd) {
+                case "visit" -> {
+                    String visit = split[1];
+                    back.push(current);
+                    current = visit;
+                    while (!forward.isEmpty()) {
+                        forward.pop();
+                    }
+                }
+                case "back" -> {
+                    forward.push(current);
+                    if (!back.isEmpty())
+                        current = back.pop();
+
+                }
+                case "forward" -> {
+                    back.push(current);
+                    if (!forward.isEmpty())
+                        current = forward.pop();
+                }
+                case "current" -> currents.add(current);
+            }
+        }
+
+        return currents;
     }
 
     // ─────────────────────────────────────────────────────────────
