@@ -62,6 +62,10 @@ public class QueueStackChallenges {
         if (pushed.length != popped.length)   throw new IllegalArgumentException("Arrays must be same length");
         // TODO — simulate push/pop with an ArrayDeque as stack
         //        push elements one by one, popping while stack top matches popped[j]
+        Deque<Integer> stack = new ArrayDeque<>();
+
+
+
         return false;
     }
 
@@ -83,7 +87,24 @@ public class QueueStackChallenges {
         // TODO — filter alphanumeric, push to Deque
         //        compare peekFirst() and peekLast(), pollFirst() and pollLast()
         //        until deque has 0 or 1 element
-        return false;
+        String normalizedS = s.replaceAll("\\s+", "").trim().toLowerCase();
+
+        Deque<Character> queue = new ArrayDeque<>();
+        for (char c : normalizedS.toCharArray()) {
+            queue.push(c);
+        }
+
+        while (!queue.isEmpty()) {
+            char front = queue.peekFirst();
+            char tail = queue.peekLast();
+            if (front != tail) {
+                return false;
+            }
+            queue.pollLast();
+            queue.pollFirst();
+        }
+
+        return true;
     }
 
     // ─────────────────────────────────────────────────────────────
