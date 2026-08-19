@@ -340,7 +340,7 @@ class QueueStackChallengesTest {
         @Test
         void tripleNested() {
             // ((())) = 2*(2*(1)) = 4
-            assertEquals(4, QueueStackChallenges.challenge6("(***)"));
+            assertEquals(4, QueueStackChallenges.challenge6("((()))"));
         }
 
         @Test

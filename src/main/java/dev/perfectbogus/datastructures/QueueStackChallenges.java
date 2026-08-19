@@ -207,8 +207,8 @@ public class QueueStackChallenges {
     // Score of Balanced Brackets using a Stack.
     // Compute the score of a balanced brackets string:
     // → "()" scores 1
-    // → "AB" scores A + B  (concatenation)
-    // → "(A)" scores 2 * A  (wrapping doubles the score)
+    // → "()()" scores A + B  (concatenation)
+    // → "(())" scores 2 * A  (wrapping doubles the score)
     //
     // Algorithm (stack-based):
     // → push 0 onto stack as base
@@ -227,7 +227,19 @@ public class QueueStackChallenges {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO — use ArrayDeque<Integer> as stack
         //        push 0 as base, then process each char
-        return 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.push(0);
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                stack.push(0);
+            } else if (c == ')') {
+                int v = stack.pop();
+                int w = stack.pop();
+                stack.push(w + Math.max(2*v, 1));
+            }
+        }
+
+        return stack.pop();
     }
 
     // ══════════════════════════════════════════════════════════════════════
