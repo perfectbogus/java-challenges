@@ -181,7 +181,25 @@ public class QueueStackChallenges {
         //              move temp.pop() back to main
         //            push current to temp
         //        drain tempStack to result list (index 0=bottom, last=top)
-        return new ArrayList<>();
+        Deque<Integer> mainStack = new ArrayDeque<>();
+        for (Integer i : stack) {
+            mainStack.push(i);
+        }
+
+        Deque<Integer> tmpStack = new ArrayDeque<>();
+        while (!mainStack.isEmpty()) {
+            int current = mainStack.pop();
+            while (!tmpStack.isEmpty() && tmpStack.peek() > current) {
+                mainStack.push(tmpStack.pop());
+            }
+            tmpStack.push(current);
+        }
+
+        List<Integer> result = new ArrayList<>();
+        while (!tmpStack.isEmpty()) {
+            result.add(tmpStack.pop());
+        }
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
