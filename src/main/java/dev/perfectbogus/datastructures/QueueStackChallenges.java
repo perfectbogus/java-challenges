@@ -131,7 +131,19 @@ public class QueueStackChallenges {
         //        REG → addLast (join back)
         //        VIP → addFirst (jump to front)
         //        poll all into result list
-        return new ArrayList<>();
+        Deque<String> customerQueue = new ArrayDeque<>();
+        for (String s : customers) {
+            String[] split = s.split(":");
+            String type = split[0];
+            String name = split[1];
+            if (type.equals("REG")) {
+                customerQueue.offerLast(name);
+            } else if (type.equals("VIP")) {
+                customerQueue.offerFirst(name);
+            }
+        }
+
+        return new ArrayList<>(customerQueue);
     }
 
     // ─────────────────────────────────────────────────────────────
