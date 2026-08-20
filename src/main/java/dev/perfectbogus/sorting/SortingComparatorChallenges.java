@@ -65,7 +65,13 @@ public class SortingComparatorChallenges {
     public static List<Map.Entry<String, Integer>> challenge2(Map<String, Integer> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Map.Entry<String, Integer>> byCombined = Comparator.comparingInt( e -> {
+            int length = e.getKey().length();
+            int val = e.getValue();
+            return length*val;
+        });
+        Comparator<Map.Entry<String, Integer>> byAlpha = Map.Entry.comparingByKey();
+        return map.entrySet().stream().sorted(byCombined.thenComparing(byAlpha)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
