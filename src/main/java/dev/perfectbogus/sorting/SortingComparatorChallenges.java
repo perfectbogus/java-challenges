@@ -203,7 +203,14 @@ public class SortingComparatorChallenges {
     public static List<Product> challenge6(List<Product> products) {
         if (products == null) throw new IllegalArgumentException("Products cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Product> byProfitMarginDesc = Comparator.<Product>comparingDouble(p ->
+                (p.price() - p.cost()) / (p.price() * 100))
+                .reversed();
+        Comparator<Product> byName = Comparator.comparing(Product::name);
+
+        products.sort(byProfitMarginDesc.thenComparing(byName));
+
+        return products;
     }
 
     // ─────────────────────────────────────────────────────────────
