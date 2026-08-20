@@ -503,6 +503,23 @@ public class QueueStackChallenges {
         //        each round: rotate (k-1) times (addLast(pollFirst()))
         //        then pollFirst() = eliminated player
         //        repeat until 1 remains → that is the winner
-        return new HotPotatoResult(new ArrayList<>(), "");
+        Deque<String> q = new ArrayDeque<>();
+        for (String player : players) {
+            q.offer(player);
+        }
+
+        int i = 1;
+        List<String> eliminated = new ArrayList<>();
+        while (q.size() > 1) {
+            if (i == k) {
+                eliminated.add(q.pollFirst());
+                i = 1;
+            } else {
+                q.offer(q.pollFirst());
+                i++;
+            }
+        }
+
+        return new HotPotatoResult(eliminated, q.poll());
     }
 }
