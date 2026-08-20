@@ -351,7 +351,40 @@ public class QueueStackChallenges {
         // TODO — use ArrayDeque<Integer> countStack and ArrayDeque<String> stringStack
         //        current string starts as ""
         //        current count starts as 0
-        return "";
+        ArrayDeque<Integer> countStack = new ArrayDeque<>();
+        ArrayDeque<String> stringStack = new ArrayDeque<>();
+
+        int count = 0;
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                count = count * 10 + (c - '0');
+            } else {
+                if (c == '[') {
+                    countStack.push(count);
+                    count = 0;
+                    stringStack.push(String.valueOf(c));
+                } else if (c == ']') {
+                    String tmp = "";
+                    while (!stringStack.isEmpty() && !stringStack.peek().equals("[")) {
+                        tmp = stringStack.pop() + tmp;
+                    }
+                    stringStack.pop();// remove the [ in the stack used as backward stop
+
+                    int num = countStack.pop();
+                    String res = tmp.repeat(num);
+                    stringStack.push(res);
+                } else {
+                    stringStack.push(String.valueOf(c));
+                }
+            }
+        }
+
+        String ans = "";
+        while (!stringStack.isEmpty()) {
+            ans = stringStack.pop() + ans;
+        }
+
+        return ans;
     }
 
     // ─────────────────────────────────────────────────────────────
