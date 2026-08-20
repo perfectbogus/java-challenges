@@ -1,6 +1,7 @@
 package dev.perfectbogus.sorting;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.*;
 
 public class SortingComparatorChallenges {
@@ -166,7 +167,12 @@ public class SortingComparatorChallenges {
     public static List<Integer> challenge5(List<Integer> numbers) {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Integer> byNDigits = Comparator.comparingInt(i -> Character.charCount(i));
+        Comparator<Integer> byValue = Comparator.naturalOrder();
+
+        numbers.sort(byNDigits.thenComparing(byValue));
+
+        return numbers;
     }
 
     // ══════════════════════════════════════════════════════════════════════
