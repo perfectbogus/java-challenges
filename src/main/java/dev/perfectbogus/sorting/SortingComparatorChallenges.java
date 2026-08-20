@@ -235,7 +235,14 @@ public class SortingComparatorChallenges {
     public static List<Map.Entry<String, List<String>>> challenge7(Map<String, List<String>> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Map.Entry<String, List<String>>> byAvgWordLengthDesc =
+                Map.Entry.<String, List<String>>comparingByValue(Comparator.comparingDouble(list ->
+                        list.stream().mapToDouble(String::length).average().orElse(0.0))).reversed();
+
+        Comparator<Map.Entry<String, List<String>>> byListSize = Map.Entry.comparingByValue(Comparator.comparingInt(List::size));
+        Comparator<Map.Entry<String, List<String>>> byKeyAlpha = Map.Entry.comparingByKey(Comparator.naturalOrder());
+
+        return map.entrySet().stream().sorted(byAvgWordLengthDesc.thenComparing(byListSize).thenComparing(byKeyAlpha)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
