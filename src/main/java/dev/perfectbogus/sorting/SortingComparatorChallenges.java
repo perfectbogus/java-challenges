@@ -272,7 +272,40 @@ public class SortingComparatorChallenges {
     public static int[][] challenge8(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        int max = Arrays.stream(matrix).mapToInt(row -> Arrays.stream(row).max().orElse(0)).max().orElse(0);
+
+        Set<Integer> primes = new HashSet<>();
+        for (int i = 2; i <= max; i++) {
+            if (isPrime(i)) {
+                primes.add(i);
+            }
+        }
+
+        Comparator<int[]> byCountPrimeDesc = Comparator.<int[]>comparingLong(row ->
+                Arrays.stream(row).filter(primes::contains).count()).reversed();
+        Comparator<int[]> byRowSum = Comparator.comparingInt(row -> Arrays.stream(row).sum());
+        Comparator<int[]> byFirstElem = Comparator.comparingInt(row -> row[0]);
+
+        Arrays.sort(matrix, byCountPrimeDesc.thenComparing(byRowSum).thenComparing(byFirstElem));
+
         return matrix;
+    }
+
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+
+        // Descarta pares y múltiplos de 3 rápidamente
+        if (n % 2 == 0 || n % 3 == 0) return false;
+
+        // Comprueba usando la regla de 6k ± 1 hasta sqrt(n)
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     // ─────────────────────────────────────────────────────────────
