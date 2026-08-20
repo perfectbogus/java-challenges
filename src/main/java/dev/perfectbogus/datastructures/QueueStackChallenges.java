@@ -425,7 +425,32 @@ public class QueueStackChallenges {
         // TODO — use ArrayDeque<Integer> storing INDICES
         //        monotonic INCREASING (remove from back if nums[back] >= nums[i])
         //        front = minimum of current window
-        return new int[]{};
+        Deque<Integer> q = new ArrayDeque<>();
+
+        List<Integer> results = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            while (!q.isEmpty() && q.peekFirst() < i - k + 1) {
+                q.pollFirst();
+            }
+
+            while (!q.isEmpty() && nums[q.peekLast()] > nums[i]) {
+                q.pollLast();
+            }
+
+            q.addLast(i);
+
+            if (i >= k - 1) {
+                results.add(nums[q.peekFirst()]);
+            }
+
+        }
+
+        int[] r = new int[results.size()];
+        for (int i = 0; i < results.size(); i++) {
+            r[i] = results.get(i);
+        }
+
+        return r;
     }
 
     // ─────────────────────────────────────────────────────────────

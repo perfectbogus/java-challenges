@@ -551,7 +551,7 @@ class QueueStackChallengesTest {
         @Test
         void withNegatives() {
             assertArrayEquals(
-                    new int[]{-5,-5,-3},
+                    new int[]{-5,-5,-5},
                     QueueStackChallenges.challenge9(
                             new int[]{-1,-3,-5,-3,-2}, 3));
         }
