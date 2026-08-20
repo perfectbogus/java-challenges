@@ -64,9 +64,16 @@ public class QueueStackChallenges {
         //        push elements one by one, popping while stack top matches popped[j]
         Deque<Integer> stack = new ArrayDeque<>();
 
+        int j = 0;
+        for (int k : pushed) {
+            stack.push(k);
+            while (!stack.isEmpty() && stack.peek() == popped[j]) {
+                stack.pop();
+                j++;
+            }
+        }
 
-
-        return false;
+        return stack.isEmpty();
     }
 
     // ─────────────────────────────────────────────────────────────
