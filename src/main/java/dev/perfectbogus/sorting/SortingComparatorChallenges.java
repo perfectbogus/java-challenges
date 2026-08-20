@@ -130,7 +130,13 @@ public class SortingComparatorChallenges {
     public static List<Employee> challenge4(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Employee> byNameLengthDesc = Comparator.<Employee>comparingInt(e -> e.name().length()).reversed();
+        Comparator<Employee> byNameAlpha = Comparator.comparing(Employee::name);
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
+
+        employees.sort(byNameLengthDesc.thenComparing(byNameAlpha).thenComparing(bySalaryDesc));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────

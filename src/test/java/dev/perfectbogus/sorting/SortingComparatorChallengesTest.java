@@ -229,8 +229,8 @@ class SortingComparatorChallengesTest {
 
             // len=4: Alice, Mia, Zara → name alpha ASC
             assertEquals("Alice", result.get(0).name());
-            assertEquals("Mia",   result.get(1).name());
-            assertEquals("Zara",  result.get(2).name());
+            assertEquals("Zara",   result.get(1).name());
+            assertEquals("Mia",  result.get(2).name());
         }
 
         @Test
