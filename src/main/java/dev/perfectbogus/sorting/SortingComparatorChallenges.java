@@ -97,6 +97,12 @@ public class SortingComparatorChallenges {
     public static int[][] challenge3(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Comparator<int[]> byProduct = Comparator.comparingInt(row -> row[0] * row[1]);
+        Comparator<int[]> byFirstElem = Comparator.comparingInt(row -> row[0]);
+        Comparator<int[]> byLastElem = Comparator.comparingInt(row -> row[1]);
+
+        Arrays.sort(matrix, byProduct.thenComparing(byFirstElem).thenComparing(byLastElem));
+
         return matrix;
     }
 
