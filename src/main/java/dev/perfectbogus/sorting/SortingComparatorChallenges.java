@@ -33,7 +33,11 @@ public class SortingComparatorChallenges {
     public static List<String> challenge1(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<String> byLastChar = Comparator.comparingInt(w -> w.charAt(w.length() - 1));
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+        words.sort(byLastChar.thenComparing(byLength).thenComparing(byAlpha));
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────
