@@ -354,7 +354,40 @@ public class MapChallenges {
         //   LOGIN:  map.compute(user, (k, v) -> v == null ? 1 : v + 1)
         //   LOGOUT: map.compute(user, (k, v) -> (v == null || v <= 1) ? null : v - 1)
         //           returning null removes the entry!
-        return new HashMap<>();
+        Map<String, Integer> sessions = new HashMap<>();
+        for (String event : events) {
+            String[] split = event.split(":");
+            String type = split[0];
+            String name = split[1];
+
+            switch (type) {
+                case "LOGIN":
+                    sessions.compute(name, (key, value) -> value == null ? 1 : value + 1);
+                    break;
+                case "LOGOUT":
+                    sessions.compute(name, (key, value) -> (value == null || value <= 1) ? null : value - 1);
+                    break;
+            }
+        }
+
+        return sessions;
+    }
+
+    public static Map<String, Integer> challenge8_2(List<String> events) {
+        if (events == null) throw new IllegalArgumentException("Events cannot be null");
+
+        Map<String, Integer> sessions = new HashMap<>();
+        events.forEach(event -> {
+            String[] parts = event.split(":");
+            String   type  = parts[0];
+            String   user  = parts[1];
+            if (type.equals("LOGIN")) {
+                sessions.compute(user, (k, v) -> v == null ? 1 : v + 1);
+            } else {
+                sessions.compute(user, (k, v) -> (v == null || v <= 1) ? null : v - 1);
+            }
+        });
+        return sessions;
     }
 
     // ─────────────────────────────────────────────────────────────
