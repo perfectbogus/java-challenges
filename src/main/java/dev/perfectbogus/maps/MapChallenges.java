@@ -210,7 +210,13 @@ public class MapChallenges {
         // TODO — convert to TreeMap (sorted keys), use forEach() to build report
         //        sort each employee list alphabetically
         //        join lines with "\n"
-        return "";
+        Map<String, List<String>> orderMap = new TreeMap<>(deptMap);
+
+        orderMap.forEach((key, value) -> value.sort(Comparator.naturalOrder()));
+
+        return orderMap.entrySet().stream().map(e ->
+                e.getKey() + " (" + e.getValue().size() + " employees): " + String.join(", ", e.getValue()))
+                .collect(Collectors.joining("\n"));
     }
 
     // ══════════════════════════════════════════════════════════════════════
