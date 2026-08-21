@@ -335,8 +335,26 @@ public class SortingComparatorChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<Employee> challenge9(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
-        // TODO
-        return new ArrayList<>();
+
+        // Step 1 — count employees per department
+        Map<String, Long> headcounts = employees.stream()
+                .collect(Collectors.groupingBy(Employee::department, Collectors.counting()));
+
+        // Step 2 — define comparators
+        Comparator<Employee> byHeadcountDesc = Comparator
+                .<Employee>comparingLong(e -> headcounts.get(e.department()))
+                .reversed();
+        Comparator<Employee> bySalaryDesc = Comparator
+                .comparingDouble(Employee::salary)
+                .reversed();
+        Comparator<Employee> byNameAsc = Comparator.comparing(Employee::name);
+
+        // Step 3 — sort with full chain
+        employees.sort(byHeadcountDesc
+                .thenComparing(bySalaryDesc)
+                .thenComparing(byNameAsc));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
