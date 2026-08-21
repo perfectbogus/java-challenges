@@ -494,6 +494,43 @@ public class MapChallenges {
     public static Map<String, AccountSummary> challenge10(List<String> transactions) {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         // TODO
-        return new HashMap<>();
+        Map<String, double[]> data = new HashMap<>();
+        for (String t : transactions) {
+            String[] split = t.split(":");
+            String account = split[1];
+            data.computeIfAbsent(account, s -> new double[4]);
+        }
+
+        for (String t : transactions) {
+            String[] split = t.split(":");
+            String type = split[0];
+            String account = split[1];
+            double[] stats = data.computeIfAbsent(account, k -> new double[4]);
+            stats[0]++;
+            double amount = Double.parseDouble(split[2]);
+            if (type.equals("DEPOSIT")) {
+                stats[1] += amount;
+            } else {
+                stats[2] += amount;
+            }
+            stats[3] = Math.max(stats[3], amount);
+        }
+
+        Map<String, AccountSummary> result = data.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getKey,
+                entry -> buildSummary(entry.getValue())
+        ));
+
+        return result;
+    }
+
+    private static AccountSummary buildSummary(double[] stats) {
+        int count = (int) stats[0];
+        double totalDeposits = stats[1];
+        double totalWithdrawals = stats[2];
+        double largest = stats[3];
+        double net = totalDeposits - totalWithdrawals;
+        String status = net > 0 ? "HEALTHY" : net < 0 ? "OVERDRAWN" : "ZERO";
+        return new AccountSummary(count, totalDeposits, totalWithdrawals, net, largest, status);
     }
 }
