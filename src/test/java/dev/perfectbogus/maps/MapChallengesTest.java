@@ -187,6 +187,20 @@ class MapChallengesTest {
         }
 
         @Test
+        void basicCase3_2() {
+            Map<String, Integer> cart1 = new HashMap<>(Map.of("apple",3,"banana",2,"cherry",1));
+            Map<String, Integer> cart2 = new HashMap<>(Map.of("banana",4,"cherry",2,"date",5));
+
+            Map<String, Integer> result = MapChallenges.challenge3_2(cart1, cart2);
+
+            assertEquals(4, result.size());
+            assertEquals(3, result.get("apple"));  // only cart1
+            assertEquals(6, result.get("banana")); // 2+4
+            assertEquals(3, result.get("cherry")); // 1+2
+            assertEquals(5, result.get("date"));   // only cart2
+        }
+
+        @Test
         void noCommonItems() {
             Map<String, Integer> cart1 = new HashMap<>(Map.of("apple",3,"banana",2));
             Map<String, Integer> cart2 = new HashMap<>(Map.of("cherry",1,"date",5));

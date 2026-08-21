@@ -137,7 +137,24 @@ public class MapChallenges {
         if (cart2 == null) throw new IllegalArgumentException("Cart2 cannot be null");
         // TODO — start with new HashMap<>(cart1)
         //        then use merge() for each entry in cart2
-        return new HashMap<>();
+        Map<String, Integer> merge = new HashMap<>(cart1);
+
+        for (Map.Entry<String, Integer> entry : cart2.entrySet()) {
+            merge.merge(entry.getKey(), entry.getValue(), Integer::sum);
+        }
+
+        return merge;
+    }
+
+    public static Map<String, Integer> challenge3_2(Map<String, Integer> cart1, Map<String, Integer> cart2) {
+        if (cart1 == null) throw new IllegalArgumentException("Cart1 cannot be null");
+        if (cart2 == null) throw new IllegalArgumentException("Cart2 cannot be null");
+
+        Map<String, Integer> merge = new HashMap<>(cart1);
+
+        cart2.forEach((key, value) -> merge.merge(key, value, Integer::sum));
+
+        return merge;
     }
 
     // ─────────────────────────────────────────────────────────────
