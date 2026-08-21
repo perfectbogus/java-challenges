@@ -387,7 +387,18 @@ public class SortingComparatorChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<String> challenge10(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
+        Set<Character> vowels = new HashSet<>(Set.of('a', 'e', 'i', 'o', 'u'));
+
+        Comparator<String> byRatioVowelsDesc = Comparator.<String>comparingDouble(w -> {
+            int length = w.length();
+            long nVowels = w.chars().mapToObj(c -> (char) c).filter(vowels::contains).count();
+            return (double) nVowels/length;
+        }).reversed();
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+
+        words.sort(byRatioVowelsDesc.thenComparing(byLength).thenComparing(byAlpha));
         // TODO
-        return new ArrayList<>();
+        return words;
     }
 }
