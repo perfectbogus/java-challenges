@@ -252,7 +252,17 @@ public class MapChallenges {
         if (edges == null) throw new IllegalArgumentException("Edges cannot be null");
         // TODO — use computeIfAbsent(node, k -> new ArrayList<>()).add(neighbor)
         //        sort each neighbor list at the end
-        return new HashMap<>();
+        Map<String, List<String>> adj = new HashMap<>();
+        final int FROM = 0;
+        final int TO = 1;
+
+        for (String[] edge : edges) {
+            adj.computeIfAbsent(edge[FROM], k -> new ArrayList<>()).add(edge[TO]);
+        }
+
+        adj.values().forEach(list -> list.sort(Comparator.naturalOrder()));
+
+        return adj;
     }
 
     // ─────────────────────────────────────────────────────────────
