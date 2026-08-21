@@ -93,7 +93,25 @@ public class MapChallenges {
     public static Map<Character, Integer> challenge2(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO — iterate with index, use putIfAbsent(char, index)
-        return new LinkedHashMap<>();
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            map.putIfAbsent(s.charAt(i), i);
+        }
+        return map;
+    }
+
+    public static Map<Character, Integer> challenge2_2(String s) {
+        if (s == null) throw new IllegalArgumentException("input cannot be null");
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (!map.containsKey(s.charAt(i))) {
+                map.put(s.charAt(i), i);
+            }
+        }
+
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────

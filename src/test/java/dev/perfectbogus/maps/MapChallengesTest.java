@@ -110,10 +110,24 @@ class MapChallengesTest {
             assertEquals(1, result.get('r')); // first 'r' at index 1, not 6!
             assertEquals(2, result.get('o'));
             assertEquals(3, result.get('g')); // first 'g' at index 3, not 9!
-            assertEquals(4, result.get('a'));
-            assertEquals(5, result.get('m')); // first 'm' at index 5, not 6!
-            assertEquals(7, result.get('i'));
-            assertEquals(8, result.get('n'));
+            assertEquals(5, result.get('a'));
+            assertEquals(6, result.get('m')); // first 'm' at index 5, not 6!
+            assertEquals(8, result.get('i'));
+            assertEquals(9, result.get('n'));
+        }
+
+        @Test
+        void basicCase2_2() {
+            Map<Character, Integer> result = MapChallenges.challenge2_2("programming");
+
+            assertEquals(0, result.get('p'));
+            assertEquals(1, result.get('r')); // first 'r' at index 1, not 6!
+            assertEquals(2, result.get('o'));
+            assertEquals(3, result.get('g')); // first 'g' at index 3, not 9!
+            assertEquals(5, result.get('a'));
+            assertEquals(6, result.get('m')); // first 'm' at index 5, not 6!
+            assertEquals(8, result.get('i'));
+            assertEquals(9, result.get('n'));
         }
 
         @Test
