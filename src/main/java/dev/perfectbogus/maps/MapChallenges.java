@@ -423,7 +423,17 @@ public class MapChallenges {
         // TODO — for each [item, amount]:
         //        int qty = Integer.parseInt(amount)
         //        if (inventory.remove(item, qty)) → add to removed map
-        return new HashMap<>();
+
+        Map<String, Integer> removed = new HashMap<>();
+
+        for (String[] request : requests) {
+            int qty = Integer.parseInt(request[1]);
+            if (inventory.remove(request[0], qty)) {
+                removed.put(request[0], qty);
+            }
+        }
+
+        return removed;
     }
 
     // ══════════════════════════════════════════════════════════════════════
