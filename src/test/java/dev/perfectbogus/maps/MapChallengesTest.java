@@ -29,6 +29,18 @@ class MapChallengesTest {
         }
 
         @Test
+        void basicCase1_2() {
+            Map<String, Integer> result = MapChallenges.challenge1_2(
+                    List.of("apple","banana","apple","cherry","banana","apple"),
+                    List.of("apple","grape","banana","fig"));
+
+            assertEquals(3, result.get("apple"));
+            assertEquals(0, result.get("grape"));  // never seen → 0
+            assertEquals(2, result.get("banana"));
+            assertEquals(0, result.get("fig"));    // never seen → 0
+        }
+
+        @Test
         void queryOrderPreserved() {
             Map<String, Integer> result = MapChallenges.challenge1(
                     List.of("a","b","a"),

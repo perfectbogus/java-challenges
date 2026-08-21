@@ -1,6 +1,7 @@
 package dev.perfectbogus.maps;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.*;
 
 public class MapChallenges {
@@ -9,6 +10,7 @@ public class MapChallenges {
     // SECTION A — EASY (Challenges 1–5)
     // Main functions covered: getOrDefault, putIfAbsent, merge, replaceAll, forEach
     // ══════════════════════════════════════════════════════════════════════
+
 
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 1 — getOrDefault()
@@ -32,7 +34,41 @@ public class MapChallenges {
         if (queries == null) throw new IllegalArgumentException("Queries cannot be null");
         // TODO — use getOrDefault() to build frequency map
         //        use getOrDefault() to answer each query
-        return new LinkedHashMap<>();
+
+        // build freq map
+        Map<String, Integer> freq = new HashMap<>();
+        for (String w : words) {
+            freq.put(w, freq.getOrDefault(w, 0) + 1);
+        }
+
+        // answer each query
+        Map<String, Integer> result = new LinkedHashMap<>();
+        for (String q : queries) {
+            result.put(q, freq.getOrDefault(q, 0));
+        }
+
+        return result;
+    }
+
+    public static Map<String, Integer> challenge1_2(List<String> words, List<String> queries) {
+        if (words   == null) throw new IllegalArgumentException("Words cannot be null");
+        if (queries == null) throw new IllegalArgumentException("Queries cannot be null");
+        // TODO — use getOrDefault() to build frequency map
+        //        use getOrDefault() to answer each query
+        Set<String> set = new HashSet<>(queries);
+
+        // build freq map
+        Map<String, Long> freq = words.stream().filter(set::contains).collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ));
+
+        return queries.stream().collect(Collectors.toMap(
+                Function.identity(),
+                q -> freq.getOrDefault(q, 0L).intValue(),
+                (e1, e2) -> e1,
+                LinkedHashMap::new
+        ));
     }
 
     // ─────────────────────────────────────────────────────────────
