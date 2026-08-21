@@ -176,6 +176,9 @@ public class MapChallenges {
     public static Map<String, Double> challenge4(Map<String, Double> prices) {
         if (prices == null) throw new IllegalArgumentException("Prices cannot be null");
         // TODO — use prices.replaceAll((product, price) -> ...)
+
+        prices.replaceAll((key, value) -> value > 100.0 ? value * 0.90 : value * 1.05);
+
         return prices;
     }
 
