@@ -293,6 +293,24 @@ public class MapChallenges {
         if (salaries == null) throw new IllegalArgumentException("Salaries cannot be null");
         if (raises   == null) throw new IllegalArgumentException("Raises cannot be null");
         // TODO — for each [name, pct]: use computeIfPresent(name, (k, v) -> v * (1 + pct/100))
+
+        for (String[] raise : raises) {
+            String name = raise[0];
+            double percentage = Double.parseDouble(raise[1]);
+            salaries.computeIfPresent(name, (key, value) -> value * (1 + percentage/100));
+        }
+
+        return salaries;
+    }
+
+    public static Map<String, Double> challenge7_2(Map<String, Double> salaries, List<String[]> raises) {
+        if (salaries == null) throw new IllegalArgumentException("Salaries cannot be null");
+        if (raises == null) throw new IllegalArgumentException("Raises cannot be null");
+
+        int name = 0;
+        int raising = 1;
+        raises.forEach(raise -> salaries.computeIfPresent(raise[name], (key, value) -> value * (1 + Double.parseDouble(raise[raising])/100)));
+
         return salaries;
     }
 

@@ -477,6 +477,28 @@ class MapChallengesTest {
         }
 
         @Test
+        void basicCase7_2() {
+            Map<String, Double> salaries = new HashMap<>(Map.of(
+                    "Alice", 80000.0,
+                    "Bob",   60000.0,
+                    "Carol", 75000.0
+            ));
+            List<String[]> raises = List.of(
+                    new String[]{"Alice","10"},
+                    new String[]{"Diana","20"}, // Diana doesn't exist → no new entry!
+                    new String[]{"Bob","5"},
+                    new String[]{"Carol","15"}
+            );
+            Map<String, Double> result = MapChallenges.challenge7_2(salaries, raises);
+
+            assertEquals(3,        result.size());       // Diana NOT added!
+            assertEquals(88000.0,  result.get("Alice"),  0.01);
+            assertEquals(63000.0,  result.get("Bob"),    0.01);
+            assertEquals(86250.0,  result.get("Carol"),  0.01);
+            assertFalse(result.containsKey("Diana"));    // key absent → stays absent!
+        }
+
+        @Test
         void absentKeyNotAdded() {
             Map<String, Double> salaries = new HashMap<>(Map.of("Alice", 80000.0));
             List<String[]> raises = new ArrayList<>();
