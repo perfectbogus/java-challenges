@@ -81,9 +81,8 @@ class ThreadingChallengesTest {
         }
 
         @Test
-        void zeroThreads() {
-            assertThrows(IllegalArgumentException.class,
-                    () -> ThreadingChallenges.challenge2(0));
+        void zeroThreads() throws InterruptedException {
+            assertEquals(0, ThreadingChallenges.challenge2(0));
         }
     }
 

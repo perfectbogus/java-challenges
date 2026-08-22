@@ -63,7 +63,23 @@ public class ThreadingChallenges {
         //        loop: start all threads
         //        loop: join all threads
         //        return sum.get()
-        return 0;
+        AtomicInteger sum = new AtomicInteger(0);
+
+        List<Thread> threads = new ArrayList<>();
+        for (int i = 0; i < threadCount; i++) {
+            final int j = i;
+            threads.add(new Thread(() -> sum.getAndAdd(j)));
+        }
+
+        for (Thread t : threads) {
+            t.start();
+        }
+
+        for (Thread t : threads) {
+            t.join();
+        }
+
+        return sum.get();
     }
 
     // ─────────────────────────────────────────────────────────────
