@@ -1,5 +1,6 @@
 package dev.perfectbogus.threading;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -101,7 +102,23 @@ public class ThreadingChallenges {
     public static long challenge3(long delayMs) throws InterruptedException {
         if (delayMs < 0) throw new IllegalArgumentException("delayMs must be non-negative");
         // TODO — record start time, start thread with sleep, join, return elapsed
-        return 0L;
+
+        AtomicLong endTime = new AtomicLong();
+
+        Thread task = new Thread(() -> {
+            try {
+                long startTime = Instant.now().toEpochMilli();
+                Thread.sleep(delayMs);
+                endTime.set(Instant.now().toEpochMilli() - startTime);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        task.start();
+        task.join();
+
+        return endTime.get();
     }
 
     // ─────────────────────────────────────────────────────────────
