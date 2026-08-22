@@ -142,7 +142,66 @@ public class ThreadingChallenges {
         // TODO — create inner class or array with synchronized counter
         //        threadCount threads increment, threadCount threads decrement
         //        join all, return final value (should be 0)
-        return 0;
+        SyncClass counter = new SyncClass();
+
+        Thread[] threads = new Thread[threadCount*2];
+
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < operationsPerThread; j++) {
+                    counter.increment();
+                }
+            });
+        }
+
+        for (int i = threadCount; i < threadCount * 2; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < operationsPerThread; j++) {
+                    counter.decrement();
+                }
+            });
+        }
+
+        for (int i = 0; i < threadCount * 2; i++) {
+            threads[i].start();
+        }
+
+        for (int i = 0; i < threadCount * 2; i++) {
+            threads[i].join();
+        }
+
+        return counter.get();
+    }
+
+    static class SyncClass {
+        private int counter = 0;
+        private final Object lock = new Object();
+
+        public void increment() {
+            synchronized (lock) {
+                this.counter++;
+            }
+        }
+
+        public void decrement() {
+            synchronized (lock) {
+                this.counter--;
+            }
+        }
+
+        public Integer get() {
+            synchronized (lock) {
+                return this.counter;
+            }
+        }
+    }
+
+    static class SyncCounter {
+        private int counter = 0;
+
+        public synchronized void increment() { counter++; }
+        public synchronized void decrement() { counter--; }
+        public synchronized int get() { return counter; }
     }
 
     // ─────────────────────────────────────────────────────────────
