@@ -307,7 +307,35 @@ public class ThreadingChallenges {
         if (sublists == null) throw new IllegalArgumentException("Sublists cannot be null");
         // TODO — newFixedThreadPool, submit Callable per sublist
         //        collect all futures FIRST, then get() in order
-        return new ArrayList<>();
+        int nProcessors = Runtime.getRuntime().availableProcessors();
+        int nThreads = Math.min(sublists.size(), nProcessors);
+
+        ExecutorService executor = Executors.newFixedThreadPool(nThreads);
+        List<Future<Integer>> holder = new ArrayList<>();
+
+        for (List<Integer> list : sublists) {
+            Future<Integer> future = executor.submit(() -> {
+                int count = 0;
+                for (int i : list) {
+                    count += i;
+                }
+                return count;
+            });
+            holder.add(future);
+        }
+
+        List<Integer> results = new ArrayList<>();
+
+        try {
+            for (Future<Integer> future : holder) {
+                results.add(future.get());
+            }
+        } finally {
+            executor.shutdown();
+            executor.awaitTermination(5, TimeUnit.SECONDS);
+        }
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
