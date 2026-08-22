@@ -267,7 +267,25 @@ public class ThreadingChallenges {
         // TODO — newFixedThreadPool, submit taskCount Callables returning thread name
         //        collect Future results into Set<String>
         //        shutdown + awaitTermination
-        return new HashSet<>();
+        ExecutorService executor = Executors.newFixedThreadPool(poolSize);
+
+        List<Future<String>> futures = new ArrayList<>();
+        for (int i = 0; i < taskCount; i++) {
+            Future<String> future = executor.submit(
+                    () -> Thread.currentThread().getName()
+            );
+            futures.add(future);
+        }
+
+        Set<String> threadNames = new HashSet<>();
+        for (Future<String> future : futures) {
+            threadNames.add(future.get());
+        }
+
+        executor.shutdown();
+        executor.awaitTermination(5, TimeUnit.SECONDS);
+
+        return threadNames;
     }
 
     // ─────────────────────────────────────────────────────────────
