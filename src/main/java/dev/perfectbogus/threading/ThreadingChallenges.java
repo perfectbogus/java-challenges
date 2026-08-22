@@ -222,7 +222,27 @@ public class ThreadingChallenges {
             throws InterruptedException {
         if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
         // TODO — AtomicInteger counter, create + start threads, join all, return counter.get()
-        return 0;
+        AtomicInteger counter = new AtomicInteger(0);
+
+        Thread[] threads = new Thread[threadCount];
+
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < incrementsPerThread; j++) {
+                    counter.getAndIncrement();
+                }
+            });
+        }
+
+        for (Thread t : threads) {
+            t.start();
+        }
+
+        for (Thread t : threads) {
+            t.join();
+        }
+
+        return counter.get();
     }
 
     // ─────────────────────────────────────────────────────────────
