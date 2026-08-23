@@ -262,25 +262,25 @@ class ThreadingChallengesTest {
     class Challenge8 {
 
         @Test
-        void basicCase() throws InterruptedException {
+        void basicCase() throws InterruptedException, ExecutionException {
             int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
             assertEquals(55L, ThreadingChallenges.challenge8(array, 2));
         }
 
         @Test
-        void singleChunk() throws InterruptedException {
+        void singleChunk() throws InterruptedException, ExecutionException {
             int[] array = {1, 2, 3, 4, 5};
             assertEquals(15L, ThreadingChallenges.challenge8(array, 1));
         }
 
         @Test
-        void oneChunkPerElement() throws InterruptedException {
+        void oneChunkPerElement() throws InterruptedException, ExecutionException {
             int[] array = {10, 20, 30, 40, 50};
             assertEquals(150L, ThreadingChallenges.challenge8(array, 5));
         }
 
         @Test
-        void largeArray() throws InterruptedException {
+        void largeArray() throws InterruptedException, ExecutionException {
             int[] array = new int[1000];
             Arrays.fill(array, 1);
             assertEquals(1000L, ThreadingChallenges.challenge8(array, 4));

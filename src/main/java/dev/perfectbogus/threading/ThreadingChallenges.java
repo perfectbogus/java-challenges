@@ -354,13 +354,40 @@ public class ThreadingChallenges {
     // → use AtomicLong to accumulate total safely
     // → join all threads before returning
     // ─────────────────────────────────────────────────────────────
-    public static long challenge8(int[] array, int chunkCount) throws InterruptedException {
+    public static long challenge8(int[] array, int chunkCount) throws InterruptedException, ExecutionException {
         if (array == null)   throw new IllegalArgumentException("Array cannot be null");
         if (chunkCount <= 0) throw new IllegalArgumentException("chunkCount must be positive");
-        // TODO — compute chunk boundaries, create one thread per chunk
-        //        each thread sums its slice, adds to AtomicLong total
-        //        join all, return total.get()
-        return 0L;
+
+        int n = array.length / chunkCount;       // ← base chunk size
+        List<Future<Long>> futures = new ArrayList<>();
+
+        ExecutorService executor = Executors.newFixedThreadPool(
+                Math.min(chunkCount, Runtime.getRuntime().availableProcessors())
+        );
+
+        for (int i = 0; i < chunkCount; i++) {
+            final int start = i * n;
+            final int end   = (i == chunkCount - 1)  // ← Bug 2 fix: last chunk!
+                    ? array.length
+                    : start + n;                          // ← Bug 1 fix: no (n-1)!
+
+            futures.add(executor.submit(() -> {
+                long sum = 0L;
+                for (int j = start; j < end; j++) {  // ← for loop is cleaner!
+                    sum += array[j];
+                }
+                return sum;
+            }));
+        }
+
+        long total = 0L;
+        try {
+            for (Future<Long> f : futures) total += f.get();
+        } finally {
+            executor.shutdown();
+            executor.awaitTermination(5, TimeUnit.SECONDS);
+        }
+        return total;
     }
 
     // ─────────────────────────────────────────────────────────────
