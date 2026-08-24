@@ -454,7 +454,36 @@ public class ThreadingChallenges {
         // TODO — ConcurrentHashMap<String,Integer> freq
         //        split words into chunks, each thread: chunk.forEach(w -> freq.merge(w,1,Integer::sum))
         //        join all, return freq
-        return new ConcurrentHashMap<>();
+
+        Map<String, Integer> freq = new ConcurrentHashMap<>();
+        Thread[] threads = new Thread[threadCount];
+        int offset = words.size() / threadCount;
+
+        for (int i = 0; i < threadCount; i++) {
+            int start = i * offset;
+            int end = (i == threadCount - 1) ? words.size() : start + offset;
+
+
+            System.out.println("Start: " + start + " end: " + end);
+            List<String> chunk = words.subList(start, end);
+
+            threads[i] = new Thread(() -> {
+                System.out.println(chunk);
+                for (String w : chunk) {
+                    freq.merge(w, 1, Integer::sum);
+                }
+            });
+        }
+
+        for (Thread t : threads) {
+            t.start();
+        }
+
+        for (Thread t : threads) {
+            t.join();
+        }
+
+        return freq;
     }
 
     // ══════════════════════════════════════════════════════════════════════
