@@ -412,7 +412,22 @@ public class ThreadingChallenges {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO — create List<Callable<String>>, use invokeAll()
         //        collect results from futures in order
-        return new ArrayList<>();
+
+        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+        List<Callable<String>> callables = new ArrayList<>();
+        for (String word : words) {
+            callables.add(() -> new StringBuilder(word).reverse().toString());
+        }
+
+        List<Future<String>> futures = executor.invokeAll(callables);
+
+        List<String> results = new ArrayList<>();
+        for (Future<String> future : futures) {
+            results.add(future.get());
+        }
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
