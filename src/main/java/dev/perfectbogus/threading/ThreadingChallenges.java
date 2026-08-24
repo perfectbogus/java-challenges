@@ -606,7 +606,10 @@ public class ThreadingChallenges {
             throws InterruptedException, ExecutionException {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO — CompletableFuture.supplyAsync(sum).thenApply(*mult).thenApply("Result: "+x).get()
-        return "";
+        return CompletableFuture.supplyAsync(() -> numbers.stream().mapToInt(Integer::intValue).sum())
+                .thenApply(sum -> sum * multiplier)
+                .thenApply(result -> "Result: " + result)
+                .get();
     }
 
     // ─────────────────────────────────────────────────────────────
