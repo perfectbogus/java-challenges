@@ -635,7 +635,15 @@ public class ThreadingChallenges {
         // TODO — List<CompletableFuture<Integer>> futures = each supplyAsync(n*n)
         //        CompletableFuture.allOf(futures.toArray(new CF[0])).get()
         //        collect results: futures.stream().map(CompletableFuture::join).toList()
-        return new ArrayList<>();
+        List<CompletableFuture<Integer>> futures = new ArrayList<>();
+        for (int n : numbers) {
+            futures.add(CompletableFuture.supplyAsync(() -> n * n));
+        }
+
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get();
+
+        List<Integer> result = futures.stream().map(CompletableFuture::join).toList();
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
