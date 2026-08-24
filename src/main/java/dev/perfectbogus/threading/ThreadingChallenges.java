@@ -464,7 +464,6 @@ public class ThreadingChallenges {
             int end = (i == threadCount - 1) ? words.size() : start + offset;
 
 
-            System.out.println("Start: " + start + " end: " + end);
             List<String> chunk = words.subList(start, end);
 
             threads[i] = new Thread(() -> {
@@ -515,7 +514,73 @@ public class ThreadingChallenges {
         //        producers: take slice, put each number, put poison pills
         //        consumers: poll until -1, add to AtomicLong sum
         //        join all, return sum.get()
-        return 0L;
+        BlockingQueue<Integer> q = new LinkedBlockingQueue<>();
+        AtomicLong sum = new AtomicLong(0);
+        CountDownLatch producerLatch = new CountDownLatch(producerCount);
+        final int POISON = -1;
+
+
+        Thread[] producers = new Thread[producerCount];
+        int offsetProd = numbers.size() / producerCount;
+        for (int i = 0; i < producerCount; i++) {
+            int start = i * offsetProd;
+            int end = (i == producerCount - 1) ? numbers.size() : start + offsetProd;
+            List<Integer> chunk = numbers.subList(start, end);
+            producers[i] = new Thread(() -> {
+                chunk.forEach(value -> {
+                    try {
+                        q.put(value);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                producerLatch.countDown();
+            });
+        }
+
+        Thread[] consumers = new Thread[consumerCount];
+        for (int i = 0; i < consumerCount; i++) {
+            consumers[i] = new Thread(() -> {
+                while (true) {
+                    int val = 0;
+                    try {
+                        val = q.take();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if (val == POISON) break;
+                    sum.addAndGet(val);
+                }
+            });
+        }
+
+        Thread coordinator = new Thread(() -> {
+            try {
+                producerLatch.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            for (int i = 0; i < consumerCount; i++) {
+                q.offer(POISON);
+            }
+        });
+
+        coordinator.start();
+        for (Thread t : producers) {
+            t.start();
+        }
+
+        for (Thread t : consumers) {
+            t.start();
+        }
+
+        for (Thread t : producers) t.join();
+        coordinator.join();
+        for (Thread t : consumers) t.join();
+
+
+
+        return sum.get();
     }
 
     // ─────────────────────────────────────────────────────────────
