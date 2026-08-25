@@ -1,6 +1,7 @@
 package dev.perfectbogus.sorting;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.*;
 
 public class SortingMixChallenges2 {
@@ -67,7 +68,30 @@ public class SortingMixChallenges2 {
     public static List<Map.Entry<String, List<Integer>>> challenge2(Map<String, List<Integer>> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, long[]> statsMap = map.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getKey,
+                entry -> {
+                    IntSummaryStatistics stats = entry.getValue().stream()
+                            .mapToInt(Integer::intValue)
+                            .summaryStatistics();
+                    return new long[]{stats.getMax() - stats.getMin(), stats.getSum()};
+                }
+        ));
+
+        final int RANGE = 0;
+        Comparator<Map.Entry<String, List<Integer>>> byRangeDesc =
+                Comparator.<Map.Entry<String, List<Integer>>>comparingLong( e ->
+                        statsMap.get(e.getKey())[RANGE]
+                ).reversed();
+
+        final int SUM = 1;
+        Comparator<Map.Entry<String, List<Integer>>> bySub = Comparator.comparingLong( e ->
+                statsMap.get(e.getKey())[SUM]
+        );
+
+        Comparator<Map.Entry<String, List<Integer>>> byKey = Map.Entry.comparingByKey(Comparator.naturalOrder());
+
+        return map.entrySet().stream().sorted(byRangeDesc.thenComparing(bySub).thenComparing(byKey)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
