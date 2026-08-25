@@ -775,7 +775,22 @@ public class ThreadingChallenges {
         //        CompletableFuture<Integer> productFuture = supplyAsync(product of list2)
         //        thenCombine((s,p) -> "sum="+s+" product="+p+" total="+(s+p))
         //        .get()
-        return "";
+        CompletableFuture<Integer> sumFuture = CompletableFuture.supplyAsync(() ->
+            list1.stream().mapToInt(Integer::intValue).sum()
+        );
+
+        CompletableFuture<Integer> productFuture = CompletableFuture.supplyAsync(() -> {
+            int product = 1;
+            for (int i : list2) {
+                product *= i;
+            }
+            return product;
+        });
+
+        return sumFuture.thenCombine(
+                productFuture,
+                (s, p) -> "sum=" + s + " product=" + p + " total=" + (s + p)
+        ).get();
     }
 
     // ─────────────────────────────────────────────────────────────
