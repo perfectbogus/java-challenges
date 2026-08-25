@@ -118,6 +118,31 @@ public class SortingMixChallenges2 {
     public static int[][] challenge3(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Map<int[], int[]> statsMap = new IdentityHashMap<>();
+        for (int[] row : matrix) {
+            int countEven = 0;
+            int sum = 0;
+            for (int i : row) {
+                if (i % 2 == 0) {
+                    countEven++;
+                }
+                sum += i;
+            }
+            statsMap.put(row, new int[]{countEven, sum});
+        }
+
+        final int COUNT_EVEN = 0;
+        Comparator<int[]> byRowEvenNumbDesc = Comparator.<int[]>comparingInt(row ->
+                statsMap.get(row)[COUNT_EVEN]
+        ).reversed();
+
+        final int SUM = 1;
+        Comparator<int[]> byRowSum = Comparator.comparingInt(row -> statsMap.get(row)[SUM]);
+        final int FIRST_ELEMENT = 0;
+        Comparator<int[]> byFirstElem = Comparator.comparingInt(row -> row[FIRST_ELEMENT]);
+
+        Arrays.sort(matrix, byRowEvenNumbDesc.thenComparing(byRowSum).thenComparing(byFirstElem));
+
         return matrix;
     }
 

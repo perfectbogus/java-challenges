@@ -186,10 +186,10 @@ class SortingMixChallenges2Test {
             int[][] result = SortingMixChallenges2.challenge3(
                     new int[][]{{4,2},{6,8},{2,4,6}});
 
-            // all even → sum ASC: [4,2]=6,[6,8]=14,[2,4,6]=12
-            assertArrayEquals(new int[]{4, 2}, result[0]);    // sum=6
-            assertArrayEquals(new int[]{2,4,6}, result[1]);   // sum=12
-            assertArrayEquals(new int[]{6, 8}, result[2]);    // sum=14
+            // [2,4,6]=3 evens, [4,2]=2 evens sum=6, [6,8]=2 evens sum=14
+            assertArrayEquals(new int[]{2, 4, 6}, result[0]); // ← 3 evens → FIRST!
+            assertArrayEquals(new int[]{4, 2},    result[1]); // ← 2 evens, sum=6
+            assertArrayEquals(new int[]{6, 8},    result[2]);
         }
 
         @Test
