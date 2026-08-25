@@ -670,7 +670,30 @@ public class ThreadingChallenges {
         //        after starting all: startGun.countDown()
         //        doneLatch.await()
         //        return counter.get()
-        return 0;
+        CountDownLatch startGun = new CountDownLatch(1);
+        CountDownLatch finishLine = new CountDownLatch(threadCount);
+        AtomicInteger counter = new AtomicInteger();
+
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                try {
+                    startGun.await();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                counter.incrementAndGet();
+                finishLine.countDown();
+            });
+        }
+
+        for (Thread t : threads) t.start();
+
+        startGun.countDown();
+
+        finishLine.await();
+
+        return counter.get();
     }
 
     // ─────────────────────────────────────────────────────────────
