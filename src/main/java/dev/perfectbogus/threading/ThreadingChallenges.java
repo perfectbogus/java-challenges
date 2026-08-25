@@ -888,7 +888,46 @@ public class ThreadingChallenges {
         //          phase2: globalMax = Arrays.stream(chunkMaxes).max()
         //                  count elements == globalMax in chunk
         //        join all, return total count
-        return 0;
+        CyclicBarrier barrier = new CyclicBarrier(threadCount);
+
+        Thread[] threads = new Thread[threadCount];
+        int[] chunkMaxes = new int[threadCount];
+        int[] countMaxes = new int[threadCount];
+        final int offset = array.length / threadCount;
+        for (int i = 0; i < threadCount; i++) {
+            final int idxMax = i;
+            final int start = i * offset;
+            final int end = (i == threadCount - 1) ? array.length : start + offset;
+
+            threads[i] = new Thread(() -> {
+                int max = Integer.MIN_VALUE;
+                for (int idx = start; idx < end; idx++) {
+                    max = Math.max(max, array[idx]);
+                }
+                chunkMaxes[idxMax] = max;
+
+                try {
+                    barrier.await();
+                } catch (InterruptedException | BrokenBarrierException e) {
+                    throw new RuntimeException(e);
+                }
+
+                final int globalMax = Arrays.stream(chunkMaxes).max().orElse(0);
+                int countMaxesInChunk = 0;
+                for (int idx = start; idx < end; idx++) {
+                    if (array[idx] == globalMax) {
+                        countMaxesInChunk++;
+                    }
+                }
+
+                countMaxes[idxMax] = countMaxesInChunk;
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return Arrays.stream(countMaxes).sum();
     }
 
     // ══════════════════════════════════════════════════════════════════════
