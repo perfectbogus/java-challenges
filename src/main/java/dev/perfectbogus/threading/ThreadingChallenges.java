@@ -969,12 +969,48 @@ public class ThreadingChallenges {
     //          ForkJoinPool pool = new ForkJoinPool()
     //          return pool.invoke(new SumTask(array, 0, array.length, threshold))
     // ─────────────────────────────────────────────────────────────
+    public static class SumTask extends RecursiveTask<Long> {
+        private final int[] array;
+        private final int start;
+        private final int end;
+        private final int threshold;
+
+        public SumTask(int[] array, int start, int end, int threshold) {
+            this.array = array;
+            this.start = start;
+            this.end = end;
+            this.threshold = threshold;
+        }
+
+        @Override
+        protected Long compute() {
+            if (end - start <= threshold) {
+                long sum = 0L;
+                for (int i = start; i < end; i++) {
+                    sum += array[i];
+                }
+                return sum;
+            } else {
+                int mid = (start + end) / 2;
+                SumTask left = new SumTask(array, start, mid, threshold);
+                SumTask right = new SumTask(array, mid, end, threshold);
+                left.fork();
+                long rightResult = right.compute();
+                long leftResult = left.join();
+                return leftResult + rightResult;
+            }
+        }
+    }
     public static long challenge19(int[] array, int threshold) {
         if (array == null)    throw new IllegalArgumentException("Array cannot be null");
         if (threshold <= 0)   throw new IllegalArgumentException("threshold must be positive");
         // TODO — implement RecursiveTask<Long> SumTask inside this method or as inner class
         //        use ForkJoinPool to invoke it
-        return 0L;
+        RecursiveTask<Long> sumTask = new SumTask(array, 0, array.length, threshold);
+
+        try (ForkJoinPool pool = new ForkJoinPool()) {
+            return pool.invoke(sumTask);
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
