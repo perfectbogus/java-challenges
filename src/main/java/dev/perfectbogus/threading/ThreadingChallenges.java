@@ -721,7 +721,31 @@ public class ThreadingChallenges {
         //        AtomicInteger current = 0, maxSeen = 0
         //        thread: sem.acquire(), current++, maxSeen=max(maxSeen,current), current--, sem.release()
         //        join all, return maxSeen.get()
-        return 0;
+        Semaphore sem = new Semaphore(maxConcurrent);
+        AtomicInteger current = new AtomicInteger(0);
+        AtomicInteger maxSeen = new AtomicInteger(0);
+
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                try {
+                    sem.acquire();
+                    current.incrementAndGet();
+                    maxSeen.set(Math.max(maxSeen.get(), current.get()));
+                    Thread.sleep(1000);
+                    current.decrementAndGet();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    sem.release();
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return maxSeen.get();
     }
 
     // ─────────────────────────────────────────────────────────────
