@@ -31,7 +31,18 @@ public class SortingMixChallenges2 {
     public static List<Employee> challenge1(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Employee> byTaxAdjustedDesc = Comparator.comparingDouble(SortingMixChallenges2::getTaxAdjNetSalary).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+        employees.sort(byTaxAdjustedDesc.thenComparing(byName));
+        return employees;
+    }
+
+    public static double getTaxAdjNetSalary(Employee e) {
+        double rate = e.salary() > 100_000 ? 0.60
+                : e.salary() > 70_000 ? 0.70
+                : e.salary() > 50_000 ? 0.80
+                : 0.90;
+        return e.salary() * rate;
     }
 
     // ─────────────────────────────────────────────────────────────

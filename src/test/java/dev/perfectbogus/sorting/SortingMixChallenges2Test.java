@@ -35,13 +35,13 @@ class SortingMixChallenges2Test {
             List<SortingMixChallenges2.Employee> result =
                     SortingMixChallenges2.challenge1(employees);
 
-            // net: Alice=72000, Eve=70000, Carol=52500, Frank=49000, Diana=44000, Bob=40500
-            assertEquals("Alice",  result.get(0).name());
-            assertEquals("Eve",    result.get(1).name());
-            assertEquals("Carol",  result.get(2).name());
-            assertEquals("Frank",  result.get(3).name());
-            assertEquals("Diana",  result.get(4).name());
-            assertEquals("Bob",    result.get(5).name());
+            // net: Alice=72000, Eve=70000, Frank=56000, Carol=52500, Diana=44000, Bob=40500
+            assertEquals("Alice", result.get(0).name());
+            assertEquals("Eve",   result.get(1).name());
+            assertEquals("Frank", result.get(2).name());
+            assertEquals("Carol", result.get(3).name());
+            assertEquals("Diana", result.get(4).name());
+            assertEquals("Bob",   result.get(5).name());
         }
 
         @Test
