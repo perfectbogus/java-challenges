@@ -730,14 +730,16 @@ public class ThreadingChallenges {
             threads[i] = new Thread(() -> {
                 try {
                     sem.acquire();
-                    current.incrementAndGet();
-                    maxSeen.set(Math.max(maxSeen.get(), current.get()));
-                    Thread.sleep(1000);
-                    current.decrementAndGet();
+                    try {
+                        current.incrementAndGet();
+                        maxSeen.set(Math.max(maxSeen.get(), current.get()));
+                        Thread.sleep(10);
+                        current.decrementAndGet();
+                    } finally {
+                        sem.release();
+                    }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                } finally {
-                    sem.release();
                 }
             });
         }
