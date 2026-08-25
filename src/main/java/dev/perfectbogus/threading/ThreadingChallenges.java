@@ -817,7 +817,37 @@ public class ThreadingChallenges {
         if (chunkCount <= 0) throw new IllegalArgumentException("chunkCount must be positive");
         // TODO — split into chunks, create Callable<int[]> per chunk
         //        invokeAll(callables), combine: globalMin=min of all chunkMins, globalMax=max of all chunkMaxs
-        return new int[]{0, 0};
+        final int MINIMUM = 0;
+        final int MAXIMUM = 1;
+        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        List<Callable<int[]>> futures = new ArrayList<>();
+
+        int offset = array.length / chunkCount;
+        for (int i = 0; i < chunkCount; i++) {
+            int start = i * offset;
+            int end = (i == chunkCount - 1) ? array.length : start + offset;
+            Callable<int[]> task = () -> {
+                int min = Integer.MAX_VALUE;
+                int max = Integer.MIN_VALUE;
+                for (int j = start; j < end; j++) {
+                    min = Math.min(min, array[j]);
+                    max = Math.max(max, array[j]);
+                }
+                return new int[]{min, max};
+            };
+            futures.add(task);
+        }
+
+        List<Future<int[]>> futureResults = executor.invokeAll(futures);
+
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        for (Future<int[]> f : futureResults) {
+            min = Math.min(min, f.get()[MINIMUM]);
+            max = Math.max(max, f.get()[MAXIMUM]);
+        }
+
+        return new int[]{min, max};
     }
 
     // ─────────────────────────────────────────────────────────────
