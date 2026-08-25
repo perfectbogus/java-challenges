@@ -1001,6 +1001,7 @@ public class ThreadingChallenges {
             }
         }
     }
+
     public static long challenge19(int[] array, int threshold) {
         if (array == null)    throw new IllegalArgumentException("Array cannot be null");
         if (threshold <= 0)   throw new IllegalArgumentException("threshold must be positive");
@@ -1056,6 +1057,51 @@ public class ThreadingChallenges {
         if (producerCount <= 0)  throw new IllegalArgumentException("producerCount must be positive");
         if (consumerCount <= 0)  throw new IllegalArgumentException("consumerCount must be positive");
         // TODO — see hints above
-        return new ConcurrentHashMap<>();
+        LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>();
+        ConcurrentHashMap<String, Long> counts = new ConcurrentHashMap<>();
+        final String POISON = "POISON";
+
+        Thread[] producerThreads = new Thread[producerCount];
+        final int offset = items.size() / producerCount;
+        for (int i = 0; i < producerCount; i++) {
+            final int start = i * offset;
+            final int end = (i == producerCount - 1) ? items.size() : start + offset;
+            List<String> chunk = items.subList(start, end);
+            producerThreads[i] = new Thread(() -> {
+                for (String s : chunk) {
+                    try {
+                        queue.put(s);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            });
+        }
+
+        Thread[] consumerThreads = new Thread[consumerCount];
+        for (int i = 0; i < consumerCount; i++) {
+            consumerThreads[i] = new Thread(() -> {
+                while (true) {
+                    try {
+                        String item = queue.take();
+                        if (item.equals(POISON)) break;
+                        String category = item.split(":")[0];
+                        counts.merge(category, 1L, Long::sum);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        }
+
+        for (Thread t : producerThreads) t.start();
+        for (Thread t : consumerThreads) t.start();
+
+        for (Thread t : producerThreads) t.join();
+        for (int i = 0; i < consumerCount; i++) queue.put(POISON);
+
+        for (Thread t : consumerThreads) t.join();
+
+        return counts;
     }
 }
