@@ -21,7 +21,26 @@ public class EasyStreamChallenges {
     public static long challenge1(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return 0L;
+        Set<Character> vowels = new HashSet<>(Set.of('a', 'e', 'i', 'o', 'u'));
+
+        return words.stream()
+                .filter(w -> {
+                    for (char c : w.toCharArray()) {
+                        if (vowels.contains(c)) return true;
+                    }
+                    return false;
+                })
+                .count();
+    }
+
+    public static long challenge1_2(List<String> words) {
+        if (words == null) throw new IllegalArgumentException("Words cannot be null");
+
+        Set<Character> vowels = new HashSet<>(Set.of('a', 'e', 'i', 'o', 'u'));
+
+        return words.stream()
+                .filter(w -> w.chars().mapToObj(c -> (char) c).anyMatch(vowels::contains))
+                .count();
     }
 
     // ─────────────────────────────────────────────────────────────

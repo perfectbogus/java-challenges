@@ -22,6 +22,12 @@ class EasyStreamChallengesTest {
         }
 
         @Test
+        void basicCase1_2() {
+            assertEquals(3L, EasyStreamChallenges.challenge1_2(
+                    List.of("apple","gym","rhythm","hello","cry","fly","orange")));
+        }
+
+        @Test
         void allHaveVowels() {
             assertEquals(3L, EasyStreamChallenges.challenge1(
                     List.of("apple","orange","idea")));
