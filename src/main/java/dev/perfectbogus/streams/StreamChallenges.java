@@ -200,6 +200,31 @@ public class StreamChallenges {
         // Step 1 — nested groupingBy
         // Step 2 — flatMap entries to find max avg
         //          format: String.format("%.2f", avg)
-        return "";
+        Map<String, Map<String, Double>> map = employees.stream().collect(
+                Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.groupingBy(
+                                e -> e.yearsOfExperience() >= 5 ? "SENIOR" : "JUNIOR",
+                                Collectors.averagingDouble(Employee::salary)
+                        )
+                ));
+
+        String result = map.entrySet().stream().flatMap(outer ->
+                outer.getValue().entrySet().stream().map(inner ->
+                        Map.entry(
+                                outer.getKey() + "-" + inner.getKey(),
+                                inner.getValue()
+                        )
+                ))
+                .max(Map.Entry.comparingByValue())
+                .map(entry ->
+                        String.format(
+                                "%s=%.2f",
+                                entry.getKey(),
+                                entry.getValue()
+                ))
+                .orElse("");
+
+        return result;
     }
 }
