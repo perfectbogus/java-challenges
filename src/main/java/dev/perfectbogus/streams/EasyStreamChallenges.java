@@ -76,7 +76,7 @@ public class EasyStreamChallenges {
     public static int challenge3(List<Integer> numbers) {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO
-        return 0;
+        return numbers.stream().filter(i -> i % 2 == 0).mapToInt(i -> i * i).sum();
     }
 
     // ─────────────────────────────────────────────────────────────
