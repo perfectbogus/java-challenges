@@ -135,7 +135,10 @@ public class EasyStreamChallenges {
     public static MatchResult challenge6(List<Integer> numbers) {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO
-        return new MatchResult(false, false, false);
+        boolean allPositive = numbers.stream().allMatch(i -> i > 0);
+        boolean anyNegative = numbers.stream().anyMatch(i -> i < 0);
+        boolean nonZero = numbers.stream().noneMatch(i -> i == 0);
+        return new MatchResult(allPositive, anyNegative, nonZero);
     }
 
     // ─────────────────────────────────────────────────────────────
