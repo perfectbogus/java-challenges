@@ -158,7 +158,7 @@ public class EasyStreamChallenges {
     public static Optional<String> challenge7(List<String> words, char letter) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return Optional.empty();
+        return words.stream().filter(w -> w.charAt(0) == letter).findFirst();
     }
 
     // ─────────────────────────────────────────────────────────────
