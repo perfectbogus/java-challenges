@@ -305,6 +305,7 @@ public class ThreadingChallenges {
     public static List<Integer> challenge7(List<List<Integer>> sublists)
             throws InterruptedException, ExecutionException {
         if (sublists == null) throw new IllegalArgumentException("Sublists cannot be null");
+        if (sublists.isEmpty()) return new ArrayList<>();
         // TODO — newFixedThreadPool, submit Callable per sublist
         //        collect all futures FIRST, then get() in order
         int nProcessors = Runtime.getRuntime().availableProcessors();
