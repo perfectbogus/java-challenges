@@ -172,7 +172,37 @@ public class SortingMixChallenges2 {
     public static List<String> challenge4(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, Integer> stats;
+
+        stats = words.stream().collect(Collectors.toMap(
+                    Function.identity(),
+                    w -> {
+                        char current = w.charAt(0);
+                        int longest = 1;
+                        int max = 0;
+                        for (int i = 1; i < w.length(); i++) {
+                            if (current == w.charAt(i)) {
+                                longest++;
+                            } else {
+                                max = Math.max(max, longest);
+                                current = w.charAt(i);
+                                longest = 1;
+                            }
+                        }
+                        return Math.max(max, longest);
+                    }
+                )
+        );
+
+        System.out.println(stats);
+
+        Comparator<String> byLongestConsecutiveDesc = Comparator.<String>comparingInt(stats::get).reversed();
+        Comparator<String> byWordLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAplha = Comparator.naturalOrder();
+
+        words.sort(byLongestConsecutiveDesc.thenComparing(byWordLength).thenComparing(byAplha));
+
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -203,7 +233,37 @@ public class SortingMixChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static List<Employee> challenge5(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
         // TODO
-        return new ArrayList<>();
+        Map<String, List<Employee>> byDept = employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> list.stream().sorted(bySalaryDesc).toList()
+                )
+        ));
+
+        Map<Employee, Integer> rank = new IdentityHashMap<>();
+        for (Map.Entry<String, List<Employee>> employeesByDept : byDept.entrySet()) {
+            int ranking = 0;
+            double beforeSalary = 0;
+            List<Employee> sorted = employeesByDept.getValue();
+
+            for (int i = 0; i < sorted.size(); i++) {
+                Employee e = sorted.get(i);
+                if (e.salary() != beforeSalary) {
+                    ranking = i + 1;
+                }
+                rank.put(e, ranking);
+                beforeSalary = e.salary();
+            }
+        }
+
+        Comparator<Employee> byRank = Comparator.comparingInt(rank::get);
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        employees.sort(byRank.thenComparing(bySalaryDesc).thenComparing(byName));
+
+        return employees;
     }
 }
