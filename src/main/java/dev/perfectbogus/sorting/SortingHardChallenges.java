@@ -463,7 +463,30 @@ public class SortingHardChallenges {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         if (criteria == null)  throw new IllegalArgumentException("Criteria cannot be null");
         // TODO
-        return new ArrayList<>();
+
+        Comparator<DynEmployee> com = (a, b) -> 0;
+        for (String c : criteria) {
+            String[] parts = c.split(":");
+            String field = parts[0];
+            String direction = parts[1];
+            Comparator<DynEmployee> partial = switch (field) {
+                case "department" -> Comparator.comparing(DynEmployee::department);
+                case "salary" -> Comparator.comparingDouble(DynEmployee::salary);
+                case "name" -> Comparator.comparing(DynEmployee::name);
+                case "yearsOfExperience" -> Comparator.comparingInt(DynEmployee::yearsOfExperience);
+                default -> throw new IllegalArgumentException("invalid field");
+            };
+
+            if (direction.equals("DESC")) {
+                partial = partial.reversed();
+            }
+
+            com = com.thenComparing(partial);
+        }
+
+        employees.sort(com);
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
