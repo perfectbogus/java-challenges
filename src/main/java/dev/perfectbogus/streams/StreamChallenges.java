@@ -122,7 +122,10 @@ public class StreamChallenges {
     public static SplitResult challenge3(List<Integer> numbers, int threshold) {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO — use takeWhile() for below, dropWhile() for above
-        return new SplitResult(new ArrayList<>(), new ArrayList<>());
+        List<Integer> below = numbers.stream().takeWhile(n -> n < threshold).toList();
+        List<Integer> above = numbers.stream().dropWhile(n -> n <= threshold).toList();
+
+        return new SplitResult(below, above);
     }
 
     // ─────────────────────────────────────────────────────────────
