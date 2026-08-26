@@ -536,6 +536,24 @@ public class SortingHardChallenges {
     public static List<Student> challenge10(List<Student> students) {
         if (students == null) throw new IllegalArgumentException("Students cannot be null");
         // TODO
-        return new ArrayList<>();
+
+        Map<String, List<Student>> map = students.stream().collect(Collectors.groupingBy(Student::className));
+
+        Map<Student, Double> rank = new IdentityHashMap<>();
+
+        map.values().forEach(studentsByClass -> {
+            for (Student s : studentsByClass) {
+                long count = studentsByClass.stream().filter(e -> e.score() < s.score()).count();
+                double percentile = (double) count / studentsByClass.size();
+                rank.put(s, percentile);
+            }
+        });
+
+        Comparator<Student> byPercentileDesc = Comparator.<Student>comparingDouble(rank::get).reversed();
+        Comparator<Student> byName = Comparator.comparing(Student::name);
+
+        students.sort(byPercentileDesc.thenComparing(byName));
+
+        return students;
     }
 }
