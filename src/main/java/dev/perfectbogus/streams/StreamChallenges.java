@@ -153,7 +153,12 @@ public class StreamChallenges {
         if (n <= 0) throw new IllegalArgumentException("n must be positive");
         // TODO — Stream.iterate(seed, pair -> next pair)
         //        .limit(n).map(pair -> pair[0]).toList()
-        return new ArrayList<>();
+        return Stream.iterate(
+                    new long[]{0L, 1L},
+                    (pair) -> new long[]{pair[1], pair[0] + pair[1]})
+                .limit(n)
+                .map(pair -> pair[0])
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
