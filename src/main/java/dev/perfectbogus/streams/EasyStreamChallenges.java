@@ -93,7 +93,8 @@ public class EasyStreamChallenges {
     public static List<String> challenge4(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+        return words.stream().distinct().sorted(byAlpha).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
