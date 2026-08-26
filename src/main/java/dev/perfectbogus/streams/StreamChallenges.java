@@ -39,7 +39,13 @@ public class StreamChallenges {
         if (sentences == null) throw new IllegalArgumentException("Sentences cannot be null");
         if (minLength < 0)     throw new IllegalArgumentException("minLength must be non-negative");
         // TODO
-        return new HashMap<>();
+        return sentences.stream()
+                .flatMap(s -> Arrays.stream(s.split(" ")))
+                .filter(w -> w.length() > minLength)
+                .collect(Collectors.groupingBy(
+                        w -> w.charAt(0),
+                        Collectors.counting()
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -73,7 +79,18 @@ public class StreamChallenges {
     public static int challenge2(List<Integer> prices) {
         if (prices == null) throw new IllegalArgumentException("Prices cannot be null");
         // TODO
-        return 0;
+        int[] result = prices.stream().reduce(
+                new int[]{Integer.MAX_VALUE, 0},
+                (track, price) -> new int[]{
+                        Math.min(track[0], price),
+                        Math.max(track[1], price - track[0])
+                },
+                (actual , next) -> new int[] {
+                        Math.min(actual[0], next[0]),
+                        Math.max(actual[1], next[1])
+                }
+        );
+        return result[1];
     }
 
     // ─────────────────────────────────────────────────────────────
