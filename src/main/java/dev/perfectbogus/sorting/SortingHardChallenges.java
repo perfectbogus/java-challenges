@@ -341,6 +341,24 @@ public class SortingHardChallenges {
     public static int[][] challenge7(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Map<int[], double[]> stats = new IdentityHashMap<>();
+        for (int[] row : matrix) {
+            double mean = Arrays.stream(row).average().orElse(0);
+            long sum = Arrays.stream(row).sum();
+            double var = Arrays.stream(row).mapToDouble(v -> Math.pow(v-mean, 2)).average().orElse(0);
+            double[] data = new double[]{var, sum};
+            stats.put(row, data);
+        }
+
+        final int VARIANCE = 0;
+        Comparator<int[]> byVariance = Comparator.<int[]>comparingDouble(row -> stats.get(row)[VARIANCE]).reversed();
+        final int SUM = 1;
+        Comparator<int[]> bySum = Comparator.comparingDouble(row -> stats.get(row)[SUM]);
+        final int FIRST_ELE = 0;
+        Comparator<int[]> byFirstEle = Comparator.comparingDouble(row -> row[FIRST_ELE]);
+
+        Arrays.sort(matrix, byVariance.thenComparing(bySum).thenComparing(byFirstEle));
+
         return matrix;
     }
 
