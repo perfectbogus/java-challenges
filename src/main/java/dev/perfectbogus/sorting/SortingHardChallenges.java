@@ -398,7 +398,30 @@ public class SortingHardChallenges {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         if (alphabet == null || alphabet.length() != 26) throw new IllegalArgumentException("Invalid alphabet");
         // TODO
-        return new ArrayList<>();
+        Map<Character, Integer> priorityLetters = new HashMap<>();
+        for (int i = 0; i < alphabet.length(); i++) {
+            priorityLetters.put(alphabet.charAt(i), i);
+        }
+
+
+        Comparator<String> byCustomAlpha = (w1, w2) -> {
+            int minLen = Math.min(w1.length(), w2.length());
+
+            for (int i = 0; i < minLen; i++) {
+                int order1 = priorityLetters.get(w1.charAt(i));
+                int order2 = priorityLetters.get(w2.charAt(i));
+
+                if (order1 != order2) {
+                    return order1 - order2;
+                }
+            }
+
+            return w1.length() - w2.length();
+        };
+
+        words.sort(byCustomAlpha);
+
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────
