@@ -110,7 +110,8 @@ public class EasyStreamChallenges {
     public static String challenge5(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return "NONE";
+        Comparator<Employee> byHighestSalary = Comparator.comparingDouble(Employee::salary);
+        return employees.stream().max(byHighestSalary).map(Employee::name).orElse("NONE");
     }
 
     // ─────────────────────────────────────────────────────────────
