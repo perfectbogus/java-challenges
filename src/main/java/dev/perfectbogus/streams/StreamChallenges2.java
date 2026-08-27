@@ -29,7 +29,8 @@ public class StreamChallenges2 {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO — mapToDouble(salary).summaryStatistics()
         //        return new SalaryStats(stats.getMin(), stats.getMax(), stats.getSum(), stats.getCount())
-        return new SalaryStats(0, 0, 0, 0);
+        DoubleSummaryStatistics stats = employees.stream().mapToDouble(Employee::salary).summaryStatistics();
+        return new SalaryStats(stats.getMin(), stats.getMax(), stats.getSum(), stats.getCount());
     }
 
     // ─────────────────────────────────────────────────────────────
