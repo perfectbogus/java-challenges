@@ -58,7 +58,10 @@ public class EasyStreamChallenges {
     public static List<Integer> challenge2(List<Integer> numbers) {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO
-        return numbers.stream().filter(i -> Math.abs(i) % 2 == 1).map(i -> i * 3).toList();
+        return numbers.stream()
+                .filter(i -> Math.abs(i) % 2 == 1)
+                .map(i -> i * 3)
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -76,7 +79,10 @@ public class EasyStreamChallenges {
     public static int challenge3(List<Integer> numbers) {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO
-        return numbers.stream().filter(i -> i % 2 == 0).mapToInt(i -> i * i).sum();
+        return numbers.stream()
+                .filter(i -> i % 2 == 0)
+                .mapToInt(i -> i * i)
+                .sum();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -94,7 +100,10 @@ public class EasyStreamChallenges {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
         Comparator<String> byAlpha = Comparator.naturalOrder();
-        return words.stream().distinct().sorted(byAlpha).toList();
+        return words.stream()
+                .distinct()
+                .sorted(byAlpha)
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -158,7 +167,9 @@ public class EasyStreamChallenges {
     public static Optional<String> challenge7(List<String> words, char letter) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return words.stream().filter(w -> w.charAt(0) == letter).findFirst();
+        return words.stream()
+                .filter(w -> w.charAt(0) == letter)
+                .findFirst();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -181,7 +192,8 @@ public class EasyStreamChallenges {
         return employees.stream()
                 .filter(e -> e.department().equals(department))
                 .mapToDouble(Employee::salary)
-                .average().orElse(0.0);
+                .average()
+                .orElse(0.0);
     }
 
     // ─────────────────────────────────────────────────────────────
