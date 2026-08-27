@@ -314,6 +314,12 @@ public class StreamChallenges2 {
     public static List<Long> challenge10(long n) {
         if (n <= 0) throw new IllegalArgumentException("n must be positive");
         // TODO — see hints above
-        return new ArrayList<>();
+        return Stream.concat(
+            Stream.iterate(
+                n,
+                val -> val > 1,
+                val -> val%2 == 0 ? val/2 : 3*val+1),
+            Stream.of(1L)
+        ).toList();
     }
 }
