@@ -205,7 +205,10 @@ public class EasyStreamChallenges {
         if (names     == null) throw new IllegalArgumentException("Names cannot be null");
         if (separator == null) throw new IllegalArgumentException("Separator cannot be null");
         // TODO
-        return prefix + suffix;
+        return names.stream()
+                .filter(w -> w.length() > minLength)
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.joining(separator, prefix, suffix));
     }
 
     // ─────────────────────────────────────────────────────────────
