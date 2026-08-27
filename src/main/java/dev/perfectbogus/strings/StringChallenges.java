@@ -24,7 +24,9 @@ public class StringChallenges {
     public static String challenge1(String sentence) {
         if (sentence == null) throw new IllegalArgumentException("Sentence cannot be null");
         // TODO
-        return "";
+        return Arrays.stream(sentence.split(" "))
+                .map(w -> new StringBuilder(w).reverse())
+                .collect(Collectors.joining(" "));
     }
 
     // ─────────────────────────────────────────────────────────────
