@@ -234,6 +234,6 @@ public class EasyStreamChallenges {
         if (pageSize <= 0)   throw new IllegalArgumentException("pageSize must be positive");
         if (pageNumber < 0)  throw new IllegalArgumentException("pageNumber must be non-negative");
         // TODO
-        return new ArrayList<>();
+        return numbers.stream().skip((long) pageNumber * pageSize).limit(pageSize).toList();
     }
 }
