@@ -158,7 +158,7 @@ public class StreamChallenges2 {
     public static List<String> challenge6(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO — IntStream.range(0, words.size()).mapToObj(i -> i + ":" + words.get(i)).toList()
-        return new ArrayList<>();
+        return IntStream.range(0, words.size()).mapToObj(i -> i + ":" + words.get(i)).toList();
     }
 
     // ══════════════════════════════════════════════════════════════════════
