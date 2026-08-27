@@ -212,7 +212,14 @@ public class StreamChallenges2 {
     public static Map<Integer, Set<String>> challenge8(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO — groupingBy(String::length, mapping(identity, toSet()))
-        return new HashMap<>();
+        return words.stream()
+                .collect(Collectors.groupingBy(
+                        String::length,
+                        Collectors.mapping(
+                                Function.identity(),
+                                Collectors.toSet()
+                        )
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
