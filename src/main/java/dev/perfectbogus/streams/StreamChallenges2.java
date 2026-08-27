@@ -246,7 +246,20 @@ public class StreamChallenges2 {
         if (topN <= 0)         throw new IllegalArgumentException("topN must be positive");
         // TODO — flatMap sentence → words, groupingBy counting,
         //        sort entrySet by freq DESC then alpha ASC, limit(topN), map keys
-        return new ArrayList<>();
+        Comparator<Map.Entry<String, Long>> byValueDesc = Map.Entry.<String, Long>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Long>> byKeyAlpha = Map.Entry.comparingByKey();
+
+        return sentences.stream()
+                .flatMap(sentence -> Arrays.stream(sentence.split("\\s+")))
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                ))
+                .entrySet().stream()
+                .sorted(byValueDesc.thenComparing(byKeyAlpha))
+                .limit(3)
+                .map(Map.Entry::getKey)
+                .toList();
     }
 
     // ══════════════════════════════════════════════════════════════════════
