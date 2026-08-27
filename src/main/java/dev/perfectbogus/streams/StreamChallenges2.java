@@ -50,7 +50,10 @@ public class StreamChallenges2 {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         if (n <= 0)          throw new IllegalArgumentException("n must be positive");
         // TODO — sorted(Comparator.reverseOrder()) + limit(n) + toList()
-        return new ArrayList<>();
+        return numbers.stream()
+                .sorted(Comparator.reverseOrder())
+                .limit(n)
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
