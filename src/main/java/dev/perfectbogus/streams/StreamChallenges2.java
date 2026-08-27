@@ -1,6 +1,7 @@
 package dev.perfectbogus.streams;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.*;
 
 public class StreamChallenges2 {
@@ -70,7 +71,12 @@ public class StreamChallenges2 {
     public static Map<String, Integer> challenge3(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO — collect(Collectors.toMap(Function.identity(), String::length))
-        return new HashMap<>();
+        return words.stream()
+                .distinct()
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        String::length
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
