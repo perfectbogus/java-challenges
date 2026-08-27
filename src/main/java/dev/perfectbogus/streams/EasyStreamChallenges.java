@@ -178,7 +178,10 @@ public class EasyStreamChallenges {
         if (employees  == null) throw new IllegalArgumentException("Employees cannot be null");
         if (department == null) throw new IllegalArgumentException("Department cannot be null");
         // TODO
-        return 0.0;
+        return employees.stream()
+                .filter(e -> e.department().equals(department))
+                .mapToDouble(Employee::salary)
+                .average().orElse(0.0);
     }
 
     // ─────────────────────────────────────────────────────────────
