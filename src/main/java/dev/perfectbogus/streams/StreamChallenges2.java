@@ -95,7 +95,9 @@ public class StreamChallenges2 {
     public static List<String> challenge4(List<Optional<String>> optionals) {
         if (optionals == null) throw new IllegalArgumentException("Optionals cannot be null");
         // TODO — stream().flatMap(Optional::stream).toList()
-        return new ArrayList<>();
+        return optionals.stream()
+                .flatMap(Optional::stream)
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
