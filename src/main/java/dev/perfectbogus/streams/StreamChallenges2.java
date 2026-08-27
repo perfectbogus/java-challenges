@@ -187,7 +187,10 @@ public class StreamChallenges2 {
         // TODO — Stream.concat(list1.stream(), list2.stream())
         //        .distinct().sorted()
         //        .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList))
-        return new ArrayList<>();
+        return Stream.concat(list1.stream(), list2.stream())
+                .distinct()
+                .sorted()
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
