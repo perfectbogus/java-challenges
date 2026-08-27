@@ -123,7 +123,20 @@ public class StreamChallenges2 {
         // TODO — Collectors.partitioningBy(e -> e.salary() > threshold,
         //                  Collectors.mapping(Employee::name, Collectors.toList()))
         //        then sort each list!
-        return new HashMap<>();
+        Map<Boolean, List<String>> results = employees.stream()
+                .collect(Collectors.partitioningBy(
+                        e -> e.salary() > threshold,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> list.stream()
+                                        .map(Employee::name)
+                                        .sorted(Comparator.naturalOrder())
+                                        .toList()
+                        )
+
+                ));
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
