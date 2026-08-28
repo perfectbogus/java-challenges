@@ -54,7 +54,19 @@ public class StringChallenges {
     public static CharCount challenge2(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO
-        return new CharCount(0, 0);
+        Set<Character> vowels = new HashSet<>(Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
+
+        String normalized = s.replaceAll("\\s+", "");
+
+        Map<Boolean, Long> map = normalized.chars()
+                .mapToObj(c -> (char) c)
+                .filter(Character::isLetter)
+                .collect(Collectors.partitioningBy(
+                        vowels::contains,
+                        Collectors.counting()
+                ));
+
+        return new CharCount( map.get(Boolean.TRUE).intValue(), map.get(Boolean.FALSE).intValue());
     }
 
     // ─────────────────────────────────────────────────────────────
