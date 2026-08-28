@@ -25,7 +25,34 @@ public class CharacterChallenges {
     public static Map<String, Long> challenge1(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO
-        return new HashMap<>();
+        long letterCount = 0;
+        long digitCount = 0;
+        long otherCount = 0;
+
+        for (char c : s.toCharArray()) {
+            if (Character.isLetter(c)) {
+                letterCount++;
+            } else if (Character.isDigit(c)) {
+                digitCount++;
+            } else {
+                otherCount++;
+            }
+        }
+
+        return Map.of("LETTER", letterCount, "DIGIT", digitCount, "OTHER", otherCount);
+    }
+
+    public static Map<String, Long> challenge1_2(String s) {
+        if (s == null) throw new IllegalArgumentException("Input cannot bu null");
+
+        return s.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(
+                        c -> Character.isLetter(c) ? "LETTER"
+                                : Character.isDigit(c) ? "DIGIT"
+                                : "OTHER",
+                        Collectors.counting()
+                ));
     }
 
     // ─────────────────────────────────────────────────────────────
