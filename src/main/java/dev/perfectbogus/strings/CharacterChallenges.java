@@ -130,7 +130,20 @@ public class CharacterChallenges {
     public static int challenge3(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO
-        return 0;
+        int sum = 0;
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) sum += Character.getNumericValue(c);
+        }
+        return sum;
+    }
+
+    public static int challenge3_2(String s) {
+        if (s == null) throw new IllegalArgumentException("Input cannot be null");
+
+        return s.chars().mapToObj(c -> (char)c)
+                .filter(Character::isDigit)
+                .mapToInt(Character::getNumericValue)
+                .sum();
     }
 
     // ─────────────────────────────────────────────────────────────

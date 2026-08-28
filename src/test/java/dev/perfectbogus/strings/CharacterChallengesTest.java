@@ -129,6 +129,12 @@ class CharacterChallengesTest {
         }
 
         @Test
+        void basicCase2() {
+            // 1+2+3+4+5+6 = 21
+            assertEquals(21, CharacterChallenges.challenge3_2("abc 123 def 456"));
+        }
+
+        @Test
         void noDigits() {
             assertEquals(0, CharacterChallenges.challenge3("no digits here!"));
         }
