@@ -318,7 +318,11 @@ public class CharacterChallenges {
         if (chars == null) throw new IllegalArgumentException("Chars cannot be null");
         // TODO — compute distance using Math.abs(Character.compare(c, target))
         //        find minimum distance, handle ties with natural order
-        return Optional.empty();
+        return chars.stream()
+                .min(Comparator.<Character>comparingInt(
+                        c -> Math.abs(Character.compare(c, target))
+                        )
+                        .thenComparing(Comparator.naturalOrder()));
     }
 
     // ─────────────────────────────────────────────────────────────
