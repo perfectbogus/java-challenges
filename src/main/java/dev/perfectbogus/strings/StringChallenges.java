@@ -180,7 +180,17 @@ public class StringChallenges {
             throw new IllegalArgumentException("Inputs cannot be null");
         if (pattern.isEmpty()) return 0;
         // TODO — use indexOf(pattern, fromIndex) in a loop
-        return 0;
+
+        int count = 0;
+        int i = 0;
+        while (i < text.length()) {
+            int j = text.indexOf(pattern, i);
+            if (j == -1) break;
+            count++;
+            i = j + pattern.length();
+        }
+
+        return count;
     }
 
     // ─────────────────────────────────────────────────────────────

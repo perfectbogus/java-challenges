@@ -308,7 +308,7 @@ class StringChallengesTest {
 
         @Test
         void singleOccurrence() {
-            assertEquals(1, StringChallenges.challenge6("abcabc","abc"));
+            assertEquals(1, StringChallenges.challenge6("abcdef","abc"));
         }
 
         @Test
