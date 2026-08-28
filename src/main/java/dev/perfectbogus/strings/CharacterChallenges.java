@@ -140,9 +140,9 @@ public class CharacterChallenges {
     public static int challenge3_2(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
 
-        return s.chars().mapToObj(c -> (char)c)
+        return s.chars()
                 .filter(Character::isDigit)
-                .mapToInt(Character::getNumericValue)
+                .map(Character::getNumericValue)
                 .sum();
     }
 
@@ -168,8 +168,17 @@ public class CharacterChallenges {
     // ─────────────────────────────────────────────────────────────
     public static boolean challenge4(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
+        if (s.isEmpty()) return false;
         // TODO
-        return false;
+        char first = s.charAt(0);
+        if (!Character.isLetter(first) && first != '_' && first != '$') return false;
+
+        for (int i = 1; i < s.length(); i++) {
+            char r = s.charAt(i);
+            if (!Character.isLetterOrDigit(r) && r != '_' && r != '$') return false;
+        }
+
+        return true;
     }
 
     // ─────────────────────────────────────────────────────────────
