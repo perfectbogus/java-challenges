@@ -105,11 +105,6 @@ public class StringChallenges {
     // Input:  "ABC", shift=1  → "BCD"
     // Input:  "Hello", shift=0 → "Hello" (no shift)
     // ─────────────────────────────────────────────────────────────
-    public static void main(String[] args) {
-        System.out.println((char) ('a' + 1));
-        System.out.println((char) 98);
-        System.out.println((int) 'A');
-    }
     public static String challenge4(String s, int shift) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO
@@ -281,7 +276,20 @@ public class StringChallenges {
     public static boolean challenge9(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO
-        return false;
+        int[] lookup = new int[26];
+        String n = s.toLowerCase().replaceAll("[^a-z]", "");
+
+        for (char c : n.toCharArray()) {
+            lookup[c - 'a']++;
+        }
+
+        for (int i : lookup) {
+            if (i < 1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     // ─────────────────────────────────────────────────────────────
