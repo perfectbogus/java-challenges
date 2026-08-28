@@ -311,6 +311,14 @@ public class StringChallenges {
         if (words.isEmpty()) return "";
         // TODO — start with words.get(0) as prefix
         //        for each word: while !word.startsWith(prefix) → trim one char from end!
-        return "";
+        String prefix = words.get(0);
+
+        for (String w : words) {
+            while (!w.startsWith(prefix)) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+            }
+        }
+
+        return prefix;
     }
 }
