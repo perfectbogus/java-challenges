@@ -249,7 +249,6 @@ public class CharacterChallenges {
             int d = Character.digit(c, 16);
             if (d == -1) throw new IllegalArgumentException("not a valid hex: " + c);
             result = result * 16 + d;
-            System.out.println(result);
         }
         return result;
     }
@@ -275,7 +274,20 @@ public class CharacterChallenges {
         // TODO — track boolean inWord
         //        when !isWhitespace and !inWord → new word! count++, inWord=true
         //        when isWhitespace → inWord=false
-        return 0;
+        boolean inWord = false;
+        int count = 0;
+
+        for (char c : s.toCharArray()) {
+            if (!Character.isWhitespace(c)) {
+                if (!inWord) {
+                    count++;
+                }
+                inWord = true;
+            } else {
+                inWord = false;
+            }
+        }
+        return count;
     }
 
     // ─────────────────────────────────────────────────────────────
