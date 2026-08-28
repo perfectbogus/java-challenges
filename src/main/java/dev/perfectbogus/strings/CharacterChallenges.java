@@ -431,6 +431,49 @@ public class CharacterChallenges {
         if (password == null) throw new IllegalArgumentException("Password cannot be null");
         // TODO — check each rule, collect violations into list
         //        valid = violations.isEmpty()
-        return new PasswordResult(false, new ArrayList<>());
+        int nUpper = 0;
+        int nLower = 0;
+        int nDigit = 0;
+        int nSpecial = 0;
+        int nWhite = 0;
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                nUpper++;
+            }
+            if (Character.isLowerCase(c)) {
+                nLower++;
+            }
+            if (Character.isDigit(c)){
+                nDigit++;
+            }
+            if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c)) {
+                nSpecial++;
+            }
+            if (Character.isWhitespace(c)) {
+                nWhite++;
+            }
+        }
+
+        List<String> violations = new ArrayList<>();
+        if (password.length() < 8) {
+            violations.add("Must be at least 8 characters");
+        }
+        if (nUpper < 1) {
+            violations.add("Must contain at least 1 uppercase letter");
+        }
+        if (nLower < 1) {
+            violations.add("Must contain at least 1 lowercase letter");
+        }
+        if (nDigit < 1) {
+            violations.add("Must contain at least 1 digit");
+        }
+        if (nSpecial < 1) {
+            violations.add("Must contain at least 1 special character");
+        }
+        if (nWhite > 0) {
+            violations.add("Must not contain whitespace");
+        }
+
+        return new PasswordResult(violations.isEmpty(), violations);
     }
 }
