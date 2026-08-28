@@ -144,7 +144,23 @@ public class StringChallenges {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         if (s.isEmpty()) return "";
         // TODO
-        return "";
+        int count = 0;
+        char prev = s.charAt(0);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == prev) {
+                count++;
+            } else {
+                sb.append(prev).append(count);
+                prev = c;
+                count = 1;
+            }
+        }
+
+        sb.append(prev).append(count);
+
+        return sb.toString();
     }
 
     // ─────────────────────────────────────────────────────────────
