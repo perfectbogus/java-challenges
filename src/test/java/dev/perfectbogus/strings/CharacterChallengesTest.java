@@ -75,6 +75,12 @@ class CharacterChallengesTest {
         }
 
         @Test
+        void basicCase_2() {
+            assertEquals("hELLO wORLD! 123",
+                    CharacterChallenges.challenge2_2("Hello World! 123"));
+        }
+
+        @Test
         void mixedCase() {
             assertEquals("jAVA is fUN",
                     CharacterChallenges.challenge2("Java IS Fun"));

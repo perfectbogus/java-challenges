@@ -76,7 +76,31 @@ public class CharacterChallenges {
     public static String challenge2(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO
-        return "";
+        return s.chars()
+                .mapToObj(c -> (char) c)
+                .map(c -> Character.isUpperCase(c) ? Character.toLowerCase(c)
+                        : Character.isLowerCase(c) ? Character.toUpperCase(c)
+                        : c)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+    }
+
+    public static String challenge2_2(String s) {
+        if (s == null) throw new IllegalArgumentException("Input cannot be null");
+
+        StringBuilder sb = new StringBuilder();
+
+        for (char c : s.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                sb.append(Character.toLowerCase(c));
+            } else if (Character.isLowerCase(c)) {
+                sb.append(Character.toUpperCase(c));
+            } else {
+                sb.append(c);
+            }
+        }
+
+        return sb.toString();
     }
 
     // ─────────────────────────────────────────────────────────────
