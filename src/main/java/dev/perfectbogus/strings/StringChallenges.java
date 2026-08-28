@@ -56,9 +56,7 @@ public class StringChallenges {
         // TODO
         Set<Character> vowels = new HashSet<>(Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
 
-        String normalized = s.replaceAll("\\s+", "");
-
-        Map<Boolean, Long> map = normalized.chars()
+        Map<Boolean, Long> map = s.chars()
                 .mapToObj(c -> (char) c)
                 .filter(Character::isLetter)
                 .collect(Collectors.partitioningBy(
@@ -83,7 +81,13 @@ public class StringChallenges {
     public static boolean challenge3(String s1, String s2) {
         if (s1 == null || s2 == null) throw new IllegalArgumentException("Inputs cannot be null");
         // TODO
-        return false;
+        char[] c1 = s1.toLowerCase().replaceAll("\\s+", "").toCharArray();
+        char[] c2 = s2.toLowerCase().replaceAll("\\s+", "").toCharArray();
+
+        Arrays.sort(c1);
+        Arrays.sort(c2);
+
+        return Arrays.equals(c1, c2);
     }
 
     // ─────────────────────────────────────────────────────────────
