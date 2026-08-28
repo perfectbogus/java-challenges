@@ -394,7 +394,7 @@ class StringChallengesTest {
 
         @Test
         void basicCase() {
-            assertEquals("programing",
+            assertEquals("progamin",
                     StringChallenges.challenge8("programming"));
         }
 

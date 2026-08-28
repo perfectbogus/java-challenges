@@ -233,7 +233,39 @@ public class StringChallenges {
     public static String challenge8(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO
-        return "";
+        Set<Character> set = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            if (!set.contains(c)) {
+                set.add(c);
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String challenge8_2(String s) {
+        if (s == null) throw new IllegalArgumentException("Input cannot be null");
+
+        Set<Character> set = new LinkedHashSet<>();
+        for (char c : s.toCharArray()) {
+            set.add(c);
+        }
+
+        return set.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+    }
+
+    public static String challenge8_3(String s) {
+        if (s == null) throw new IllegalArgumentException("Input cannot be null");
+        Set<Character> seen = new LinkedHashSet<>();
+        return s.chars()
+                .mapToObj(c -> (char) c)
+                .filter(seen::add)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
     }
 
     // ─────────────────────────────────────────────────────────────
