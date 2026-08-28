@@ -203,9 +203,16 @@ public class CharacterChallenges {
     // ─────────────────────────────────────────────────────────────
     public static String challenge5(int n) {
         if (n < 0) throw new IllegalArgumentException("n must be non-negative");
+        if (n == 0) return "0";
         // TODO — use Character.forDigit(remainder, 16) in a loop
         //        prepend each hex digit to StringBuilder
-        return "";
+        StringBuilder sb = new StringBuilder();
+        while (n > 0) {
+            sb.append(Character.forDigit(n % 16, 16));
+            n /= 16;
+        }
+
+        return sb.reverse().toString();
     }
 
     // ─────────────────────────────────────────────────────────────
