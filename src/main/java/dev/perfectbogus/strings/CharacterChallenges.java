@@ -244,7 +244,14 @@ public class CharacterChallenges {
         // TODO — for each char: int d = Character.digit(c, 16)
         //        if d == -1 → throw IllegalArgumentException
         //        result = result * 16 + d
-        return 0;
+        int result = 0;
+        for (char c : hex.toCharArray()) {
+            int d = Character.digit(c, 16);
+            if (d == -1) throw new IllegalArgumentException("not a valid hex: " + c);
+            result = result * 16 + d;
+            System.out.println(result);
+        }
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
