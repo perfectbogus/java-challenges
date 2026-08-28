@@ -209,8 +209,11 @@ public class StringChallenges {
     // ─────────────────────────────────────────────────────────────
     public static String challenge7(String sentence) {
         if (sentence == null) throw new IllegalArgumentException("Sentence cannot be null");
+        if (sentence.isBlank()) return "";
         // TODO
-        return "";
+        return Arrays.stream(sentence.split(" ")).map(
+                w -> w.substring(0, 1).toUpperCase() + w.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
     }
 
     // ─────────────────────────────────────────────────────────────
