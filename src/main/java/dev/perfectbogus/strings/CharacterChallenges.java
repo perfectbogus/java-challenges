@@ -350,7 +350,44 @@ public class CharacterChallenges {
     public static boolean challenge9(String s) {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO — filter isAlphabetic, toLowerCase, check palindrome
-        return false;
+        StringBuilder sb = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (Character.isAlphabetic(c)) {
+                sb.append(Character.toLowerCase(c));
+            }
+        }
+
+        String pal = sb.toString();
+        int l = 0;
+        int r = pal.length() - 1;
+        while (l < r) {
+            if (pal.charAt(l) != pal.charAt(r)) return false;
+            l++;
+            r--;
+        }
+
+        return true;
+    }
+
+    public static boolean challenge9_2(String s) {
+        if (s == null) throw new IllegalArgumentException("Input cannot be null");
+
+        String n = s.chars()
+                .mapToObj(c -> (char)c)
+                .filter(Character::isAlphabetic)
+                .map(Character::toLowerCase)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+
+        int l = 0;
+        int r = n.length() - 1;
+        while (l < r) {
+            if (n.charAt(l) != n.charAt(r)) return false;
+            l++;
+            r--;
+        }
+
+        return true;
     }
 
     // ─────────────────────────────────────────────────────────────

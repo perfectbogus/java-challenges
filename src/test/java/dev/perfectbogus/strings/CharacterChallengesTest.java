@@ -437,6 +437,12 @@ class CharacterChallengesTest {
         }
 
         @Test
+        void classicPalindrome_2() {
+            assertTrue(CharacterChallenges.challenge9_2(
+                    "A man a plan a canal Panama"));
+        }
+
+        @Test
         void notPalindrome() {
             assertFalse(CharacterChallenges.challenge9("race a car"));
         }
