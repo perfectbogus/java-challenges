@@ -208,7 +208,20 @@ public class CompletableFutureChallenges {
         // TODO — List<CF<Integer>> futures = each supplyAsync(n*n)
         //        allOf(futures.toArray(new CF[0])).get()
         //        futures.stream().map(CF::join).toList()
-        return new ArrayList<>();
+        List<CompletableFuture<Integer>> listCF = new ArrayList<>();
+        for (int n : numbers) {
+            listCF.add(CompletableFuture.supplyAsync(() -> n*n));
+        }
+
+        CompletableFuture<Void> allCF = CompletableFuture.allOf(listCF.toArray(new CompletableFuture[0]));
+
+        allCF.get();
+
+        List<Integer> results = listCF.stream()
+                .map(CompletableFuture::join)
+                .toList();
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
