@@ -3,6 +3,7 @@ package dev.perfectbogus.concurrent;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
+import java.util.function.Supplier;
 import java.util.stream.*;
 
 public class CompletableFutureChallenges {
@@ -24,7 +25,9 @@ public class CompletableFutureChallenges {
             throws ExecutionException, InterruptedException {
         if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO — CompletableFuture.supplyAsync(() -> sum).get()
-        return 0;
+        Supplier<Integer> sumSupplier = () -> numbers.stream().mapToInt(Integer::intValue).sum();
+        CompletableFuture<Integer> cf = CompletableFuture.supplyAsync(sumSupplier);
+        return cf.get();
     }
 
     // ─────────────────────────────────────────────────────────────
