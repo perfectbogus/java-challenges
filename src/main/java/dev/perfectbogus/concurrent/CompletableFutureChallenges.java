@@ -3,6 +3,7 @@ package dev.perfectbogus.concurrent;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.*;
 
@@ -149,10 +150,10 @@ public class CompletableFutureChallenges {
         // TODO — supplyAsync(deptNames.get(deptId))
         //        .thenCompose(name -> supplyAsync(deptCounts.get(name)))
         //        .get()
-        return CompletableFuture
-                .supplyAsync(() -> deptNames.get(deptId))
-                .thenCompose(name -> CompletableFuture.supplyAsync(() -> deptCounts.get(name)))
-                .get();
+        CompletableFuture<String> supplyName = CompletableFuture.supplyAsync(() -> deptNames.get(deptId));
+        Function<String, CompletableFuture<Integer>> supplyCount = (name) -> CompletableFuture.supplyAsync(() -> deptCounts.get(name));
+
+        return supplyName.thenCompose(supplyCount).get();
     }
 
     // ─────────────────────────────────────────────────────────────
