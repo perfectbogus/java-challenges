@@ -179,7 +179,12 @@ public class CompletableFutureChallenges {
         if (list1 == null || list2 == null)
             throw new IllegalArgumentException("Lists cannot be null");
         // TODO — supplyAsync(sum).thenCombine(supplyAsync(product), CombineResult::new).get()
-        return new CombineResult(0, 0);
+        CompletableFuture<Integer> sumFuture = CompletableFuture.supplyAsync(() -> list1.stream().mapToInt(Integer::intValue).sum());
+        CompletableFuture<Integer> productFuture = CompletableFuture.supplyAsync(() -> list2.stream().reduce((a, b) -> a * b).orElse(0));
+
+        CompletableFuture<CombineResult> resultFuture = sumFuture.thenCombine(productFuture, CombineResult::new);
+
+        return resultFuture.get();
     }
 
     // ─────────────────────────────────────────────────────────────
