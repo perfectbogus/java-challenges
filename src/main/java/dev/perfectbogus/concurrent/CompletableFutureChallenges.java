@@ -30,6 +30,14 @@ public class CompletableFutureChallenges {
         return cf.get();
     }
 
+    public static int challenge1_2(List<Integer> numbers) throws ExecutionException, InterruptedException {
+        if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
+
+        return CompletableFuture.supplyAsync(() ->
+                numbers.stream().mapToInt(Integer::intValue).sum())
+                .get();
+    }
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 2
     // Use supplyAsync() + thenApply() + thenApply() to build a
@@ -50,7 +58,10 @@ public class CompletableFutureChallenges {
             throws ExecutionException, InterruptedException {
         if (input == null) throw new IllegalArgumentException("Input cannot be null");
         // TODO — supplyAsync(trim).thenApply(toUpperCase).thenApply(wrap).get()
-        return "";
+        return CompletableFuture.supplyAsync(input::trim)
+                .thenApply(String::toUpperCase)
+                .thenApply(s -> "<<" + s + ">>")
+                .get();
     }
 
     // ─────────────────────────────────────────────────────────────
