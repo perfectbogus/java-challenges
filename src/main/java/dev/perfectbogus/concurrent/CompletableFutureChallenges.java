@@ -86,7 +86,11 @@ public class CompletableFutureChallenges {
         // TODO — AtomicInteger result = new AtomicInteger()
         //        supplyAsync(count > threshold).thenAccept(result::set).get()
         //        return result.get()
-        return 0;
+        AtomicInteger result = new AtomicInteger(0);
+        CompletableFuture.supplyAsync(() -> (int) numbers.stream().filter(i -> i > threshold).count())
+                .thenAccept(result::set)
+                .get();
+        return result.get();
     }
 
     // ─────────────────────────────────────────────────────────────
