@@ -116,7 +116,12 @@ public class CompletableFutureChallenges {
         if (employees == null || employees.isEmpty())
             throw new IllegalArgumentException("Employees cannot be null or empty");
         // TODO — supplyAsync(maxSalary).thenApply(format).get()
-        return "";
+        return CompletableFuture.supplyAsync(() ->
+                employees.stream()
+                        .mapToDouble(Employee::salary)
+                        .max().orElse(0.0))
+                .thenApply(max -> String.format("Max salary: %.2f", max))
+                .get();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -144,7 +149,10 @@ public class CompletableFutureChallenges {
         // TODO — supplyAsync(deptNames.get(deptId))
         //        .thenCompose(name -> supplyAsync(deptCounts.get(name)))
         //        .get()
-        return 0;
+        return CompletableFuture
+                .supplyAsync(() -> deptNames.get(deptId))
+                .thenCompose(name -> CompletableFuture.supplyAsync(() -> deptCounts.get(name)))
+                .get();
     }
 
     // ─────────────────────────────────────────────────────────────
