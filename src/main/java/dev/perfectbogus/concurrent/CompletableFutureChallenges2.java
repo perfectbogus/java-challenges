@@ -35,7 +35,7 @@ public class CompletableFutureChallenges2 {
         CompletableFuture<Integer> sumFuture = CompletableFuture.supplyAsync(() ->
                 numbers.stream().mapToInt(Integer::intValue).sum());
 
-        sumFuture.thenRun(() -> counter.incrementAndGet()).get();
+        sumFuture.thenRun(counter::incrementAndGet).get();
 
         return counter.get();
     }
@@ -65,7 +65,18 @@ public class CompletableFutureChallenges2 {
         //        cf.whenComplete((res,ex) -> ref.set(ex!=null ? "FAILURE:..." : "SUCCESS:..."))
         //        try { cf.get() } catch (ExecutionException e) { /* expected */ }
         //        return ref.get()
-        return "";
+        AtomicReference<String> ref = new AtomicReference<>();
+
+        CompletableFuture<Integer> cf = CompletableFuture.supplyAsync(() -> n/d);
+        cf.whenComplete((res, ex) -> ref.set(ex!=null ? "FAILURE:/ by zero" : "SUCCESS:" + res));
+
+        try {
+            cf.get();
+        } catch (ExecutionException e) {
+            throw new RuntimeException();
+        }
+
+        return ref.get();
     }
 
     // ─────────────────────────────────────────────────────────────
