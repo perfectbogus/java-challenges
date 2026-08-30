@@ -224,6 +224,18 @@ public class CompletableFutureChallenges {
         return results;
     }
 
+    public static List<Integer> challenge7_2(List<Integer> numbers) {
+        if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
+
+        List<CompletableFuture<Integer>> futures = numbers.stream()
+                .map(n -> CompletableFuture.supplyAsync(() -> n * n))
+                .toList();
+
+        return futures.stream()
+                .map(CompletableFuture::join)
+                .toList();
+    }
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 8
     // Use exceptionally() to handle errors gracefully.
@@ -244,7 +256,13 @@ public class CompletableFutureChallenges {
         // TODO — supplyAsync(numerator/denominator)
         //        .exceptionally(ex -> -1)
         //        .get()
-        return 0;
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+                    if (denominator == 0) throw new IllegalArgumentException("denominator cannot be zero");
+                    return numerator/denominator;
+                })
+                .exceptionally(ex -> -1);
+
+        return future.get();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -272,7 +290,19 @@ public class CompletableFutureChallenges {
         // TODO — supplyAsync(() -> { if empty throw; return reversed; })
         //        .handle((result, ex) -> ex != null ? "ERROR: "+ex.getMessage() : result)
         //        .get()
-        return "";
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(
+                () -> {
+                    if (s.isEmpty()) throw new IllegalArgumentException("String cannot be null");
+                    return new StringBuilder(s).reverse().toString();
+                })
+                .handle((result, ex) -> {
+                    if (ex != null) {
+                        return "ERROR: String cannot be empty";
+                    }
+                    return result;
+                });
+
+        return future.get();
     }
 
     // ─────────────────────────────────────────────────────────────
