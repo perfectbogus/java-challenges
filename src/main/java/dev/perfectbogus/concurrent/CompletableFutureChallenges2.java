@@ -226,7 +226,14 @@ public class CompletableFutureChallenges2 {
         //        .thenApply(sum -> sum * multiplier)
         //        .get() → computedValue
         //        return new RunResult(counter.get(), computedValue)
-        return new RunResult(0, 0);
+        AtomicInteger counter = new AtomicInteger(0);
+
+        Integer computed = CompletableFuture.runAsync(counter::incrementAndGet)
+                .thenApply(v -> numbers.stream().mapToInt(Integer::intValue).sum())
+                .thenApply(sum -> sum * multiplier)
+                .get();
+
+        return new RunResult(counter.get(), computed);
     }
 
     // ─────────────────────────────────────────────────────────────
