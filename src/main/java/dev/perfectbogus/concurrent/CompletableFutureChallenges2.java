@@ -30,7 +30,14 @@ public class CompletableFutureChallenges2 {
         // TODO — AtomicInteger counter = new AtomicInteger(0)
         //        supplyAsync(sum).thenRun(counter::incrementAndGet).get()
         //        return counter.get()
-        return 0;
+        AtomicInteger counter = new AtomicInteger(0);
+
+        CompletableFuture<Integer> sumFuture = CompletableFuture.supplyAsync(() ->
+                numbers.stream().mapToInt(Integer::intValue).sum());
+
+        sumFuture.thenRun(() -> counter.incrementAndGet()).get();
+
+        return counter.get();
     }
 
     // ─────────────────────────────────────────────────────────────
