@@ -331,6 +331,17 @@ public class CompletableFutureChallenges {
             throw new IllegalArgumentException("Tasks cannot be null or empty");
         // TODO — List<CF<String>> futures = each supplyAsync(sleep then return name)
         //        anyOf(futures.toArray(new CF[0])).get() → cast to String
-        return "";
+        List<CompletableFuture<String>> futures = tasks.stream()
+                .map(t -> CompletableFuture.supplyAsync(() -> {
+                    try {
+                        Thread.sleep(t.sleepMs());
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                    return t.name();
+                }))
+                .toList();
+
+        return (String) CompletableFuture.anyOf(futures.toArray(new CompletableFuture[0])).get();
     }
 }
