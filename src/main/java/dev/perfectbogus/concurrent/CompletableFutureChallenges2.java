@@ -307,7 +307,10 @@ public class CompletableFutureChallenges2 {
         // TODO — supplyAsync(() -> Integer.parseInt(input))
         //        .exceptionally(ex -> input.length())
         //        .get()
-        return 0;
+        CompletableFuture<Integer> computedFuture = CompletableFuture.supplyAsync(() -> Integer.parseInt(input))
+                .exceptionally(ex -> input.length());
+
+        return computedFuture.get();
     }
 
     // ─────────────────────────────────────────────────────────────
