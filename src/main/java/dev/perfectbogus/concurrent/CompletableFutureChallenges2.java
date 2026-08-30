@@ -273,7 +273,15 @@ public class CompletableFutureChallenges2 {
         //        CF<Double> salCF    = supplyAsync(salaries.get(id))
         //        allOf(nameCF, deptCF, salCF).get()
         //        return new EmployeeSummary(nameCF.join(), deptCF.join(), salCF.join())
-        return new EmployeeSummary("", "", 0.0);
+        CompletableFuture<String> nameFuture = CompletableFuture.supplyAsync(() -> names.get(id));
+        CompletableFuture<String> deptFuture = CompletableFuture.supplyAsync(() -> depts.get(id));
+        CompletableFuture<Double> salaryFuture = CompletableFuture.supplyAsync(() -> salaries.get(id));
+
+        CompletableFuture<Void> allFutures = CompletableFuture.allOf(nameFuture, deptFuture, salaryFuture);
+
+        allFutures.join();
+
+        return new EmployeeSummary(nameFuture.get(), deptFuture.get(), salaryFuture.get());
     }
 
     // ─────────────────────────────────────────────────────────────
