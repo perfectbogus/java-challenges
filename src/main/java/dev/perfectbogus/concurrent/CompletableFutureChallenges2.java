@@ -184,7 +184,13 @@ public class CompletableFutureChallenges2 {
         //        CF<String> shortest = supplyAsync(shortest word in list2)
         //        longest.thenAcceptBoth(shortest, (l,s) -> ref.set(...)).get()
         //        return ref.get()
-        return "";
+        AtomicReference<String> ref = new AtomicReference<>();
+        CompletableFuture<String> longest = CompletableFuture.supplyAsync(() -> list1.stream().max(Comparator.comparingInt(String::length)).orElse(""));
+        CompletableFuture<String> shortest = CompletableFuture.supplyAsync(() -> list2.stream().min(Comparator.comparingInt(String::length)).orElse(""));
+
+        longest.thenAcceptBoth(shortest, (l, s) -> ref.set("longest=" + l + " shortest=" + s)).get();
+
+        return ref.get();
     }
 
     // ─────────────────────────────────────────────────────────────
