@@ -387,6 +387,10 @@ public class CompletableFutureChallenges2 {
         //        .thenCompose(username -> supplyAsync(deptMap.get(username)))
         //        .thenCompose(dept     -> supplyAsync(budgetMap.get(dept)))
         //        .get()
-        return 0.0;
+        Double v = CompletableFuture.supplyAsync(() -> userMap.get(userId))
+                .thenCompose(name -> CompletableFuture.supplyAsync(() -> deptMap.get(name)))
+                .thenCompose(i -> CompletableFuture.supplyAsync(() -> budgetMap.get(i)))
+                .get();
+        return v;
     }
 }
