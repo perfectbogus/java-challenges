@@ -134,7 +134,25 @@ public class CompletableFutureChallenges2 {
         //        List<CF<String>> futures = each supplyAsync(threadName, executor)
         //        collect results into Set<String>
         //        executor.shutdown()
-        return new HashSet<>();
+        ExecutorService executor = Executors.newFixedThreadPool(poolSize);
+        List<CompletableFuture<String>> futures = new ArrayList<>();
+
+        for (int i = 0; i < taskCount; i++) {
+            final int j = i;
+            futures.add(CompletableFuture.supplyAsync(() -> Thread.currentThread().getName(), executor));
+        }
+
+        Set<String> set = new HashSet<>();
+
+        try {
+            for (CompletableFuture<String> cf : futures) {
+                set.add(cf.get());
+            }
+        } finally {
+            executor.shutdown();
+        }
+
+        return set;
     }
 
     // ─────────────────────────────────────────────────────────────
