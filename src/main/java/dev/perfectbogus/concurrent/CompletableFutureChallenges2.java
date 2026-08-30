@@ -68,12 +68,15 @@ public class CompletableFutureChallenges2 {
         AtomicReference<String> ref = new AtomicReference<>();
 
         CompletableFuture<Integer> cf = CompletableFuture.supplyAsync(() -> n/d);
-        cf.whenComplete((res, ex) -> ref.set(ex!=null ? "FAILURE:/ by zero" : "SUCCESS:" + res));
+        cf.whenComplete((res, ex) ->
+                ref.set(ex!=null
+                        ? "FAILURE:" + ex.getCause().getMessage()
+                        : "SUCCESS:" + res)
+        );
 
         try {
             cf.get();
         } catch (ExecutionException e) {
-            throw new RuntimeException();
         }
 
         return ref.get();
@@ -100,7 +103,10 @@ public class CompletableFutureChallenges2 {
     public static String challenge3(int n)
             throws ExecutionException, InterruptedException {
         // TODO — completedFuture(n).thenApply(square).thenApply(toString).thenApply(wrap).get()
-        return "";
+        return CompletableFuture.completedFuture(n)
+                .thenApply(i -> i * i)
+                .thenApply(String::valueOf)
+                .thenApply(x -> "Result: " + x).get();
     }
 
     // ─────────────────────────────────────────────────────────────
