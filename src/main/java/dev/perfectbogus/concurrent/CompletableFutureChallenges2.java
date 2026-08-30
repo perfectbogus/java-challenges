@@ -340,7 +340,17 @@ public class CompletableFutureChallenges2 {
         // TODO — supplyAsync(() -> { sleep(sleepMs); return value; })
         //        .completeOnTimeout(defaultValue, timeoutMs, TimeUnit.MILLISECONDS)
         //        .get()
-        return 0;
+        int result = CompletableFuture.supplyAsync(() -> {
+                    try {
+                        Thread.sleep(sleepMs);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return value;}
+                )
+                .completeOnTimeout(defaultValue, timeoutMs, TimeUnit.MILLISECONDS)
+                .get();
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
