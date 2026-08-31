@@ -33,7 +33,21 @@ public class ThreadingChallenges2 {
         //        Thread t = new Thread(() -> { while(running) counter.incrementAndGet() })
         //        t.start(), Thread.sleep(sleepMs), running=false, t.join()
         //        return counter.get()
-        return 0L;
+        AtomicBoolean running = new AtomicBoolean(true);
+        AtomicLong counter = new AtomicLong();
+
+        Thread t = new Thread(() -> {
+            while (running.get()) {
+                counter.incrementAndGet();
+            }
+        });
+
+        t.start();
+        Thread.sleep(sleepMs);
+        running.set(false);
+        t.join();
+
+        return counter.get();
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -59,7 +73,23 @@ public class ThreadingChallenges2 {
         //        CopyOnWriteArrayList<Integer> results = new CopyOnWriteArrayList<>()
         //        each thread: local.set(index), results.add(local.get())
         //        join all, return results sorted
-        return new ArrayList<>();
+        ThreadLocal<Integer> local = new ThreadLocal<>();
+        List<Integer> list = new CopyOnWriteArrayList<>();
+        Thread[] threads = new Thread[threadCount];
+
+        for (int i = 0; i < threadCount; i++) {
+            final int j = i;
+            threads[i] = new Thread(() -> {
+                local.set(j);
+                list.add(local.get());
+                local.remove();
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return list.stream().sorted().toList();
     }
 
     // ─────────────────────────────────────────────────────────────
