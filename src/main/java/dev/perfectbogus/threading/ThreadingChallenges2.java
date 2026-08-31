@@ -356,7 +356,20 @@ public class ThreadingChallenges2 {
         //        thread: while(!Thread.currentThread().isInterrupted()) count.incrementAndGet()
         //        t.start(), sleep(sleepMs), t.interrupt(), t.join()
         //        return count.get()
-        return 0L;
+        AtomicLong count = new AtomicLong(0);
+
+        Thread t = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                count.incrementAndGet();
+            }
+        });
+
+        t.start();
+        Thread.sleep(sleepMs);
+        t.interrupt();
+        t.join();
+
+        return count.get();
     }
 
     // ─────────────────────────────────────────────────────────────
