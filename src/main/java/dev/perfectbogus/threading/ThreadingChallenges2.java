@@ -547,7 +547,23 @@ public class ThreadingChallenges2 {
         //          phaser.arriveAndAwaitAdvance()
         //          phase2: total.addAndGet(Arrays.stream(results).sum())
         //        join all, return total.get()
-        return 0L;
+        int[] results = new int[numbers.size()];
+        Phaser phaser = new Phaser(numbers.size());
+        AtomicLong total = new AtomicLong();
+        Thread[] threads = new Thread[numbers.size()];
+        for (int i = 0; i < numbers.size(); i++) {
+            final int j = i;
+            threads[i] = new Thread(() -> {
+                results[j] = numbers.get(j) * numbers.get(j);
+                phaser.arriveAndAwaitAdvance();
+                total.addAndGet(Arrays.stream(results).sum());
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return total.get();
     }
 
     // ─────────────────────────────────────────────────────────────
