@@ -319,7 +319,22 @@ public class ThreadingChallenges2 {
         // TODO — AtomicInteger atomic = new AtomicInteger(0)
         //        each thread: int cur; do { cur=atomic.get() } while(!atomic.compareAndSet(cur,cur+1))
         //        join all, return atomic.get()
-        return 0;
+        AtomicInteger atomic = new AtomicInteger(0);
+        Thread[] threads = new Thread[threadCount];
+
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                int current = atomic.get();
+                while (!atomic.compareAndSet(current, current + 1)) {
+                    current = atomic.get();
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return atomic.get();
     }
 
     // ─────────────────────────────────────────────────────────────
