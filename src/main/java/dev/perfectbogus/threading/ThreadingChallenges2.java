@@ -273,7 +273,27 @@ public class ThreadingChallenges2 {
         //        int result = exec.invokeAny(callables)
         //        exec.shutdown()
         //        return result
-        return 0;
+        ExecutorService executor = Executors.newFixedThreadPool(sleepTimes.size());
+        List<Callable<Long>> callables = new ArrayList<>();
+
+        for (int i = 0; i < sleepTimes.size(); i++) {
+            final long l = sleepTimes.get(i);
+            final long j = i;
+            callables.add(() -> {
+                try {
+                    Thread.sleep(l);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                return j;
+            });
+        }
+
+        Long result = executor.invokeAny(callables);
+
+        executor.shutdown();
+
+        return result.intValue();
     }
 
     // ─────────────────────────────────────────────────────────────
