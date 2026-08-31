@@ -505,7 +505,14 @@ public class ThreadingChallenges2 {
         //        Thread.sleep(totalMs)
         //        scheduler.shutdownNow()
         //        return counter.get()
-        return 0;
+        AtomicInteger counter = new AtomicInteger();
+        try (ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1)) {
+            scheduler.scheduleAtFixedRate(counter::incrementAndGet, 0, periodMs, TimeUnit.MILLISECONDS);
+            Thread.sleep(totalMs);
+            scheduler.shutdownNow();
+        }
+
+        return counter.get();
     }
 
     // ─────────────────────────────────────────────────────────────
