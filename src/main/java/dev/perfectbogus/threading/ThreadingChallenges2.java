@@ -153,7 +153,24 @@ public class ThreadingChallenges2 {
         //        int[] counter = {0}  (array trick for lambda capture!)
         //        threads: synchronized(lock) { counter[0]++ }
         //        join all, return counter[0]
-        return 0;
+        final Object lock = new Object();
+        Thread[] threads = new Thread[threadCount];
+        int[] counter = new int[]{0};
+
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < incrementsPerThread; j++) {
+                    synchronized (lock) {
+                        counter[0]++;
+                    }
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return counter[0];
     }
 
     // ─────────────────────────────────────────────────────────────
