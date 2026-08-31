@@ -194,7 +194,15 @@ public class ThreadingChallenges2 {
         //        t.start()
         //        t.join(timeoutMs)
         //        return !t.isAlive()
-        return false;
+        Thread t = new Thread(() -> {
+            try { Thread.sleep(sleepMs); }
+            catch (InterruptedException e) { Thread.currentThread().interrupt(); };
+        });
+
+        t.start();
+        t.join(timeoutMs);
+
+        return !t.isAlive();
     }
 
     // ─────────────────────────────────────────────────────────────
