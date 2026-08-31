@@ -397,7 +397,20 @@ public class ThreadingChallenges2 {
         // TODO — CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<>()
         //        threads: list.add(index)
         //        join all, return sorted list
-        return new ArrayList<>();
+        List<Integer> list = new CopyOnWriteArrayList<>();
+        Thread[] threads = new Thread[threadCount];
+
+        for (int i = 0; i < threadCount; i++) {
+            final int idx = i;
+            threads[i] = new Thread(() -> {
+                list.add(idx);
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return list.stream().sorted().toList();
     }
 
     // ══════════════════════════════════════════════════════════════════════
@@ -434,7 +447,35 @@ public class ThreadingChallenges2 {
         //        readers: lock.readLock().lock(), readCount.incrementAndGet(), lock.readLock().unlock()
         //        writers: lock.writeLock().lock(), sharedValue[0]++, lock.writeLock().unlock()
         //        join all, return readCount.get()
-        return 0L;
+        ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+        int[] sharedValue = {0};
+        AtomicLong readCount = new AtomicLong();
+        Thread[] readers = new Thread[readerCount];
+        for (int i = 0; i < readerCount; i++) {
+            readers[i] = new Thread(() -> {
+                for (int j = 0; j < operationsEach; j++) {
+                    lock.readLock().lock();
+                    try { readCount.incrementAndGet(); }
+                    finally { lock.readLock().unlock(); }
+                }
+            });
+        }
+
+        Thread[] writers = new Thread[writerCount];
+        for (int i = 0; i < writerCount; i++) {
+            writers[i] = new Thread(() -> {
+                lock.writeLock().lock();
+                sharedValue[0]++;
+                lock.writeLock().unlock();
+            });
+        }
+
+        for (Thread r : readers) r.start();
+        for (Thread r : readers) r.join();
+        for (Thread w : writers) w.start();
+        for (Thread w : writers) w.join();
+
+        return readCount.get();
     }
 
     // ─────────────────────────────────────────────────────────────
