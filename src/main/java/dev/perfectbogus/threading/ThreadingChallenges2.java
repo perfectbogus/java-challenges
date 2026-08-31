@@ -232,7 +232,21 @@ public class ThreadingChallenges2 {
         //        submit taskCount Callables returning thread name
         //        collect results into Set<String>
         //        shutdown + awaitTermination
-        return new HashSet<>();
+        Set<String> set = new HashSet<>();
+        List<Future<String>> futures = new ArrayList<>();
+        try (ExecutorService executor = Executors.newCachedThreadPool()) {
+            for (int i = 0; i < taskCount; i++) {
+                Callable<String> task = () -> Thread.currentThread().getName();
+                futures.add(executor.submit(task));
+            }
+
+            for (Future<String> f : futures) {
+                set.add(f.get());
+            }
+
+            executor.shutdown();
+        }
+        return set;
     }
 
     // ─────────────────────────────────────────────────────────────
