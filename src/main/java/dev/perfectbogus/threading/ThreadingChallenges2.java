@@ -117,7 +117,18 @@ public class ThreadingChallenges2 {
         // TODO — AtomicReference<String> ref = new AtomicReference<>(null)
         //        threads: ref.compareAndSet(null, Thread.currentThread().getName())
         //        join all, return ref.get()
-        return "";
+        AtomicReference<String> ref = new AtomicReference<>();
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                ref.compareAndSet(null, Thread.currentThread().getName());
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return ref.get();
     }
 
     // ─────────────────────────────────────────────────────────────
