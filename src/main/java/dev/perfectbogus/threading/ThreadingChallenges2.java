@@ -890,7 +890,57 @@ public class ThreadingChallenges2 {
         if (threshold <= 0)    throw new IllegalArgumentException("threshold must be positive");
         // TODO — implement MergeSortTask extends RecursiveAction
         //        use ForkJoinPool to invoke
+        class MergeSortTask extends RecursiveAction {
+
+            private int start;
+            private int end;
+
+            MergeSortTask(int start, int end) {
+                this.start = start;
+                this.end = end;
+            }
+
+            @Override
+            protected void compute() {
+                if (end - start <= threshold) {
+                    Arrays.sort(array, start, end);
+                } else {
+                    int mid = (start + end) / 2;
+                    MergeSortTask left = new MergeSortTask(start, mid);
+                    MergeSortTask right = new MergeSortTask(mid, end);
+                    left.fork();
+                    right.compute();
+                    left.join();
+                    merge(array, start, mid, end);
+                }
+            }
+
+        }
+
+        try (ForkJoinPool pool = new ForkJoinPool()) {
+            pool.invoke(new MergeSortTask(0, array.length));
+        }
+
         return array;
+    }
+
+    private static void merge(int[] array, int start, int mid, int end) {
+        int[] tmp = Arrays.copyOfRange(array, start, end);
+
+        int left = 0;
+        int right = mid - start;
+        int k = start;
+
+        while (left < mid - start && right < end - start) {
+            if (tmp[left] <= tmp[right]) {
+                array[k++] = tmp[left++];
+            } else {
+                array[k++] = tmp[right++];
+            }
+        }
+
+        while (left < mid - start) array[k++] = tmp[left++];
+        while (right < end - start) array[k++] = tmp[right++];
     }
 
     // ─────────────────────────────────────────────────────────────
