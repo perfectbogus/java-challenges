@@ -979,6 +979,41 @@ public class ThreadingChallenges2 {
         if (poolSize  <= 0) throw new IllegalArgumentException("poolSize must be positive");
         if (taskCount <= 0) throw new IllegalArgumentException("taskCount must be positive");
         // TODO — see hints above
-        return 0;
+        LinkedBlockingQueue<Runnable> q = new LinkedBlockingQueue<>();
+        AtomicInteger counter = new AtomicInteger(0);
+
+        Runnable worker = () -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    Runnable task = q.poll(100, TimeUnit.MILLISECONDS);
+                    if (task != null) {
+                        task.run();
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        };
+
+        Thread[] workers = new Thread[poolSize];
+        for (int i = 0; i < poolSize; i++) {
+            workers[i] = new Thread(worker);
+            workers[i].start();
+        }
+
+        for (int i = 0; i < taskCount; i++) {
+            q.put(counter::incrementAndGet);
+        }
+
+        while (!q.isEmpty()) {
+            Thread.sleep(10);
+        }
+
+        Thread.sleep(50);
+
+        for (Thread w : workers) w.interrupt();
+        for (Thread w : workers) w.join();
+
+        return counter.get();
     }
 }
