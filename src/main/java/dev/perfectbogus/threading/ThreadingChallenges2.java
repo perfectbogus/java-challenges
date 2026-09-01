@@ -659,7 +659,39 @@ public class ThreadingChallenges2 {
         //          else: split, fork both halves!
         //        ForkJoinPool.commonPool().invoke(new FillTask(0, size))
         //        return result
-        return new int[0];
+        int[] result = new int[size];
+
+        class FillTask extends RecursiveAction {
+            private final int start;
+            private final int end;
+
+            public FillTask(int start, int end) {
+                this.start = start;
+                this.end = end;
+            }
+
+            @Override
+            protected void compute() {
+                if (end - start <= threshold) {
+                    for (int i = start; i < end; i++) {
+                        result[i] = i * i;
+                    }
+                    return;
+                } else {
+                    int mid = (start + end) / 2;
+                    FillTask left = new FillTask(start, mid);
+                    FillTask right = new FillTask(mid, end);
+
+                    left.fork();
+                    right.compute();
+                    left.join();
+                }
+            }
+        }
+
+        ForkJoinPool.commonPool().invoke(new FillTask(0, size));
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
