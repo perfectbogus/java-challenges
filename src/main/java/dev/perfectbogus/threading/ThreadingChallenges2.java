@@ -775,7 +775,37 @@ public class ThreadingChallenges2 {
         //        producer thread: items.forEach(i -> queue.transfer(i))
         //        consumer thread: for each item: sum.addAndGet(queue.take())
         //        join both, return sum.get()
-        return 0L;
+        LinkedTransferQueue<Integer> q = new LinkedTransferQueue<>();
+        AtomicLong sum = new AtomicLong();
+
+        Thread producer = new Thread(() -> {
+            for (Integer item : items) {
+                try {
+                    q.transfer(item);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        });
+
+        Thread consumer = new Thread(() -> {
+            for (int i = 0; i < items.size(); i++) {
+                try {
+                    sum.addAndGet(q.take());
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        });
+
+        producer.start();
+        consumer.start();
+
+        producer.join();
+        consumer.join();
+
+        return sum.get();
     }
 
     // ─────────────────────────────────────────────────────────────
