@@ -805,7 +805,20 @@ public class ThreadingChallenges2 {
         //        submit taskCount Callables returning Thread.currentThread().getName()
         //        collect results into Set<String>
         //        executor.shutdown() + awaitTermination
-        return new HashSet<>();
+        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(10);
+        List<Future<String>> futures = new ArrayList<>();
+        try (ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 4, 60L, TimeUnit.SECONDS, workQueue)) {
+            for (int i = 0; i < taskCount; i++) {
+                futures.add(executor.submit(() -> Thread.currentThread().getName()));
+            }
+        }
+
+        Set<String> set = new HashSet<>();
+        for (Future<String> f : futures) {
+            set.add(f.get());
+        }
+
+        return set;
     }
 
     // ══════════════════════════════════════════════════════════════════════
