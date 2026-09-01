@@ -723,7 +723,29 @@ public class ThreadingChallenges2 {
         //        each thread: if(lock.tryLock()) { try{successes++} finally{lock.unlock()} }
         //                     else failures++
         //        join all, return new TryLockResult(successes.get(), failures.get())
-        return new TryLockResult(0, 0);
+        ReentrantLock lock = new ReentrantLock();
+        AtomicInteger successes = new AtomicInteger(0);
+        AtomicInteger failures = new AtomicInteger(0);
+
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                if (lock.tryLock()) {
+                    try {
+                        successes.incrementAndGet();
+                    } finally {
+                        lock.unlock();
+                    }
+                } else {
+                    failures.incrementAndGet();
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return new TryLockResult(successes.get(), failures.get());
     }
 
     // ─────────────────────────────────────────────────────────────
