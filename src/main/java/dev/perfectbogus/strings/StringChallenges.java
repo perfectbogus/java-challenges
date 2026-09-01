@@ -139,7 +139,7 @@ public class StringChallenges {
         if (s == null) throw new IllegalArgumentException("Input cannot be null");
         if (s.isEmpty()) return "";
         // TODO
-        int count = 0;
+        int count = 1;
         char prev = s.charAt(0);
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < s.length(); i++) {
