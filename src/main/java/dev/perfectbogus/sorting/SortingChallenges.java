@@ -1,6 +1,7 @@
 package dev.perfectbogus.sorting;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.*;
 
 public class SortingChallenges {
@@ -35,8 +36,18 @@ public class SortingChallenges {
         if (bonusMap   == null) throw new IllegalArgumentException("BonusMap cannot be null");
         // TODO
 
+        Map<Employee, Double> compensations = employees.stream()
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        e -> e.salary() + bonusMap.getOrDefault(e.name(), 0.0)
+                ));
 
-        return new ArrayList<>();
+        Comparator<Employee> byCompensationDesc = Comparator.<Employee>comparingDouble(compensations::get).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        return employees.stream()
+                .sorted(byCompensationDesc.thenComparing(byName))
+                .toList();
     }
 
     // ─────────────────────────────────────────────────────────────
