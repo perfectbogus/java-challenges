@@ -602,7 +602,33 @@ public class ThreadingChallenges2 {
         //        thread2: ref2.set(exchanger.exchange(value2))
         //        join both
         //        return new ExchangeResult(ref1.get(), ref2.get())
-        return new ExchangeResult("", "");
+        Exchanger<String> exchanger = new Exchanger<>();
+        AtomicReference<String> ref1 = new AtomicReference<>();
+        AtomicReference<String> ref2 = new AtomicReference<>();
+
+        Thread t1 = new Thread(() -> {
+            try {
+                ref1.set(exchanger.exchange(value1));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            try {
+                ref2.set(exchanger.exchange(value2));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        return new ExchangeResult(ref1.get(), ref2.get());
     }
 
     // ─────────────────────────────────────────────────────────────
