@@ -424,6 +424,36 @@ public class SortingChallenges {
     public static int[][] challenge8(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+        Map<int[], int[]> longest = Arrays.stream(matrix).collect(Collectors.toMap(
+                Function.identity(),
+                row -> {
+                    int countMax = 1;
+                    int countLongest = 1;
+                    int sum = row[0];
+                    for (int i = 1; i < row.length; i++) {
+                        if (row[i] > row[i - 1]) {
+                            countLongest++;
+                        } else {
+                            countLongest = 1;
+                        }
+                        sum += row[i];
+
+                        if (countLongest > countMax) {
+                            countMax = countLongest;
+                        }
+                    }
+                    return new int[]{countMax, sum};
+                },
+                (e1, e2) -> e1,
+                IdentityHashMap::new
+        ));
+
+        Comparator<int[]> byLongestDesc = Comparator.<int[]>comparingInt(row -> longest.get(row)[0]).reversed();
+        Comparator<int[]> bySum = Comparator.comparingInt(row -> longest.get(row)[1]);
+        Comparator<int[]> byFirstElem = Comparator.comparingInt(row -> row[0]);
+
+        Arrays.sort(matrix, byLongestDesc.thenComparing(bySum).thenComparing(byFirstElem));
+
         return matrix;
     }
 
