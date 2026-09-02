@@ -111,6 +111,16 @@ public class SortingChallenges {
                 .toList();
     }
 
+    public static List<Map.Entry<String, List<Integer>>> challenge2_2(Map<String, List<Integer>> map) {
+        if (map == null) throw new IllegalArgumentException("Map cannot be null");
+
+        return map.entrySet().stream().sorted(
+                Comparator.<Map.Entry<String, List<Integer>>>comparingDouble(e -> median(e.getValue())).reversed()
+                        .thenComparing(e -> e.getValue().stream().mapToInt(Integer::intValue).sum())
+                        .thenComparing(Map.Entry::getKey)
+        ).toList();
+    }
+
     private static double median(List<Integer> list ) {
         List<Integer> sorted = list.stream().sorted().toList();
         int size = sorted.size();

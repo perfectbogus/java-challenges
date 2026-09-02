@@ -110,6 +110,25 @@ class SortingChallengesTest {
         }
 
         @Test
+        void basicCase2_2() {
+            Map<String, List<Integer>> map = new LinkedHashMap<>();
+            map.put("alice", List.of(3,1,4,1,5)); // median=3.0, sum=14
+            map.put("bob",   List.of(2,8));         // median=5.0, sum=10
+            map.put("carol", List.of(7,3,7));       // median=7.0, sum=17
+            map.put("diana", List.of(4,4,4,4));     // median=4.0, sum=16
+            map.put("eve",   List.of(1,9));         // median=5.0, sum=10
+
+            List<Map.Entry<String, List<Integer>>> result =
+                    SortingChallenges.challenge2_2(map);
+
+            assertEquals("carol", result.get(0).getKey()); // median=7.0
+            assertEquals("bob",   result.get(1).getKey()); // median=5.0,sum=10,b<e
+            assertEquals("eve",   result.get(2).getKey()); // median=5.0,sum=10,e>b
+            assertEquals("diana", result.get(3).getKey()); // median=4.0
+            assertEquals("alice", result.get(4).getKey()); // median=3.0
+        }
+
+        @Test
         void oddSizeMedian() {
             Map<String, List<Integer>> map = new HashMap<>(Map.of(
                     "a", List.of(1,2,3,4,5), // sorted=[1,2,3,4,5] median=3
