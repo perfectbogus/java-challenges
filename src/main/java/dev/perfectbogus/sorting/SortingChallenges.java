@@ -281,7 +281,29 @@ public class SortingChallenges {
     public static List<Employee> challenge5(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, Integer> tierOrder = Map.of("HIGH", 0, "MID", 1, "LOW", 2);
+
+        Map<String, Double> avgDept = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.averagingDouble(Employee::salary)
+                ));
+
+        Map<Employee, String> performance = employees.stream()
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        e -> e.salary() >= avgDept.get(e.department()) * 1.2 ? "HIGH"
+                                : e.salary() >= avgDept.get(e.department()) * 0.8 ? "MID"
+                                : "LOW"
+                ));
+
+        Comparator<Employee> byPerformance = Comparator.comparingInt(e -> tierOrder.get(performance.get(e)));
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        employees.sort(byPerformance.thenComparing(bySalaryDesc).thenComparing(byName));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
