@@ -195,9 +195,11 @@ public class SortingChallenges {
                         (e1, e2) -> e1
                 ));
 
-        words.sort(Comparator.<String>comparingInt(score::get).reversed()
-                .thenComparingInt(String::length)
-                .thenComparing(Comparator.naturalOrder()));
+        Comparator<String> byScoreDesc = Comparator.<String>comparingInt(score::get).reversed();
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+
+        words.sort(byScoreDesc.thenComparing(byLength).thenComparing(byAlpha));
 
         return words;
     }
