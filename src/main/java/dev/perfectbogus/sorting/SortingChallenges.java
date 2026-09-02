@@ -196,7 +196,7 @@ public class SortingChallenges {
                 ));
 
         words.sort(Comparator.<String>comparingInt(score::get).reversed()
-                .thenComparing(String::length)
+                .thenComparingInt(String::length)
                 .thenComparing(Comparator.naturalOrder()));
 
         return words;
@@ -229,6 +229,20 @@ public class SortingChallenges {
     public static int[][] challenge4(int[][] matrix) {
         if (matrix == null) throw new IllegalArgumentException("Matrix cannot be null");
         // TODO
+
+        Map<int[], Integer> weighted = new IdentityHashMap<>();
+
+        Arrays.stream(matrix).forEach(row -> weighted.put(row, row[0] * row[1]));
+
+        Comparator<int[]> byWeightedDesc = Comparator.<int[]>comparingInt(weighted::get).reversed();
+        Comparator<int[]> byScoreDesc = Comparator.<int[]>comparingInt(row -> row[0]).reversed();
+        Comparator<int[]> byWeight = Comparator.comparingInt(row -> row[1]);
+
+        Arrays.sort(
+                matrix,
+                byWeightedDesc.thenComparing(byScoreDesc).thenComparing(byWeight)
+        );
+
         return matrix;
     }
 
