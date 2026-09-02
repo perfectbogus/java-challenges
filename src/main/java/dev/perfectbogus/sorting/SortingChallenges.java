@@ -325,11 +325,27 @@ public class SortingChallenges {
     //
     // Output: [(team2,...),(team3,...),(team1,...),(team5,...),(team4,...)]
     // ─────────────────────────────────────────────────────────────
-    public static List<Map.Entry<String, List<String>>> challenge6(
-            Map<String, List<String>> map) {
+    public static List<Map.Entry<String, List<String>>> challenge6(Map<String, List<String>> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, Integer> longest = map.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue().stream().mapToInt(String::length).max().orElse(0)
+                ));
+
+        Comparator<Map.Entry<String, List<String>>> byLongestDesc =
+                Comparator.<Map.Entry<String, List<String>>>comparingInt(e ->
+                        longest.get(e.getKey())).reversed();
+
+        Comparator<Map.Entry<String, List<String>>> byListSize = Comparator.comparingInt(e ->
+                e.getValue().size());
+
+        Comparator<Map.Entry<String, List<String>>> byKeyAlpha = Map.Entry.comparingByKey();
+
+        return map.entrySet().stream().sorted(
+                byLongestDesc.thenComparing(byListSize).thenComparing(byKeyAlpha)
+        ).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
