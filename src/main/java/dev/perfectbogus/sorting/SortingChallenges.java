@@ -372,7 +372,27 @@ public class SortingChallenges {
     public static List<Employee> challenge7(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, Double> deptVariance = employees.stream()
+                .collect(Collectors.groupingBy(
+                        Employee::department,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list -> {
+                                    double mean = list.stream().mapToDouble(Employee::salary).average().orElse(0.0);
+                                    double squaredDeviation = list.stream().mapToDouble(e -> Math.pow(e.salary() - mean, 2)).sum();
+                                    return squaredDeviation / list.size();
+                                }
+                        )
+                ));
+
+        Comparator<Employee> byDeptVarianceDesc = Comparator.<Employee>comparingDouble(e ->
+                deptVariance.get(e.department())).reversed();
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        employees.sort(byDeptVarianceDesc.thenComparing(bySalaryDesc).thenComparing(byName));
+
+        return employees;
     }
 
     // ─────────────────────────────────────────────────────────────
