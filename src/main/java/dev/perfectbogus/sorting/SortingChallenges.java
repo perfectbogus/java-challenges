@@ -159,7 +159,47 @@ public class SortingChallenges {
     public static List<String> challenge3(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        String[] letters = new String[] {
+                "",
+                "aAeEiIoOuUlLnNsStTrR",
+                "dDgG",
+                "bBcCmMpP",
+                "fFhHvVwWyY",
+                "kK",
+                "",
+                "",
+                "jJxX",
+                "",
+                "qQzZ"
+        };
+
+        Map<Character, Integer> points = new HashMap<>();
+
+        for (int i = 0; i < letters.length; i++) {
+            String s = letters[i];
+            if (s.isEmpty()) continue;
+
+            for (char c : s.toCharArray()) {
+                points.put(c, i);
+            }
+        }
+
+        Map<String, Integer> score = words.stream().collect(
+                Collectors.toMap(
+                        Function.identity(),
+                        s -> s.chars()
+                                .mapToObj(c -> (char) c)
+                                .filter(points::containsKey)
+                                .mapToInt(points::get)
+                                .sum(),
+                        (e1, e2) -> e1
+                ));
+
+        words.sort(Comparator.<String>comparingInt(score::get).reversed()
+                .thenComparing(String::length)
+                .thenComparing(Comparator.naturalOrder()));
+
+        return words;
     }
 
     // ─────────────────────────────────────────────────────────────
