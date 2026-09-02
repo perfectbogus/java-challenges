@@ -479,11 +479,23 @@ public class SortingChallenges {
     //
     // Output: [(alpha,199),(beta,88),(epsilon,55),(delta,73),(gamma,100)]
     // ─────────────────────────────────────────────────────────────
-    public static List<Map.Entry<String, Integer>> challenge9(
-            Map<String, Integer> map) {
+    public static List<Map.Entry<String, Integer>> challenge9(Map<String, Integer> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+        Comparator<Map.Entry<String, Integer>> byDigitSumDesc = Comparator.<Map.Entry<String, Integer>>comparingInt(e -> {
+            String value = String.valueOf(e.getValue());
+            int sum = 0;
+            for (char c : value.toCharArray()) {
+                if (Character.isDigit(c)) {
+                    sum += Character.getNumericValue(c);
+                }
+            }
+            return sum;
+        }).reversed();
+        Comparator<Map.Entry<String, Integer>> byKeyLengthDesc = Comparator.<Map.Entry<String, Integer>>comparingInt(e -> e.getKey().length()).reversed();
+        Comparator<Map.Entry<String, Integer>> byKeyAlpha = Map.Entry.comparingByKey();
+
+        return map.entrySet().stream().sorted(byDigitSumDesc.thenComparing(byKeyLengthDesc).thenComparing(byKeyAlpha)).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
