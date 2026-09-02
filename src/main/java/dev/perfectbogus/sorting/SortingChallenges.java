@@ -76,7 +76,47 @@ public class SortingChallenges {
             Map<String, List<Integer>> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         // TODO
-        return new ArrayList<>();
+
+        Map<String, double[]> statisticsMap = map.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> {
+                            List<Integer> list = e.getValue();
+                            double media = median(list);
+                            double sum = list.stream().mapToDouble(Integer::doubleValue).sum();
+                            return new double[]{media, sum};
+                        }
+                ));
+
+        Comparator<Map.Entry<String, List<Integer>>> byMedianDesc =
+                Comparator.<Map.Entry<String, List<Integer>>>comparingDouble(
+                 e -> {
+                     double[] stats = statisticsMap.get(e.getKey());
+                     return stats[0];
+                 }
+        ).reversed();
+
+        Comparator<Map.Entry<String, List<Integer>>> bySum =
+                Comparator.comparingDouble(e -> {
+                    String key = e.getKey();
+                    double[] stats = statisticsMap.get(key);
+                    return stats[1];
+                });
+
+        Comparator<Map.Entry<String, List<Integer>>> byKeyAlpha = Map.Entry.comparingByKey();
+
+
+        return map.entrySet().stream().
+                sorted(byMedianDesc.thenComparing(bySum).thenComparing(byKeyAlpha))
+                .toList();
+    }
+
+    private static double median(List<Integer> list ) {
+        List<Integer> sorted = list.stream().sorted().toList();
+        int size = sorted.size();
+        return size % 2 == 1
+                ? sorted.get(size / 2)
+                : (sorted.get(size / 2 - 1) + sorted.get(size / 2)) / 2.0;
     }
 
     // ─────────────────────────────────────────────────────────────
