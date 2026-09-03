@@ -51,7 +51,16 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<Integer> challenge2(String text) {
         if (text == null) throw new IllegalArgumentException("Text cannot be null");
-        return new ArrayList<>();
+        Pattern p = Pattern.compile("-?\\d+");
+        Matcher m = p.matcher(text);
+
+        List<Integer> results = new ArrayList<>();
+        while (m.find()) {
+            int i = Integer.parseInt(m.group());
+            results.add(i);
+        }
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
