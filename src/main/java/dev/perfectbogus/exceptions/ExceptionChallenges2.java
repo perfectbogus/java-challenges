@@ -276,7 +276,11 @@ public class ExceptionChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static Throwable challenge7(Throwable t) {
         if (t == null) throw new IllegalArgumentException("Throwable cannot be null");
-        return t;
+        Throwable e = t;
+        while (e.getCause() != null) {
+            e = e.getCause();
+        }
+        return e;
     }
 
     // ─────────────────────────────────────────────────────────────
