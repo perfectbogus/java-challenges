@@ -68,7 +68,10 @@ public class ExceptionChallenges {
     }
 
     public static String challenge3(String name, double salary) {
-        return "";
+        if (name == null || name.isBlank()) throw new InvalidEmployeeException("Name cannot be blank");
+        if (salary < 0) throw new InvalidEmployeeException("Salary cannot be negative");
+
+        return  String.format("%s/%.2f", name, salary);
     }
 
     // ─────────────────────────────────────────────────────────────
