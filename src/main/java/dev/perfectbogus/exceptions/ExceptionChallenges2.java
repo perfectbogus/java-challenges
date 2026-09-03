@@ -157,7 +157,16 @@ public class ExceptionChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static List<String> challenge5(List<Runnable> tasks) {
         if (tasks == null) throw new IllegalArgumentException("Tasks cannot be null");
-        return new ArrayList<>();
+        List<String> info = new ArrayList<>();
+        for (Runnable task : tasks) {
+            try {
+                task.run();
+                info.add("OK");
+            } catch (RuntimeException e) {
+                info.add("ERROR: " + e.getClass().getSimpleName() + ": " + e.getMessage());
+            }
+        }
+        return info;
     }
 
     // ══════════════════════════════════════════════════════════════════════
