@@ -127,7 +127,13 @@ public class ExceptionChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static <T> Optional<T> challenge4(Object obj, Class<T> clazz) {
         if (clazz == null) throw new IllegalArgumentException("Class cannot be null");
-        return Optional.empty();
+        if (obj == null) return Optional.empty();
+
+        try {
+            return Optional.of(clazz.cast(obj));
+        } catch (ClassCastException e) {
+            return Optional.empty();
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
