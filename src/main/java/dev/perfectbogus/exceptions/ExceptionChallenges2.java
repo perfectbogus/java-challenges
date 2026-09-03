@@ -359,15 +359,27 @@ public class ExceptionChallenges2 {
         // You implement this class!
         // constructor: AggregateException(List<String> violations)
         // method: List<String> getViolations()
+        List<String> violations;
         public AggregateException(List<String> violations) {
             super(violations.size() + " validation error(s)");
+            this.violations = violations;
         }
-        public List<String> getViolations() { return new ArrayList<>(); }
+        public List<String> getViolations() { return violations; }
     }
 
     public static String challenge9(String password) {
         if (password == null) throw new IllegalArgumentException("Password cannot be null");
-        return "";
+        List<String> violations = new ArrayList<>();
+        if (password.length() < 8) violations.add("Too short");
+        if (password.chars().noneMatch(Character::isUpperCase)) violations.add("Missing uppercase");
+        if (password.chars().noneMatch(Character::isDigit)) violations.add("Missing digit");
+        if (password.chars().noneMatch(e -> !Character.isLetterOrDigit(e))) violations.add("Missing special character");
+
+        if (violations.isEmpty()) {
+            return "Password is valid";
+        } else {
+            throw new AggregateException(violations);
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
