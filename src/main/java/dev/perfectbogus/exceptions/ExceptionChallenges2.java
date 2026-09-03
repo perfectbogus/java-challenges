@@ -61,16 +61,20 @@ public class ExceptionChallenges2 {
         // You implement this class!
         // constructor: MissingKeyException(String key)
         // method: String getKey()
+        private final String key;
         public MissingKeyException(String key) {
             super("Key not found: " + key);
+            this.key = key;
         }
-        public String getKey() { return ""; }
+        public String getKey() { return key; }
     }
 
     public static <V> V challenge2(Map<String, V> map, String key) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         if (key == null) throw new IllegalArgumentException("Key cannot be null");
-        return null;
+        if (map.get(key) == null) throw new MissingKeyException(key);
+
+        return map.get(key);
     }
 
     // ─────────────────────────────────────────────────────────────
