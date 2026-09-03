@@ -447,6 +447,21 @@ public class ExceptionChallenges2 {
 
     public static SuppressedResult challenge10() {
         List<String> log = new ArrayList<>();
-        return new SuppressedResult("", new ArrayList<>(), log);
+        List<String> suppressedMessages = new ArrayList<>();
+        String primaryMessage = null;
+        try (FailingResource r1 = new FailingResource("R1", false, log);
+             FailingResource r2 = new FailingResource("R2", true, log)) {
+
+            r1.use();
+            r2.use();
+            throw new RuntimeException("primary");
+
+        } catch (Exception e) {
+            primaryMessage = e.getMessage();
+            for (Throwable suppressed : e.getSuppressed()) {
+                suppressedMessages.add(suppressed.getMessage());
+            }
+        }
+        return new SuppressedResult(primaryMessage, suppressedMessages, log);
     }
 }
