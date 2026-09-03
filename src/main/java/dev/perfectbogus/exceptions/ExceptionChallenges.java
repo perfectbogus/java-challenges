@@ -249,7 +249,12 @@ public class ExceptionChallenges {
     // Input:  null, 0                        → Optional.empty()
     // ─────────────────────────────────────────────────────────────
     public static <T> Optional<T> challenge8(List<T> list, int index) {
-        return Optional.empty();
+        if (list == null) return Optional.empty();
+        try {
+            return Optional.of(list.get(index));
+        } catch (IndexOutOfBoundsException e) {
+            return Optional.empty();
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
