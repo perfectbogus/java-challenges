@@ -2,6 +2,7 @@ package dev.perfectbogus.exceptions;
 
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 
 public class ExceptionChallenges {
 
@@ -125,7 +126,19 @@ public class ExceptionChallenges {
 
     public static ParseResult challenge5(List<String> items) {
         if (items == null) throw new IllegalArgumentException("Items cannot be null");
-        return new ParseResult(new ArrayList<>(), new ArrayList<>());
+
+        List<Integer> values = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
+
+        for (String s : items) {
+            try {
+                values.add(Integer.parseInt(s));
+            } catch (NumberFormatException e) {
+                errors.add("Invalid: " + s);
+            }
+        }
+
+        return new ParseResult(values, errors);
     }
 
     // ─────────────────────────────────────────────────────────────
