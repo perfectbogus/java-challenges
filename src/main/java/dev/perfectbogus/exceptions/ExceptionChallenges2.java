@@ -208,21 +208,52 @@ public class ExceptionChallenges2 {
 
     public static class ParseException extends DataException {
         // You implement this class!
-        public ParseException(String message, int lineNumber) { super(message); }
-        public int getLineNumber() { return 0; }
+        private final int lineNumber;
+        public ParseException(String message, int lineNumber) {
+            super(message);
+            this.lineNumber = lineNumber;
+        }
+        public int getLineNumber() { return lineNumber; }
     }
 
     public static class ValidationException extends DataException {
         // You implement this class!
-        public ValidationException(String message, String field) { super(message); }
-        public String getField() { return ""; }
+        private final String field;
+        public ValidationException(String message, String field) {
+            super(message);
+            this.field = field;
+        }
+        public String getField() { return field; }
     }
 
     record DataResult(List<Integer> values, List<String> errors) {}
 
     public static DataResult challenge6(List<String> data) {
         if (data == null) throw new IllegalArgumentException("Data cannot be null");
-        return new DataResult(new ArrayList<>(), new ArrayList<>());
+        List<Integer> list = new ArrayList<>();
+        List<String> errors = new ArrayList<>();
+
+        for (int i = 0; i < data.size(); i++) {
+            try {
+                String s = data.get(i);
+                if (s == null) throw new ParseException("Null input at line " + i, i);
+
+                int parsed = 0;
+                try {
+                    parsed = Integer.parseInt(s);
+                } catch (NumberFormatException e) {
+                    throw new ParseException("Not a number at line " + i, i);
+                }
+                if (parsed < 0) throw new ValidationException("Negative value in field: " + s, s);
+                list.add(parsed);
+            } catch (ParseException e) {
+                errors.add("PARSE_ERROR: " + e.getLineNumber());
+            } catch (ValidationException e) {
+                errors.add("VALIDATION_ERROR: " + e.getField());
+            }
+        }
+
+        return new DataResult(list, errors);
     }
 
     // ─────────────────────────────────────────────────────────────

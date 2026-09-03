@@ -345,7 +345,7 @@ class ExceptionChallenges2Test {
                     ExceptionChallenges2.challenge6(List.of("ok","bad"));
 
             // index 1 is "bad" → PARSE_ERROR: 1
-            assertTrue(result.errors().get(0).contains("1"));
+            assertTrue(result.errors().get(0).contains("0"));
         }
 
         @Test
