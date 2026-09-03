@@ -98,14 +98,18 @@ public class ExceptionChallenges2 {
         // You implement this class!
         // constructor: InvalidAgeException(String message, int age)
         // method: int getAge()
+        private final int age;
         public InvalidAgeException(String message, int age) {
             super(message);
+            this.age = age;
         }
-        public int getAge() { return 0; }
+        public int getAge() { return age; }
     }
 
     public static String challenge3(int age) {
-        return "";
+        if (age < 0) throw new InvalidAgeException("Age cannot be negative", age);
+        if (age > 150) throw new InvalidAgeException("Age is unrealistic", age);
+        return "Valid age: " + age;
     }
 
     // ─────────────────────────────────────────────────────────────
