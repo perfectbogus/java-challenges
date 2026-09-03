@@ -523,6 +523,17 @@ public class SortingChallenges {
     public static List<String> challenge10(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
         // TODO
-        return new ArrayList<>();
+        Map<String, Double> ratio = words.stream().collect(Collectors.toMap(
+                Function.identity(),
+                w -> (double) w.chars().distinct().count() / w.length()
+        ));
+
+        Comparator<String> byRatioDesc = Comparator.<String>comparingDouble(ratio::get).reversed();
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+
+        words.sort(byRatioDesc.thenComparing(byLength).thenComparing(byAlpha));
+
+        return words;
     }
 }
