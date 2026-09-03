@@ -37,7 +37,11 @@ public class ExceptionChallenges {
     // Input:  "-5"    → Optional[-5]
     // ─────────────────────────────────────────────────────────────
     public static Optional<Integer> challenge2(String s) {
-        return Optional.empty();
+        try {
+            return Optional.of(Integer.parseInt(s));
+        } catch (NullPointerException | NumberFormatException e) {
+            return Optional.empty();
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
