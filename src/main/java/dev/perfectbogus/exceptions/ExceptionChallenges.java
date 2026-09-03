@@ -2,6 +2,7 @@ package dev.perfectbogus.exceptions;
 
 import java.util.*;
 import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class ExceptionChallenges {
@@ -320,6 +321,20 @@ public class ExceptionChallenges {
 
     public static FinallyResult challenge10(Runnable task) {
         if (task == null) throw new IllegalArgumentException("Task cannot be null");
-        return new FinallyResult(null, null, false);
+
+        boolean[] finallyRan = new boolean[]{false};
+        String result = null;
+        String exceptionType = null;
+
+        try {
+            task.run();
+            result = "COMPLETED";
+        } catch (Exception e) {
+            exceptionType = e.getClass().getSimpleName();
+        }  finally {
+            finallyRan[0] = true;
+        }
+
+        return new FinallyResult(result, exceptionType, finallyRan[0]);
     }
 }
