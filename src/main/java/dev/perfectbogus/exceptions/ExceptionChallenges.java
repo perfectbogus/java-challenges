@@ -90,7 +90,20 @@ public class ExceptionChallenges {
     // Input:  () -> { System.out.println("ok"); }    → "NONE"
     // ─────────────────────────────────────────────────────────────
     public static String challenge4(Runnable task) {
-        return "";
+        try {
+            task.run();
+            return "NONE";
+        } catch (ArithmeticException e) {
+            return "ARITHMETIC";
+        } catch (NullPointerException e) {
+            return "NULL";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "ARRAY_INDEX";
+        } catch (NumberFormatException e) {
+            return "NUMBER_FORMAT";
+        } catch (Exception e) {
+            return "UNKNOWN";
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
