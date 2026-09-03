@@ -27,7 +27,7 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static boolean challenge1(String email) {
         if (email == null) return false;
-        return false;
+        return email.matches("([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+).([a-zA-Z]{2,})");
     }
 
     // ─────────────────────────────────────────────────────────────
