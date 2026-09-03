@@ -1,5 +1,6 @@
 package dev.perfectbogus.exceptions;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.Callable;
 
@@ -302,13 +303,32 @@ public class ExceptionChallenges2 {
     //   → returns result ✓
     // ─────────────────────────────────────────────────────────────
     @SafeVarargs
-    public static <T> T challenge8(Callable<T> task, int maxRetries,
-                                   Class<? extends Exception>... retryOn)
-            throws Exception {
+    public static <T> T challenge8(Callable<T> task, int maxRetries, Class<? extends Exception>... retryOn) throws Exception {
         if (task      == null) throw new IllegalArgumentException("Task cannot be null");
         if (maxRetries <= 0)   throw new IllegalArgumentException("maxRetries must be positive");
         if (retryOn   == null) throw new IllegalArgumentException("retryOn cannot be null");
-        return null;
+
+        Exception lastException = null;
+        for (int attemp = 1; attemp <= maxRetries; attemp++) {
+            try {
+                return task.call();
+            } catch (Exception e) {
+                lastException = e;
+
+                boolean shouldRetry = false;
+                for (Class<? extends Exception> allowed : retryOn) {
+                    if (allowed != null && allowed.isInstance(e)) {
+                        shouldRetry = true;
+                        break;
+                    }
+                }
+
+                if (!shouldRetry) throw e;
+            }
+
+        }
+
+        throw new RuntimeException("Failed after " + maxRetries + " attempts", lastException);
     }
 
     // ─────────────────────────────────────────────────────────────
