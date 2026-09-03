@@ -165,11 +165,15 @@ public class ExceptionChallenges {
         }
     }
 
-    public static int challenge6(Map<String, String> config, String key)
-            throws ConfigurationException {
-        if (config == null || key == null)
-            throw new IllegalArgumentException("Config and key cannot be null");
-        return 0;
+    public static int challenge6(Map<String, String> config, String key) throws ConfigurationException {
+        if (config == null || key == null) throw new IllegalArgumentException("Config and key cannot be null");
+        if (config.get(key) == null) throw new ConfigurationException("Key not found: " + key, new NoSuchElementException(key));
+
+        try {
+            return Integer.parseInt(config.get(key));
+        } catch (NumberFormatException e) {
+            throw new ConfigurationException("Invalid value for key: " + key, e);
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
