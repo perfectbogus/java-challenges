@@ -35,7 +35,7 @@ public class ExceptionChallenges2 {
             task.run();
             return "OK";
         } catch (Exception e) {
-            throw new RuntimeException(context + ": " + e.getCause(), e);
+            throw new RuntimeException(context + ": " + e.getMessage(), e);
         }
     }
 
