@@ -225,6 +225,12 @@ public class ExceptionChallenges {
 
     public static List<String> challenge7(String r1Name, String r2Name) {
         List<String> log = new ArrayList<>();
+        try (TrackedResource t1 = new TrackedResource(r1Name, log); TrackedResource t2 = new TrackedResource(r2Name, log)) {
+            t1.use();
+            t2.use();
+        } catch (IllegalStateException e) {
+
+        }
         return log;
     }
 
