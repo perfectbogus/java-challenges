@@ -79,7 +79,7 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static String challenge3(String text) {
         if (text == null) throw new IllegalArgumentException("Text cannot be null");
-        return "";
+        return text.replaceAll("\\s+", " ").strip();
     }
 
     // ─────────────────────────────────────────────────────────────
