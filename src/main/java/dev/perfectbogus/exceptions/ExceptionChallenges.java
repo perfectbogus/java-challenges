@@ -279,7 +279,17 @@ public class ExceptionChallenges {
     public static <T> T challenge9(Callable<T> task, int maxRetries) {
         if (task == null)     throw new IllegalArgumentException("Task cannot be null");
         if (maxRetries <= 0)  throw new IllegalArgumentException("maxRetries must be positive");
-        return null;
+        int attempt = 1;
+        Exception lastException = new Exception();
+        while (attempt <= maxRetries) {
+            try {
+                return task.call();
+            } catch (Exception e) {
+                lastException = e;
+                attempt++;
+            }
+        }
+        throw new RuntimeException("All " + maxRetries + " attempts failed", lastException);
     }
 
     // ─────────────────────────────────────────────────────────────
