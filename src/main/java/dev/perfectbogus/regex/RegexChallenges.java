@@ -226,9 +226,28 @@ public class RegexChallenges {
     //             or replaceAll with limit
     // ─────────────────────────────────────────────────────────────
     public static String challenge8(String cardNumber) {
-        if (cardNumber == null)
-            throw new IllegalArgumentException("Card number cannot be null");
-        return "";
+        if (cardNumber == null) throw new IllegalArgumentException("Card number cannot be null");
+        long totalDigits = cardNumber.chars().filter(Character::isDigit).count();
+
+        if (totalDigits <= 4) return cardNumber;
+
+        int toMask = (int)(totalDigits) - 4;
+        int masked = 0;
+        Pattern p = Pattern.compile("\\d");
+        Matcher m = p.matcher(cardNumber);
+        StringBuffer sb = new StringBuffer();
+
+        while (m.find()) {
+            if (masked < toMask) {
+                m.appendReplacement(sb, "*");
+                masked++;
+            } else {
+                m.appendReplacement(sb, m.group());
+            }
+        }
+        m.appendTail(sb);
+
+        return sb.toString();
     }
 
     // ─────────────────────────────────────────────────────────────
