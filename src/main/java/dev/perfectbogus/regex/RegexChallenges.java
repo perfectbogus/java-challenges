@@ -136,7 +136,7 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static String challenge5(String camel) {
         if (camel == null) throw new IllegalArgumentException("Input cannot be null");
-        return "";
+        return camel.replaceAll("([A-Z])", "_$1").replaceAll("^_", "").toLowerCase();
     }
 
     // ─────────────────────────────────────────────────────────────

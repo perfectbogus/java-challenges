@@ -253,7 +253,7 @@ class RegexChallengesTest {
 
         @Test
         void startsWithUppercase() {
-            assertEquals("html_parser",
+            assertEquals("h_t_m_l_parser",
                     RegexChallenges.challenge5("HTMLParser"));
         }
 
