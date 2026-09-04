@@ -103,7 +103,13 @@ public class RegexChallenges {
 
     public static DateParts challenge4(String date) {
         if (date == null) throw new IllegalArgumentException("Date cannot be null");
-        return new DateParts(0, 0, 0);
+        Pattern p = Pattern.compile("(\\d{4})-(\\d{2})-(\\d{2})");
+        Matcher m = p.matcher(date);
+        if (!m.matches()) throw new IllegalArgumentException();
+        int year = Integer.parseInt(m.group(1));
+        int month = Integer.parseInt(m.group(2));
+        int day = Integer.parseInt(m.group(3));
+        return new DateParts(year, month, day);
     }
 
     // ─────────────────────────────────────────────────────────────
