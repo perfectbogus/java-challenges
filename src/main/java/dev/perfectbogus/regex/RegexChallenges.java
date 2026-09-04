@@ -1,6 +1,7 @@
 package dev.perfectbogus.regex;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.*;
 import java.util.stream.*;
 
@@ -274,7 +275,10 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<String> challenge9(String text) {
         if (text == null) throw new IllegalArgumentException("Text cannot be null");
-        return new ArrayList<>();
+        Predicate<String> NON_EMPTY = s -> !s.isEmpty();
+        String[] split = text.split("\\s*[.,!?:;\\s]\\s*");
+
+        return Arrays.stream(split).filter(NON_EMPTY).toList();
     }
 
     // ─────────────────────────────────────────────────────────────

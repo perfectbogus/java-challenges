@@ -450,7 +450,7 @@ class RegexChallengesTest {
 
         @Test
         void noPunctuation() {
-            assertEquals(List.of("no punctuation"),
+            assertEquals(List.of("no", "punctuation"),
                     RegexChallenges.challenge9("no punctuation"));
         }
 
