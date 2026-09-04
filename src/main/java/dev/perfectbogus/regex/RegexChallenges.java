@@ -315,6 +315,14 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<String> challenge10(String text) {
         if (text == null) throw new IllegalArgumentException("Text cannot be null");
-        return new ArrayList<>();
+
+        Set<Character> vowels = new HashSet<>(Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
+        Predicate<String> hasAVowel = s -> s.chars().mapToObj(c -> (char)c).anyMatch(vowels::contains);
+        Predicate<String> hasAConsonant = s -> s.chars().mapToObj(c ->(char)c)
+                .anyMatch(c -> Character.isLetter(c) && !vowels.contains(c));
+
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(text);
+        return m.results().map(MatchResult::group).filter(hasAVowel.and(hasAConsonant)).toList();
     }
 }
