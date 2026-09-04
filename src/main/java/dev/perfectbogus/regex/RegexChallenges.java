@@ -164,16 +164,12 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static boolean challenge6(String ip) {
         if (ip == null) return false;
-        Pattern p = Pattern.compile("\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}");
-        Matcher m = p.matcher(ip);
-
-        if (!m.matches()) {
+        String regex = "\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}";
+        if (!ip.matches(regex)) {
             return false;
         }
 
-        String[] split = ip.split("\\.");
-
-        return Arrays.stream(split).mapToInt(Integer::parseInt).allMatch(i -> i >= 0 && i < 256 );
+        return Arrays.stream(ip.split("\\.")).mapToInt(Integer::parseInt).allMatch(i -> i >= 0 && i < 256 );
     }
 
     // ─────────────────────────────────────────────────────────────
