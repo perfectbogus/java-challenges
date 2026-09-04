@@ -31,7 +31,20 @@ public class LockingChallenges {
             throws InterruptedException {
         if (threadCount <= 0 || incrementsPerThread <= 0)
             throw new IllegalArgumentException("Values must be positive");
-        return 0;
+        SynchronizedCounter counter = new SynchronizedCounter();
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < incrementsPerThread; j++) {
+                    counter.increment();
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return counter.getCount();
     }
 
     // ─────────────────────────────────────────────────────────────
