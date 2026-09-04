@@ -192,7 +192,17 @@ public class RegexChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<String> challenge7(String text) {
         if (text == null) throw new IllegalArgumentException("Text cannot be null");
-        return new ArrayList<>();
+        Pattern p = Pattern.compile("#(\\w+)");
+        Matcher m = p.matcher(text);
+
+        List<String> results = new ArrayList<>();
+        while (m.find()) {
+            results.add(m.group(1));
+        }
+
+        results.sort(Comparator.naturalOrder());
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
