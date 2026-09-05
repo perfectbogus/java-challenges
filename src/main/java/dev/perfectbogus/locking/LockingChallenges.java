@@ -378,9 +378,27 @@ public class LockingChallenges {
         }
     }
 
-    public static double[] challenge7(double x, double y)
-            throws InterruptedException {
-        return new double[]{0.0, 0.0};
+    public static double[] challenge7(double x, double y) throws InterruptedException {
+
+        Point p = new Point();
+
+        Thread writer = new Thread(() -> {
+            p.write(x, y);
+        });
+
+        double[][] result = new double[1][2];
+
+        Thread reader = new Thread(() -> {
+            result[0] = p.read();
+        });
+
+        writer.start();
+        writer.join();
+
+        reader.start();
+        reader.join();
+
+        return result[0];
     }
 
     // ─────────────────────────────────────────────────────────────
