@@ -29,7 +29,11 @@ public class CollectorChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static String challenge1(List<Employee> employees, double threshold) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
-        return "";
+        return employees.stream()
+                .filter(e -> e.salary() > threshold)
+                .sorted(Comparator.comparing(Employee::name))
+                .map(Employee::name)
+                .collect(Collectors.joining(", ", "[", "]"));
     }
 
     // ─────────────────────────────────────────────────────────────

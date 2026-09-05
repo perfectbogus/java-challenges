@@ -7,7 +7,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CollectorChallenges22Test {
+class CollectorChallenges2Test {
 
     @Nested
     class Challenge1 {
