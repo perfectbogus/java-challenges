@@ -288,11 +288,47 @@ public class LockingChallenges {
     // → readers: readLock for ALL reads
     // → writers: writeLock for ALL writes
     // ─────────────────────────────────────────────────────────────
-    public static int challenge6(int readerCount, int writerCount)
-            throws InterruptedException {
-        if (readerCount <= 0 || writerCount <= 0)
-            throw new IllegalArgumentException("Counts must be positive");
-        return 0;
+    public static int challenge6(int readerCount, int writerCount) throws InterruptedException {
+        if (readerCount <= 0 || writerCount <= 0) throw new IllegalArgumentException("Counts must be positive");
+
+        ReadWriteLock lock = new ReentrantReadWriteLock();
+        Lock readLock = lock.readLock();
+        Lock writeLock = lock.writeLock();
+        Thread[] readers = new Thread[readerCount];
+        Thread[] writers = new Thread[writerCount];
+
+
+        Map<Character, Integer> cache = new HashMap<>(Map.of('a', 1, 'b', 2, 'c', 3));
+
+        for (int i = 0; i < readerCount; i++) {
+            readers[i] = new Thread(() -> {
+                readLock.lock();
+                try {
+                    cache.size();
+                } finally {
+                    readLock.unlock();
+                }
+            });
+        }
+
+        for (int i = 0; i < writerCount; i++) {
+            final int idx = i;
+            writers[i] = new Thread(() -> {
+                writeLock.lock();
+                try {
+                    cache.replace('a', idx);
+                } finally {
+                    writeLock.unlock();
+                }
+            });
+        }
+
+        for (Thread r : readers) r.start();
+        for (Thread w : writers) w.start();
+        for (Thread r : readers) r.join();
+        for (Thread w : writers) w.join();
+
+        return cache.size();
     }
 
     // ─────────────────────────────────────────────────────────────
