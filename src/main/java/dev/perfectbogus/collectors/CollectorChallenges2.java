@@ -136,7 +136,13 @@ public class CollectorChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static Map<String, Long> challenge4(List<Employee> employees, double threshold) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
-        return new HashMap<>();
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.filtering(
+                        e -> e.salary() > threshold,
+                        Collectors.counting()
+                )
+        ));
     }
 
     // ─────────────────────────────────────────────────────────────
