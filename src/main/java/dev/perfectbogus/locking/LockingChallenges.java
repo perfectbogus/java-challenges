@@ -433,7 +433,49 @@ public class LockingChallenges {
                                             double initialBalance2, double amount, int threadCount)
             throws InterruptedException {
         if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
-        return new TransferResult(0.0, 0.0);
+        ReentrantLock lock1 = new ReentrantLock();
+        ReentrantLock lock2 = new ReentrantLock();
+        double[] bal1 = {initialBalance1};
+        double[] bal2 = {initialBalance2};
+        int id1 = 1;
+        int id2 = 2;
+
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            if (i % 2 == 0) {
+                threads[i] = new Thread(() -> {
+                    transfer(id1, bal1, lock1, id2, bal2, lock2, amount);
+                });
+            } else {
+                threads[i] = new Thread(() -> {
+                    transfer(id2, bal2, lock2, id1, bal1, lock1, amount);
+                });
+            }
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return new TransferResult(bal1[0], bal2[0]);
+    }
+
+    private static void transfer(int fromId, double[] fromBal, ReentrantLock fromLock,
+                                 int toId, double[] toBal, ReentrantLock toLock, double amount) {
+        ReentrantLock firstLock = fromId < toId ? fromLock : toLock;
+        ReentrantLock secondLock = fromId < toId ? toLock : fromLock;
+
+        firstLock.lock();
+        try {
+            secondLock.lock();
+            try {
+                fromBal[0] -= amount;
+                toBal[0] += amount;
+            } finally {
+                secondLock.unlock();
+            }
+        } finally {
+            firstLock.unlock();
+        }
     }
 
     // ─────────────────────────────────────────────────────────────
