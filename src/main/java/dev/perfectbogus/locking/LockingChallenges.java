@@ -83,7 +83,19 @@ public class LockingChallenges {
             throws InterruptedException {
         if (threadCount <= 0)  throw new IllegalArgumentException("threadCount must be positive");
         if (initialBalance < 0) throw new IllegalArgumentException("Balance must be non-negative");
-        return 0.0;
+        BankAccount ba = new BankAccount(initialBalance);
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                ba.deposit(100.0);
+                ba.withdraw(100.0);
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return ba.getBalance();
     }
 
     // ─────────────────────────────────────────────────────────────
