@@ -111,11 +111,28 @@ public class LockingChallenges {
     // → MUST use try-finally to unlock!
     // → int[] counter = {0} for lambda capture
     // ─────────────────────────────────────────────────────────────
-    public static int challenge3(int threadCount, int incrementsPerThread)
-            throws InterruptedException {
-        if (threadCount <= 0 || incrementsPerThread <= 0)
-            throw new IllegalArgumentException("Values must be positive");
-        return 0;
+    public static int challenge3(int threadCount, int incrementsPerThread) throws InterruptedException {
+        if (threadCount <= 0 || incrementsPerThread <= 0) throw new IllegalArgumentException("Values must be positive");
+        ReentrantLock lock = new ReentrantLock();
+        int[] counter = new int[]{0};
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < incrementsPerThread; j++) {
+                    lock.lock();
+                    try {
+                        counter[0]++;
+                    } finally {
+                        lock.unlock();
+                    }
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return counter[0];
     }
 
     // ─────────────────────────────────────────────────────────────
