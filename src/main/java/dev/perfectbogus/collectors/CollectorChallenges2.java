@@ -175,6 +175,12 @@ public class CollectorChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static List<Employee> challenge5(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
-        return new ArrayList<>();
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+
+        return employees.stream().collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> list.stream().sorted(bySalaryDesc.thenComparing(byName))
+        )).toList();
     }
 }
