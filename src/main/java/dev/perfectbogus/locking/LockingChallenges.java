@@ -1,6 +1,7 @@
 package dev.perfectbogus.locking;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.*;
 
 public class LockingChallenges {
@@ -154,7 +155,32 @@ public class LockingChallenges {
 
     public static TryLockStats challenge4(int threadCount) throws InterruptedException {
         if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
-        return new TryLockStats(0, 0, 0);
+        ReentrantLock lock = new ReentrantLock();
+        Thread[] threads = new Thread[threadCount];
+        AtomicInteger acquired = new AtomicInteger(0);
+        AtomicInteger missed = new AtomicInteger(0);
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                if (lock.tryLock()) {
+                    lock.lock();
+                    try {
+                        Thread.sleep(10);
+                        acquired.incrementAndGet();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    } finally {
+                        lock.unlock();
+                    }
+                } else {
+                    missed.incrementAndGet();
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return new TryLockStats(acquired.get(), missed.get(), acquired.get() + missed.get());
     }
 
     // ─────────────────────────────────────────────────────────────
