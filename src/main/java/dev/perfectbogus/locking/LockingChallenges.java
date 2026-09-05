@@ -1,6 +1,7 @@
 package dev.perfectbogus.locking;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.*;
@@ -25,8 +26,13 @@ public class LockingChallenges {
     static class SynchronizedCounter {
         private int count = 0;
 
-        public synchronized void increment() { count++; }
-        public synchronized int getCount()   { return count; }
+        public synchronized void increment() {
+            count++;
+        }
+
+        public synchronized int getCount() {
+            return count;
+        }
     }
 
     public static int challenge1(int threadCount, int incrementsPerThread)
@@ -74,16 +80,32 @@ public class LockingChallenges {
         private final Object lock = new Object();
         private double balance;
 
-        BankAccount(double initialBalance) { this.balance = initialBalance; }
+        BankAccount(double initialBalance) {
+            this.balance = initialBalance;
+        }
 
-        void deposit(double amount)  { synchronized (lock) { balance += amount; } }
-        void withdraw(double amount) { synchronized (lock) { balance -= amount; } }
-        double getBalance()          { synchronized (lock) { return balance; } }
+        void deposit(double amount) {
+            synchronized (lock) {
+                balance += amount;
+            }
+        }
+
+        void withdraw(double amount) {
+            synchronized (lock) {
+                balance -= amount;
+            }
+        }
+
+        double getBalance() {
+            synchronized (lock) {
+                return balance;
+            }
+        }
     }
 
     public static double challenge2(int threadCount, double initialBalance)
             throws InterruptedException {
-        if (threadCount <= 0)  throw new IllegalArgumentException("threadCount must be positive");
+        if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
         if (initialBalance < 0) throw new IllegalArgumentException("Balance must be non-negative");
         BankAccount ba = new BankAccount(initialBalance);
         Thread[] threads = new Thread[threadCount];
@@ -152,7 +174,8 @@ public class LockingChallenges {
     // → thread that gets lock: sleep(10ms), then unlock
     // → thread that misses: just increments missed count
     // ─────────────────────────────────────────────────────────────
-    record TryLockStats(int acquired, int missed, int total) {}
+    record TryLockStats(int acquired, int missed, int total) {
+    }
 
     public static TryLockStats challenge4(int threadCount) throws InterruptedException {
         if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
@@ -218,7 +241,7 @@ public class LockingChallenges {
 
 
         Thread producer = new Thread(() -> {
-            for(Integer item : items) {
+            for (Integer item : items) {
                 lock.lock();
                 try {
                     while (buffer.size() == capacity) {
@@ -362,8 +385,12 @@ public class LockingChallenges {
 
         void write(double newX, double newY) {
             long stamp = lock.writeLock();
-            try { x = newX; y = newY; }
-            finally { lock.unlockWrite(stamp); }
+            try {
+                x = newX;
+                y = newY;
+            } finally {
+                lock.unlockWrite(stamp);
+            }
         }
 
         double[] read() {
@@ -371,8 +398,12 @@ public class LockingChallenges {
             double curX = x, curY = y;
             if (!lock.validate(stamp)) {
                 stamp = lock.readLock();
-                try { curX = x; curY = y; }
-                finally { lock.unlockRead(stamp); }
+                try {
+                    curX = x;
+                    curY = y;
+                } finally {
+                    lock.unlockRead(stamp);
+                }
             }
             return new double[]{curX, curY};
         }
@@ -427,7 +458,8 @@ public class LockingChallenges {
     //   5 threads transfer 100 from account2 → account1
     //   net: 0 change → both still 1000.0
     // ─────────────────────────────────────────────────────────────
-    record TransferResult(double balance1, double balance2) {}
+    record TransferResult(double balance1, double balance2) {
+    }
 
     public static TransferResult challenge8(double initialBalance1,
                                             double initialBalance2, double amount, int threadCount)
@@ -503,10 +535,28 @@ public class LockingChallenges {
     // → MUST use new ReentrantLock(true) (fair mode!)
     // → collect acquisition order in a CopyOnWriteArrayList
     // ─────────────────────────────────────────────────────────────
-    public static List<Integer> challenge9(int threadCount)
-            throws InterruptedException {
+    public static List<Integer> challenge9(int threadCount) throws InterruptedException {
         if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
-        return new ArrayList<>();
+        ReentrantLock lock = new ReentrantLock(true);
+        List<Integer> results = new CopyOnWriteArrayList<>();
+
+        Thread[] threads = new Thread[threadCount];
+        for (int i = 0; i < threadCount; i++) {
+            final int j = i;
+            threads[i] = new Thread(() -> {
+                lock.lock();
+                try {
+                    results.add(j);
+                } finally {
+                    lock.unlock();
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return results;
     }
 
     // ─────────────────────────────────────────────────────────────
