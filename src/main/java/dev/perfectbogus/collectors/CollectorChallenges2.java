@@ -63,7 +63,13 @@ public class CollectorChallenges2 {
     public static SalaryStats challenge2(List<Employee> employees) {
         if (employees == null || employees.isEmpty())
             throw new IllegalArgumentException("Employees cannot be null or empty");
-        return new SalaryStats(0, 0, 0);
+        SalaryStats collect = employees.stream().collect(Collectors.teeing(
+                Collectors.summingDouble(Employee::salary),
+                Collectors.counting(),
+                (sum, count) -> new SalaryStats(sum, count, sum / count)
+        ));
+
+        return collect;
     }
 
     // ─────────────────────────────────────────────────────────────
