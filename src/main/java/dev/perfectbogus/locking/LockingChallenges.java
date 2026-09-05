@@ -1,6 +1,7 @@
 package dev.perfectbogus.locking;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.*;
 
@@ -206,7 +207,64 @@ public class LockingChallenges {
     // ─────────────────────────────────────────────────────────────
     public static long challenge5(List<Integer> items) throws InterruptedException {
         if (items == null) throw new IllegalArgumentException("Items cannot be null");
-        return 0L;
+
+        ReentrantLock lock = new ReentrantLock();
+        Condition notFull = lock.newCondition();
+        Condition notEmpty = lock.newCondition();
+        int capacity = 1;
+        Deque<Integer> buffer = new ArrayDeque<>(2);
+        AtomicBoolean done = new AtomicBoolean(false);
+        AtomicInteger sum = new AtomicInteger(0);
+
+
+        Thread producer = new Thread(() -> {
+            for(Integer item : items) {
+                lock.lock();
+                try {
+                    while (buffer.size() == capacity) {
+                        notFull.await();
+                    }
+                    buffer.add(item);
+                    notEmpty.signal();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    lock.unlock();
+                }
+            }
+            done.set(true);
+            lock.lock();
+            try {
+                notEmpty.signalAll();
+            } finally {
+                lock.unlock();
+            }
+        });
+
+        Thread consumer = new Thread(() -> {
+            while (!done.get() || !buffer.isEmpty()) {
+                lock.lock();
+                try {
+                    while (buffer.isEmpty()) {
+                        notEmpty.await();
+                    }
+                    int item = buffer.poll();
+                    sum.getAndAdd(item);
+                    notFull.signal();
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    lock.unlock();
+                }
+            }
+        });
+
+        producer.start();
+        consumer.start();
+        producer.join();
+        consumer.join();
+
+        return sum.get();
     }
 
     // ─────────────────────────────────────────────────────────────
