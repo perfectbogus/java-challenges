@@ -591,6 +591,22 @@ public class LockingChallenges {
     // → use CopyOnWriteArrayList for thread-safe logging
     // ─────────────────────────────────────────────────────────────
     public static List<String> challenge10() throws InterruptedException {
-        return new ArrayList<>();
+        List<String> log = new ArrayList<>();
+        Thread worker = new Thread(() -> {
+            log.add("worker: started");
+            LockSupport.park();
+            log.add("worker: resumed");
+            log.add("worker: done");
+        });
+
+        worker.start();
+        log.add("main: started");
+        Thread.sleep(50);
+        log.add("main: unparking");
+        LockSupport.unpark(worker);
+        worker.join();
+        log.add("main: done");
+
+        return log;
     }
 }
