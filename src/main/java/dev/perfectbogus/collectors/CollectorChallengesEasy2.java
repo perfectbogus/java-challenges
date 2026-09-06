@@ -2,9 +2,8 @@ package dev.perfectbogus.collectors;
 
 import java.util.*;
 import java.util.stream.*;
-import java.util.function.*;
 
-public class CollectorChallenges2 {
+public class CollectorChallengesEasy2 {
 
     record Employee(String name, String department, double salary) {}
 
