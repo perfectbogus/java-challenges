@@ -90,13 +90,30 @@ public class CollectorChallenges2 {
     //   Map<String, DoubleSummaryStatistics> statsMap,
     //   String topDept)
     // ─────────────────────────────────────────────────────────────
-    record StatsResult(Map<String, DoubleSummaryStatistics> statsMap,
-                       String topDept) {}
+    record StatsResult(Map<String, DoubleSummaryStatistics> statsMap, String topDept) {}
 
     public static StatsResult challenge2(List<Employee> employees) {
-        if (employees == null || employees.isEmpty())
-            throw new IllegalArgumentException("Employees cannot be null or empty");
-        return new StatsResult(new HashMap<>(), "");
+        if (employees == null || employees.isEmpty()) throw new IllegalArgumentException("Employees cannot be null or empty");
+
+        Map<String, DoubleSummaryStatistics> statsMap = employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.summarizingDouble(Employee::salary)
+        ));
+
+        String topDept = statsMap.entrySet().stream()
+                .max(Comparator.comparingDouble(
+                                (Map.Entry<String, DoubleSummaryStatistics> e) ->
+                                        e.getValue().getAverage())
+                        .thenComparing(Comparator.<Map.Entry<String, DoubleSummaryStatistics>,
+                                String>comparing(Map.Entry::getKey).reversed()))
+                .map(e ->
+                        String.format(
+                                "%s: avg=%.2f count=%d",
+                                e.getKey(),
+                                e.getValue().getAverage(),
+                                e.getValue().getCount()))
+                .orElse("");
+        return new StatsResult(statsMap, topDept);
     }
 
     // ─────────────────────────────────────────────────────────────
