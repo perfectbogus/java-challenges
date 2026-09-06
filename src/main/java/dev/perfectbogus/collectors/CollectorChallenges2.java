@@ -33,7 +33,34 @@ public class CollectorChallenges2 {
     public static String challenge1(List<Employee> employees) {
         if (employees == null || employees.isEmpty())
             throw new IllegalArgumentException("Employees cannot be null or empty");
-        return "";
+        Map<String, Double> map = employees.stream().collect(Collectors.toMap(
+                Employee::department,
+                Employee::salary,
+                (existing, incoming) -> existing + incoming
+        ));
+
+        Map.Entry<String, Double> max = Map.entry("", 0.0);
+        for (Map.Entry<String, Double> e : map.entrySet()) {
+            if (e.getValue() > max.getValue()) {
+                max = e;
+            }
+        }
+        return String.format("%s=%.2f", max.getKey(), max.getValue());
+    }
+
+    public static String challenge1_2(List<Employee> employees) {
+        if (employees == null || employees.isEmpty())
+            throw new IllegalArgumentException("Employees cannot be null or empty");
+        return employees.stream()
+                .collect(Collectors.toMap(
+                    Employee::department,
+                    Employee::salary,
+                    (existing, incoming) -> existing + incoming))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(e -> String.format("%s=%.2f", e.getKey(), e.getValue()))
+                .orElse("");
+
     }
 
     // ─────────────────────────────────────────────────────────────
