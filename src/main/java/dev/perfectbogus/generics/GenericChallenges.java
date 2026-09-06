@@ -237,14 +237,21 @@ public class GenericChallenges {
             this.success = success;
         }
 
-        static <T> Result<T> ok(T value)        { return new Result<>(null, null, false); }
-        static <T> Result<T> error(String msg)   { return new Result<>(null, null, false); }
+        static <T> Result<T> ok(T value)        { return new Result<>(value, null, true); }
+        static <T> Result<T> error(String msg)   { return new Result<>(null, msg, false); }
 
-        boolean isSuccess() { return false; }
-        T getValue()        { return null; }
-        String getError()   { return null; }
+        boolean isSuccess() { return this.success; }
+        T getValue()        { return this.value; }
+        String getError()   { return this.error; }
 
-        <R> Result<R> map(Function<T, R> fn) { return Result.error(""); }
+        <R> Result<R> map(Function<T, R> fn) {
+            if (this.success) {
+                R value = fn.apply(this.value);
+                return Result.ok(value);
+            } else {
+                return Result.error(this.error);
+            }
+        }
     }
 
     public static <T> Result<T> challenge8ok(T value)       { return Result.ok(value); }
