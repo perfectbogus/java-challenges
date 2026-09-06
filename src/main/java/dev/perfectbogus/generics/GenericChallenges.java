@@ -155,15 +155,17 @@ public class GenericChallenges {
     static class Stack<T> {
         private final List<T> items = new ArrayList<>();
 
-        void push(T item) { }
+        void push(T item) {
+            items.add(item);
+        }
 
-        T pop() { return null; }
+        T pop() { return items.removeLast(); }
 
-        T peek() { return null; }
+        T peek() { return items.getLast(); }
 
-        boolean isEmpty() { return true; }
+        boolean isEmpty() { return items.isEmpty(); }
 
-        int size() { return 0; }
+        int size() { return items.size(); }
     }
 
     public static <T> Stack<T> challenge6() {
