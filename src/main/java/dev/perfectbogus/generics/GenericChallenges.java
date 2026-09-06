@@ -98,13 +98,13 @@ public class GenericChallenges {
             this.second = second;
         }
 
-        A first()  { return null; }
-        B second() { return null; }
+        A first()  { return this.first; }
+        B second() { return this.second; }
 
-        Pair<B, A> swap() { return new Pair<>(null, null); }
+        Pair<B, A> swap() { return new Pair<>(this.second, this.first); }
 
         @Override
-        public String toString() { return ""; }
+        public String toString() { return "("+ this.first + ", " + this.second +")"; }
     }
 
     public static <A, B> Pair<A, B> challenge4(A first, B second) {
