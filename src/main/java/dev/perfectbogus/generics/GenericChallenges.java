@@ -70,7 +70,7 @@ public class GenericChallenges {
     public static <T> List<T> challenge3(List<T> list, Predicate<T> predicate) {
         if (list == null)      throw new IllegalArgumentException("List cannot be null");
         if (predicate == null) throw new IllegalArgumentException("Predicate cannot be null");
-        return new ArrayList<>();
+        return list.stream().filter(predicate).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
