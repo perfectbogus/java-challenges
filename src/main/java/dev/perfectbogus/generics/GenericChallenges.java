@@ -193,7 +193,13 @@ public class GenericChallenges {
     public static <A, B> List<Pair<A, B>> challenge7(List<A> list1, List<B> list2) {
         if (list1 == null || list2 == null)
             throw new IllegalArgumentException("Lists cannot be null");
-        return new ArrayList<>();
+        int min = Math.min(list1.size(), list2.size());
+        List<Pair<A, B>> resultList = new ArrayList<>();
+        for (int i = 0; i < min; i++) {
+            resultList.add(new Pair<>(list1.get(i), list2.get(i)));
+        }
+
+        return resultList;
     }
 
     // ─────────────────────────────────────────────────────────────
