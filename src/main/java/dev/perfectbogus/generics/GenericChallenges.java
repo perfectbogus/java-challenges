@@ -273,7 +273,7 @@ public class GenericChallenges {
     // ─────────────────────────────────────────────────────────────
     public static <T> List<T> challenge9(List<List<T>> lists) {
         if (lists == null) throw new IllegalArgumentException("List cannot be null");
-        return new ArrayList<>();
+        return lists.stream().flatMap(list -> list.stream()).toList();
     }
 
     // ─────────────────────────────────────────────────────────────
