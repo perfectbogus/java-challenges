@@ -128,7 +128,7 @@ public class GenericChallenges {
     // ─────────────────────────────────────────────────────────────
     public static double challenge5(List<? extends Number> list) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return 0.0;
+        return list.stream().mapToDouble(Number::doubleValue).sum();
     }
 
     // ─────────────────────────────────────────────────────────────
