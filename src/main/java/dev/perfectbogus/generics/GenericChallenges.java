@@ -24,7 +24,14 @@ public class GenericChallenges {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
         if (i < 0 || i >= list.size() || j < 0 || j >= list.size())
             throw new IllegalArgumentException("Index out of bounds");
-        return new ArrayList<>();
+
+        List<T> newList = new ArrayList<>(list);
+
+        T tmp = newList.get(i);
+        newList.set(i, newList.get(j));
+        newList.set(j, tmp);
+
+        return newList;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -44,7 +51,7 @@ public class GenericChallenges {
     public static <T extends Comparable<T>> T challenge2(List<T> list) {
         if (list == null)    throw new IllegalArgumentException("List cannot be null");
         if (list.isEmpty()) throw new IllegalArgumentException("List cannot be empty");
-        return list.get(0);
+        return list.stream().max(Comparator.naturalOrder()).get();
     }
 
     // ─────────────────────────────────────────────────────────────

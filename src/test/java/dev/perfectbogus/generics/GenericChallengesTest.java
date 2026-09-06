@@ -90,7 +90,7 @@ class GenericChallengesTest {
         @Test
         void emptyListThrows() {
             assertThrows(IllegalArgumentException.class,
-                    () -> GenericChallenges.challenge2(List.of()));
+                    () -> GenericChallenges.challenge2(List.<String>of()));
         }
 
         @Test
