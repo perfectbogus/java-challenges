@@ -192,9 +192,14 @@ public class CollectorChallenges2 {
     record SalaryRange(Employee lowest, Employee highest) {}
 
     public static String challenge4(List<Employee> employees) {
-        if (employees == null || employees.isEmpty())
-            throw new IllegalArgumentException("Employees cannot be null or empty");
-        return "";
+        if (employees == null || employees.isEmpty()) throw new IllegalArgumentException("Employees cannot be null or empty");
+        SalaryRange sr = employees.stream().collect(Collectors.teeing(
+                Collectors.minBy(Comparator.comparingDouble(Employee::salary)),
+                Collectors.maxBy(Comparator.comparingDouble(Employee::salary)),
+                (min, max) -> new SalaryRange(min.get(), max.get())
+        ));
+
+        return String.format("lowest=%s(%.0f) highest=%s(%.0f)", sr.lowest().name(), sr.lowest().salary(), sr.highest().name(), sr.highest().salary());
     }
 
     // ─────────────────────────────────────────────────────────────
