@@ -149,7 +149,22 @@ public class CollectorChallenges2 {
     public static PartitionReport challenge3(List<Employee> employees,
                                              double threshold) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
-        return new PartitionReport("", "");
+        Map<Boolean, String> map = employees.stream().collect(Collectors.partitioningBy(
+                e -> e.salary() > threshold,
+                Collectors.mapping(
+                        Employee::name,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                list ->
+                                    list.isEmpty() ? "NONE"
+                                            : list.stream().sorted(Comparator.naturalOrder())
+                                            .collect(Collectors.joining(" | "))
+
+
+                        )
+                )
+        ));
+        return new PartitionReport(map.get(true), map.get(false));
     }
 
     // ─────────────────────────────────────────────────────────────
