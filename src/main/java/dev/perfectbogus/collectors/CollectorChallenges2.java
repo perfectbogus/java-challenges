@@ -237,6 +237,24 @@ public class CollectorChallenges2 {
     public static double challenge5(List<Employee> employees) {
         if (employees == null || employees.isEmpty())
             throw new IllegalArgumentException("Employees cannot be null or empty");
-        return 0.0;
+
+        Double collect = employees.stream().collect(Collector.of(
+                () -> new ArrayList<Double>(),
+                (list, e) -> list.add(e.salary()),
+                (list1, list2) -> {
+                    list1.addAll(list2);
+                    return list1;
+                },
+                list -> {
+                    list.sort(Comparator.naturalOrder());
+                    if (list.size() % 2 == 1) {
+                        return list.get(list.size() / 2);
+                    } else {
+                        int middle = (list.size() / 2) - 1;
+                        return (list.get(middle) + list.get(middle + 1)) / 2.0;
+                    }
+                }
+        ));
+        return collect;
     }
 }
