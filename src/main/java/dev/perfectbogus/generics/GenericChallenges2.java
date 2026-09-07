@@ -288,13 +288,28 @@ public class GenericChallenges2 {
     //
     // Throw IllegalArgumentException if either list or comparator is null.
     // ─────────────────────────────────────────────────────────────
-    public static <T> List<T> challenge8(List<T> list1, List<T> list2,
-                                         Comparator<T> comparator) {
+    public static <T> List<T> challenge8(List<T> list1, List<T> list2, Comparator<T> comparator) {
         if (list1 == null || list2 == null)
             throw new IllegalArgumentException("Lists cannot be null");
         if (comparator == null)
             throw new IllegalArgumentException("Comparator cannot be null");
-        return new ArrayList<>();
+
+        List<T> result = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+
+        while (i < list1.size() && j < list2.size()) {
+            if (comparator.compare(list1.get(i), list2.get(j)) <= 0) {
+                result.add(list1.get(i++));
+            } else {
+                result.add(list2.get(j++));
+            }
+        }
+
+        while (i < list1.size()) result.add(list1.get(i++));
+        while (j < list2.size()) result.add(list2.get(j++));
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
