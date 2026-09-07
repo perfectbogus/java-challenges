@@ -297,6 +297,10 @@ public class GenericChallenges {
                                                      Function<T, K> classifier) {
         if (list == null)       throw new IllegalArgumentException("List cannot be null");
         if (classifier == null) throw new IllegalArgumentException("Classifier cannot be null");
-        return new HashMap<>();
+        return list.stream().collect(Collectors.groupingBy(
+                classifier,
+                HashMap::new,
+                Collectors.toList()
+        ));
     }
 }
