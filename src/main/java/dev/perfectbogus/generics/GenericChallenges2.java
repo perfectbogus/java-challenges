@@ -352,24 +352,40 @@ public class GenericChallenges2 {
             this.isLeft     = isLeft;
         }
 
-        static <L, R> Either<L, R> left(L value)  { return new Either<>(null, null, true); }
-        static <L, R> Either<L, R> right(R value) { return new Either<>(null, null, false); }
+        static <L, R> Either<L, R> left(L value)  {
+            return new Either<>(value, null, true);
+        }
+        static <L, R> Either<L, R> right(R value) {
+            return new Either<>(null, value, false);
+        }
 
-        boolean isLeft()  { return false; }
-        boolean isRight() { return false; }
-        L getLeft()       { return null; }
-        R getRight()      { return null; }
+        boolean isLeft()  { return this.isLeft; }
+        boolean isRight() { return !this.isLeft; }
+        L getLeft()       { return this.leftValue; }
+        R getRight()      { return this.rightValue; }
 
         <L2> Either<L2, R> mapLeft(Function<L, L2> fn) {
-            return Either.left(null);
+            if (this.isLeft) {
+                return Either.left(fn.apply(this.leftValue));
+            }
+            return Either.right(this.rightValue);
         }
 
         <R2> Either<L, R2> mapRight(Function<R, R2> fn) {
-            return Either.right(null);
+            if (!this.isLeft) {
+                return Either.right(fn.apply(this.rightValue));
+            }
+            return Either.left(this.leftValue);
         }
 
         @Override
-        public String toString() { return ""; }
+        public String toString() {
+            if (this.isLeft) {
+                return "Left(" + this.leftValue + ")";
+            } else {
+                return "Right(" + this.rightValue + ")";
+            }
+        }
     }
 
     public static <L, R> Either<L, R> challenge9left(L value) {
