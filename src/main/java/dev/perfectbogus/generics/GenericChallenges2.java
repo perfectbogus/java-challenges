@@ -80,11 +80,10 @@ public class GenericChallenges2 {
     //
     // Throw IllegalArgumentException if list or predicate is null.
     // ─────────────────────────────────────────────────────────────
-    public static <T> T challenge3(List<T> list, Predicate<T> predicate,
-                                   T defaultValue) {
+    public static <T> T challenge3(List<T> list, Predicate<T> predicate, T defaultValue) {
         if (list == null)      throw new IllegalArgumentException("List cannot be null");
         if (predicate == null) throw new IllegalArgumentException("Predicate cannot be null");
-        return defaultValue;
+        return list.stream().filter(predicate).findFirst().orElse(defaultValue);
     }
 
     // ─────────────────────────────────────────────────────────────
