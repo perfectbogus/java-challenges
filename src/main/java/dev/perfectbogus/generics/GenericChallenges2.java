@@ -121,7 +121,7 @@ public class GenericChallenges2 {
 
     public static <T, K> Map<K, T> challenge4_2(List<T> list, Function<T, K> keyExtractor) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        if (keyExtractor == null) throw new IllegalArgumentException("KeyExtractro cannot be null");
+        if (keyExtractor == null) throw new IllegalArgumentException("KeyExtractor cannot be null");
 
         return list.stream().collect(Collectors.toMap(
                 keyExtractor,
