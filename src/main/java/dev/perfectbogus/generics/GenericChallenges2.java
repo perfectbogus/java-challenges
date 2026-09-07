@@ -63,7 +63,7 @@ public class GenericChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static <T> List<T> challenge2(List<T> list) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return new ArrayList<>();
+        return new LinkedHashSet<>(list).stream().toList();
     }
 
     // ─────────────────────────────────────────────────────────────
