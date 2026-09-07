@@ -420,6 +420,7 @@ public class GenericChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static <T, R> Function<T, R> challenge10(Function<T, R> fn) {
         if (fn == null) throw new IllegalArgumentException("Function cannot be null");
-        return t -> null;
+        Map<T, R> cache = new HashMap<>();
+        return input -> cache.computeIfAbsent(input, fn);
     }
 }
