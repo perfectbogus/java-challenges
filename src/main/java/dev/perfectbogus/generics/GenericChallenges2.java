@@ -144,7 +144,13 @@ public class GenericChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static <T> List<T> challenge5(T value, int n) {
         if (n < 0) throw new IllegalArgumentException("n must be non-negative");
-        return new ArrayList<>();
+        if (n == 0) return new ArrayList<>();
+
+        List<T> result = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            result.add(value);
+        }
+        return result;
     }
 
     // ══════════════════════════════════════════════════════════════════════
