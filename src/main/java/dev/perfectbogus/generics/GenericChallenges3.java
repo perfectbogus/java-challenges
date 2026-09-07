@@ -52,7 +52,16 @@ public class GenericChallenges3 {
     public static <T> List<T> challenge2(List<T> list, int k) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
         if (k < 0)        throw new IllegalArgumentException("k must be non-negative");
-        return new ArrayList<>();
+        if (k == 0) return list;
+        if (list.isEmpty()) return new ArrayList<>();
+
+        int shift = k % list.size();
+        int idx = list.size() - shift;
+
+        List<T> result = new ArrayList<>(list.subList(idx, list.size()));
+        result.addAll(list.subList(0, idx));
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
