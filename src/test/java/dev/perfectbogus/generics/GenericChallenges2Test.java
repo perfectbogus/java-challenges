@@ -368,6 +368,16 @@ class GenericChallenges2Test {
         }
 
         @Test
+        void salaryRaise7_2() {
+            Map<String, Double> input = Map.of("Alice", 95000.0, "Bob", 60000.0);
+            Map<String, Double> result =
+                    GenericChallenges2.challenge7_2(input, salary -> salary * 1.1);
+
+            assertEquals(104500.0, result.get("Alice"), 0.01);
+            assertEquals(66000.0,  result.get("Bob"),   0.01);
+        }
+
+        @Test
         void squareValues() {
             Map<String, Integer> input = Map.of("a", 1, "b", 2, "c", 3);
             Map<String, Integer> result =

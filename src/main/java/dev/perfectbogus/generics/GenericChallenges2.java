@@ -241,11 +241,28 @@ public class GenericChallenges2 {
     //
     // Throw IllegalArgumentException if map or mapper is null.
     // ─────────────────────────────────────────────────────────────
-    public static <K, V, R> Map<K, R> challenge7(Map<K, V> map,
-                                                 Function<V, R> mapper) {
+    public static <K, V, R> Map<K, R> challenge7(Map<K, V> map, Function<V, R> mapper) {
         if (map == null)    throw new IllegalArgumentException("Map cannot be null");
         if (mapper == null) throw new IllegalArgumentException("Mapper cannot be null");
-        return new HashMap<>();
+
+        Map<K, R> resultMap = new HashMap<>();
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            K key = entry.getKey();
+            V value = entry.getValue();
+            resultMap.put(key, mapper.apply(value));
+        }
+
+        return resultMap;
+    }
+
+    public static <K, V, R> Map<K, R> challenge7_2(Map<K, V> map, Function<V, R> mapper) {
+        if (map == null) throw new IllegalArgumentException("Map cannot be null");
+        if (mapper == null) throw new IllegalArgumentException("Mapper cannot be null");
+
+        return map.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getKey,
+                (e -> mapper.apply(e.getValue()))
+        ));
     }
 
     // ─────────────────────────────────────────────────────────────
