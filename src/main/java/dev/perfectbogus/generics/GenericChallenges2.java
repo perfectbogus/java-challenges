@@ -191,12 +191,33 @@ public class GenericChallenges2 {
             this.items    = new ArrayDeque<>();
         }
 
-        boolean offer(T item) { return false; }
-        T poll()              { return null; }
-        T peek()              { return null; }
-        boolean isEmpty()     { return true; }
-        boolean isFull()      { return false; }
-        int size()            { return 0; }
+        boolean offer(T item) {
+            if (items.size() < capacity) {
+                return items.offer(item);
+            } else {
+                return false;
+            }
+        }
+
+        T poll() {
+            return items.poll();
+        }
+
+        T peek()              {
+            return items.peek();
+        }
+
+        boolean isEmpty()     {
+            return items.isEmpty();
+        }
+
+        boolean isFull()      {
+            return items.size() == capacity;
+        }
+
+        int size()            {
+            return items.size();
+        }
     }
 
     public static <T> BoundedQueue<T> challenge6(int capacity) {
