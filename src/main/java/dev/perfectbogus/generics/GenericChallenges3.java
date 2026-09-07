@@ -26,7 +26,7 @@ public class GenericChallenges3 {
     public static <T> int challenge1(List<T> list, Predicate<T> predicate) {
         if (list == null)      throw new IllegalArgumentException("List cannot be null");
         if (predicate == null) throw new IllegalArgumentException("Predicate cannot be null");
-        return 0;
+        return (int) list.stream().filter(predicate).count();
     }
 
     // ─────────────────────────────────────────────────────────────
