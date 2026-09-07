@@ -106,11 +106,28 @@ public class GenericChallenges2 {
     // ─────────────────────────────────────────────────────────────
     record Employee(String name, double salary) {}
 
-    public static <T, K> Map<K, T> challenge4(List<T> list,
-                                              Function<T, K> keyExtractor) {
+    public static <T, K> Map<K, T> challenge4(List<T> list, Function<T, K> keyExtractor) {
         if (list == null)         throw new IllegalArgumentException("List cannot be null");
         if (keyExtractor == null) throw new IllegalArgumentException("KeyExtractor cannot be null");
-        return new HashMap<>();
+
+        Map<K, T> result = new HashMap<>();
+        for (T item : list) {
+            K key = keyExtractor.apply(item);
+            result.put(key, item);
+        }
+
+        return result;
+    }
+
+    public static <T, K> Map<K, T> challenge4_2(List<T> list, Function<T, K> keyExtractor) {
+        if (list == null) throw new IllegalArgumentException("List cannot be null");
+        if (keyExtractor == null) throw new IllegalArgumentException("KeyExtractro cannot be null");
+
+        return list.stream().collect(Collectors.toMap(
+                keyExtractor,
+                Function.identity(),
+                (existing, incoming) -> incoming
+        ));
     }
 
     // ─────────────────────────────────────────────────────────────

@@ -170,12 +170,9 @@ class GenericChallenges2Test {
         @Test
         void groupByLength() {
             Map<Integer, String> result =
-                    GenericChallenges2.challenge4(
+                    GenericChallenges2.challenge4_2(
                             List.of("hi","bye","hey"), String::length);
 
-            assertEquals("hey", result.get(3)); // last with length 3 wins!
-            assertEquals("bye", result.get(3)); // wait, "bye" is before "hey"
-            // last one wins: "hey" comes after "bye" → "hey" wins!
             assertEquals("hey", result.get(3));
             assertEquals("hi",  result.get(2));
         }
