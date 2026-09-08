@@ -243,11 +243,30 @@ public class GenericChallenges3 {
     static class MultiMap<K, V> {
         private final Map<K, List<V>> map = new HashMap<>();
 
-        void add(K key, V value)            { }
-        List<V> getAll(K key)               { return new ArrayList<>(); }
-        boolean remove(K key, V value)      { return false; }
-        boolean containsKey(K key)          { return false; }
-        int size()                          { return 0; }
+        void add(K key, V value)            {
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
+        }
+
+        List<V> getAll(K key)               {
+            return map.getOrDefault(key, List.of());
+        }
+
+        boolean remove(K key, V value)      {
+            if (map.containsKey(key)) {
+                return map.get(key).remove(value);
+            }
+            return false;
+        }
+
+        boolean containsKey(K key)          {
+            return map.containsKey(key);
+        }
+
+        int size() {
+            return map.values().stream()
+                    .mapToInt(List::size)
+                    .sum();
+        }
     }
 
     public static <K, V> MultiMap<K, V> challenge7() {
