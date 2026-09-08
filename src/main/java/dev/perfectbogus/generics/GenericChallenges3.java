@@ -178,7 +178,14 @@ public class GenericChallenges3 {
     // ─────────────────────────────────────────────────────────────
     public static <T> T challenge5(T value, List<Function<T, T>> fns) {
         if (fns == null) throw new IllegalArgumentException("Functions list cannot be null");
-        return value;
+        if (fns.isEmpty()) return value;
+
+        Function<T, T> all = Function.identity();
+        for (Function<T, T> fn : fns) {
+            all = all.andThen(fn);
+        }
+
+        return all.apply(value);
     }
 
     // ─────────────────────────────────────────────────────────────
