@@ -73,6 +73,19 @@ public class MapChallenges2 {
         return result;
     }
 
+    public static <K extends Comparable<K>, V> Map<V, List<K>> challenge2_2(Map<K, V> map) {
+        if (map == null) throw new IllegalArgumentException("Map cannot be null");
+
+        return map.entrySet().stream()
+                .collect(Collectors.groupingBy(
+                        Map.Entry::getValue,
+                        Collectors.collectingAndThen(
+                                Collectors.mapping(Map.Entry::getKey, Collectors.toList()),
+                                list -> { Collections.sort(list); return list; }
+                        )
+                ));
+    }
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 3 — Anagram groups
     //
