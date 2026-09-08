@@ -121,6 +121,29 @@ public class MapChallenges2 {
         return result;
     }
 
+    public static Map<String, List<String>> challenge3_2(List<String> words) {
+        if (words == null) throw new IllegalArgumentException("Words cannot be null");
+
+        return words.stream()
+                .collect(Collectors.groupingBy(
+                        word -> sortLetters(word)
+                ))
+                .entrySet().stream()
+                .filter(e -> e.getValue().size() > 1)
+                .peek(e -> Collections.sort(e.getValue()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                ));
+    }
+
+    private static String sortLetters(String word) {
+        if (word == null) throw new IllegalArgumentException("Word cannot be null");
+        char[] letter = word.toCharArray();
+        Arrays.sort(letter);
+        return new String(letter);
+    }
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 4 — Map difference report
     //
