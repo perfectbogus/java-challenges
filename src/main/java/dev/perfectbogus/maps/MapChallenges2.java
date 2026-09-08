@@ -28,7 +28,23 @@ public class MapChallenges2 {
     public static List<String> challenge1(List<String> sentences, int n) {
         if (sentences == null) throw new IllegalArgumentException("Sentences cannot be null");
         if (n <= 0)            throw new IllegalArgumentException("n must be positive");
-        return new ArrayList<>();
+        Map<String, Integer> freq = new HashMap<>();
+        for (String sentence : sentences) {
+            String[] words = sentence.split("\\s+");
+            for (String word : words) {
+                freq.merge(word, 1, Integer::sum);
+            }
+        }
+
+        Comparator<Map.Entry<String, Integer>> byValueDesc = Map.Entry.<String, Integer>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Integer>> byKey = Map.Entry.comparingByKey();
+
+        return freq.entrySet().stream()
+                .sorted(byValueDesc.thenComparing(byKey))
+                .map(Map.Entry::getKey)
+                .limit(n)
+                .toList();
+
     }
 
     // ─────────────────────────────────────────────────────────────
