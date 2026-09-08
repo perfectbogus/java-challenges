@@ -139,15 +139,15 @@ public class GenericChallenges3 {
             this.cache    = new LinkedHashMap<>(capacity, 0.75f, true) {
                 @Override
                 protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-                    return false; // ← implement eviction policy!
+                    return size() > capacity; // ← implement eviction policy!
                 }
             };
         }
 
-        V get(K key)              { return null; }
-        void put(K key, V value)  { }
-        int size()                { return 0; }
-        boolean containsKey(K key){ return false; }
+        V get(K key)              { return cache.get(key); }
+        void put(K key, V value)  { cache.put(key, value); }
+        int size()                { return cache.size(); }
+        boolean containsKey(K key){ return cache.containsKey(key); }
     }
 
     public static <K, V> LRUCache<K, V> challenge4(int capacity) {
