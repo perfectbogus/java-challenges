@@ -88,7 +88,16 @@ public class GenericChallenges3 {
     public static <T> List<List<T>> challenge3(List<T> list, int chunkSize) {
         if (list == null)    throw new IllegalArgumentException("List cannot be null");
         if (chunkSize <= 0)  throw new IllegalArgumentException("chunkSize must be positive");
-        return new ArrayList<>();
+        if (list.isEmpty()) return new ArrayList<>();
+
+        List<List<T>> result = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i += chunkSize) {
+            int end = Math.min(i + chunkSize, list.size());
+            result.add(new ArrayList<>(list.subList(i, end)));
+        }
+
+        return result;
     }
 
     // ══════════════════════════════════════════════════════════════════════
