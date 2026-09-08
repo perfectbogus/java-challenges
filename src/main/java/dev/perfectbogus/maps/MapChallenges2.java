@@ -1,0 +1,241 @@
+package dev.perfectbogus.maps;
+
+import java.util.*;
+import java.util.stream.*;
+import java.util.function.*;
+
+public class MapChallenges2 {
+
+    record Employee(String name, String department, double salary, int yearsOfExperience) {}
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 1 — Top N most frequent words
+    //
+    // Given a list of sentences, count word frequency across ALL
+    // sentences. Return the TOP N words by frequency DESCENDING.
+    // For ties in frequency → sort ALPHABETICALLY ASCENDING.
+    //
+    // Use merge() for counting, then sort the entrySet.
+    //
+    // Input:  sentences=["the cat sat on the mat",
+    //                    "the cat in the hat",
+    //                    "the cat sat"], n=3
+    // Frequencies: the=5, cat=3, sat=2, on=1, mat=1, in=1, hat=1
+    // Top 3: ["the","cat","sat"]
+    //
+    // Throw IllegalArgumentException if sentences is null or n <= 0.
+    // ─────────────────────────────────────────────────────────────
+    public static List<String> challenge1(List<String> sentences, int n) {
+        if (sentences == null) throw new IllegalArgumentException("Sentences cannot be null");
+        if (n <= 0)            throw new IllegalArgumentException("n must be positive");
+        return new ArrayList<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 2 — Invert map to multimap
+    //
+    // Invert a Map<K, V> to Map<V, List<K>>.
+    // Multiple original keys may share the same value.
+    // Lists of keys sorted ALPHABETICALLY.
+    //
+    // Input:  {"Alice"="Eng","Bob"="Mkt","Carol"="Eng","Diana"="Mkt"}
+    // Output: {"Eng"=["Alice","Carol"], "Mkt"=["Bob","Diana"]}
+    //
+    // Use computeIfAbsent() to build the inverted map.
+    // Throw IllegalArgumentException if map is null.
+    // ─────────────────────────────────────────────────────────────
+    public static <K extends Comparable<K>, V> Map<V, List<K>> challenge2(Map<K, V> map) {
+        if (map == null) throw new IllegalArgumentException("Map cannot be null");
+        return new HashMap<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 3 — Anagram groups
+    //
+    // Group words that are ANAGRAMS of each other.
+    // Use sorted characters as the grouping key.
+    // Within each group, words sorted ALPHABETICALLY.
+    // Only include groups with 2 or more words!
+    //
+    // Input:  ["eat","tea","tan","ate","nat","bat"]
+    // Output: {"aet"=["ate","eat","tea"], "ant"=["nat","tan"]}
+    //         "abt"=["bat"] excluded (only 1 word)
+    //
+    // Use computeIfAbsent() to group words.
+    // Throw IllegalArgumentException if words is null.
+    // ─────────────────────────────────────────────────────────────
+    public static Map<String, List<String>> challenge3(List<String> words) {
+        if (words == null) throw new IllegalArgumentException("Words cannot be null");
+        return new HashMap<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 4 — Map difference report
+    //
+    // Compare two maps and return a DiffReport:
+    // → onlyInLeft:  keys in map1 but NOT in map2
+    // → onlyInRight: keys in map2 but NOT in map1
+    // → different:   keys in BOTH but with DIFFERENT values
+    //
+    // record DiffReport<K>(Set<K> onlyInLeft,
+    //                      Set<K> onlyInRight, Set<K> different)
+    //
+    // Input:  map1={"a"=1,"b"=2,"c"=3,"d"=4}
+    //         map2={"b"=2,"c"=99,"e"=5}
+    // onlyInLeft:  {"a","d"}
+    // onlyInRight: {"e"}
+    // different:   {"c"}  (3≠99; b=2=2 same!)
+    //
+    // Throw IllegalArgumentException if either map is null.
+    // ─────────────────────────────────────────────────────────────
+    record DiffReport<K>(Set<K> onlyInLeft, Set<K> onlyInRight, Set<K> different) {}
+
+    public static <K, V> DiffReport<K> challenge4(Map<K, V> map1, Map<K, V> map2) {
+        if (map1 == null || map2 == null)
+            throw new IllegalArgumentException("Maps cannot be null");
+        return new DiffReport<>(new HashSet<>(), new HashSet<>(), new HashSet<>());
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 5 — Two-level nested map
+    //
+    // Given employees, build:
+    // Map<String dept, Map<String tier, Double totalSalary>>
+    //   tier = "SENIOR" if yearsOfExperience >= 5, else "JUNIOR"
+    //
+    // Use merge() to accumulate salaries.
+    //
+    // Input:
+    //   Alice/Eng/90000/8 → Eng,SENIOR
+    //   Bob/Eng/70000/3   → Eng,JUNIOR
+    //   Carol/Mkt/80000/6 → Mkt,SENIOR
+    //   Diana/Mkt/60000/2 → Mkt,JUNIOR
+    //   Eve/Eng/85000/7   → Eng,SENIOR
+    //
+    // Output:
+    //   Eng → {SENIOR=175000.0, JUNIOR=70000.0}
+    //   Mkt → {SENIOR=80000.0,  JUNIOR=60000.0}
+    //
+    // Throw IllegalArgumentException if employees is null.
+    // ─────────────────────────────────────────────────────────────
+    public static Map<String, Map<String, Double>> challenge5(List<Employee> employees) {
+        if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+        return new HashMap<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 6 — Element positions index
+    //
+    // Given a list, build a Map<T, List<Integer>> where:
+    // → key   = element value
+    // → value = list of ALL indices where element appears (ascending)
+    //
+    // Input:  ["a","b","a","c","b","a"]
+    // Output: {"a"=[0,2,5], "b"=[1,4], "c"=[3]}
+    //
+    // Input:  [1,2,3,2,1]
+    // Output: {1=[0,4], 2=[1,3], 3=[2]}
+    //
+    // Use computeIfAbsent() to build index lists.
+    // Throw IllegalArgumentException if list is null.
+    // ─────────────────────────────────────────────────────────────
+    public static <T> Map<T, List<Integer>> challenge6(List<T> list) {
+        if (list == null) throw new IllegalArgumentException("List cannot be null");
+        return new HashMap<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 7 — Running cumulative sum (LinkedHashMap!)
+    //
+    // Given a LinkedHashMap<String, Double> of label→value,
+    // return a NEW LinkedHashMap where each value is replaced
+    // by the CUMULATIVE SUM up to and including that entry.
+    // Preserve INSERTION ORDER.
+    //
+    // Input:  {"Jan"=100.0,"Feb"=150.0,"Mar"=200.0,"Apr"=50.0}
+    // Output: {"Jan"=100.0,"Feb"=250.0,"Mar"=450.0,"Apr"=500.0}
+    //
+    // Throw IllegalArgumentException if map is null.
+    // ─────────────────────────────────────────────────────────────
+    public static Map<String, Double> challenge7(LinkedHashMap<String, Double> map) {
+        if (map == null) throw new IllegalArgumentException("Map cannot be null");
+        return new LinkedHashMap<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 8 — Frequency of frequencies
+    //
+    // Given a list, count element frequencies, then group elements
+    // by their frequency count.
+    //
+    // Return Map<Integer, List<T>>:
+    //   key   = frequency count
+    //   value = list of elements with that frequency (sorted naturally)
+    //
+    // Input:  ["apple","banana","apple","cherry","banana","apple"]
+    //   apple=3, banana=2, cherry=1
+    // Output: {3=["apple"], 2=["banana"], 1=["cherry"]}
+    //
+    // Input:  [1,2,3,2,1,3,1]
+    //   1=3, 2=2, 3=2
+    // Output: {3=[1], 2=[2,3]}
+    //
+    // Step 1: build frequency map using merge()
+    // Step 2: group elements by frequency using computeIfAbsent()
+    // Throw IllegalArgumentException if list is null.
+    // ─────────────────────────────────────────────────────────────
+    public static <T extends Comparable<T>> Map<Integer, List<T>> challenge8(List<T> list) {
+        if (list == null) throw new IllegalArgumentException("List cannot be null");
+        return new HashMap<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 9 — Merge maps with custom policy
+    //
+    // Merge two maps using a mergeFunction to resolve duplicate keys.
+    // → key only in map1 → keep map1 value
+    // → key only in map2 → keep map2 value
+    // → key in BOTH → apply mergeFunction(map1Value, map2Value)
+    //
+    // Use Map.merge() to implement cleanly.
+    //
+    // Input:  map1={"a"=10,"b"=20,"c"=30}
+    //         map2={"b"=5,"c"=15,"d"=25}
+    //         mergeFunction=Integer::sum
+    // Output: {"a"=10,"b"=25,"c"=45,"d"=25}
+    //
+    // Throw IllegalArgumentException if any argument is null.
+    // ─────────────────────────────────────────────────────────────
+    public static <K, V> Map<K, V> challenge9(Map<K, V> map1, Map<K, V> map2,
+                                              BiFunction<V, V, V> mergeFunction) {
+        if (map1 == null || map2 == null)
+            throw new IllegalArgumentException("Maps cannot be null");
+        if (mergeFunction == null)
+            throw new IllegalArgumentException("MergeFunction cannot be null");
+        return new HashMap<>();
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // CHALLENGE 10 — Word co-occurrence map
+    //
+    // For each word, find all OTHER words that appear in the SAME
+    // sentence. Return Map<String, Set<String>>.
+    //
+    // Input:  ["hello world","hello java","java rocks"]
+    // hello → {world, java}
+    // world → {hello}
+    // java  → {hello, rocks}
+    // rocks → {java}
+    //
+    // Rules:
+    // → a word does NOT co-occur with itself!
+    // → use Set to avoid duplicates!
+    // → use computeIfAbsent() to build sets
+    //
+    // Throw IllegalArgumentException if sentences is null.
+    // ─────────────────────────────────────────────────────────────
+    public static Map<String, Set<String>> challenge10(List<String> sentences) {
+        if (sentences == null) throw new IllegalArgumentException("Sentences cannot be null");
+        return new HashMap<>();
+    }
+}
