@@ -103,7 +103,22 @@ public class MapChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static Map<String, List<String>> challenge3(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
-        return new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for (String word : words) {
+            map.computeIfAbsent(sortLetters(word), w -> new ArrayList<>()).add(word);
+        }
+
+        Map<String, List<String>> result = new HashMap<>();
+
+        for (Map.Entry<String, List<String>> e : map.entrySet()) {
+            if (e.getValue().size() > 1) {
+                result.put(e.getKey(), e.getValue());
+            }
+        }
+
+        result.values().forEach(Collections::sort);
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
