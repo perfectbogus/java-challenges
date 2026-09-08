@@ -62,7 +62,15 @@ public class MapChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static <K extends Comparable<K>, V> Map<V, List<K>> challenge2(Map<K, V> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
-        return new HashMap<>();
+
+        Map<V, List<K>> result = new HashMap<>();
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            result.computeIfAbsent(entry.getValue(), v -> new ArrayList<>())
+                    .add(entry.getKey());
+        }
+
+        result.values().forEach(Collections::sort);
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
