@@ -208,7 +208,14 @@ public class GenericChallenges3 {
     public static <T> List<List<T>> challenge6(List<T> list, int windowSize) {
         if (list == null)    throw new IllegalArgumentException("List cannot be null");
         if (windowSize <= 0) throw new IllegalArgumentException("windowSize must be positive");
-        return new ArrayList<>();
+
+        List<List<T>> result = new ArrayList<>();
+
+        for (int i = 0; i <= list.size() - windowSize; i++) {
+            result.add(new ArrayList<>(list.subList(i, i + windowSize)));
+        }
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
