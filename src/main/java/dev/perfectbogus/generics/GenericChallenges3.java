@@ -308,9 +308,51 @@ public class GenericChallenges3 {
             Node(T value) { this.value = value; }
         }
 
-        void insert(T value)       { }
-        boolean contains(T value)  { return false; }
-        List<T> inOrder()          { return new ArrayList<>(); }
+        void insert(T value)       {
+            root = insertNode(root, value);
+        }
+
+        private Node<T> insertNode(Node<T> node, T value) {
+            if (node == null) return new Node<>(value);
+
+            int cmp = value.compareTo(node.value);
+
+            if (cmp < 0) {
+                node.left = insertNode(node.left, value);
+            } else if (cmp > 0) {
+                node.right = insertNode(node.right, value);
+            }
+
+            return node;
+        }
+
+        boolean contains(T value)  {
+            return containsNode(root, value);
+        }
+
+        private boolean containsNode(Node<T> node, T value) {
+            if (node == null) return false;
+
+            int cmp = value.compareTo(node.value);
+
+            if (cmp < 0) return containsNode(node.left, value);
+            if (cmp > 0) return containsNode(node.right, value);
+            else return true;
+        }
+
+
+        List<T> inOrder()          {
+            List<T> result = new ArrayList<>();
+            inOrderHelper(root, result);
+            return result;
+        }
+
+        private void inOrderHelper(Node<T> node, List<T> result) {
+            if (node == null) return;
+            inOrderHelper(node.left, result);
+            result.add(node.value);
+            inOrderHelper(node.right, result);
+        }
     }
 
     public static <T extends Comparable<T>> BST<T> challenge8() {
