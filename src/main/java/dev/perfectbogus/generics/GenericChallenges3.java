@@ -483,10 +483,77 @@ public class GenericChallenges3 {
             adjacencyList.get(from).add(to);
         }
 
-        List<T> bfs(T start)              { return new ArrayList<>(); }
-        List<T> dfs(T start)              { return new ArrayList<>(); }
-        boolean isReachable(T from, T to) { return false; }
-        boolean hasCycle()                { return false; }
+        List<T> bfs(T start)              {
+            List<T> result = new ArrayList<>();
+            Set<T> visited = new LinkedHashSet<>();
+            Queue<T> queue = new LinkedList<>();
+
+            queue.offer(start);
+            visited.add(start);
+
+            while (!queue.isEmpty()) {
+                T current = queue.poll();
+                result.add(current);
+
+                for (T neighbor : adjacencyList.getOrDefault(current, List.of())) {
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        queue.offer(neighbor);
+                    }
+                }
+            }
+            return result;
+        }
+        List<T> dfs(T start) {
+            List<T> result = new ArrayList<>();
+            Set<T> visited = new LinkedHashSet<>();
+            dfsHelper(start, visited, result);
+            return result;
+        }
+
+        private void dfsHelper(T current, Set<T> visited, List<T> result) {
+            visited.add(current);
+            result.add(current);
+
+            for (T neighbor : adjacencyList.getOrDefault(current, List.of())) {
+                if (!visited.contains(neighbor)) {
+                    dfsHelper(neighbor, visited, result);
+                }
+            }
+
+        }
+
+        boolean isReachable(T from, T to) {
+            return bfs(from).contains(to);
+        }
+        boolean hasCycle()                {
+            Map<T, Integer> color = new HashMap<>();
+
+            for (T vertex : adjacencyList.keySet()) {
+                if (!color.containsKey(vertex)) {
+                    if (dfsColor(vertex, color)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private boolean dfsColor(T current, Map<T, Integer> color) {
+            color.put(current, 1);
+
+            for (T neighbor : adjacencyList.getOrDefault(current, List.of())) {
+                Integer neighborColor = color.getOrDefault(neighbor, 0);
+
+                if (neighborColor == 1) return true;
+                if (neighborColor == 0) {
+                    if (dfsColor(neighbor, color)) return true;
+                }
+            }
+
+            color.put(current, 2);
+            return false;
+        }
     }
 
     public static <T> Graph<T> challenge10() {
