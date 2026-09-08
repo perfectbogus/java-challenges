@@ -392,10 +392,20 @@ public class GenericChallenges3 {
             this.supplier = supplier;
         }
 
-        static <T> Lazy<T> of(Supplier<T> supplier) { return new Lazy<>(supplier); }
+        static <T> Lazy<T> of(Supplier<T> supplier) {
+            return new Lazy<>(supplier);
+        }
 
-        T get()              { return null; }
-        boolean isComputed() { return false; }
+        T get()              {
+            if (!computed) {
+                value = supplier.get();
+                computed = true;
+            }
+            return value;
+        }
+        boolean isComputed() {
+            return computed;
+        }
     }
 
     public static <T> Lazy<T> challenge9(Supplier<T> supplier) {
