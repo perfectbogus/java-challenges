@@ -489,6 +489,24 @@ public class MapChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static Map<String, Set<String>> challenge10(List<String> sentences) {
         if (sentences == null) throw new IllegalArgumentException("Sentences cannot be null");
-        return new HashMap<>();
+        Map<String, Set<String>> result = new HashMap<>();
+        for (String sentence : sentences) {
+            if (sentence == null || sentence.isBlank()) continue;
+
+            List<String> words = Arrays.stream(sentence.trim().split("\\s+"))
+                    .distinct()
+                    .toList();
+
+            for (int i = 0; i < words.size(); i++) {
+                String wordA = words.get(i);
+                for (int j = 0; j < words.size(); j++) {
+                    if (i != j) {
+                        String wordB = words.get(j);
+                        result.computeIfAbsent(wordA, k -> new HashSet<>()).add(wordB);
+                    }
+                }
+            }
+        }
+        return result;
     }
 }
