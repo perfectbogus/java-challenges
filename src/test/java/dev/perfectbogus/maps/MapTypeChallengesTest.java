@@ -156,8 +156,9 @@ class MapTypeChallengesTest {
             List<int[]> result = MapTypeChallenges.challenge3(
                     List.of(5,3,1,4,2), 7);
 
-            assertEquals(1, result.size());
-            assertArrayEquals(new int[]{0,3}, result.get(0)); // 5+... wait
+            assertEquals(2, result.size());
+            assertArrayEquals(new int[]{1, 3}, result.get(0)); // 5+... wait
+            assertArrayEquals(new int[]{0, 4}, result.get(1));
             // 5+?: 7-5=2, see when 2 is found at i=4, pair is [0,4]
             // let me recalculate
             // i=0: map={5→0}

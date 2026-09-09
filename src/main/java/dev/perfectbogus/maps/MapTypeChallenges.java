@@ -92,7 +92,16 @@ public class MapTypeChallenges {
     // ─────────────────────────────────────────────────────────────
     public static List<int[]> challenge3(List<Integer> list, int target) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        List<int[]> result = new ArrayList<>();
+        for (int idx = 0; idx < list.size(); idx++) {
+            int diff = target - list.get(idx);
+            if (map.containsKey(diff)) {
+                result.add(new int[]{map.get(diff), idx});
+            }
+            map.put(list.get(idx), idx);
+        }
+        return result;
     }
 
     // ══════════════════════════════════════════════════════════════════════
