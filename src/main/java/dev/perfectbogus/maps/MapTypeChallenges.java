@@ -54,9 +54,12 @@ public class MapTypeChallenges {
     // ─────────────────────────────────────────────────────────────
     public static Map<Character, List<String>> challenge2(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
-        if (words.stream().anyMatch(String::isEmpty))
-            throw new IllegalArgumentException("Words cannot be empty strings");
-        return new HashMap<>();
+        if (words.stream().anyMatch(String::isEmpty)) throw new IllegalArgumentException("Words cannot be empty strings");
+        Map<Character, List<String>> map = new HashMap<>();
+        for (String w : words) {
+            map.computeIfAbsent(w.charAt(0), k -> new ArrayList<>()).add(w);
+        }
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
