@@ -282,7 +282,14 @@ public class MapTypeChallenges {
 
     public static GradeBounds challenge8(TreeMap<Integer, String> map, int target) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
-        return new GradeBounds("NONE", "NONE");
+
+        Map.Entry<Integer, String> floor = map.floorEntry(target);
+        Map.Entry<Integer, String> ceiling = map.ceilingEntry(target);
+
+        String floorGrade = floor == null ? "NONE" : floor.getValue();
+        String ceilingGrade = ceiling == null ? "NONE" : ceiling.getValue();
+
+        return new GradeBounds(floorGrade, ceilingGrade);
     }
 
     // ─────────────────────────────────────────────────────────────
