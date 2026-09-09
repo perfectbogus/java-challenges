@@ -187,7 +187,39 @@ public class MapTypeChallenges {
     public static List<String> challenge6(List<String> items, int n) {
         if (items == null) throw new IllegalArgumentException("Items cannot be null");
         if (n <= 0)        throw new IllegalArgumentException("n must be positive");
-        return new ArrayList<>();
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>(n, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, Integer> eldest) {
+                return size() > n;
+            }
+        };
+
+        for (String w : items) {
+            map.put(w, 1);
+        }
+
+        List<String> result = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            result.add(entry.getKey());
+        }
+
+        return result;
+    }
+
+    public static List<String> challenge6_2(List<String> items, int n) {
+        if (items == null) throw new IllegalArgumentException("Items cannot be null");
+        if (n <= 0) throw new IllegalArgumentException("N must be positive");
+
+        LinkedHashMap<String, Boolean> map = new LinkedHashMap<>(n, 0.75f, true) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry<String, Boolean> eldest) {
+                return size() > n;
+            }
+        };
+
+        items.forEach(item -> map.put(item, Boolean.TRUE));
+
+        return new ArrayList<>(map.keySet());
     }
 
     // ══════════════════════════════════════════════════════════════════════
