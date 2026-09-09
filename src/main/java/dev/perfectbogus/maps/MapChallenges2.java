@@ -229,9 +229,74 @@ public class MapChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static Map<String, Map<String, Double>> challenge5(List<Employee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
-        return new HashMap<>();
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.groupingBy(
+                        e -> e.yearsOfExperience() >= 5 ? "SENIOR" : "JUNIOR",
+                        Collectors.summingDouble(Employee::salary)
+                )
+        ));
     }
 
+    public static Map<String, Map<String, Double>> challenge5_2(List<Employee> employees) {
+        if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+
+        Map<String, List<Employee>> map = new HashMap<>();
+        for (Employee e : employees) {
+            map.computeIfAbsent(e.department, w -> new ArrayList<>()).add(e);
+        }
+
+        Map<String, Map<String, Double>> result = new HashMap<>();
+        for (Map.Entry<String, List<Employee>> e : map.entrySet()) {
+            Map<String, Double> salariesBySeniorityMap = new HashMap<>();
+            List<Employee> seniors = e.getValue().stream().filter(emp -> emp.yearsOfExperience() >= 5).toList();
+            Double totalSalariesSeniors = seniors.stream().mapToDouble(Employee::salary).sum();
+            List<Employee> juniors = e.getValue().stream().filter(emp -> emp.yearsOfExperience() < 5).toList();
+            Double totalSalariesJuniors = juniors.stream().mapToDouble(Employee::salary).sum();
+            salariesBySeniorityMap.put("SENIOR", totalSalariesSeniors);
+            salariesBySeniorityMap.put("JUNIOR", totalSalariesJuniors);
+            result.put(e.getKey(), salariesBySeniorityMap);
+        }
+
+        return result;
+    }
+
+    public static Map<String, Map<String, Double>> challenge5_3(List<Employee> employees) {
+        if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+
+        Map<String, List<Employee>> map = new HashMap<>();
+        for (Employee e : employees) {
+            map.computeIfAbsent(e.department(), w -> new ArrayList<>()).add(e);
+        }
+
+        Map<String, Map<String, Double>> result = new HashMap<>();
+        for (Map.Entry<String, List<Employee>> entry : map.entrySet()) {
+            Map<String, Double> collect = entry.getValue().stream().collect(Collectors.groupingBy(
+                    e -> e.yearsOfExperience() >= 5 ? "SENIOR" : "JUNIOR",
+                    Collectors.collectingAndThen(
+                            Collectors.toList(),
+                            list -> list.stream().mapToDouble(Employee::salary).sum()
+                    )
+            ));
+
+            result.put(entry.getKey(), collect);
+        }
+
+        return result;
+    }
+
+    public static Map<String, Map<String, Double>> challenge5_4(List<Employee> employees) {
+        if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
+        Map<String, Map<String, Double>> result = new HashMap<>();
+
+        for (Employee e : employees) {
+            String tier = e.yearsOfExperience() >= 5 ? "SENIOR" : "JUNIOR";
+
+            result.computeIfAbsent(e.department(), k -> new HashMap<>()).merge(tier, e.salary(), Double::sum);
+        }
+
+        return result;
+    }
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 6 — Element positions index
     //

@@ -282,6 +282,42 @@ class MapChallenges2Test {
         }
 
         @Test
+        void basicCase2() {
+            List<MapChallenges2.Employee> employees = List.of(
+                    new MapChallenges2.Employee("Alice", "Eng", 90000, 8),
+                    new MapChallenges2.Employee("Bob",   "Eng", 70000, 3),
+                    new MapChallenges2.Employee("Carol", "Mkt", 80000, 6),
+                    new MapChallenges2.Employee("Diana", "Mkt", 60000, 2),
+                    new MapChallenges2.Employee("Eve",   "Eng", 85000, 7)
+            );
+            Map<String, Map<String, Double>> result =
+                    MapChallenges2.challenge5_2(employees);
+
+            assertEquals(175000.0, result.get("Eng").get("SENIOR"), 0.01);
+            assertEquals(70000.0,  result.get("Eng").get("JUNIOR"), 0.01);
+            assertEquals(80000.0,  result.get("Mkt").get("SENIOR"), 0.01);
+            assertEquals(60000.0,  result.get("Mkt").get("JUNIOR"), 0.01);
+        }
+
+        @Test
+        void basicCase3() {
+            List<MapChallenges2.Employee> employees = List.of(
+                    new MapChallenges2.Employee("Alice", "Eng", 90000, 8),
+                    new MapChallenges2.Employee("Bob",   "Eng", 70000, 3),
+                    new MapChallenges2.Employee("Carol", "Mkt", 80000, 6),
+                    new MapChallenges2.Employee("Diana", "Mkt", 60000, 2),
+                    new MapChallenges2.Employee("Eve",   "Eng", 85000, 7)
+            );
+            Map<String, Map<String, Double>> result =
+                    MapChallenges2.challenge5_3(employees);
+
+            assertEquals(175000.0, result.get("Eng").get("SENIOR"), 0.01);
+            assertEquals(70000.0,  result.get("Eng").get("JUNIOR"), 0.01);
+            assertEquals(80000.0,  result.get("Mkt").get("SENIOR"), 0.01);
+            assertEquals(60000.0,  result.get("Mkt").get("JUNIOR"), 0.01);
+        }
+
+        @Test
         void seniorThresholdIsExclusive() {
             // yearsOfExperience=5 → SENIOR (>= 5!)
             List<MapChallenges2.Employee> employees = List.of(
