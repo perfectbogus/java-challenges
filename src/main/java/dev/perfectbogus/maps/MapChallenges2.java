@@ -315,7 +315,12 @@ public class MapChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static <T> Map<T, List<Integer>> challenge6(List<T> list) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return new HashMap<>();
+        Map<T, List<Integer>> map = new HashMap<>();
+        int idx = 0;
+        for (T value : list) {
+            map.computeIfAbsent(value, w -> new ArrayList<>()).add(idx++);
+        }
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
