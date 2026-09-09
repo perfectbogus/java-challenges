@@ -166,9 +166,43 @@ public class MapChallenges2 {
     record DiffReport<K>(Set<K> onlyInLeft, Set<K> onlyInRight, Set<K> different) {}
 
     public static <K, V> DiffReport<K> challenge4(Map<K, V> map1, Map<K, V> map2) {
-        if (map1 == null || map2 == null)
-            throw new IllegalArgumentException("Maps cannot be null");
-        return new DiffReport<>(new HashSet<>(), new HashSet<>(), new HashSet<>());
+        if (map1 == null || map2 == null) throw new IllegalArgumentException("Maps cannot be null");
+
+        Set<K> different = new HashSet<>();
+        Set<K> onlyInLeft = onlyOn(map1, map2, different);
+        Set<K> onlyInRight = onlyOn(map2, map1, different);
+
+        return new DiffReport<>(onlyInLeft, onlyInRight, different);
+    }
+
+    private static <K, V> Set<K> onlyOn(Map<K, V> map1, Map<K,V> map2, Set<K> diff) {
+        Set<K> only = new HashSet<>();
+        for (Map.Entry<K, V> e : map1.entrySet()) {
+            if (!map2.containsKey(e.getKey())) {
+                only.add(e.getKey());
+            } else if (!e.getValue().equals(map2.get(e.getKey()))) {
+                diff.add(e.getKey());
+            }
+        }
+
+        return only;
+    }
+
+    public static <K, V> DiffReport<K> challenge4_2(Map<K, V> map1, Map<K, V> map2) {
+        if (map1 == null || map2 == null) throw new IllegalArgumentException("Maps cannot be null");
+
+        Set<K> onlyInLeft = new HashSet<>(map1.keySet());
+        onlyInLeft.removeAll(map2.keySet());
+
+        Set<K> onlyInRight = new HashSet<>(map2.keySet());
+        onlyInRight.removeAll(map1.keySet());
+
+        Set<K> different = map1.keySet().stream()
+                .filter(map2::containsKey)
+                .filter(k -> !map1.get(k).equals(map2.get(k)))
+                .collect(Collectors.toSet());
+
+        return new DiffReport<>(onlyInLeft, onlyInRight, different);
     }
 
     // ─────────────────────────────────────────────────────────────

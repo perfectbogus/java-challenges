@@ -126,7 +126,7 @@ class MapChallenges2Test {
 
         @Test
         void emptyMap() {
-            assertTrue(MapChallenges2.challenge2(Map.of()).isEmpty());
+            assertTrue(MapChallenges2.challenge2(Map.<String, String>of()).isEmpty());
         }
 
         @Test
