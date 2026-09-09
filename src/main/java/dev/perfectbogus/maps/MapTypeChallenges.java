@@ -316,7 +316,35 @@ public class MapTypeChallenges {
     public static List<String> challenge9(List<Product> products, int n) {
         if (products == null) throw new IllegalArgumentException("Products cannot be null");
         if (n <= 0)           throw new IllegalArgumentException("n must be positive");
-        return new ArrayList<>();
+        TreeMap<Double, String> map = new TreeMap<>();
+        for (Product p : products) {
+            map.put(p.price(), p.name());
+        }
+
+        List<String> result = new ArrayList<>();
+        int i = 0;
+        int limit = Math.min(n, map.size());
+        while (i < limit) {
+            result.add(map.pollLastEntry().getValue());
+            i++;
+        }
+
+        return result;
+    }
+
+    public static List<String> challenge9_2(List<Product> products, int n) {
+        if (products == null) throw new IllegalArgumentException("Products cannot be null");
+        if (n <= 0) throw new IllegalArgumentException("n must be positive");
+        TreeMap<Double, String> map = new TreeMap<>();
+        for(Product p : products) {
+            map.put(p.price(), p.name());
+        }
+
+        return map.descendingMap()
+                .values()
+                .stream()
+                .limit(n)
+                .toList();
     }
 
     // ══════════════════════════════════════════════════════════════════════

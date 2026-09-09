@@ -481,6 +481,19 @@ class MapTypeChallengesTest {
         }
 
         @Test
+        void basicCase2() {
+            List<MapTypeChallenges.Product> products = List.of(
+                    new MapTypeChallenges.Product("Pen",    1.5),
+                    new MapTypeChallenges.Product("Laptop", 999.0),
+                    new MapTypeChallenges.Product("Book",   25.0),
+                    new MapTypeChallenges.Product("Phone",  699.0),
+                    new MapTypeChallenges.Product("Bag",    49.0)
+            );
+            assertEquals(List.of("Laptop","Phone","Bag"),
+                    MapTypeChallenges.challenge9_2(products, 3));
+        }
+
+        @Test
         void topOne() {
             List<MapTypeChallenges.Product> products = List.of(
                     new MapTypeChallenges.Product("A", 10.0),
