@@ -249,7 +249,8 @@ public class MapTypeChallenges {
                                           int lo, int hi) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
         if (lo > hi)     throw new IllegalArgumentException("lo must be <= hi");
-        return new ArrayList<>();
+        Map<Integer, String> resultMap = map.subMap(lo, true, hi, true);
+        return new ArrayList<>(resultMap.values());
     }
 
     // ─────────────────────────────────────────────────────────────
