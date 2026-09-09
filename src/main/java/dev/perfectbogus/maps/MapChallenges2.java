@@ -323,6 +323,17 @@ public class MapChallenges2 {
         return map;
     }
 
+    public static <T> Map<T, List<Integer>> challenge6_2(List<T> list) {
+        if (list == null) throw new IllegalArgumentException("List cannot be null");
+
+        return IntStream.range(0, list.size())
+                .boxed()
+                .collect(Collectors.groupingBy(
+                        i -> list.get(i),
+                        Collectors.toList()
+                ));
+    }
+
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 7 — Running cumulative sum (LinkedHashMap!)
     //
