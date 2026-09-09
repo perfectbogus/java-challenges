@@ -365,6 +365,16 @@ class MapChallenges2Test {
         }
 
         @Test
+        void basicStringCase2() {
+            Map<String, List<Integer>> result = MapChallenges2.challenge6_2(
+                    List.of("a","b","a","c","b","a"));
+
+            assertEquals(List.of(0,2,5), result.get("a"));
+            assertEquals(List.of(1,4),   result.get("b"));
+            assertEquals(List.of(3),      result.get("c"));
+        }
+
+        @Test
         void integerList() {
             Map<Integer, List<Integer>> result = MapChallenges2.challenge6(
                     List.of(1,2,3,2,1));
