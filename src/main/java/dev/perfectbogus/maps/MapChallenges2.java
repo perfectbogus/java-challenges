@@ -395,7 +395,40 @@ public class MapChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static <T extends Comparable<T>> Map<Integer, List<T>> challenge8(List<T> list) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return new HashMap<>();
+        Map<T, Long> freq = list.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ));
+
+        return freq.entrySet().stream()
+                .collect(Collectors.groupingBy(
+                        e -> e.getValue().intValue(),
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                entries -> entries.stream()
+                                        .map(Map.Entry::getKey)
+                                        .sorted()
+                                        .toList()
+                        )
+                ));
+    }
+
+    public static <T extends Comparable<T>> Map<Integer, List<T>> challenge8_2(List<T> list) {
+        if (list == null) throw new IllegalArgumentException("List cannot be null");
+
+        Map<T, Integer> freq = new HashMap<>();
+        for (T value : list) {
+            freq.merge(value, 1, Integer::sum);
+        }
+
+        Map<Integer, List<T>> result = new HashMap<>();
+        for (Map.Entry<T, Integer> entry : freq.entrySet()) {
+            result.computeIfAbsent(entry.getValue(), k -> new ArrayList<>()).add(entry.getKey());
+        }
+
+        result.values().forEach(Collections::sort);
+
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
