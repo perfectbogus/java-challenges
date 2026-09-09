@@ -448,13 +448,24 @@ public class MapChallenges2 {
     //
     // Throw IllegalArgumentException if any argument is null.
     // ─────────────────────────────────────────────────────────────
-    public static <K, V> Map<K, V> challenge9(Map<K, V> map1, Map<K, V> map2,
-                                              BiFunction<V, V, V> mergeFunction) {
-        if (map1 == null || map2 == null)
-            throw new IllegalArgumentException("Maps cannot be null");
-        if (mergeFunction == null)
-            throw new IllegalArgumentException("MergeFunction cannot be null");
-        return new HashMap<>();
+    public static <K, V> Map<K, V> challenge9(Map<K, V> map1, Map<K, V> map2, BiFunction<V, V, V> mergeFunction) {
+        if (map1 == null || map2 == null) throw new IllegalArgumentException("Maps cannot be null");
+        if (mergeFunction == null) throw new IllegalArgumentException("MergeFunction cannot be null");
+
+        Map<K, V> result = new HashMap<>(map1);
+        for (Map.Entry<K, V> entry : map2.entrySet()) {
+            result.merge(entry.getKey(), entry.getValue(), mergeFunction);
+        }
+
+        return result;
+    }
+
+    public static <K, V> Map<K, V> challenge9_2(Map<K, V> map1, Map<K, V> map2, BiFunction<V, V, V> mergeFunction) {
+        if (map1 == null || map2 == null) throw new IllegalArgumentException("Maps cannot be null");
+        if (mergeFunction == null) throw new IllegalArgumentException("MergeFunction cannot be null");
+        Map<K, V> result = new HashMap<>(map1);
+        map2.forEach((k, v) -> result.merge(k, v, mergeFunction));
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
