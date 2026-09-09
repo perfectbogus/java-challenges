@@ -335,6 +335,7 @@ public class MapTypeChallenges {
     public static List<String> challenge9_2(List<Product> products, int n) {
         if (products == null) throw new IllegalArgumentException("Products cannot be null");
         if (n <= 0) throw new IllegalArgumentException("n must be positive");
+
         TreeMap<Double, String> map = new TreeMap<>();
         for(Product p : products) {
             map.put(p.price(), p.name());
@@ -371,12 +372,34 @@ public class MapTypeChallenges {
     //
     // Throw IllegalArgumentException if words is null or threadCount <= 0.
     // ─────────────────────────────────────────────────────────────
-    public static Map<String, Integer> challenge10(List<String> words,
-                                                   int threadCount)
-            throws InterruptedException {
+    public static Map<String, Integer> challenge10(List<String> words, int threadCount) throws InterruptedException {
         if (words == null)    throw new IllegalArgumentException("Words cannot be null");
         if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
-        return new ConcurrentHashMap<>();
+
+        Map<String, Integer> map = new ConcurrentHashMap<>();
+        Thread[] threads = new Thread[threadCount];
+        int chunk = Math.max(1, words.size() / threadCount);
+
+        for (int t = 0; t < threadCount; t++) {
+            final int start = t * chunk;
+            final int end = (t == threadCount - 1) ? words.size() : start + chunk;
+
+            if (start >= words.size()) {
+                threads[t] = new Thread(() -> {});
+                continue;
+            }
+
+            threads[t] = new Thread(() -> {
+                for (int j = start; j < end; j++){
+                    map.merge(words.get(j), 1, Integer::sum);
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
