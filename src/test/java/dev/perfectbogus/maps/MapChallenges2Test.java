@@ -434,6 +434,27 @@ class MapChallenges2Test {
         }
 
         @Test
+        void basicCase2() {
+            LinkedHashMap<String, Double> input = new LinkedHashMap<>();
+            input.put("Jan", 100.0);
+            input.put("Feb", 150.0);
+            input.put("Mar", 200.0);
+            input.put("Apr",  50.0);
+
+            Map<String, Double> result = MapChallenges2.challenge7_2(input);
+
+            List<Map.Entry<String, Double>> entries = new ArrayList<>(result.entrySet());
+            assertEquals("Jan", entries.get(0).getKey());
+            assertEquals(100.0, entries.get(0).getValue(), 0.01);
+            assertEquals("Feb", entries.get(1).getKey());
+            assertEquals(250.0, entries.get(1).getValue(), 0.01);
+            assertEquals("Mar", entries.get(2).getKey());
+            assertEquals(450.0, entries.get(2).getValue(), 0.01);
+            assertEquals("Apr", entries.get(3).getKey());
+            assertEquals(500.0, entries.get(3).getValue(), 0.01);
+        }
+
+        @Test
         void singleEntry() {
             LinkedHashMap<String, Double> input = new LinkedHashMap<>();
             input.put("only", 42.0);

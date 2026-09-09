@@ -1,6 +1,7 @@
 package dev.perfectbogus.maps;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.*;
 import java.util.function.*;
 
@@ -349,7 +350,25 @@ public class MapChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static Map<String, Double> challenge7(LinkedHashMap<String, Double> map) {
         if (map == null) throw new IllegalArgumentException("Map cannot be null");
-        return new LinkedHashMap<>();
+        LinkedHashMap<String, Double> replace = new LinkedHashMap<>();
+        double sum = 0.0;
+        for (Map.Entry<String, Double> entry : map.entrySet()) {
+            sum += entry.getValue();
+            replace.put(entry.getKey(), sum);
+        }
+        return replace;
+    }
+
+    public static Map<String, Double> challenge7_2(LinkedHashMap<String, Double> map) {
+        if (map == null) throw new IllegalArgumentException("Map cannot be null");
+        AtomicReference<Double> running = new AtomicReference<>(0.0);
+
+        return map.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> running.updateAndGet(sum -> sum + e.getValue()),
+                (existing, incoming) -> existing,
+                LinkedHashMap::new
+        ));
     }
 
     // ─────────────────────────────────────────────────────────────
