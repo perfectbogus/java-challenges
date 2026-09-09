@@ -27,7 +27,11 @@ public class MapTypeChallenges {
     // ─────────────────────────────────────────────────────────────
     public static Map<String, Integer> challenge1(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
-        return new HashMap<>();
+        Map<String, Integer> result = new HashMap<>();
+        for (String s : words) {
+            result.merge(s, 1, Integer::sum);
+        }
+        return result;
     }
 
     // ─────────────────────────────────────────────────────────────
