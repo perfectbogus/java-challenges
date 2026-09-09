@@ -154,7 +154,11 @@ public class MapTypeChallenges {
     // ─────────────────────────────────────────────────────────────
     public static LinkedHashMap<String, Integer> challenge5(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
-        return new LinkedHashMap<>();
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        for (String word : words) {
+            map.merge(word, 1, Integer::sum);
+        }
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
