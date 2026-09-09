@@ -127,7 +127,11 @@ public class MapTypeChallenges {
     // ─────────────────────────────────────────────────────────────
     public static LinkedHashMap<String, Integer> challenge4(List<String> words) {
         if (words == null) throw new IllegalArgumentException("Words cannot be null");
-        return new LinkedHashMap<>();
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        for (int i = 0; i < words.size(); i++) {
+            map.putIfAbsent(words.get(i), i);
+        }
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
