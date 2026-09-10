@@ -420,12 +420,33 @@ public class MapTypeChallenges {
     // Use computeIfAbsent(length, k -> new CopyOnWriteArrayList<>()).add(word)
     // Throw IllegalArgumentException if words is null or threadCount <= 0.
     // ─────────────────────────────────────────────────────────────
-    public static Map<Integer, List<String>> challenge11(List<String> words,
-                                                         int threadCount)
-            throws InterruptedException {
+    public static Map<Integer, List<String>> challenge11(List<String> words, int threadCount) throws InterruptedException {
         if (words == null)    throw new IllegalArgumentException("Words cannot be null");
         if (threadCount <= 0) throw new IllegalArgumentException("threadCount must be positive");
-        return new ConcurrentHashMap<>();
+        Map<Integer, List<String>> map = new ConcurrentHashMap<>();
+        Thread[] threads = new Thread[threadCount];
+        int chunk = Math.max(1, words.size() / threadCount);
+
+        for (int t = 0; t < threadCount; t++) {
+            final int start = t * chunk;
+            final int end = (t == threadCount - 1) ? words.size() : start + chunk;
+
+            if (start >= words.size()) {
+                threads[t] = new Thread(() -> {});
+                continue;
+            }
+
+            threads[t] = new Thread(() -> {
+                for (int j = start; j < end; j++){
+                    map.computeIfAbsent(words.get(j).length(), k -> new CopyOnWriteArrayList<>()).add(words.get(j));
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -449,11 +470,34 @@ public class MapTypeChallenges {
     // ─────────────────────────────────────────────────────────────
     record Transaction(String category, long amount) {}
 
-    public static Map<String, Long> challenge12(List<Transaction> transactions,
-                                                int threadCount)
+    public static Map<String, Long> challenge12(List<Transaction> transactions, int threadCount)
             throws InterruptedException {
         if (transactions == null) throw new IllegalArgumentException("Transactions cannot be null");
         if (threadCount  <= 0)    throw new IllegalArgumentException("threadCount must be positive");
-        return new ConcurrentHashMap<>();
+        Map<String, Long> map = new ConcurrentHashMap<>();
+        int chunk = Math.max(1, transactions.size() / threadCount);
+        Thread[] threads = new Thread[threadCount];
+
+        for (int t = 0; t < threadCount; t++) {
+            int start = t * chunk;
+            int end = (t == threadCount - 1) ? transactions.size() : (start + chunk);
+
+            if (start >= transactions.size()) {
+                threads[t] = new Thread(() ->{});
+                continue;
+            }
+
+            threads[t] = new Thread(() -> {
+                for (int j = start; j < end; j++) {
+                    Transaction trans = transactions.get(j);
+                    map.merge(trans.category(), trans.amount, Long::sum);
+                }
+            });
+        }
+
+        for (Thread t : threads) t.start();
+        for (Thread t : threads) t.join();
+
+        return map;
     }
 }
