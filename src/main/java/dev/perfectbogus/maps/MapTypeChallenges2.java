@@ -1,6 +1,7 @@
 package dev.perfectbogus.maps;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MapTypeChallenges2 {
 
@@ -167,7 +168,17 @@ public class MapTypeChallenges2 {
 
     public static EnumMap<Priority, Long> challenge4(List<Task> tasks) {
         if (tasks == null) throw new IllegalArgumentException("Tasks cannot be null");
-        return new EnumMap<>(Priority.class);
+        EnumMap<Priority, Long> map = new EnumMap<>(Priority.class);
+
+        for (Priority p : Priority.values()) {
+            map.put(p, 0L);
+        }
+
+        for (Task t : tasks) {
+            map.merge(t.priority(), 1L, Long::sum);
+        }
+
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
