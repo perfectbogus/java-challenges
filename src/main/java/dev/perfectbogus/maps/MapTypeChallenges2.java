@@ -205,7 +205,13 @@ public class MapTypeChallenges2 {
 
     public static EnumMap<Department, Double> challenge5(List<DeptEmployee> employees) {
         if (employees == null) throw new IllegalArgumentException("Employees cannot be null");
-        return new EnumMap<>(Department.class);
+        EnumMap<Department, Double> map = new EnumMap<>(Department.class);
+
+        for (DeptEmployee e : employees) {
+            map.merge(e.department(), e.salary(), Math::max);
+        }
+
+        return map;
     }
 
     // ─────────────────────────────────────────────────────────────
