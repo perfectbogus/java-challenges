@@ -249,6 +249,17 @@ public class MapTypeChallenges2 {
 
     public static int challenge6(List<ScoredTask> tasks) {
         if (tasks == null) throw new IllegalArgumentException("Tasks cannot be null");
-        return 0;
+        EnumMap<Priority, Integer> map = new EnumMap<>(Priority.class);
+        map.put(Priority.LOW, 1);
+        map.put(Priority.MEDIUM, 2);
+        map.put(Priority.HIGH, 3);
+
+        int total = 0;
+        for(ScoredTask t : tasks) {
+            total += t.score() * map.get(t.priority());
+        }
+        return total;
     }
+
+
 }
