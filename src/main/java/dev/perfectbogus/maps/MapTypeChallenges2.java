@@ -112,7 +112,18 @@ public class MapTypeChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static Map<String, List<Integer>> challenge3(List<Object> list) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return new HashMap<>();
+        Map<Object, List<Integer>> map = new IdentityHashMap<>();
+        int i = 0;
+        for (Object o : list) {
+            map.computeIfAbsent(o, w -> new ArrayList<>()).add(i++);
+        }
+
+        Map<String, List<Integer>> result = new HashMap<>();
+        for (Map.Entry<Object, List<Integer>> entry : map.entrySet()) {
+            if (entry.getValue().size() > 1) result.put(String.valueOf(entry.getKey()), entry.getValue());
+        }
+
+        return result;
     }
 
     // ══════════════════════════════════════════════════════════════════════
