@@ -44,7 +44,11 @@ public class MapTypeChallenges2 {
     // ─────────────────────────────────────────────────────────────
     public static int challenge1(List<String> list) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return 0;
+        Map<String, Integer> map = new IdentityHashMap<>();
+        for (String s : list) {
+            map.merge(s, 1, Integer::sum);
+        }
+        return map.size();
     }
 
     // ─────────────────────────────────────────────────────────────
