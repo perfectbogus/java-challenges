@@ -80,7 +80,11 @@ public class MapTypeChallenges2 {
 
     public static int challenge2(List<Item> list) {
         if (list == null) throw new IllegalArgumentException("List cannot be null");
-        return 0;
+        Map<Item, Boolean> visited = new IdentityHashMap<>();
+        for (Item i : list) {
+            visited.computeIfAbsent(i, w -> Boolean.TRUE);
+        }
+        return visited.size();
     }
 
     // ─────────────────────────────────────────────────────────────
