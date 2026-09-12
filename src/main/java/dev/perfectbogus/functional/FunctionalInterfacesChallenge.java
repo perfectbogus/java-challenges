@@ -69,7 +69,7 @@ public class FunctionalInterfacesChallenge {
      * Passes every element of numbers to the given consumer, in order.
      */
     public static void applyToEach(List<Integer> numbers, Consumer<Integer> consumer) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        numbers.forEach(consumer);
     }
 
     /**
