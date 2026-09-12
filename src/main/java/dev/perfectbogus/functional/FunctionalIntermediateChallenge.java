@@ -25,7 +25,7 @@ public class FunctionalIntermediateChallenge {
     // the first operand and returns another function which takes the second
     // operand and produces the sum.
     public static Function<Integer, Function<Integer, Integer>> curriedAdd() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return i ->  j -> i + j ;
     }
 
     // CHALLENGE 2: Apply a TriFunction
