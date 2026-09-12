@@ -31,7 +31,7 @@ public class FunctionalIntermediateChallenge {
     // CHALLENGE 2: Apply a TriFunction
     // Applies the given three-argument function to a, b and c and returns the result.
     public static Integer applyTriFunction(TriFunction<Integer, Integer, Integer, Integer> f, int a, int b, int c) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return f.apply(a, b , c);
     }
 
     // CHALLENGE 3: Memoize
