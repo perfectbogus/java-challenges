@@ -24,7 +24,7 @@ public class FunctionalInterfacesChallenge {
      * Applies the given function to the input and returns the result.
      */
     public static Integer transform(Function<String, Integer> f, String input) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return f.apply(input);
     }
 
     /**
@@ -33,7 +33,7 @@ public class FunctionalInterfacesChallenge {
      * Applies the given two-argument function to a and b and returns the result.
      */
     public static Integer combineValues(BiFunction<Integer, Integer, Integer> f, int a, int b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return f.apply(a, b);
     }
 
     /**
