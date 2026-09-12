@@ -78,7 +78,7 @@ public class FunctionalInterfacesChallenge {
      * Passes key and value to the given two-argument consumer.
      */
     public static void applyBiConsumer(BiConsumer<String, Integer> action, String key, Integer value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        action.accept(key, value);
     }
 
     /**
