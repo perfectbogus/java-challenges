@@ -134,7 +134,7 @@ public class FunctionalInterfacesChallenge {
      * Returns true only if value satisfies both p1 and p2.
      */
     public static boolean checkCombined(Predicate<Integer> p1, Predicate<Integer> p2, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return p1.and(p2).test(value);
     }
 
     /**
