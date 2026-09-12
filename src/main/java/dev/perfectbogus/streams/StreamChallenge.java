@@ -1,5 +1,6 @@
 package dev.perfectbogus.streams;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -55,8 +56,11 @@ public class StreamChallenge {
      *         or Optional.empty() if no word matches
      */
     public static Optional<String> longestWordStartingWith(List<String> words, char letter) {
-        // TODO: implement using Stream API
-        // (hint: filter -> max with Comparator.comparingInt)
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (words == null) throw new IllegalArgumentException("Words cannot be null");
+        if (!Character.isLetter(letter)) throw new IllegalArgumentException("Letter is not a letter: " + letter);
+
+        return words.stream()
+                .filter(w -> w.startsWith("" + letter))
+                .max(Comparator.comparingInt(String::length));
     }
 }
