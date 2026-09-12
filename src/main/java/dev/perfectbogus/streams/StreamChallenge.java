@@ -35,9 +35,10 @@ public class StreamChallenge {
      * @return the sum of squares of the even numbers; 0 if there are none
      */
     public static int sumOfSquaresOfEvens(List<Integer> numbers) {
+        if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
         // TODO: implement using Stream API
         // (hint: filter -> map -> sum, or reduce)
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().filter(i -> i % 2 == 0).mapToInt(Integer::intValue).map(i -> i * i).sum();
     }
 
     /**
