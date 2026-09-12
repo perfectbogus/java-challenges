@@ -1,5 +1,6 @@
 package dev.perfectbogus.functional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,8 +39,10 @@ public class FunctionalIntermediateChallenge {
     // Returns a new function that behaves like the given function, but caches
     // results per input so the underlying function is only ever invoked once
     // for each distinct argument.
+
     public static Function<Integer, Integer> memoize(Function<Integer, Integer> function) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Integer> memo = new HashMap<>();
+        return input -> memo.computeIfAbsent(input, k -> function.apply(input));
     }
 
     // CHALLENGE 4: Pipeline
