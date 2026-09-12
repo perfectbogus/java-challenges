@@ -125,7 +125,7 @@ public class FunctionalInterfacesChallenge {
      * to the given comparator. The original list must not be modified.
      */
     public static List<String> sortWith(List<String> list, Comparator<String> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return list.stream().sorted(comparator).toList();
     }
 
     /**
