@@ -42,7 +42,7 @@ public class FunctionalInterfacesChallenge {
      * Evaluates the given predicate against value.
      */
     public static boolean checkCondition(Predicate<Integer> predicate, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return predicate.test(value);
     }
 
     /**
