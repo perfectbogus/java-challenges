@@ -1,6 +1,7 @@
 package dev.perfectbogus;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -47,7 +48,10 @@ public class FunctionalChallenge {
      * @return the concatenation of first.get() and second.get()
      */
     public static String combineStrings(Supplier<String> first, Supplier<String> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (first == null) throw new IllegalArgumentException("First cannot be null");
+        if (second == null) throw new IllegalArgumentException("Second cannot be null");
+
+        return first.get() + second.get();
     }
 
     /**
@@ -61,7 +65,10 @@ public class FunctionalChallenge {
      * @return g applied to (f applied to x)
      */
     public static int composeAndApply(Function<Integer, Integer> f, Function<Integer, Integer> g, int x) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Objects.requireNonNull(f, "f cannot be null");
+        Objects.requireNonNull(g, "g cannot be null");
+        Function<Integer, Integer> all = g.compose(f);
+        return all.apply(x);
     }
 
     /**
