@@ -17,7 +17,9 @@ public class FunctionalChallenge {
      * @return f applied to (f applied to x)
      */
     public static int applyTwice(Function<Integer, Integer> f, int x) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (f == null) throw new IllegalArgumentException("f cannot be null");
+        Function<Integer, Integer> all = f.compose(f);
+        return all.apply(x);
     }
 
     /**
