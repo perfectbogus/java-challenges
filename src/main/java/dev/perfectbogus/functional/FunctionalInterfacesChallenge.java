@@ -143,7 +143,7 @@ public class FunctionalInterfacesChallenge {
      * Applies the given function to input and returns the primitive int result.
      */
     public static int mapToInt(ToIntFunction<String> function, String input) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return function.applyAsInt(input);
     }
 
     /**
