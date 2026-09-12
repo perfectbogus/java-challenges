@@ -96,7 +96,7 @@ public class FunctionalInterfacesChallenge {
      * Applies the given binary operator to a and b and returns the result.
      */
     public static Integer applyBinaryOperator(BinaryOperator<Integer> operator, int a, int b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return operator.apply(a, b);
     }
 
     /**
