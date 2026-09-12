@@ -32,7 +32,9 @@ public class FunctionalChallenge {
      * @return true if all numbers satisfy the predicate (or the list is empty), false otherwise
      */
     public static boolean allMatch(List<Integer> numbers, Predicate<Integer> predicate) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (numbers == null) throw new IllegalArgumentException("Numbers cannot be null");
+        if (predicate == null) throw new IllegalArgumentException("Predicate cannot be null");
+        return numbers.stream().allMatch(predicate);
     }
 
     /**
