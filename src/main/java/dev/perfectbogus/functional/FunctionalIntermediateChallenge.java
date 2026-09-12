@@ -65,6 +65,10 @@ public class FunctionalIntermediateChallenge {
     // returns an Optional containing the result. If it throws any exception,
     // returns Optional.empty() instead of propagating the exception.
     public static <T, R> Optional<R> safeApply(ThrowingFunction<T, R> function, T input) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return Optional.of(function.apply(input));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 }
