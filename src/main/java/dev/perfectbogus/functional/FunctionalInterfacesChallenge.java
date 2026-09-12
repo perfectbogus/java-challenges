@@ -152,6 +152,6 @@ public class FunctionalInterfacesChallenge {
      * Evaluates the given primitive int predicate against value.
      */
     public static boolean checkIntCondition(IntPredicate predicate, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return predicate.test(value);
     }
 }
