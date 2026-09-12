@@ -81,6 +81,9 @@ public class FunctionalChallenge {
      * @return the number of words that satisfy the predicate
      */
     public static long countMatching(List<String> words, Predicate<String> predicate) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Objects.requireNonNull(words, "Words cannot be null");
+        Objects.requireNonNull(predicate, "Predicate cannot be null");
+
+        return words.stream().filter(predicate).count();
     }
 }
