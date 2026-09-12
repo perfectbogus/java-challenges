@@ -1,9 +1,6 @@
 package dev.perfectbogus.functional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
@@ -50,7 +47,17 @@ public class FunctionalIntermediateChallenge {
     // order, feeding each result into the next. An empty list should behave
     // as the identity function.
     public static Function<Integer, Integer> pipeline(List<Function<Integer, Integer>> functions) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Objects.requireNonNull(functions, "Functions cannot be null");
+        Function<Integer, Integer> all = Function.identity();
+        for (Function<Integer, Integer> f : functions) {
+            all = all.andThen(f);
+        }
+        return all;
+    }
+
+    public static Function<Integer, Integer> pipeline2(List<Function<Integer, Integer>> functions) {
+        Objects.requireNonNull(functions, "Functions cannot be null");
+        return functions.stream().reduce(Function.identity(), Function::andThen);
     }
 
     // CHALLENGE 5: Safe Apply
