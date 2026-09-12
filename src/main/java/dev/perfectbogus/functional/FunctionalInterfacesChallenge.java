@@ -87,7 +87,7 @@ public class FunctionalInterfacesChallenge {
      * Applies the given unary operator to value and returns the result.
      */
     public static Integer applyOperator(UnaryOperator<Integer> operator, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return operator.apply(value);
     }
 
     /**
