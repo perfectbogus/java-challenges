@@ -105,7 +105,7 @@ public class FunctionalInterfacesChallenge {
      * Executes the given task.
      */
     public static void execute(Runnable task) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        task.run();
     }
 
     /**
@@ -115,7 +115,7 @@ public class FunctionalInterfacesChallenge {
      * by the task should propagate to the caller.
      */
     public static Integer execute(Callable<Integer> task) throws Exception {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return task.call();
     }
 
     /**
