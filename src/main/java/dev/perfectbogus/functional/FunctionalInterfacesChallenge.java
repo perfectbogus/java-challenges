@@ -51,7 +51,7 @@ public class FunctionalInterfacesChallenge {
      * Evaluates the given two-argument predicate against a and b.
      */
     public static boolean checkRelation(BiPredicate<Integer, Integer> predicate, int a, int b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return predicate.test(a, b);
     }
 
     /**
@@ -60,7 +60,7 @@ public class FunctionalInterfacesChallenge {
      * Obtains and returns a value from the given supplier.
      */
     public static String getValue(Supplier<String> supplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return supplier.get();
     }
 
     /**
