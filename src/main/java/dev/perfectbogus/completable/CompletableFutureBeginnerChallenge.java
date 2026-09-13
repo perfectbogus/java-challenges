@@ -58,7 +58,7 @@ public class CompletableFutureBeginnerChallenge {
     // Returns a new future whose result is combiner applied to the results
     // of f1 and f2, once both have completed.
     public static CompletableFuture<Integer> combineTwoFutures(CompletableFuture<Integer> f1, CompletableFuture<Integer> f2, BiFunction<Integer, Integer, Integer> combiner) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return f1.thenCombine(f2, combiner);
     }
 
     // CHALLENGE 8
