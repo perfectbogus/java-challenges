@@ -81,6 +81,6 @@ public class CompletableFutureBeginnerChallenge {
     // caused the future to transition to a completed state, or false if
     // the future was already completed.
     public static boolean completeManually(CompletableFuture<String> future, String value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.complete(value);
     }
 }
