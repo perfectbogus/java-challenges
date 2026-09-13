@@ -13,7 +13,7 @@ public class CompletableFutureIntermediateChallenge {
     // has completed. The returned future's own result can be ignored by
     // callers; it exists only to signal that all of them are done.
     public static CompletableFuture<Void> combineAll(List<CompletableFuture<?>> futures) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
     }
 
     // CHALLENGE 2
