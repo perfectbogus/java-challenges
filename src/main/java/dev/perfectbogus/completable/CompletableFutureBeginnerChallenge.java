@@ -44,14 +44,14 @@ public class CompletableFutureBeginnerChallenge {
     // Runs action once future completes (its result, if any, is ignored),
     // and returns only after action has run.
     public static void runAfterCompletion(CompletableFuture<?> future, Runnable action) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        future.thenRun(action).join();
     }
 
     // CHALLENGE 6
     // Returns the result of future if it completes normally, or
     // defaultValue if it completes exceptionally.
     public static String getValueOrDefault(CompletableFuture<String> future, String defaultValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.exceptionally(t -> defaultValue).join();
     }
 
     // CHALLENGE 7
