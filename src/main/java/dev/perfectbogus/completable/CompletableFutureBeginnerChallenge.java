@@ -66,7 +66,7 @@ public class CompletableFutureBeginnerChallenge {
     // mapper, which itself returns a future (the two stages should be
     // flattened rather than nested).
     public static CompletableFuture<Integer> chainFutures(CompletableFuture<Integer> future, Function<Integer, CompletableFuture<Integer>> mapper) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.thenCompose(mapper);
     }
 
     // CHALLENGE 9
