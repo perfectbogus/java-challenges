@@ -11,14 +11,14 @@ public class CompletableFutureBeginnerChallenge {
     // CHALLENGE 1
     // Returns an already-completed future holding value.
     public static <T> CompletableFuture<T> createCompleted(T value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.completedFuture(value);
     }
 
     // CHALLENGE 2
     // Returns a future that will be completed asynchronously with the
     // result produced by supplier.
     public static CompletableFuture<String> supplyValue(Supplier<String> supplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.supplyAsync(supplier);
     }
 
     // CHALLENGE 3
