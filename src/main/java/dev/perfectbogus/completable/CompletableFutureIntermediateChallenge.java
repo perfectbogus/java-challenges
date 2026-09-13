@@ -2,6 +2,7 @@ package dev.perfectbogus.completable;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -19,7 +20,7 @@ public class CompletableFutureIntermediateChallenge {
     // CHALLENGE 2
     // Returns the result of whichever future in the list completes first.
     public static Object firstCompleted(List<CompletableFuture<String>> futures) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.anyOf(futures.toArray(new CompletableFuture[0])).join();
     }
 
     // CHALLENGE 3
