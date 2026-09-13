@@ -73,7 +73,7 @@ public class CompletableFutureBeginnerChallenge {
     // Returns whether future has already reached a terminal state
     // (completed normally, exceptionally, or was cancelled).
     public static boolean isFutureDone(CompletableFuture<?> future) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.isDone();
     }
 
     // CHALLENGE 10
