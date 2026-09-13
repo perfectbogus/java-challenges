@@ -1,5 +1,6 @@
 package dev.perfectbogus.completable;
 
+import java.util.concurrent.ExecutionException;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -25,14 +26,18 @@ public class CompletableFutureBeginnerChallenge {
     // Returns a new future whose result is mapper applied to the result
     // of future, once future completes.
     public static CompletableFuture<Integer> transformValue(CompletableFuture<Integer> future, Function<Integer, Integer> mapper) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.thenApplyAsync(mapper);
     }
 
     // CHALLENGE 4
     // Passes the result of future to consumer once future completes, and
     // returns only after consumer has run.
     public static void consumeValue(CompletableFuture<String> future, Consumer<String> consumer) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            consumer.accept(future.get());
+        } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     // CHALLENGE 5
