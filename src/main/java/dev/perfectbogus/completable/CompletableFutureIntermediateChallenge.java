@@ -29,7 +29,8 @@ public class CompletableFutureIntermediateChallenge {
     // "Failed: <message>" (using the exception's message) if it completed
     // exceptionally.
     public static CompletableFuture<String> describeOutcome(CompletableFuture<Integer> future) {
-        return future.handle((result, ex) -> ex != null ? "Failed: " + ex.getMessage() : "Success: " + result);
+        return future.handle(
+                (result, ex) -> ex != null ? "Failed: " + ex.getMessage() : "Success: " + result);
     }
 
     // CHALLENGE 4
@@ -37,7 +38,7 @@ public class CompletableFutureIntermediateChallenge {
     // normally, or the literal string "error" if it completed
     // exceptionally. Does not alter the outcome of future itself.
     public static void onCompleteLog(CompletableFuture<String> future, List<String> log) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        future.whenComplete((result, ex) -> log.add(ex != null ? "error" : result));
     }
 
     // CHALLENGE 5
