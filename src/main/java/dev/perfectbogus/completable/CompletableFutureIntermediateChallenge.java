@@ -55,7 +55,7 @@ public class CompletableFutureIntermediateChallenge {
     // that result. If future fails, or mapper throws while computing its
     // result, the returned future completes with fallback instead.
     public static CompletableFuture<Integer> chainWithRecovery(CompletableFuture<Integer> future, Function<Integer, Integer> mapper, int fallback) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.thenApplyAsync(mapper).exceptionally(t -> fallback);
     }
 
     // CHALLENGE 7
