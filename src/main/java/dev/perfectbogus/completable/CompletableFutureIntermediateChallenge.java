@@ -1,5 +1,6 @@
 package dev.perfectbogus.completable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -70,7 +71,17 @@ public class CompletableFutureIntermediateChallenge {
     // Waits for every future in the list to complete, then returns their
     // results as a list, preserving the original order.
     public static <T> List<T> joinAll(List<CompletableFuture<T>> futures) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<T> results = new ArrayList<>();
+        for (CompletableFuture<T> f : futures) {
+            results.add(f.join());
+        }
+        return results;
+    }
+
+    public static <T> List<T> joinAllStream(List<CompletableFuture<T>> futures) {
+        return futures.stream()
+                .map(CompletableFuture::join)
+                .toList();
     }
 
     // CHALLENGE 9

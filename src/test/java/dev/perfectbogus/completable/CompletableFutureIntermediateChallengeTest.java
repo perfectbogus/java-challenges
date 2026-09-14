@@ -253,6 +253,16 @@ class CompletableFutureIntermediateChallengeTest {
         }
 
         @Test
+        void testReturnsAllResultsInOrderStream() {
+            List<CompletableFuture<Integer>> futures = List.of(
+                    CompletableFuture.completedFuture(1),
+                    CompletableFuture.completedFuture(2),
+                    CompletableFuture.completedFuture(3)
+            );
+            assertEquals(List.of(1, 2, 3), CompletableFutureIntermediateChallenge.joinAllStream(futures));
+        }
+
+        @Test
         void testEmptyListReturnsEmptyList() {
             assertEquals(List.of(), CompletableFutureIntermediateChallenge.joinAll(List.of()));
         }
