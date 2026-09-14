@@ -63,7 +63,7 @@ public class CompletableFutureIntermediateChallenge {
     // work is executed using the given executor rather than the default
     // one.
     public static CompletableFuture<Integer> applyWithExecutor(CompletableFuture<Integer> future, Function<Integer, Integer> mapper, Executor executor) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.thenApplyAsync(mapper, executor);
     }
 
     // CHALLENGE 8
