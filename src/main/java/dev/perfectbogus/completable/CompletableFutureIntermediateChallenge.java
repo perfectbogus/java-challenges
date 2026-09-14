@@ -89,7 +89,7 @@ public class CompletableFutureIntermediateChallenge {
     // completes within timeoutMillis, or with fallback if that time
     // elapses before future completes.
     public static CompletableFuture<String> withTimeoutFallback(CompletableFuture<String> future, long timeoutMillis, String fallback) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.completeOnTimeout(fallback, timeoutMillis, TimeUnit.MILLISECONDS);
     }
 
     // CHALLENGE 10
