@@ -46,7 +46,7 @@ public class CompletableFutureIntermediateChallenge {
     // this call caused the future to transition to a completed state, or
     // false if the future was already completed.
     public static boolean failManually(CompletableFuture<String> future, Throwable error) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.completeExceptionally(error);
     }
 
     // CHALLENGE 6
