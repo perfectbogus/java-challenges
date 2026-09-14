@@ -29,7 +29,7 @@ public class CompletableFutureIntermediateChallenge {
     // "Failed: <message>" (using the exception's message) if it completed
     // exceptionally.
     public static CompletableFuture<String> describeOutcome(CompletableFuture<Integer> future) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.handle((result, ex) -> ex != null ? "Failed: " + ex.getMessage() : "Success: " + result);
     }
 
     // CHALLENGE 4
