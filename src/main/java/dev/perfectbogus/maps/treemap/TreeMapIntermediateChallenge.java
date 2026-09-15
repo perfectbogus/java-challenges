@@ -62,7 +62,7 @@ public class TreeMapIntermediateChallenge {
     // Returns a new TreeMap containing every entry of map whose key is
     // strictly greater than key (i.e. key itself is excluded).
     public static TreeMap<Integer, String> tailMapExclusive(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new TreeMap<>(map.tailMap(key, false));
     }
 
     // CHALLENGE 8
