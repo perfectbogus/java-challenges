@@ -35,7 +35,7 @@ public class TreeMapBeginnerChallenge {
     // Returns the smallest key in map that is strictly greater than key,
     // or null if no such key exists.
     public static Integer higher(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.higherKey(key);
     }
 
     // CHALLENGE 6
