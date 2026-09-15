@@ -39,7 +39,7 @@ public class TreeMapIntermediateChallenge {
     // map that is greater than or equal to key, or null if no such entry
     // exists.
     public static Map.Entry<Integer, String> ceilingEntry(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.ceilingEntry(key);
     }
 
     // CHALLENGE 5
