@@ -47,7 +47,7 @@ public class TreeMapIntermediateChallenge {
     // map that is less than or equal to key, or null if no such entry
     // exists.
     public static Map.Entry<Integer, String> floorEntry(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.floorEntry(key);
     }
 
     // CHALLENGE 6
