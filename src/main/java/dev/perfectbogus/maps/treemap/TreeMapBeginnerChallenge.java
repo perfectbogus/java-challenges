@@ -1,6 +1,8 @@
 package dev.perfectbogus.maps.treemap;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class TreeMapBeginnerChallenge {
@@ -49,13 +51,13 @@ public class TreeMapBeginnerChallenge {
     // Returns, in ascending order, every key in map that is strictly less
     // than key.
     public static List<Integer> keysBelow(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.headMap(key).keySet().stream().toList();
     }
 
     // CHALLENGE 8
     // Returns, in ascending order, every key in map that is greater than
     // or equal to fromInclusive and strictly less than toExclusive.
     public static List<Integer> keysInRange(TreeMap<Integer, String> map, int fromInclusive, int toExclusive) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.subMap(fromInclusive, toExclusive).keySet().stream().toList();
     }
 }
