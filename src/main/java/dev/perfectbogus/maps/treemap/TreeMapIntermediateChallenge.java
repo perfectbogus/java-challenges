@@ -1,4 +1,5 @@
 package dev.perfectbogus.maps.treemap;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,7 +12,10 @@ public class TreeMapIntermediateChallenge {
     // the same key). When two source keys differ only by case, the one
     // encountered later while iterating source's entrySet wins.
     public static TreeMap<String, Integer> buildCaseInsensitiveMap(Map<String, Integer> source) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byCase = Comparator.comparing(String::toLowerCase);
+        TreeMap<String, Integer> result = new TreeMap<>(byCase);
+        result.putAll(source);
+        return result;
     }
 
     // CHALLENGE 2
