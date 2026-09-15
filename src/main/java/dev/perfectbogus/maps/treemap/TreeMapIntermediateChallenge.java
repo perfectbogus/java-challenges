@@ -70,7 +70,9 @@ public class TreeMapIntermediateChallenge {
     // a key appears in both, the resulting value is the sum of the two
     // values.
     public static TreeMap<String, Integer> mergeSorted(TreeMap<String, Integer> map1, TreeMap<String, Integer> map2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        TreeMap<String, Integer> result = new TreeMap<>(map1);
+        map2.forEach((key, value) -> result.merge(key, value, Integer::sum));
+        return result;
     }
 
     // CHALLENGE 9
