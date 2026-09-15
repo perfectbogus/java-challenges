@@ -14,7 +14,7 @@ public class TreeMapBeginnerChallenge {
     // CHALLENGE 2
     // Returns the largest key currently in map.
     public static Integer largestKey(TreeMap<Integer, String> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.lastKey();
     }
 
     // CHALLENGE 3
