@@ -8,7 +8,7 @@ public class TreeMapBeginnerChallenge {
     // CHALLENGE 1
     // Returns the smallest key currently in map.
     public static Integer smallestKey(TreeMap<Integer, String> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.firstKey();
     }
 
     // CHALLENGE 2
