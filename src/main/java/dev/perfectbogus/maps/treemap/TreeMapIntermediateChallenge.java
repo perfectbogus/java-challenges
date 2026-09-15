@@ -80,7 +80,12 @@ public class TreeMapIntermediateChallenge {
     // values (keys.get(i) maps to values.get(i)), ordered so that
     // iterating the map visits keys from largest to smallest.
     public static TreeMap<Integer, String> buildWithReverseOrder(List<Integer> keys, List<String> values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        TreeMap<Integer, String> result = new TreeMap<>(Comparator.reverseOrder());
+        final int min = Math.min(keys.size(), values.size());
+        for (int i = 0; i < min; i++) {
+            result.put(keys.get(i), values.get(i));
+        }
+        return result;
     }
 
     // CHALLENGE 10
