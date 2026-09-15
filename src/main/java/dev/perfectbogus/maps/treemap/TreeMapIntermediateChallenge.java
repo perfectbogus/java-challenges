@@ -80,9 +80,13 @@ public class TreeMapIntermediateChallenge {
     // values (keys.get(i) maps to values.get(i)), ordered so that
     // iterating the map visits keys from largest to smallest.
     public static TreeMap<Integer, String> buildWithReverseOrder(List<Integer> keys, List<String> values) {
+        Objects.requireNonNull(keys, "Keys cannot be null");
+        Objects.requireNonNull(values, "Values cannot be null");
+        if (keys.size() != values.size()) throw new IllegalArgumentException("Keys and Values must be same size");
+
         TreeMap<Integer, String> result = new TreeMap<>(Comparator.reverseOrder());
-        final int min = Math.min(keys.size(), values.size());
-        for (int i = 0; i < min; i++) {
+        final int size = keys.size();
+        for (int i = 0; i < size; i++) {
             result.put(keys.get(i), values.get(i));
         }
         return result;
