@@ -97,6 +97,10 @@ public class CompletableFutureIntermediateChallenge {
     // Assumes every future in the list has already reached a terminal
     // state.
     public static int countCompletedExceptionally(List<CompletableFuture<?>> futures) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int result = 0;
+        for (CompletableFuture<?> f : futures) {
+            if (f.isCompletedExceptionally()) result++;
+        }
+        return result;
     }
 }
