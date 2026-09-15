@@ -1,8 +1,5 @@
 package dev.perfectbogus.maps.treemap;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class TreeMapIntermediateChallenge {
 
@@ -23,7 +20,12 @@ public class TreeMapIntermediateChallenge {
     // is empty, returning the keys in the order they were removed (i.e.
     // descending order). map is left empty after this call.
     public static List<Integer> drainDescending(TreeMap<Integer, String> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Integer> result = new ArrayList<>();
+        while (!map.isEmpty()) {
+            Map.Entry<Integer, String> entry = map.pollLastEntry();
+            result.add(entry.getKey());
+        }
+        return result;
     }
 
     // CHALLENGE 3
