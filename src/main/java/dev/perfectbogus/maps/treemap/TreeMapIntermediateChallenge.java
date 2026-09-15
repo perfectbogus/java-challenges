@@ -55,7 +55,7 @@ public class TreeMapIntermediateChallenge {
     // less than or equal to key (i.e. key itself is included, unlike the
     // beginner headMap challenge).
     public static TreeMap<Integer, String> headMapInclusive(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new TreeMap<>(map.headMap(key, true));
     }
 
     // CHALLENGE 7
