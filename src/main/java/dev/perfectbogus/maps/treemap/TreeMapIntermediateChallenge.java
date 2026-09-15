@@ -31,7 +31,7 @@ public class TreeMapIntermediateChallenge {
     // CHALLENGE 3
     // Returns every key in map in descending order, without modifying map.
     public static List<Integer> keysDescendingNonDestructive(TreeMap<Integer, String> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.descendingKeySet().stream().toList();
     }
 
     // CHALLENGE 4
