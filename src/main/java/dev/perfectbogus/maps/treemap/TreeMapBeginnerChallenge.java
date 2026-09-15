@@ -21,14 +21,14 @@ public class TreeMapBeginnerChallenge {
     // Returns the smallest key in map that is greater than or equal to key,
     // or null if no such key exists.
     public static Integer ceiling(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.ceilingKey(key);
     }
 
     // CHALLENGE 4
     // Returns the largest key in map that is less than or equal to key,
     // or null if no such key exists.
     public static Integer floor(TreeMap<Integer, String> map, int key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.floorKey(key);
     }
 
     // CHALLENGE 5
