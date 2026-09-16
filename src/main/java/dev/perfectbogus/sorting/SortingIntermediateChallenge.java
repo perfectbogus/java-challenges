@@ -1,9 +1,6 @@
 package dev.perfectbogus.sorting;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class SortingIntermediateChallenge {
 
@@ -49,7 +46,12 @@ public class SortingIntermediateChallenge {
     // length (shortest first), and words of equal length sorted
     // alphabetically.
     public static List<String> sortByLengthThenAlphabetically(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream()
+                .sorted(
+                        Comparator.comparingInt(String::length)
+                                .thenComparing(Comparator.naturalOrder())
+                )
+                .toList();
     }
 
     // CHALLENGE 2
