@@ -83,6 +83,6 @@ public class OptionalIntermediateChallenge {
     // Returns true if both a and b are present and hold equal values,
     // false otherwise.
     public static boolean areBothPresentAndEqual(Optional<Integer> a, Optional<Integer> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return a.flatMap(x -> b.map(x::equals)).orElse(false);
     }
 }
