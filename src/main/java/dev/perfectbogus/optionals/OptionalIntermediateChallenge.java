@@ -1,9 +1,6 @@
 package dev.perfectbogus.optionals;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class OptionalIntermediateChallenge {
 
@@ -70,7 +67,7 @@ public class OptionalIntermediateChallenge {
     // Returns the value held by optional if present. If it is absent,
     // throws a NoSuchElementException whose message is errorMessage.
     public static <T> T unwrapOrThrow(Optional<T> optional, String errorMessage) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return optional.orElseThrow(() -> new NoSuchElementException(errorMessage));
     }
 
     // CHALLENGE 9
