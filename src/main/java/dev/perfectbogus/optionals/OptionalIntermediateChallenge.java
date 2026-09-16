@@ -49,7 +49,7 @@ public class OptionalIntermediateChallenge {
     // Returns the sum of the values held by every present Optional in the
     // list, ignoring any that are empty.
     public static int sumPresentValues(List<Optional<Integer>> optionals) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return optionals.stream().flatMap(Optional::stream).mapToInt(Integer::intValue).sum();
     }
 
     // CHALLENGE 6
