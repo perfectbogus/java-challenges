@@ -33,13 +33,7 @@ public class OptionalIntermediateChallenge {
     // it is present and not blank. Otherwise returns Optional.empty().
     // A blank string is one that is empty or contains only whitespace.
     public static Optional<String> firstNonBlank(Optional<String> a, Optional<String> b) {
-        if (a.isPresent() && !a.get().isBlank()) {
-            return a;
-        } else if (b.isPresent() && !b.get().isBlank()) {
-            return b;
-        } else {
-            return Optional.empty();
-        }
+        return a.filter(s -> !s.isBlank()).or(() -> b.filter(s -> !s.isBlank()));
     }
 
     // CHALLENGE 4
@@ -48,7 +42,7 @@ public class OptionalIntermediateChallenge {
     // both lookups succeed, or Optional.empty() if either lookup fails
     // to find anything.
     public static Optional<Integer> chainLookup(Map<String, String> aliasMap, Map<String, Integer> valueMap, String key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(aliasMap.get(key)).flatMap(k -> Optional.ofNullable(valueMap.get(k)));
     }
 
     // CHALLENGE 5
