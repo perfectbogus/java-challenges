@@ -56,7 +56,7 @@ public class OptionalIntermediateChallenge {
     // If optional is present, appends its value to presentLog. Otherwise,
     // appends the literal string "empty" to emptyLog.
     public static void logPresenceOutcome(Optional<String> optional, List<String> presentLog, List<String> emptyLog) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        optional.ifPresentOrElse(presentLog::add, () -> emptyLog.add("empty"));
     }
 
     // CHALLENGE 7
