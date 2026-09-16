@@ -2,6 +2,7 @@ package dev.perfectbogus.optionals;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class OptionalIntermediateChallenge {
@@ -11,6 +12,7 @@ public class OptionalIntermediateChallenge {
     // the parsed value if input is a valid integer, or Optional.empty() if
     // parsing fails for any reason.
     public static Optional<Integer> parseIntSafely(String input) {
+        Objects.requireNonNull(input, "Input cannot be null");
         try {
             int i = Integer.parseInt(input);
             return Optional.of(i);
@@ -23,7 +25,7 @@ public class OptionalIntermediateChallenge {
     // Returns the uppercased value inside optional if present, or the
     // literal string "EMPTY" if it is absent.
     public static String describe(Optional<String> optional) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return optional.map(String::toUpperCase).orElse("EMPTY");
     }
 
     // CHALLENGE 3
