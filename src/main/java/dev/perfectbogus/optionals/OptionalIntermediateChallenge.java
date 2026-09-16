@@ -76,7 +76,7 @@ public class OptionalIntermediateChallenge {
     // greater than minLength. Returns Optional.empty() in every other
     // case (optional absent, or the mapped string too short).
     public static Optional<String> mapAndFilter(Optional<Integer> optional, int minLength) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return optional.map(i -> "Value: " + i).filter(s -> s.length() > minLength);
     }
 
     // CHALLENGE 10
