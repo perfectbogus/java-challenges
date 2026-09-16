@@ -33,7 +33,13 @@ public class OptionalIntermediateChallenge {
     // it is present and not blank. Otherwise returns Optional.empty().
     // A blank string is one that is empty or contains only whitespace.
     public static Optional<String> firstNonBlank(Optional<String> a, Optional<String> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (a.isPresent() && !a.get().isBlank()) {
+            return a;
+        } else if (b.isPresent() && !b.get().isBlank()) {
+            return b;
+        } else {
+            return Optional.empty();
+        }
     }
 
     // CHALLENGE 4
