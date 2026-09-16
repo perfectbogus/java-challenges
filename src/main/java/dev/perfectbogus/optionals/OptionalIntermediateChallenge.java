@@ -63,7 +63,7 @@ public class OptionalIntermediateChallenge {
     // Returns an Optional containing the result of a divided by b (using
     // integer division), or Optional.empty() if b is zero.
     public static Optional<Integer> safeDivide(int a, int b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.of(b).filter(divisor -> divisor != 0).map(divisor -> a /divisor);
     }
 
     // CHALLENGE 8
