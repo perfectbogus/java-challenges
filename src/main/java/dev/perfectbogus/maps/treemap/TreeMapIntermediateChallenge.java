@@ -96,6 +96,6 @@ public class TreeMapIntermediateChallenge {
     // Returns how many keys in map fall between fromInclusive and
     // toInclusive, with both endpoints counted if present.
     public static int countInRange(TreeMap<Integer, String> map, int fromInclusive, int toInclusive) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.subMap(fromInclusive, true, toInclusive, true).size();
     }
 }
