@@ -20,7 +20,9 @@ public class CollectorsIntermediateChallenge {
     // false maps to every odd number. Both lists preserve the original
     // relative order.
     public static Map<Boolean, List<Integer>> partitionEvenOdd(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().collect(Collectors.partitioningBy(
+                (i) -> i % 2 == 0
+        ));
     }
 
     // CHALLENGE 3
