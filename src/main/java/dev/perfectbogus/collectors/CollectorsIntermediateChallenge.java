@@ -93,6 +93,10 @@ public class CollectorsIntermediateChallenge {
         return words.stream().toList();
     }
 
+    public static List<String> toImmutableList2(List<String> words) {
+        return words.stream().collect(Collectors.toUnmodifiableList());
+    }
+
     // CHALLENGE 9
     // Returns how many distinct first letters appear across all words in
     // the list.
