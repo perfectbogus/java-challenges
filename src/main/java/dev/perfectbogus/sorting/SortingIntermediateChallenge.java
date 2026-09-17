@@ -99,7 +99,22 @@ public class SortingIntermediateChallenge {
     // target within it, or a negative value if target is not present
     // (following the same contract as Collections.binarySearch).
     public static int findIndexBinarySearch(List<Integer> sortedList, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int left = 0;
+        int right = sortedList.size() - 1;
+        int mid = sortedList.size() / 2;
+        while (left <= right) {
+            if (sortedList.get(mid) == target) {
+                return mid;
+            }
+
+            if (target > sortedList.get(mid)) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+            mid = left + (right - left)/ 2;
+        }
+        return -1;
     }
 
     // CHALLENGE 9
