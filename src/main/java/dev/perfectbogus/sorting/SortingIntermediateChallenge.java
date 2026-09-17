@@ -132,6 +132,7 @@ public class SortingIntermediateChallenge {
     // youngest first. Among people who share the same age, their
     // relative order from the original list must be preserved.
     public static List<Person> sortPreservingInsertionOrderForTies(List<Person> people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Person> byAge = Comparator.comparing(Person::getAge);
+        return people.stream().sorted(byAge).toList();
     }
 }
