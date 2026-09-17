@@ -58,7 +58,7 @@ public class SortingIntermediateChallenge {
     // Returns a new list containing the given people sorted by age,
     // oldest first.
     public static List<Person> sortByAgeDescending(List<Person> people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return people.stream().sorted(Comparator.comparingInt(Person::getAge).reversed()).toList();
     }
 
     // CHALLENGE 3
