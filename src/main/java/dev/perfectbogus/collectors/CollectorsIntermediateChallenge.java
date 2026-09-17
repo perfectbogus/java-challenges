@@ -1,9 +1,6 @@
 package dev.perfectbogus.collectors;
 
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -78,14 +75,22 @@ public class CollectorsIntermediateChallenge {
     // Returns an Optional containing the largest value in numbers, or
     // Optional.empty() if numbers is empty.
     public static Optional<Integer> reduceToMax(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().max(Comparator.comparing(Integer::intValue));
+    }
+
+    public static Optional<Integer> reduceToMax2(List<Integer> numbers) {
+        return numbers.stream().collect(Collectors.reducing(Integer::max));
+    }
+
+    public static Optional<Integer> reduceToMax3(List<Integer> numbers) {
+        return numbers.stream().reduce(Integer::max);
     }
 
     // CHALLENGE 8
     // Returns an unmodifiable list containing every word in words, in
     // the same order.
     public static List<String> toImmutableList(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().toList();
     }
 
     // CHALLENGE 9
