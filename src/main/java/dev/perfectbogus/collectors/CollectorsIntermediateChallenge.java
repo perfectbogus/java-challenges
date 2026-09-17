@@ -29,7 +29,10 @@ public class CollectorsIntermediateChallenge {
     // Returns a map from word length to how many words in the list have
     // that length.
     public static Map<Integer, Long> countByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 4
