@@ -91,7 +91,7 @@ public class SortingIntermediateChallenge {
     // Returns the entries of map as a list, sorted by value in ascending
     // order.
     public static List<Map.Entry<String, Integer>> sortMapEntriesByValue(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.entrySet().stream().sorted(Map.Entry.comparingByValue()).toList();
     }
 
     // CHALLENGE 8
