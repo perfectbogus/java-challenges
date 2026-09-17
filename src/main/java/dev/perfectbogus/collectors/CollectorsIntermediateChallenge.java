@@ -4,6 +4,7 @@ import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CollectorsIntermediateChallenge {
 
@@ -11,7 +12,7 @@ public class CollectorsIntermediateChallenge {
     // Joins names into a single string, separated by ", ", wrapped in
     // square brackets. For example ["Ann", "Bo"] becomes "[Ann, Bo]".
     public static String joinWithBrackets(List<String> names) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return names.stream().collect(Collectors.joining(", ", "[", "]"));
     }
 
     // CHALLENGE 2
