@@ -122,7 +122,9 @@ public class SortingIntermediateChallenge {
     // alphabetically; people with the same name are sorted by age,
     // oldest first.
     public static List<Person> sortByNameThenAgeDescending(List<Person> people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Person> byNameAlpha = Comparator.comparing(Person::getName);
+        Comparator<Person> byAgeDesc = Comparator.comparing(Person::getAge).reversed();
+        return people.stream().sorted(byNameAlpha.thenComparing(byAgeDesc)).toList();
     }
 
     // CHALLENGE 10
