@@ -84,7 +84,7 @@ public class SortingIntermediateChallenge {
     // CHALLENGE 6
     // Sorts numbers in place, in descending order.
     public static void sortDescendingInPlace(Integer[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Arrays.sort(numbers, Comparator.reverseOrder());
     }
 
     // CHALLENGE 7
