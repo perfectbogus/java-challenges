@@ -4,6 +4,7 @@ import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CollectorsIntermediateChallenge {
@@ -59,7 +60,11 @@ public class CollectorsIntermediateChallenge {
     // Returns a map from each distinct word in words to how many times
     // it appears in the list.
     public static Map<String, Integer> countOccurrences(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.toMap(
+                Function.identity(),
+                w -> 1,
+                Integer::sum
+        ));
     }
 
     // CHALLENGE 6
