@@ -118,6 +118,9 @@ public class CollectorsIntermediateChallenge {
     // words (in original relative order) into a single comma-and-space
     // separated string.
     public static Map<Integer, String> groupAndJoinByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length,
+                Collectors.joining(", ")
+        ));
     }
 }
