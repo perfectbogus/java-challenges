@@ -65,7 +65,7 @@ public class SortingIntermediateChallenge {
     // Returns a new list containing the given words sorted alphabetically,
     // treating uppercase and lowercase letters as equivalent.
     public static List<String> sortIgnoringCase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().sorted(String::compareToIgnoreCase).toList();
     }
 
     // CHALLENGE 4
