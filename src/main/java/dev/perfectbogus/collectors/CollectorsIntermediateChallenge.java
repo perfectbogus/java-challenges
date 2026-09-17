@@ -71,7 +71,7 @@ public class CollectorsIntermediateChallenge {
     // Returns summary statistics (count, sum, min, max, average) for the
     // given numbers.
     public static IntSummaryStatistics getStatistics(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().collect(Collectors.summarizingInt(Integer::intValue));
     }
 
     // CHALLENGE 7
