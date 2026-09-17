@@ -101,7 +101,16 @@ public class CollectorsIntermediateChallenge {
     // Returns how many distinct first letters appear across all words in
     // the list.
     public static int countDistinctFirstLetters(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                w -> w.charAt(0)
+        )).size();
+    }
+
+    public static int countDistinctFirstLetters2(List<String> words) {
+        return words.stream().map(w -> w.charAt(0)).collect(Collectors.collectingAndThen(
+                Collectors.toSet(),
+                Set::size
+        ));
     }
 
     // CHALLENGE 10
