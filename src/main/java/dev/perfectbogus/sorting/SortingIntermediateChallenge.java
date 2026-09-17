@@ -78,7 +78,7 @@ public class SortingIntermediateChallenge {
     // CHALLENGE 5
     // Sorts numbers in place, in ascending order.
     public static void sortInPlaceAscending(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Arrays.sort(numbers);
     }
 
     // CHALLENGE 6
