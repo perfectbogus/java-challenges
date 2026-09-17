@@ -39,7 +39,20 @@ public class CollectorsIntermediateChallenge {
     // Groups words by their length. Each group's words are stored
     // uppercased, in their original relative order.
     public static Map<Integer, List<String>> groupByLengthUppercase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length,
+                Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> list.stream().map(String::toUpperCase).toList()
+                )
+        ));
+    }
+
+    public static Map<Integer, List<String>> groupByLengthUppercase2(List<String> words) {
+        return words.stream().collect(Collectors.groupingBy(
+                String::length,
+                Collectors.mapping(String::toUpperCase, Collectors.toList())
+        ));
     }
 
     // CHALLENGE 5
