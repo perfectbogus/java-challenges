@@ -72,7 +72,7 @@ public class SortingIntermediateChallenge {
     // Returns a new list containing the given words sorted alphabetically,
     // with any null elements placed at the beginning.
     public static List<String> sortWithNullsFirst(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().sorted(Comparator.nullsFirst(Comparator.naturalOrder())).toList();
     }
 
     // CHALLENGE 5
