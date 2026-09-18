@@ -43,14 +43,16 @@ public class VirtualThreadsBeginnerChallenge {
     // CHALLENGE 6
     // Blocks the calling thread until thread has finished running.
     public static void waitForCompletion(Thread thread) throws InterruptedException {
-        throw new UnsupportedOperationException("Not implemented yet");
+        thread.join();
     }
 
     // CHALLENGE 7
     // Runs every task in tasks, each on its own virtual thread, and
     // returns only once all of them have finished.
     public static void runAllTasks(List<Runnable> tasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            tasks.forEach(executor::submit);
+        }
     }
 
     // CHALLENGE 8
