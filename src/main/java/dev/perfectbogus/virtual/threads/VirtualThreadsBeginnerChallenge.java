@@ -24,7 +24,7 @@ public class VirtualThreadsBeginnerChallenge {
     // Starts task on a new virtual thread using the most direct API
     // available for this, and returns the thread.
     public static Thread startVirtualThreadQuick(Runnable task) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Thread.startVirtualThread(task);
     }
 
     // CHALLENGE 4
