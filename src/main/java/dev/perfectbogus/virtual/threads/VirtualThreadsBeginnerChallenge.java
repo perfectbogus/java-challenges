@@ -17,7 +17,7 @@ public class VirtualThreadsBeginnerChallenge {
     // CHALLENGE 2
     // Creates a new virtual thread running task, without starting it.
     public static Thread createUnstartedVirtualThread(Runnable task) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Thread.ofVirtual().name("Virtual-Thread-Worker").unstarted(task);
     }
 
     // CHALLENGE 3
