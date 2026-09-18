@@ -58,14 +58,17 @@ public class VirtualThreadsBeginnerChallenge {
     // CHALLENGE 8
     // Runs task on a virtual thread and returns its result.
     public static <T> T submitAndGetResult(Callable<T> task) throws Exception {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            Future<T> f = executor.submit(task);
+            return f.get();
+        }
     }
 
     // CHALLENGE 9
     // Runs every task in tasks, each on its own virtual thread, and
     // returns their results as a list, in the same order as tasks.
     public static List<String> submitAllAndCollectResults(List<Callable<String>> tasks) throws Exception {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 10
