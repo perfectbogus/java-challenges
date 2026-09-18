@@ -1,5 +1,6 @@
 package dev.perfectbogus.virtual.threads;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -68,7 +69,13 @@ public class VirtualThreadsBeginnerChallenge {
     // Runs every task in tasks, each on its own virtual thread, and
     // returns their results as a list, in the same order as tasks.
     public static List<String> submitAllAndCollectResults(List<Callable<String>> tasks) throws Exception {
-
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            List<String> results = new ArrayList<>();
+            for (Future<String> f : executor.invokeAll(tasks)) {
+                results.add(f.get());
+            }
+            return results;
+        }
     }
 
     // CHALLENGE 10
