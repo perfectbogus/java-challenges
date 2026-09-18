@@ -30,7 +30,7 @@ public class VirtualThreadsBeginnerChallenge {
     // CHALLENGE 4
     // Returns whether thread is a virtual thread.
     public static boolean isThreadVirtual(Thread thread) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return thread.isVirtual();
     }
 
     // CHALLENGE 5
