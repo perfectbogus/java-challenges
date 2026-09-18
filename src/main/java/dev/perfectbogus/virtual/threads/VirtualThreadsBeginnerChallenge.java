@@ -37,7 +37,7 @@ public class VirtualThreadsBeginnerChallenge {
     // Creates and starts a new virtual thread running task, with its name
     // set to name, then returns it.
     public static Thread createNamedVirtualThread(String name, Runnable task) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Thread.ofVirtual().name(name).start(task);
     }
 
     // CHALLENGE 6
