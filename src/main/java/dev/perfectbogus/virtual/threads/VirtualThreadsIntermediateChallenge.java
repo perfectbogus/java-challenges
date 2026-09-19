@@ -101,7 +101,16 @@ public class VirtualThreadsIntermediateChallenge {
     // Runs every task in tasks, each on its own virtual thread, waits for
     // all of them to complete, and returns the sum of their results.
     public static int sumViaInvokeAll(List<Callable<Integer>> tasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            List<Future<Integer>> futures = executor.invokeAll(tasks);
+            int sum = 0;
+            for (Future<Integer> f : futures) {
+                sum += f.get();
+            }
+            return sum;
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // CHALLENGE 7
