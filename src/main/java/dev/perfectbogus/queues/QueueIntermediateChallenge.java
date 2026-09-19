@@ -88,7 +88,9 @@ public class QueueIntermediateChallenge {
     // that repeatedly polling the deque yields items in their original
     // order (first-in, first-out).
     public static Deque<Integer> createFifoQueueUsingDeque(List<Integer> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<Integer> deque = new ArrayDeque<>();
+        items.forEach(deque::offer);
+        return deque;
     }
 
     // CHALLENGE 10
