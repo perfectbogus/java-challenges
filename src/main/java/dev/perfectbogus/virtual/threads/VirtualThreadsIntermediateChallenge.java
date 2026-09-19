@@ -94,7 +94,7 @@ public class VirtualThreadsIntermediateChallenge {
     // Returns whether a newly created virtual thread is a daemon thread
     // by default.
     public static boolean isVirtualThreadDaemonByDefault() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Thread.ofVirtual().start(() -> {}).isDaemon();
     }
 
     // CHALLENGE 6
