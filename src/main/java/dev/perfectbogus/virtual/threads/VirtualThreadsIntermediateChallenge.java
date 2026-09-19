@@ -129,7 +129,13 @@ public class VirtualThreadsIntermediateChallenge {
     // Waits for every thread in threads to finish, then returns true if
     // none of them are still alive afterward, false otherwise.
     public static boolean joinAllAndConfirmFinished(List<Thread> threads) throws InterruptedException {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (Thread t : threads) t.join();
+        for (Thread t : threads) {
+            if (t.isAlive()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // CHALLENGE 9
