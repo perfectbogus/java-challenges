@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
 
 public class VirtualThreadsIntermediateChallenge {
@@ -28,7 +26,13 @@ public class VirtualThreadsIntermediateChallenge {
     // id, waits for all of them to finish, and returns the set of ids
     // that were recorded.
     public static Set<Long> collectDistinctThreadIds(int numberOfTasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Long> set = new ConcurrentSkipListSet<>();
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            for (int i = 0; i < numberOfTasks; i++) {
+                executor.submit(() -> set.add(Thread.currentThread().threadId()));
+            }
+        }
+        return set;
     }
 
     // CHALLENGE 3
