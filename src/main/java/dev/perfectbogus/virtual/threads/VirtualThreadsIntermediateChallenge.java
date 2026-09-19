@@ -1,11 +1,10 @@
 package dev.perfectbogus.virtual.threads;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class VirtualThreadsIntermediateChallenge {
 
@@ -156,6 +155,40 @@ public class VirtualThreadsIntermediateChallenge {
     // thread, and returns a map from each task's name to its result,
     // once every task has completed.
     public static Map<String, Integer> collectNamedResults(Map<String, Callable<Integer>> namedTasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Future<Integer>> map;
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            map = namedTasks.entrySet().stream().collect(Collectors.toMap(
+                    Map.Entry::getKey,
+                    e -> executor.submit(e.getValue())
+            ));
+        }
+
+        return map.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> {
+                    try {
+                        return e.getValue().get();
+                    } catch (InterruptedException | ExecutionException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+        ));
+    }
+
+    public static Map<String, Integer> collectNameResults2(Map<String, Callable<Integer>> namedTasks) {
+        Map<String, Future<Integer>> futures = new HashMap<>();
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            namedTasks.forEach((name, task) -> futures.put(name, executor.submit(task)));
+        }
+
+        Map<String, Integer> results = new HashMap<>();
+        try {
+            for (var entry : futures.entrySet()) {
+                results.put(entry.getKey(), entry.getValue().get());
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
     }
 }
