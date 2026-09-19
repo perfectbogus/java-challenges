@@ -22,7 +22,7 @@ public class QueueIntermediateChallenge {
     // Returns a new Queue containing every item in items, in the same
     // order, ready to be polled starting from the first item.
     public static Queue<Integer> createQueueFromList(List<Integer> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new ArrayDeque<>(items);
     }
 
     // CHALLENGE 2
