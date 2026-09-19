@@ -1,11 +1,6 @@
 package dev.perfectbogus.queues;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -64,7 +59,11 @@ public class QueueIntermediateChallenge {
     // returning them as a list in the order they were removed. queue is
     // left empty afterward.
     public static List<Integer> drainQueue(Queue<Integer> queue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Integer> result = new ArrayList<>();
+        while (!queue.isEmpty()) {
+            result.add(queue.poll());
+        }
+        return result;
     }
 
     // CHALLENGE 7
