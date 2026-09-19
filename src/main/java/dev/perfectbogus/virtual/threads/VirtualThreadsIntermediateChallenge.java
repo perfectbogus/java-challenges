@@ -61,7 +61,33 @@ public class VirtualThreadsIntermediateChallenge {
     // result, secondValue's thread result], demonstrating that each
     // virtual thread sees its own independent value.
     public static List<Integer> runWithThreadLocalIsolated(ThreadLocal<Integer> threadLocal, int firstValue, int secondValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            int[] a = new int[2];
+            List<Integer> results = new ArrayList<>();
+            Thread t1 = Thread.ofVirtual().unstarted(() -> {
+                threadLocal.set(firstValue);
+                a[0] = threadLocal.get();
+            });
+            Thread t2 = Thread.ofVirtual().unstarted(() -> {
+                        threadLocal.set(secondValue);
+                        a[1] = threadLocal.get();
+            });
+
+            t1.start();
+            t2.start();
+            t1.join();
+            t2.join();
+
+            for (int i : a) {
+                results.add(i);
+            }
+
+            return results;
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return List.of();
+        }
     }
 
     // CHALLENGE 5
