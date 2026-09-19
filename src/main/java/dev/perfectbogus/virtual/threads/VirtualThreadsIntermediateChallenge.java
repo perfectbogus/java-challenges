@@ -40,7 +40,17 @@ public class VirtualThreadsIntermediateChallenge {
     // returns the message of that underlying exception (not the wrapper
     // exception raised while waiting for the result).
     public static String getTaskExceptionMessage(Callable<?> failingTask) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            Future<?> f = executor.submit(failingTask);
+            try {
+                f.get();
+                return "";
+            } catch (ExecutionException  e) {
+                return e.getCause().getMessage();
+            } catch (InterruptedException e) {
+                return e.getMessage();
+            }
+        }
     }
 
     // CHALLENGE 4
