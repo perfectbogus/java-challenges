@@ -71,7 +71,9 @@ public class QueueIntermediateChallenge {
     // that repeatedly popping the deque yields items in reverse of their
     // original order (last-in, first-out).
     public static Deque<Integer> createStackUsingDeque(List<Integer> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<Integer> deque = new ArrayDeque<>();
+        items.forEach(deque::push);
+        return deque;
     }
 
     // CHALLENGE 8
