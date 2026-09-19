@@ -7,8 +7,7 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 public class VirtualThreadsIntermediateChallenge {
 
@@ -17,11 +16,11 @@ public class VirtualThreadsIntermediateChallenge {
     // number to a running total, and returns the total once every thread
     // has finished.
     public static int sumConcurrently(List<Integer> numbers) {
-        AtomicInteger i = new AtomicInteger(0);
+        LongAdder i = new LongAdder();
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
-            numbers.forEach(n -> executor.submit(() -> i.getAndAdd(n)));
+            numbers.forEach(n -> executor.submit(() -> i.add(n)));
         }
-        return i.get();
+        return i.intValue();
     }
 
     // CHALLENGE 2
