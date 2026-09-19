@@ -118,7 +118,11 @@ public class VirtualThreadsIntermediateChallenge {
     // thread, and returns the result of whichever one completes
     // successfully first.
     public static String firstSuccessfulResult(List<Callable<String>> tasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            return executor.invokeAny(tasks);
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // CHALLENGE 8
