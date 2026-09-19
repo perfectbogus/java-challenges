@@ -29,7 +29,7 @@ public class QueueIntermediateChallenge {
     // Returns the element at the head of queue without removing it, or
     // null if queue is empty.
     public static Integer peekWithoutRemoving(Queue<Integer> queue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue.peek();
     }
 
     // CHALLENGE 3
