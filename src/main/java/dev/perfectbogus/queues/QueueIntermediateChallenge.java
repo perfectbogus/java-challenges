@@ -44,7 +44,11 @@ public class QueueIntermediateChallenge {
     // the queue has no available capacity. Returns true if the insertion
     // succeeded, or false if it was rejected because queue is full.
     public static boolean addSafely(Queue<Integer> queue, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return queue.add(value);
+        } catch (IllegalStateException e) {
+            return false;
+        }
     }
 
     // CHALLENGE 5
@@ -52,7 +56,7 @@ public class QueueIntermediateChallenge {
     // rejection through its return value rather than an exception.
     // Returns whatever that method reports.
     public static boolean offerReturnsFalseWhenFull(Queue<Integer> queue, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue.offer(value);
     }
 
     // CHALLENGE 6
