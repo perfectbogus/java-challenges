@@ -80,7 +80,7 @@ public class QueueIntermediateChallenge {
     // Returns the element on top of stack without removing it, or null
     // if stack is empty.
     public static Integer peekStackTop(Deque<Integer> stack) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return stack.peek();
     }
 
     // CHALLENGE 9
