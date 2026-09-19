@@ -1,9 +1,14 @@
 package dev.perfectbogus.virtual.threads;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class VirtualThreadsIntermediateChallenge {
 
@@ -12,7 +17,11 @@ public class VirtualThreadsIntermediateChallenge {
     // number to a running total, and returns the total once every thread
     // has finished.
     public static int sumConcurrently(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        AtomicInteger i = new AtomicInteger(0);
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            numbers.forEach(n -> executor.submit(() -> i.getAndAdd(n)));
+        }
+        return i.get();
     }
 
     // CHALLENGE 2
