@@ -81,6 +81,6 @@ public class VirtualThreadsBeginnerChallenge {
     // CHALLENGE 10
     // Returns the unique identifier of thread.
     public static long getThreadId(Thread thread) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return thread.threadId();
     }
 }
