@@ -143,7 +143,12 @@ public class VirtualThreadsIntermediateChallenge {
     // whether it is executing on a virtual thread, waits for the result,
     // and returns it.
     public static boolean confirmExecutorUsesVirtualThreads() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            Future<Boolean> result = executor.submit(() -> Thread.currentThread().isVirtual());
+            return result.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // CHALLENGE 10
