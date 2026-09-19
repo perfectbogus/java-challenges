@@ -36,7 +36,7 @@ public class QueueIntermediateChallenge {
     // Removes and returns the element at the head of queue, or
     // defaultValue if queue is empty.
     public static int pollOrDefault(Queue<Integer> queue, int defaultValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue.isEmpty() ? defaultValue : queue.poll();
     }
 
     // CHALLENGE 4
