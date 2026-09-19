@@ -1,0 +1,89 @@
+package dev.perfectbogus.virtual.threads;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Callable;
+
+public class VirtualThreadsIntermediateChallenge {
+
+    // CHALLENGE 1
+    // Runs one virtual thread per number in numbers, each adding that
+    // number to a running total, and returns the total once every thread
+    // has finished.
+    public static int sumConcurrently(List<Integer> numbers) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 2
+    // Starts numberOfTasks virtual threads, each recording its own thread
+    // id, waits for all of them to finish, and returns the set of ids
+    // that were recorded.
+    public static Set<Long> collectDistinctThreadIds(int numberOfTasks) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 3
+    // Runs failingTask on a virtual thread. If it throws an exception,
+    // returns the message of that underlying exception (not the wrapper
+    // exception raised while waiting for the result).
+    public static String getTaskExceptionMessage(Callable<?> failingTask) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 4
+    // Runs two virtual threads concurrently. The first sets threadLocal
+    // to firstValue and then records what threadLocal.get() returns; the
+    // second does the same with secondValue. Waits for both to finish and
+    // returns the two recorded values, in the order [firstValue's thread
+    // result, secondValue's thread result], demonstrating that each
+    // virtual thread sees its own independent value.
+    public static List<Integer> runWithThreadLocalIsolated(ThreadLocal<Integer> threadLocal, int firstValue, int secondValue) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 5
+    // Returns whether a newly created virtual thread is a daemon thread
+    // by default.
+    public static boolean isVirtualThreadDaemonByDefault() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 6
+    // Runs every task in tasks, each on its own virtual thread, waits for
+    // all of them to complete, and returns the sum of their results.
+    public static int sumViaInvokeAll(List<Callable<Integer>> tasks) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 7
+    // Runs every task in tasks concurrently, each on its own virtual
+    // thread, and returns the result of whichever one completes
+    // successfully first.
+    public static String firstSuccessfulResult(List<Callable<String>> tasks) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 8
+    // Waits for every thread in threads to finish, then returns true if
+    // none of them are still alive afterward, false otherwise.
+    public static boolean joinAllAndConfirmFinished(List<Thread> threads) throws InterruptedException {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 9
+    // Runs a task on a virtual-thread-per-task executor that checks
+    // whether it is executing on a virtual thread, waits for the result,
+    // and returns it.
+    public static boolean confirmExecutorUsesVirtualThreads() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 10
+    // Runs every task in namedTasks concurrently, each on its own virtual
+    // thread, and returns a map from each task's name to its result,
+    // once every task has completed.
+    public static Map<String, Integer> collectNamedResults(Map<String, Callable<Integer>> namedTasks) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+}
