@@ -1,10 +1,7 @@
 package dev.perfectbogus.queues;
 
 import java.util.*;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class QueueIntermediateChallenge {
@@ -196,10 +193,12 @@ public class QueueIntermediateChallenge {
     // destination, removing them from source, and returns how many
     // elements were transferred.
     public static int drainToList(BlockingQueue<Integer> source, List<Integer> destination) {
+        int count = 0;
         while (!source.isEmpty()) {
             destination.add(source.poll());
+            count++;
         }
-        return destination.size();
+        return count;
     }
 
     // CHALLENGE 19
@@ -217,6 +216,18 @@ public class QueueIntermediateChallenge {
     // one virtual thread per number, waits for all of them to finish,
     // then drains the queue and returns the sum of every value it held.
     public static int sumConcurrentlyUsingQueue(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<Integer> result = new ConcurrentLinkedDeque<>();
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            for (int n : numbers) {
+                executor.submit(() -> result.offer(n));
+            }
+        }
+
+        int sum = 0;
+        while (!result.isEmpty()) {
+            sum += result.poll();
+        }
+
+        return sum;
     }
 }
