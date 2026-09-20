@@ -180,7 +180,7 @@ public class QueueIntermediateChallenge {
     // true if the insertion succeeded within that time, or false if it
     // did not.
     public static boolean offerWithTimeout(BlockingQueue<Integer> queue, int value, long timeoutMillis) throws InterruptedException {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue.offer(value, timeoutMillis, TimeUnit.MILLISECONDS);
     }
 
     // CHALLENGE 17
@@ -188,7 +188,7 @@ public class QueueIntermediateChallenge {
     // timeoutMillis milliseconds for an element to become available if
     // necessary. Returns null if no element became available in time.
     public static Integer pollWithTimeout(BlockingQueue<Integer> queue, long timeoutMillis) throws InterruptedException {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue.poll(timeoutMillis, TimeUnit.MILLISECONDS);
     }
 
     // CHALLENGE 18
