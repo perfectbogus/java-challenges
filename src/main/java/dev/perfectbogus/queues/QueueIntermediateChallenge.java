@@ -145,7 +145,13 @@ public class QueueIntermediateChallenge {
     // that many), returning them as a list in the order they were
     // removed.
     public static List<String> pollTopN(PriorityQueue<String> queue, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> results = new ArrayList<>();
+        int i = 0;
+        while (!queue.isEmpty() && i < n) {
+            results.add(queue.poll());
+            i++;
+        }
+        return results;
     }
 
     // CHALLENGE 14
@@ -153,7 +159,7 @@ public class QueueIntermediateChallenge {
     // that repeatedly polling it yields tasks from lowest priority
     // number to highest.
     public static PriorityQueue<Task> createPriorityQueueByPriority(List<Task> tasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 15
