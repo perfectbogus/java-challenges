@@ -196,7 +196,9 @@ public class QueueIntermediateChallenge {
     // destination, removing them from source, and returns how many
     // elements were transferred.
     public static int drainToList(BlockingQueue<Integer> source, List<Integer> destination) {
-        destination.addAll(source);
+        while (!source.isEmpty()) {
+            destination.add(source.poll());
+        }
         return destination.size();
     }
 
