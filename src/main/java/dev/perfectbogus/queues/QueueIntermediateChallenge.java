@@ -159,7 +159,10 @@ public class QueueIntermediateChallenge {
     // that repeatedly polling it yields tasks from lowest priority
     // number to highest.
     public static PriorityQueue<Task> createPriorityQueueByPriority(List<Task> tasks) {
-
+        Comparator<Task> byPriority = Comparator.comparingInt(Task::priority);
+        PriorityQueue<Task> pq = new PriorityQueue<>(byPriority);
+        tasks.forEach(pq::offer);
+        return pq;
     }
 
     // CHALLENGE 15
