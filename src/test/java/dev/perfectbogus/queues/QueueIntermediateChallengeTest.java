@@ -406,18 +406,26 @@ class QueueIntermediateChallengeTest {
     class PutAndTakeTests {
 
         @Test
-        void testReturnsSomeValue() throws InterruptedException {
+        void testReturnsThePutValue() throws InterruptedException {
             BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(5);
-            queue.put(77);
-            int result = QueueIntermediateChallenge.putAndTake(queue);
-            assertTrue(result == 77 || queue.isEmpty());
+            assertEquals(77, QueueIntermediateChallenge.putAndTake(queue, 77));
         }
 
         @Test
-        void testQueueEndsEmptyWhenStartedEmpty() throws InterruptedException {
+        void testQueueEndsEmptyAfterward() throws InterruptedException {
             BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(5);
-            QueueIntermediateChallenge.putAndTake(queue);
+            QueueIntermediateChallenge.putAndTake(queue, 5);
             assertTrue(queue.isEmpty());
+        }
+
+        @Test
+        void testPreExistingElementIsTakenFirst() throws InterruptedException {
+            BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(5);
+            queue.put(1);
+            // queue: [1]. put(2) -> [1, 2]. take() returns the head, 1.
+            assertEquals(1, QueueIntermediateChallenge.putAndTake(queue, 2));
+            assertEquals(1, queue.size());
+            assertEquals(2, queue.peek());
         }
     }
 

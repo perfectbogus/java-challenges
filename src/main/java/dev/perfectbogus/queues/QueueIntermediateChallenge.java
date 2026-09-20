@@ -169,8 +169,9 @@ public class QueueIntermediateChallenge {
     // Inserts value into queue, waiting if necessary for space to become
     // available, then immediately removes and returns the head of queue,
     // waiting if necessary for an element to become available.
-    public static int putAndTake(BlockingQueue<Integer> queue) throws InterruptedException {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public static int putAndTake(BlockingQueue<Integer> queue, int value) throws InterruptedException {
+        queue.put(value);
+        return queue.take();
     }
 
     // CHALLENGE 16
