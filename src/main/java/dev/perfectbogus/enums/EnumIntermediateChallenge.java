@@ -187,13 +187,13 @@ public class EnumIntermediateChallenge {
     // Returns the sum of the ordinal() values of every priority in
     // priorities.
     public static int sumOrdinalValues(List<Priority> priorities) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return priorities.stream().mapToInt(Priority::ordinal).sum();
     }
 
     // CHALLENGE 12
     // Returns the symbol associated with op (for example "+" for PLUS).
     public static String symbolForOperation(Operation op) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return op.getSymbol();
     }
 
     // CHALLENGE 13
