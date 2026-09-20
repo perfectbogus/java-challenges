@@ -89,7 +89,12 @@ public class EnumIntermediateChallenge {
     // returning it wrapped in an Optional, or Optional.empty() if none
     // match.
     public static Optional<HttpStatus> findStatusByCode(int code) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (HttpStatus h : HttpStatus.values()) {
+            if (h.getCode() == code) {
+                return Optional.of(h);
+            }
+        }
+        return Optional.empty();
     }
 
     // CHALLENGE 3
