@@ -201,7 +201,9 @@ public class EnumIntermediateChallenge {
     // must visit priorities in their natural (declaration) order,
     // regardless of the order tasks appeared in the input.
     public static Map<Priority, List<Task>> groupTasksByPriority(List<Task> tasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return tasks.stream().collect(Collectors.groupingBy(
+                Task::priority
+        ));
     }
 
     // CHALLENGE 14
