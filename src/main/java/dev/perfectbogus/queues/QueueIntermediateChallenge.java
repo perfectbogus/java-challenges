@@ -128,14 +128,16 @@ public class QueueIntermediateChallenge {
     // Returns a new PriorityQueue containing every item in items, such
     // that repeatedly polling it yields items from smallest to largest.
     public static PriorityQueue<Integer> createMinHeap(List<Integer> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new PriorityQueue<>(items);
     }
 
     // CHALLENGE 12
     // Returns a new PriorityQueue containing every item in items, such
     // that repeatedly polling it yields items from largest to smallest.
     public static PriorityQueue<Integer> createMaxHeap(List<Integer> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        items.forEach(pq::offer);
+        return pq;
     }
 
     // CHALLENGE 13
