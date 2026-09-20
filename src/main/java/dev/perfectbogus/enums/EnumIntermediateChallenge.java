@@ -179,7 +179,8 @@ public class EnumIntermediateChallenge {
     // Returns the Weekday that follows day, wrapping from SUNDAY back
     // around to MONDAY.
     public static Weekday nextWeekday(Weekday day) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int mod = (day.ordinal() + 1) % Weekday.values().length;
+        return Weekday.values()[mod];
     }
 
     // CHALLENGE 11
