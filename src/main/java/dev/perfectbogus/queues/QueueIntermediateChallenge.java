@@ -98,7 +98,30 @@ public class QueueIntermediateChallenge {
     // the window of k consecutive elements of nums ending at that
     // position (the result has nums.length - k + 1 elements).
     public static int[] slidingWindowMax(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Objects.requireNonNull(nums, "Nums cannot be null");
+        if (k <= 0 || k > nums.length) throw new IllegalArgumentException("k out of range");
+
+        int[] results = new int[nums.length - k + 1];
+        Deque<Integer> idx = new ArrayDeque<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int value = nums[i];
+
+            if (!idx.isEmpty() && idx.peekFirst() < i - k + 1) {
+                idx.pollFirst();
+            }
+
+            while (!idx.isEmpty() && nums[idx.peekLast()] <= value) {
+                idx.pollLast();
+            }
+
+            idx.addLast(i);
+
+            if (i >= k - 1) {
+                results[i - k + 1] = nums[idx.peekFirst()];
+            }
+        }
+        return results;
     }
 
     // CHALLENGE 11
