@@ -160,7 +160,7 @@ public class EnumIntermediateChallenge {
     // CHALLENGE 8
     // Returns whether granted contains every permission in required.
     public static boolean hasAllPermissions(EnumSet<Permission> granted, EnumSet<Permission> required) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return granted.containsAll(required);
     }
 
     // CHALLENGE 9
@@ -168,7 +168,11 @@ public class EnumIntermediateChallenge {
     // Enum.valueOf's exact-name rules). Returns Optional.empty() if name
     // does not match any constant, instead of throwing.
     public static Optional<Weekday> parseWeekdaySafely(String name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return Optional.of(Weekday.valueOf(name));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 
     // CHALLENGE 10
