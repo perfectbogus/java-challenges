@@ -1,10 +1,6 @@
 package dev.perfectbogus.enums;
 
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -148,13 +144,17 @@ public class EnumIntermediateChallenge {
     // (HIGH outranks MEDIUM, which outranks LOW), based on Priority's
     // natural ordering.
     public static Priority highestPriority(List<Priority> priorities) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Objects.requireNonNull(priorities, "Priorities cannot be null");
+        if (priorities.isEmpty()) throw new IllegalArgumentException("Priorities cannot be empty");
+        return priorities.stream().sorted(Comparator.reverseOrder()).toList().get(0);
     }
 
     // CHALLENGE 7
     // Returns every Permission except those listed in excluded.
     public static EnumSet<Permission> allPermissionsExcept(Permission... excluded) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        EnumSet<Permission> ex = EnumSet.noneOf(Permission.class);
+        ex.addAll(Arrays.asList(excluded));
+        return EnumSet.complementOf(ex);
     }
 
     // CHALLENGE 8
