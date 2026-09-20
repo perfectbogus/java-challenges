@@ -207,7 +207,9 @@ public class QueueIntermediateChallenge {
     // followed by every element of second (in order), without modifying
     // either first or second.
     public static Queue<Integer> concatenateQueues(Queue<Integer> first, Queue<Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Queue<Integer> q = new ArrayDeque<>(first);
+        second.forEach(q::offer);
+        return q;
     }
 
     // CHALLENGE 20
