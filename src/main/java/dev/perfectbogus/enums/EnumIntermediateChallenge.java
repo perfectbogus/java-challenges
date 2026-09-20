@@ -5,6 +5,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class EnumIntermediateChallenge {
 
@@ -100,14 +102,31 @@ public class EnumIntermediateChallenge {
     // CHALLENGE 3
     // Applies the given arithmetic operation to a and b.
     public static int applyOperation(Operation op, int a, int b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return switch (op) {
+            case PLUS -> a + b;
+            case MINUS -> a - b;
+            case TIMES -> a * b;
+            case DIVIDE -> {
+                if (b != 0) {
+                    yield a / b;
+                } else {
+                    throw new ArithmeticException("Divisor cannot be null");
+                }
+            }
+            default -> throw new IllegalArgumentException("Op does not exists " + op);
+        };
     }
 
     // CHALLENGE 4
     // Classifies status into "Success" (OK or CREATED), "Client Error"
     // (NOT_FOUND or FORBIDDEN), or "Server Error" (SERVER_ERROR).
     public static String describeStatus(HttpStatus status) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return switch (status) {
+            case OK, CREATED -> "Success";
+            case NOT_FOUND, FORBIDDEN -> "Client Error";
+            case SERVER_ERROR -> "Server Error";
+            default -> throw new IllegalArgumentException("HttpStatus does not exists: " + status);
+        };
     }
 
     // CHALLENGE 5
@@ -116,7 +135,12 @@ public class EnumIntermediateChallenge {
     // in Weekday's natural (declaration) order, regardless of the order
     // they appeared in days.
     public static EnumMap<Weekday, Integer> countOccurrences(List<Weekday> days) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return days.stream().collect(Collectors.toMap(
+                Function.identity(),
+                e -> 1,
+                Integer::sum,
+                () -> new EnumMap<>(Weekday.class)
+        ));
     }
 
     // CHALLENGE 6
