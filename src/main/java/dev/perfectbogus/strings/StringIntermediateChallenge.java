@@ -1,9 +1,8 @@
 package dev.perfectbogus.strings;
 
 import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -182,7 +181,7 @@ public class StringIntermediateChallenge {
     // CHALLENGE 13
     // Returns how many uppercase letters appear in s.
     public static int countUppercaseLetters(String s) {
-        return s.chars().map(c -> (char) c).filter(Character::isUpperCase).map(c -> 1).sum();
+        return (int) s.chars().map(c -> (char) c).filter(Character::isUpperCase).count();
     }
 
     // CHALLENGE 14
@@ -190,7 +189,20 @@ public class StringIntermediateChallenge {
     // in ascending order. Occurrences may overlap. target is guaranteed
     // to be non-empty.
     public static List<Integer> findAllIndexesOf(String text, String target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int i = text.indexOf(target);
+        List<Integer> results = new ArrayList<>();
+        if (i == -1) return results;
+
+        results.add(i);
+        int j = i + 1;
+        while (j < text.length()) {
+            j = text.indexOf(target, j);
+            if (j == -1) break;
+            results.add(j);
+            j++;
+        }
+
+        return results;
     }
 
     // CHALLENGE 15
@@ -199,6 +211,14 @@ public class StringIntermediateChallenge {
     // lowercasing the entire result. For example "thisIsATest" becomes
     // "this_is_a_test".
     public static String toSnakeCase(String camelCase) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < camelCase.length(); i++) {
+            char c = camelCase.charAt(i);
+            if (Character.isUpperCase(c) && i != 0) {
+                sb.append("_");
+            }
+            sb.append(Character.toLowerCase(c));
+        }
+        return sb.toString();
     }
 }
