@@ -1,5 +1,6 @@
 package dev.perfectbogus.strings;
 
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -161,7 +162,7 @@ public class StringIntermediateChallenge {
     // Returns number formatted with a comma as a thousands separator
     // (for example 1234567 becomes "1,234,567").
     public static String formatWithThousandsSeparator(long number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return NumberFormat.getInstance().format(number);
     }
 
     // CHALLENGE 11
