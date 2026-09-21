@@ -1,6 +1,8 @@
 package dev.perfectbogus.strings;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringIntermediateChallenge {
 
@@ -10,7 +12,15 @@ public class StringIntermediateChallenge {
     // whitespace between words is collapsed away. Empty or all-whitespace
     // input results in an empty string.
     public static String reverseWords(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String[] split = sentence.trim().replaceAll("\\s+", " ").split(" ");
+        String[] result = new String[split.length];
+
+        int r = 0;
+        for (int i = split.length - 1; i >= 0; i--) {
+            result[r++] = split[i];
+        }
+
+        return String.join(" ", result);
     }
 
     // CHALLENGE 2
