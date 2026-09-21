@@ -2,6 +2,7 @@ package dev.perfectbogus.strings;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -29,8 +30,7 @@ public class StringIntermediateChallenge {
     // Returns whether s reads the same forwards and backwards, ignoring
     // case and ignoring any character that is not a letter or digit.
     public static boolean isPalindrome(String s) {
-        String norm = s.replaceAll("\\s+", "")
-                .replaceAll("[^a-zA-Z]", "")
+        String norm = s.replaceAll("[^a-zA-Z0-9]", "")
                 .toLowerCase();
         int l = 0;
         int r = norm.length() - 1;
@@ -91,7 +91,7 @@ public class StringIntermediateChallenge {
     // Returns how many non-overlapping times target appears in text.
     // target is guaranteed to be non-empty.
     public static int countOccurrences(String text, String target) {
-        Pattern p = Pattern.compile(target);
+        Pattern p = Pattern.compile(Pattern.quote(target));
         Matcher m = p.matcher(text);
         return m.results().mapToInt(mr -> 1).sum();
     }
@@ -113,21 +113,13 @@ public class StringIntermediateChallenge {
             if (chars[i] == c) {
                 count++;
             } else {
-                if (count == 1) {
-                    sb.append(c);
-                } else {
-                    sb.append(c).append(count);
-                }
+                sb.append(c).append(count);
                 count = 1;
                 c = chars[i];
             }
         }
 
-        if (count == 1) {
-            sb.append(c);
-        } else {
-            sb.append(c).append(count);
-        }
+        sb.append(c).append(count);
 
         if (sb.toString().length() >= s.length()) {
             return s;
@@ -141,7 +133,8 @@ public class StringIntermediateChallenge {
     // moving some prefix of s1 to its end). Strings of different lengths
     // are never rotations of each other.
     public static boolean isRotation(String s1, String s2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (s1.length() != s2.length()) return false;
+        return (s1 + s1).contains(s2);
     }
 
     // CHALLENGE 9
@@ -151,7 +144,17 @@ public class StringIntermediateChallenge {
     // portion before '@' has 2 or fewer characters, it is returned
     // unchanged.
     public static String maskEmail(String email) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Objects.requireNonNull(email);
+        String[] split = email.split("@");
+        if (split.length != 2) throw new IllegalArgumentException("Invalid email");
+        String before = split[0];
+        if (before.length() < 3) return email;
+
+        char first = before.charAt(0);
+        char last = before.charAt(before.length() - 1);
+        int repeats = before.length() - 2;
+        String stars = "*".repeat(repeats);
+        return first + stars + last + "@" + split[1];
     }
 
     // CHALLENGE 10
