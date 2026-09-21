@@ -210,7 +210,7 @@ public class EnumIntermediateChallenge {
     // Returns a new list containing every status in statuses, sorted by
     // their numeric code in ascending order.
     public static List<HttpStatus> sortStatusesByCode(List<HttpStatus> statuses) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return statuses.stream().sorted(Comparator.comparingInt(HttpStatus::getCode)).toList();
     }
 
     // CHALLENGE 15
@@ -218,6 +218,6 @@ public class EnumIntermediateChallenge {
     // "PLUS: +"), one for every Operation constant, in declaration
     // order.
     public static List<String> describeAllOperations() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(Operation.values()).map(o -> o.name() + ": " + o.getSymbol()).toList();
     }
 }
