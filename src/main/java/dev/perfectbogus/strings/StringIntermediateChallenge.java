@@ -57,7 +57,15 @@ public class StringIntermediateChallenge {
     // Returns how many vowels (a, e, i, o, u) appear in s, counting both
     // uppercase and lowercase.
     public static int countVowels(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] alpha = new int[128];
+
+        for (char c : s.toCharArray()) {
+            alpha[c]++;
+        }
+
+        int lower = alpha['a'] + alpha['e'] + alpha['i'] + alpha['o'] + alpha['u'];
+        int upper = alpha['A'] + alpha['E'] + alpha['I'] + alpha['O'] + alpha['U'];
+        return lower + upper;
     }
 
     // CHALLENGE 5
