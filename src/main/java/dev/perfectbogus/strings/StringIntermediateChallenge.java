@@ -103,7 +103,37 @@ public class StringIntermediateChallenge {
     // compressed form is not strictly shorter than s, returns s
     // unchanged instead.
     public static String compressString(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (s.isBlank()) return s;
+
+        char c = s.charAt(0);
+        char[] chars = s.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        for (int i = 1; i < chars.length; i++) {
+            if (chars[i] == c) {
+                count++;
+            } else {
+                if (count == 1) {
+                    sb.append(c);
+                } else {
+                    sb.append(c).append(count);
+                }
+                count = 1;
+                c = chars[i];
+            }
+        }
+
+        if (count == 1) {
+            sb.append(c);
+        } else {
+            sb.append(c).append(count);
+        }
+
+        if (sb.toString().length() >= s.length()) {
+            return s;
+        } else {
+            return sb.toString();
+        }
     }
 
     // CHALLENGE 8
