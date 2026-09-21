@@ -44,7 +44,13 @@ public class StringIntermediateChallenge {
     // Returns whether a and b are anagrams of each other, ignoring case
     // and ignoring spaces.
     public static boolean isAnagram(String a, String b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String aNorm = a.replaceAll("\\s+", "").toLowerCase();
+        String bNorm = b.replaceAll("\\s+", "").toLowerCase();
+        char[] aChars = aNorm.toCharArray();
+        Arrays.sort(aChars);
+        char[] bChars = bNorm.toCharArray();
+        Arrays.sort(bChars);
+        return Arrays.equals(aChars, bChars);
     }
 
     // CHALLENGE 4
