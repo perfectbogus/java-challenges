@@ -2,6 +2,8 @@ package dev.perfectbogus.strings;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringIntermediateChallenge {
@@ -89,7 +91,9 @@ public class StringIntermediateChallenge {
     // Returns how many non-overlapping times target appears in text.
     // target is guaranteed to be non-empty.
     public static int countOccurrences(String text, String target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile(target);
+        Matcher m = p.matcher(text);
+        return m.results().mapToInt(mr -> 1).sum();
     }
 
     // CHALLENGE 7
