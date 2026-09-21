@@ -190,7 +190,9 @@ public class EnumIntermediateChallenge {
     // regardless of the order tasks appeared in the input.
     public static Map<Priority, List<Task>> groupTasksByPriority(List<Task> tasks) {
         return tasks.stream().collect(Collectors.groupingBy(
-                Task::priority
+                Task::priority,
+                () -> new EnumMap<>(Priority.class),
+                Collectors.toList()
         ));
     }
 
