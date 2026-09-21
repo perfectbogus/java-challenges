@@ -169,20 +169,20 @@ public class StringIntermediateChallenge {
     // Joins every non-blank string in parts using delimiter, skipping
     // any element that is blank (empty or containing only whitespace).
     public static String joinNonBlank(List<String> parts, String delimiter) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return parts.stream().filter(p -> !p.isBlank()).collect(Collectors.joining(delimiter));
     }
 
     // CHALLENGE 12
     // Returns pattern repeated times times, back to back with no
     // separator.
     public static String repeatPattern(String pattern, int times) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return pattern.repeat(times);
     }
 
     // CHALLENGE 13
     // Returns how many uppercase letters appear in s.
     public static int countUppercaseLetters(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return s.chars().map(c -> (char) c).filter(Character::isUpperCase).map(c -> 1).sum();
     }
 
     // CHALLENGE 14
