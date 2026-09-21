@@ -27,7 +27,17 @@ public class StringIntermediateChallenge {
     // Returns whether s reads the same forwards and backwards, ignoring
     // case and ignoring any character that is not a letter or digit.
     public static boolean isPalindrome(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String norm = s.replaceAll("\\s+", "")
+                .replaceAll("[^a-zA-Z]", "")
+                .toLowerCase();
+        int l = 0;
+        int r = norm.length() - 1;
+        while (l <= r) {
+            if (norm.charAt(l++) != norm.charAt(r--)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // CHALLENGE 3
