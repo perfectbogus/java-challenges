@@ -98,19 +98,7 @@ public class EnumIntermediateChallenge {
     // CHALLENGE 3
     // Applies the given arithmetic operation to a and b.
     public static int applyOperation(Operation op, int a, int b) {
-        return switch (op) {
-            case PLUS -> a + b;
-            case MINUS -> a - b;
-            case TIMES -> a * b;
-            case DIVIDE -> {
-                if (b != 0) {
-                    yield a / b;
-                } else {
-                    throw new ArithmeticException("Divisor cannot be null");
-                }
-            }
-            default -> throw new IllegalArgumentException("Op does not exists " + op);
-        };
+        return op.apply(a, b);
     }
 
     // CHALLENGE 4
