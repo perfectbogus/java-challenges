@@ -72,7 +72,17 @@ public class StringIntermediateChallenge {
     // Returns s with the first letter of every space-separated word
     // uppercased and every other letter in that word lowercased.
     public static String capitalizeWords(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (s.isBlank()) return "";
+
+        String[] split = s.toLowerCase().split(" ");
+        String[] results = new String[split.length];
+
+        for (int i = 0; i < split.length; i++) {
+            char[] wChars = split[i].toCharArray();
+            results[i] = Character.toUpperCase(wChars[0]) + String.valueOf(wChars, 1, wChars.length - 1);
+        }
+
+        return String.join(" ", results);
     }
 
     // CHALLENGE 6
