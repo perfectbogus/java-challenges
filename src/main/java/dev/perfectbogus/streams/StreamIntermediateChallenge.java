@@ -135,6 +135,6 @@ public class StreamIntermediateChallenge {
     // Returns the product of every number in nums, computed with
     // stream reduction. An empty list returns 1.
     public static long product(List<Integer> nums) {
-        return nums.stream().reduce(1, (acc, n) -> acc * n);
+        return nums.stream().mapToLong(Integer::longValue).reduce(1L, (acc,  n) -> acc * n);
     }
 }
