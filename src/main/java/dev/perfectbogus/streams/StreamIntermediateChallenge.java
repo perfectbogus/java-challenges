@@ -125,13 +125,16 @@ public class StreamIntermediateChallenge {
     // number, computed by streaming over the characters of its string
     // representation.
     public static int sumOfDigits(int number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return String.valueOf(Math.abs(number))
+                .chars()
+                .map(Character::getNumericValue)
+                .sum();
     }
 
     // CHALLENGE 15
     // Returns the product of every number in nums, computed with
     // stream reduction. An empty list returns 1.
     public static long product(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().reduce(1, (acc, n) -> acc * n);
     }
 }
