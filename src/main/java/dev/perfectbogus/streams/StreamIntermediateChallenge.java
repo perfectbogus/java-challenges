@@ -1,8 +1,6 @@
 package dev.perfectbogus.streams;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamIntermediateChallenge {
@@ -65,14 +63,15 @@ public class StreamIntermediateChallenge {
     // than one word shares the maximum length, the first one encountered
     // is returned. An empty list returns Optional.empty().
     public static Optional<String> longestWord(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        return words.stream().max(byLength).or(Optional::empty);
     }
 
     // CHALLENGE 9
     // Flattens a list of lists into a single list, preserving the overall
     // order of elements.
     public static List<Integer> flatten(List<List<Integer>> nested) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nested.stream().flatMap(Collection::stream).toList();
     }
 
     // CHALLENGE 10
