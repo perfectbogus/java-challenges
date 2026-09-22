@@ -79,7 +79,9 @@ public class StreamIntermediateChallenge {
     // odd numbers (key false), each preserving their original relative
     // order.
     public static Map<Boolean, List<Integer>> partitionEvenOdd(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().collect(Collectors.partitioningBy(
+                n -> n % 2 == 0
+        ));
     }
 
     // CHALLENGE 11
