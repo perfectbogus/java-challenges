@@ -57,7 +57,7 @@ public class StreamIntermediateChallenge {
     // Returns the average of the numbers in nums as a double. An empty
     // list returns 0.0.
     public static double average(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().mapToInt(Integer::intValue).average().orElse(0.0);
     }
 
     // CHALLENGE 8
