@@ -101,7 +101,13 @@ public class StreamIntermediateChallenge {
     // in ascending order. If n is greater than or equal to the number of
     // entries, all keys are returned (ordered the same way).
     public static List<String> topNKeysByValue(Map<String, Integer> scores, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Map.Entry<String, Integer>> byValueDesc = Map.Entry.<String, Integer>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Integer>> byAlpha = Map.Entry.comparingByKey();
+        return scores.entrySet().stream()
+                .sorted(byValueDesc.thenComparing(byAlpha))
+                .limit(n)
+                .map(Map.Entry::getKey)
+                .toList();
     }
 
     // CHALLENGE 13
@@ -109,7 +115,7 @@ public class StreamIntermediateChallenge {
     // non-empty word in words, concatenated with no separator, in order.
     // Empty strings in words are skipped.
     public static String firstLettersUppercase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 14
