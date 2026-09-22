@@ -10,7 +10,7 @@ public class StreamIntermediateChallenge {
     // Returns the sum of the squares of every number in nums, computed with
     // a stream. An empty list returns 0.
     public static int sumOfSquares(List<Integer> nums) {
-        return nums.stream().map(n -> n * n).mapToInt(Integer::intValue).sum();
+        return nums.stream().mapToInt(n -> n * n).sum();
     }
 
     // CHALLENGE 2
@@ -24,7 +24,6 @@ public class StreamIntermediateChallenge {
     // Returns the elements of items joined together separated by ", ".
     // An empty list returns "".
     public static String joinWithCommas(List<String> items) {
-        if (items.isEmpty()) return "";
         return items.stream().collect(Collectors.joining(", "));
     }
 
@@ -65,7 +64,7 @@ public class StreamIntermediateChallenge {
     // is returned. An empty list returns Optional.empty().
     public static Optional<String> longestWord(List<String> words) {
         Comparator<String> byLength = Comparator.comparingInt(String::length);
-        return words.stream().max(byLength).or(Optional::empty);
+        return words.stream().max(byLength);
     }
 
     // CHALLENGE 9
@@ -115,7 +114,10 @@ public class StreamIntermediateChallenge {
     // non-empty word in words, concatenated with no separator, in order.
     // Empty strings in words are skipped.
     public static String firstLettersUppercase(List<String> words) {
-
+        return words.stream()
+                .filter(w -> !w.isBlank())
+                .map(w -> String.valueOf(w.charAt(0)).toUpperCase())
+                .reduce("", (acc, w) -> acc + w );
     }
 
     // CHALLENGE 14
