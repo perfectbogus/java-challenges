@@ -1,6 +1,7 @@
 package dev.perfectbogus.streams;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class StreamIntermediateChallenge {
@@ -88,7 +89,10 @@ public class StreamIntermediateChallenge {
     // Returns a map from each distinct word in words to how many times it
     // appears.
     public static Map<String, Long> wordFrequency(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 12
