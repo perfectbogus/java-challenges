@@ -17,7 +17,7 @@ public class StreamIntermediateChallenge {
     // Returns a new list containing only the even numbers from nums, sorted
     // in ascending order.
     public static List<Integer> filterAndSortEven(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().filter(n -> n % 2 == 0).sorted().toList();
     }
 
     // CHALLENGE 3
