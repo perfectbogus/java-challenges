@@ -3,6 +3,7 @@ package dev.perfectbogus.streams;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class StreamIntermediateChallenge {
 
@@ -24,7 +25,8 @@ public class StreamIntermediateChallenge {
     // Returns the elements of items joined together separated by ", ".
     // An empty list returns "".
     public static String joinWithCommas(List<String> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (items.isEmpty()) return "";
+        return items.stream().collect(Collectors.joining(", "));
     }
 
     // CHALLENGE 4
