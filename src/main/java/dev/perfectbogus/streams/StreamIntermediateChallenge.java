@@ -33,14 +33,16 @@ public class StreamIntermediateChallenge {
     // Returns how many strings in words have length strictly greater than
     // minLength.
     public static long countLongerThan(List<String> words, int minLength) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().filter(w -> w.length() > minLength).count();
     }
 
     // CHALLENGE 5
     // Groups words by their length. Each key maps to the list of words
     // (in their original relative order) that have that length.
     public static Map<Integer, List<String>> groupByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length
+        ));
     }
 
     // CHALLENGE 6
@@ -48,7 +50,7 @@ public class StreamIntermediateChallenge {
     // "apple" are considered the same word), lowercased, sorted in
     // ascending alphabetical order.
     public static List<String> distinctSortedIgnoreCase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().map(String::toLowerCase).distinct().sorted().toList();
     }
 
     // CHALLENGE 7
