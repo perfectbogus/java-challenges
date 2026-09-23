@@ -155,7 +155,7 @@ public class RegexIntermediateChallenge {
     // quotes themselves excluded, in the order they appear. A quote pair
     // with nothing between them ("") contributes an empty string.
     public static List<String> extractQuotedStrings(String s) {
-        Pattern p = Pattern.compile("\"([\\w\\s]*)\"");
+        Pattern p = Pattern.compile("\"([^\"]*)\"");
         Matcher m = p.matcher(s);
         List<String> results = new ArrayList<>();
         while (m.find()) {
