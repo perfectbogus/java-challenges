@@ -101,7 +101,7 @@ public class RegexIntermediateChallenge {
     // exactly 3 or exactly 6 hexadecimal digits (0-9, a-f, A-F) and
     // nothing else.
     public static boolean isValidHexColor(String s) {
-
+        return s.matches("#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})");
     }
 
     // CHALLENGE 9
