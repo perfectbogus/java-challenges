@@ -109,7 +109,7 @@ public class RegexIntermediateChallenge {
     // collapsed to a single space, and any leading or trailing whitespace
     // removed entirely.
     public static String collapseWhitespace(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return s.replaceAll("\\s+", " ").trim();
     }
 
     // CHALLENGE 10
