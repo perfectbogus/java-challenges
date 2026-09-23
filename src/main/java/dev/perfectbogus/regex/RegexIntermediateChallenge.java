@@ -55,7 +55,9 @@ public class RegexIntermediateChallenge {
     // formats: "123-456-7890" or "(123) 456-7890". Any other formatting
     // (missing space, missing dash, extra characters, etc.) is invalid.
     public static boolean isValidUSPhoneNumber(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("(\\d{3}-|\\(\\d{3}\\) )(\\d{3}-\\d{4})");
+        Matcher m = p.matcher(s);
+        return m.matches();
     }
 
     // CHALLENGE 6
