@@ -130,7 +130,17 @@ public class RegexIntermediateChallenge {
     // If digits consists of exactly 10 digit characters, returns it
     // reformatted as "XXX-XXX-XXXX". Otherwise, returns digits unchanged.
     public static String formatPhoneNumber(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (digits.matches("\\d{10}")) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < digits.length(); i++) {
+                if (i == 3 || i == 6) {
+                    sb.append("-");
+                }
+                sb.append(digits.charAt(i));
+            }
+            return sb.toString();
+        }
+        return digits;
     }
 
     // CHALLENGE 12
