@@ -1,5 +1,7 @@
 package dev.perfectbogus.regex;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexIntermediateChallenge {
 
@@ -9,7 +11,9 @@ public class RegexIntermediateChallenge {
     // more letters, digits or hyphens, then a dot, then 2 to 6 letters.
     // The entire string must match (no leading or trailing characters).
     public static boolean isValidEmail(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,6}");
+        Matcher m = p.matcher(s);
+        return m.matches();
     }
 
     // CHALLENGE 2
