@@ -117,7 +117,13 @@ public class RegexIntermediateChallenge {
     // two digits, hyphen, two digits), in the order they appear. The
     // digits are not checked for forming a real calendar date.
     public static List<String> extractDates(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+        Matcher m = p.matcher(s);
+        List<String> results = new ArrayList<>();
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 11
