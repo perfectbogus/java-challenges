@@ -92,7 +92,8 @@ public class RegexIntermediateChallenge {
     // Splits s on any run of one or more commas, semicolons and/or
     // whitespace characters, returning the non-empty tokens in order.
     public static List<String> splitOnMultipleDelimiters(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String[] split = s.split("[,;\\s]+");
+        return Arrays.stream(split).filter(w -> !w.isBlank()).toList();
     }
 
     // CHALLENGE 8
@@ -100,7 +101,7 @@ public class RegexIntermediateChallenge {
     // exactly 3 or exactly 6 hexadecimal digits (0-9, a-f, A-F) and
     // nothing else.
     public static boolean isValidHexColor(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 9
