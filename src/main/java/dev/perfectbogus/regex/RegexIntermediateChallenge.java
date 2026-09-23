@@ -41,7 +41,13 @@ public class RegexIntermediateChallenge {
     // in s. Digits and punctuation are never part of a word and do not
     // count on their own.
     public static int countWords(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("[a-zA-Z]+");
+        Matcher m = p.matcher(s);
+        int count = 0;
+        while (m.find()) {
+            count++;
+        }
+        return count;
     }
 
     // CHALLENGE 5
