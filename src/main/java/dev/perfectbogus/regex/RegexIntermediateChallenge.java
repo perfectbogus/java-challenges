@@ -1,4 +1,5 @@
 package dev.perfectbogus.regex;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +21,13 @@ public class RegexIntermediateChallenge {
     // Returns every maximal run of digits in s, in the order they appear.
     // A leading '-' or a decimal point is not part of the number.
     public static List<String> extractNumbers(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(s);
+        List<String> result = new ArrayList<>();
+        while (m.find()) {
+            result.add(m.group());
+        }
+        return result;
     }
 
     // CHALLENGE 3
