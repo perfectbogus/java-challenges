@@ -143,6 +143,13 @@ public class RegexIntermediateChallenge {
         return digits;
     }
 
+    public static String formatPhoneNumber2(String digits) {
+        if (!digits.matches("\\d{10}")) {
+            return digits;
+        }
+        return digits.replaceAll("(\\d{3})(\\d{3})(\\d{4})", "$1-$2-$3");
+    }
+
     // CHALLENGE 12
     // Returns every substring of s enclosed in double quotes, with the
     // quotes themselves excluded, in the order they appear. A quote pair

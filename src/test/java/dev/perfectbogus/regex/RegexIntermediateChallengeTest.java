@@ -299,6 +299,11 @@ class RegexIntermediateChallengeTest {
         }
 
         @Test
+        void testTenDigitsFormatted2() {
+            assertEquals("123-456-7890", RegexIntermediateChallenge.formatPhoneNumber2("1234567890"));
+        }
+
+        @Test
         void testTooFewDigitsUnchanged() {
             assertEquals("123", RegexIntermediateChallenge.formatPhoneNumber("123"));
         }
