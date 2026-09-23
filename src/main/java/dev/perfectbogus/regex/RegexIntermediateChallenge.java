@@ -33,7 +33,7 @@ public class RegexIntermediateChallenge {
     // CHALLENGE 3
     // Returns s with every digit character replaced by '*'.
     public static String maskDigits(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return s.replaceAll("\\d", "*");
     }
 
     // CHALLENGE 4
