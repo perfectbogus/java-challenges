@@ -1,6 +1,8 @@
 package dev.perfectbogus.regex;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,8 +66,26 @@ public class RegexIntermediateChallenge {
     // Returns every hashtag in s (a '#' immediately followed by one or more
     // letters, digits or underscores), as the tag text without the leading
     // '#', in the order they appear.
+    public static List<String> extractHashtags2(String s) {
+        String[] split = s.split(" ");
+        Predicate<String> startWithHashtag = (w) -> w.startsWith("#");
+        Predicate<String> isNotBlank = (w) -> !w.isBlank();
+        Predicate<String> isNotEmpty = (w) -> !w.isEmpty();
+        return Arrays.stream(split)
+                .filter(isNotBlank.and(isNotEmpty))
+                .filter(startWithHashtag)
+                .map(w -> w.replace("#", ""))
+                .toList();
+    }
+
     public static List<String> extractHashtags(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("#(\\w+)");
+        Matcher m = p.matcher(s);
+        List<String> results = new ArrayList<>();
+        while (m.find()) {
+            results.add(m.group(1));
+        }
+        return results;
     }
 
     // CHALLENGE 7
