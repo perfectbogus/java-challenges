@@ -60,7 +60,22 @@ public class CompletableFutureIntermediateChallenge {
     // futures completes exceptionally, the returned future completes
     // successfully with defaultValue instead.
     public static CompletableFuture<Integer> sumAllOrDefault(List<CompletableFuture<Integer>> futures, int defaultValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        CompletableFuture<Integer> all = CompletableFuture.completedFuture(0);
+        for (CompletableFuture<Integer> cf : futures) {
+            all = all.thenCombine(cf, Integer::sum);
+        }
+        return all.exceptionally(ex -> defaultValue);
+    }
+
+    public static CompletableFuture<Integer> sumAllOrDefault2(List<CompletableFuture<Integer>> futures, int defaultValue) {
+        CompletableFuture<Void> allDone = CompletableFuture.allOf(futures.toArray(CompletableFuture[]::new));
+
+        return allDone.handle((v, ex) -> {
+            if (ex != null) {
+                return defaultValue;
+            }
+            return futures.stream().mapToInt(CompletableFuture::join).sum();
+        });
     }
 
     // CHALLENGE 6
