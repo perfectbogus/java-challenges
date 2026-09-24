@@ -32,7 +32,7 @@ public class CompletableFutureIntermediateChallenge {
     // the exception.
     public static CompletableFuture<Integer> divideWithFallback(int a, int b, int fallback) {
         return CompletableFuture.supplyAsync(() -> a/b)
-                .handle((res, ex) -> ex != null ? fallback : res);
+                .exceptionally(ex -> fallback);
     }
 
     // CHALLENGE 3
