@@ -106,7 +106,6 @@ public class CompletableFutureIntermediateChallenge {
                         ? CompletableFuture.completedFuture(result)
                         : CompletableFuture.supplyAsync(supplier))
                 .thenCompose(cf -> cf);
-
     }
 
     // CHALLENGE 8
@@ -116,7 +115,7 @@ public class CompletableFutureIntermediateChallenge {
     // zero), the returned future completes successfully with "ERROR"
     // instead.
     public static CompletableFuture<String> chainWithRecovery(int input) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.supplyAsync(() -> "Result: " + ((100 / input) * 2)).exceptionally(ex -> "ERROR");
     }
 
     // CHALLENGE 9
@@ -124,7 +123,9 @@ public class CompletableFutureIntermediateChallenge {
     // exceptionally with an IllegalStateException whose message is
     // message.
     public static CompletableFuture<Integer> createFailedFuture(String message) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        CompletableFuture<Integer> failed = new CompletableFuture<>();
+        failed.completeExceptionally(new IllegalStateException(message));
+        return failed;
     }
 
     // CHALLENGE 10
