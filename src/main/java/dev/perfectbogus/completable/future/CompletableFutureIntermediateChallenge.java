@@ -101,7 +101,12 @@ public class CompletableFutureIntermediateChallenge {
     // the returned future completes with that value. supplier is never
     // called more than twice.
     public static CompletableFuture<Integer> retryOnce(Supplier<Integer> supplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.supplyAsync(supplier)
+                .handle((result, ex) -> ex == null
+                        ? CompletableFuture.completedFuture(result)
+                        : CompletableFuture.supplyAsync(supplier))
+                .thenCompose(cf -> cf);
+
     }
 
     // CHALLENGE 8
