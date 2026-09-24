@@ -50,7 +50,7 @@ public class CompletableFutureIntermediateChallenge {
     // completes successfully with fallback instead of propagating the
     // failure.
     public static CompletableFuture<Integer> sumTwoAsync(CompletableFuture<Integer> a, CompletableFuture<Integer> b, int fallback) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return a.thenCombine(b, Integer::sum).exceptionally(ex -> fallback);
     }
 
     // CHALLENGE 5
