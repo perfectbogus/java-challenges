@@ -2,6 +2,8 @@ package dev.perfectbogus.completable.future;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
@@ -84,7 +86,11 @@ public class CompletableFutureIntermediateChallenge {
     // cause (rather than the CompletionException wrapper) and throws it
     // wrapped in a ProcessingException.
     public static int unwrapOrThrow(CompletableFuture<Integer> future) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return future.join();
+        } catch (CompletionException e) {
+            throw new ProcessingException(e.getCause());
+        }
     }
 
     // CHALLENGE 7
