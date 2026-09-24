@@ -136,6 +136,6 @@ public class CompletableFutureIntermediateChallenge {
     // failed call still leaves the returned future completing
     // exceptionally with the original exception.
     public static CompletableFuture<Integer> trackExceptionOccurred(Supplier<Integer> supplier, AtomicBoolean errorOccurred) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.supplyAsync(supplier).whenComplete((result, ex) -> errorOccurred.set(ex != null));
     }
 }
