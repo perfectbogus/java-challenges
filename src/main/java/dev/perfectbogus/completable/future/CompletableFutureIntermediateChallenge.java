@@ -41,7 +41,7 @@ public class CompletableFutureIntermediateChallenge {
     // returned future completes successfully with defaultValue instead of
     // failing.
     public static CompletableFuture<Integer> parseIntOrDefault(String s, int defaultValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.supplyAsync(() -> Integer.parseInt(s)).exceptionally(ex -> defaultValue);
     }
 
     // CHALLENGE 4
