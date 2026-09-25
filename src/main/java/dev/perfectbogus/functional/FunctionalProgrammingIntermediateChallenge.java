@@ -150,7 +150,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // Returns a Function that, given a threshold, produces a Predicate
     // testing whether a value is strictly greater than that threshold.
     public static Function<Integer, Predicate<Integer>> greaterThanFactory() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (threshold) -> a -> a > threshold;
     }
 
     // CHALLENGE 14
