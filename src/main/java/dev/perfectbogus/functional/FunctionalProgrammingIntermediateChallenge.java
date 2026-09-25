@@ -49,7 +49,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // Returns a Predicate that is true only when both p1 and p2 are true
     // for the same input.
     public static <T> Predicate<T> combineAnd(Predicate<T> p1, Predicate<T> p2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return p1.and(p2);
     }
 
     // CHALLENGE 6
