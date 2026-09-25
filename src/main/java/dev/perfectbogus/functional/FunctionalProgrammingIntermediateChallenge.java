@@ -56,7 +56,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // Returns a Predicate that is true when either p1 or p2 (or both) is
     // true for the same input.
     public static <T> Predicate<T> combineOr(Predicate<T> p1, Predicate<T> p2) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return p1.or(p2);
     }
 
     // CHALLENGE 7
