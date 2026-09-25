@@ -165,6 +165,6 @@ public class FunctionalProgrammingIntermediateChallenge {
     // feeding into the next, and so on. An empty list returns a Function
     // that returns its input unchanged.
     public static Function<Integer, Integer> pipeline(List<Function<Integer, Integer>> functions) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return functions.stream().reduce(e -> e, Function::andThen);
     }
 }
