@@ -156,7 +156,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // CHALLENGE 14
     // Calls fn with a, b, and c, and returns the result.
     public static int applyTriFunction(TriFunction<Integer, Integer, Integer, Integer> fn, int a, int b, int c) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return fn.apply(a, b, c);
     }
 
     // CHALLENGE 15
