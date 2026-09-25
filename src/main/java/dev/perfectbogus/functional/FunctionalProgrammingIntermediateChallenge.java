@@ -143,7 +143,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // defaultSupplier must not be invoked at all when maybeValue is
     // present.
     public static int getConfigValueOrDefault(Optional<Integer> maybeValue, Supplier<Integer> defaultSupplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return maybeValue.orElseGet(defaultSupplier);
     }
 
     // CHALLENGE 13
