@@ -63,7 +63,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // Returns a Predicate that is true exactly when p is false for a
     // given input, and false exactly when p is true.
     public static <T> Predicate<T> negate(Predicate<T> p) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return p.negate();
     }
 
     // CHALLENGE 8
