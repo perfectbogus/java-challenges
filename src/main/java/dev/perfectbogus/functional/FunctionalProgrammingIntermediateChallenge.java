@@ -20,7 +20,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // Applies f to input, then applies g to that result, using Function's
     // andThen method (not compose).
     public static int applyAndThen(Function<Integer, Integer> f, Function<Integer, Integer> g, int input) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return f.andThen(g).apply(input);
     }
 
     // CHALLENGE 2
