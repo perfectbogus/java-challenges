@@ -1,0 +1,134 @@
+package dev.perfectbogus.functional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+public class FunctionalProgrammingIntermediateChallenge {
+
+    // A functional interface for a three-argument function, since the JDK
+    // only ships up to BiFunction (two arguments). Used by CHALLENGE 14.
+    @FunctionalInterface
+    public interface TriFunction<A, B, C, R> {
+        R apply(A a, B b, C c);
+    }
+
+    // CHALLENGE 1
+    // Applies f to input, then applies g to that result, using Function's
+    // andThen method (not compose).
+    public static int applyAndThen(Function<Integer, Integer> f, Function<Integer, Integer> g, int input) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 2
+    // Applies g to input, then applies f to that result, using Function's
+    // compose method (not andThen).
+    public static int applyCompose(Function<Integer, Integer> f, Function<Integer, Integer> g, int input) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 3
+    // Returns a curried addition function: a Function that takes the
+    // first addend and returns another Function that takes the second
+    // addend and returns their sum.
+    public static Function<Integer, Function<Integer, Integer>> curriedAdd() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 4
+    // Returns a new Function that calls fn with firstArg fixed as its
+    // first argument, taking only the second argument.
+    public static Function<Integer, Integer> partiallyApply(BiFunction<Integer, Integer, Integer> fn, int firstArg) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 5
+    // Returns a Predicate that is true only when both p1 and p2 are true
+    // for the same input.
+    public static <T> Predicate<T> combineAnd(Predicate<T> p1, Predicate<T> p2) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 6
+    // Returns a Predicate that is true when either p1 or p2 (or both) is
+    // true for the same input.
+    public static <T> Predicate<T> combineOr(Predicate<T> p1, Predicate<T> p2) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 7
+    // Returns a Predicate that is true exactly when p is false for a
+    // given input, and false exactly when p is true.
+    public static <T> Predicate<T> negate(Predicate<T> p) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 8
+    // Returns a memoized version of fn: calling the returned function
+    // with the same argument more than once only invokes fn the first
+    // time that argument is seen, returning the cached result on every
+    // later call with that same argument.
+    public static Function<Integer, Integer> memoize(Function<Integer, Integer> fn) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 9
+    // Returns a Function that applies fn to its input times times in a
+    // row (fn.apply(fn.apply(...fn.apply(input)...))). times is always
+    // >= 0; with times == 0 the returned function returns its input
+    // unchanged.
+    public static <T> Function<T, T> repeat(Function<T, T> fn, int times) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 10
+    // Returns a Supplier that calls supplier at most once: the first call
+    // to the returned Supplier's get() invokes supplier and caches the
+    // result; every later call returns the cached result without calling
+    // supplier again.
+    public static <T> Supplier<T> lazy(Supplier<T> supplier) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 11
+    // Attempts to parse s as an integer. If successful, returns an
+    // Optional containing twice that value. If s is not a valid integer,
+    // returns Optional.empty() instead of throwing.
+    public static Optional<Integer> parseAndDouble(String s) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 12
+    // Returns the value inside maybeValue if present. If maybeValue is
+    // empty, returns the value produced by defaultSupplier instead.
+    // defaultSupplier must not be invoked at all when maybeValue is
+    // present.
+    public static int getConfigValueOrDefault(Optional<Integer> maybeValue, Supplier<Integer> defaultSupplier) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 13
+    // Returns a Function that, given a threshold, produces a Predicate
+    // testing whether a value is strictly greater than that threshold.
+    public static Function<Integer, Predicate<Integer>> greaterThanFactory() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 14
+    // Calls fn with a, b, and c, and returns the result.
+    public static int applyTriFunction(TriFunction<Integer, Integer, Integer, Integer> fn, int a, int b, int c) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 15
+    // Composes functions into a single Function that applies each one in
+    // order: the first function in the list runs first, its output
+    // feeding into the next, and so on. An empty list returns a Function
+    // that returns its input unchanged.
+    public static Function<Integer, Integer> pipeline(List<Function<Integer, Integer>> functions) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+}
