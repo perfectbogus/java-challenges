@@ -35,14 +35,14 @@ public class FunctionalProgrammingIntermediateChallenge {
     // first addend and returns another Function that takes the second
     // addend and returns their sum.
     public static Function<Integer, Function<Integer, Integer>> curriedAdd() {
-        return (b) -> (a) -> a + b;
+        return (a) -> (b) -> a + b;
     }
 
     // CHALLENGE 4
     // Returns a new Function that calls fn with firstArg fixed as its
     // first argument, taking only the second argument.
     public static Function<Integer, Integer> partiallyApply(BiFunction<Integer, Integer, Integer> fn, int firstArg) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (a) -> fn.apply(firstArg, a);
     }
 
     // CHALLENGE 5
