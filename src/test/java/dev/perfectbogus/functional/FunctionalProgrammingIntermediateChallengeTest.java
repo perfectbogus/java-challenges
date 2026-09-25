@@ -233,6 +233,12 @@ class FunctionalProgrammingIntermediateChallengeTest {
         }
 
         @Test
+        void testRepeatMultipleTimes2() {
+            Function<Integer, Integer> doubleIt = x -> x * 2;
+            assertEquals(8, FunctionalProgrammingIntermediateChallenge.repeat2(doubleIt, 3).apply(1));
+        }
+
+        @Test
         void testZeroTimesReturnsInputUnchanged() {
             Function<Integer, Integer> increment = x -> x + 1;
             assertEquals(10, FunctionalProgrammingIntermediateChallenge.repeat(increment, 0).apply(10));

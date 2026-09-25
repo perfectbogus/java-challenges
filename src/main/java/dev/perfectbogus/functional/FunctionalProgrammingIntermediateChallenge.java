@@ -84,7 +84,15 @@ public class FunctionalProgrammingIntermediateChallenge {
     // >= 0; with times == 0 the returned function returns its input
     // unchanged.
     public static <T> Function<T, T> repeat(Function<T, T> fn, int times) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Function<T, T> all = e -> e;
+        for (int i = 0; i < times; i++) {
+            all = all.andThen(fn);
+        }
+        return all;
+    }
+
+    public static <T> Function<T, T> repeat2(Function<T, T> fn, int times) {
+        return times == 0 ? e -> e : fn.andThen(repeat2(fn, times - 1));
     }
 
     // CHALLENGE 10
