@@ -105,24 +105,36 @@ public class FunctionalProgrammingIntermediateChallenge {
         return () -> cache.computeIfAbsent(supplier, k -> supplier.get());
     }
 
-    public static <T> Supplier<T> lazy2(Supplier<T> supplier) {
-        Object[] cache = new Object[1];
-        boolean[] computed = new boolean[1];
-        return () -> {
-            if (!computed[0]) {
-                cache[0] = supplier.get();
-                computed[0] = true;
-            }
-            return (T) cache[0];
-        };
-    }
+//    public static <T> Supplier<T> lazy2(Supplier<T> supplier) {
+//        Object[] cache = new Object[1];
+//        boolean[] computed = new boolean[1];
+//        return () -> {
+//            if (!computed[0]) {
+//                cache[0] = supplier.get();
+//                computed[0] = true;
+//            }
+//            return (T) cache[0];
+//        };
+//    }
 
     // CHALLENGE 11
     // Attempts to parse s as an integer. If successful, returns an
     // Optional containing twice that value. If s is not a valid integer,
     // returns Optional.empty() instead of throwing.
     public static Optional<Integer> parseAndDouble(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            int i = Integer.parseInt(s);
+            return Optional.of(i*2);
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+
+    public static Optional<Integer> parseAndDouble2(String s) {
+        return Optional.ofNullable(s)
+                .filter(str -> str.matches("-?\\d+"))
+                .map(Integer::parseInt)
+                .map(i -> i * 2);
     }
 
     // CHALLENGE 12

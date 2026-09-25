@@ -272,20 +272,20 @@ class FunctionalProgrammingIntermediateChallengeTest {
             assertEquals(1, callCount.get());
         }
 
-        @Test
-        void testSupplierCalledAtMostOnce2() {
-            AtomicInteger callCount = new AtomicInteger(0);
-            Supplier<Integer> supplier = () -> {
-                callCount.incrementAndGet();
-                return 42;
-            };
-            Supplier<Integer> lazySupplier = FunctionalProgrammingIntermediateChallenge.lazy2(supplier);
-
-            assertEquals(42, lazySupplier.get());
-            assertEquals(42, lazySupplier.get());
-            assertEquals(42, lazySupplier.get());
-            assertEquals(1, callCount.get());
-        }
+//        @Test
+//        void testSupplierCalledAtMostOnce2() {
+//            AtomicInteger callCount = new AtomicInteger(0);
+//            Supplier<Integer> supplier = () -> {
+//                callCount.incrementAndGet();
+//                return 42;
+//            };
+//            Supplier<Integer> lazySupplier = FunctionalProgrammingIntermediateChallenge.lazy2(supplier);
+//
+//            assertEquals(42, lazySupplier.get());
+//            assertEquals(42, lazySupplier.get());
+//            assertEquals(42, lazySupplier.get());
+//            assertEquals(1, callCount.get());
+//        }
     }
 
     // ==========================================================
@@ -297,6 +297,11 @@ class FunctionalProgrammingIntermediateChallengeTest {
         @Test
         void testValidPositiveNumber() {
             assertEquals(Optional.of(10), FunctionalProgrammingIntermediateChallenge.parseAndDouble("5"));
+        }
+
+        @Test
+        void testValidPositiveNumber2() {
+            assertEquals(Optional.of(10), FunctionalProgrammingIntermediateChallenge.parseAndDouble2("5"));
         }
 
         @Test
