@@ -1,6 +1,8 @@
 package dev.perfectbogus.functional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -72,7 +74,8 @@ public class FunctionalProgrammingIntermediateChallenge {
     // time that argument is seen, returning the cached result on every
     // later call with that same argument.
     public static Function<Integer, Integer> memoize(Function<Integer, Integer> fn) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Integer> cache = new HashMap<>();
+        return input -> cache.computeIfAbsent(input, fn);
     }
 
     // CHALLENGE 9
