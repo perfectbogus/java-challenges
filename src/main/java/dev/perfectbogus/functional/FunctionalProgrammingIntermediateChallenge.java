@@ -35,7 +35,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // first addend and returns another Function that takes the second
     // addend and returns their sum.
     public static Function<Integer, Function<Integer, Integer>> curriedAdd() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (b) -> (a) -> a + b;
     }
 
     // CHALLENGE 4
