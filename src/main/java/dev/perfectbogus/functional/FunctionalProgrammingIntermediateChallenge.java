@@ -27,7 +27,7 @@ public class FunctionalProgrammingIntermediateChallenge {
     // Applies g to input, then applies f to that result, using Function's
     // compose method (not andThen).
     public static int applyCompose(Function<Integer, Integer> f, Function<Integer, Integer> g, int input) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return f.compose(g).apply(input);
     }
 
     // CHALLENGE 3
