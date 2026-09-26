@@ -177,7 +177,11 @@ public class ExceptionHandlingIntermediateChallenge {
         int min = Math.min(numerators.length, denominators.length);
         int[] results = new int[min];
         for (int idx = 0; idx < min; idx ++) {
-            results[idx] = denominators[idx] == 0 ? Integer.MIN_VALUE : numerators[idx] / denominators[idx];
+            try {
+                results[idx] = numerators[idx] / denominators[idx];
+            } catch (ArithmeticException e) {
+                results[idx] = Integer.MIN_VALUE;
+            }
         }
         return results;
     }
