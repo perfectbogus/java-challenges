@@ -219,7 +219,9 @@ public class ExceptionHandlingIntermediateChallenge {
     // try-with-resources statement produces propagate to the caller
     // unchanged.
     public static void useFailingResource() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (FailingCloseResource fcl = new FailingCloseResource()) {
+            throw new IllegalStateException("body failure");
+        }
     }
 
     // CHALLENGE 9
