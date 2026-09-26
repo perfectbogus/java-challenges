@@ -115,7 +115,9 @@ public class ExceptionHandlingIntermediateChallenge {
         // <amount> but balance is <balance>" (using the values as Java
         // would print them by default).
         public double withdraw(double amount) throws InsufficientFundsException {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (amount > this.balance) throw new InsufficientFundsException("Insufficient funds: attempted to withdraw " + amount + " but balance is " + balance);
+            this.balance -= amount;
+            return this.balance;
         }
     }
 
@@ -250,7 +252,12 @@ public class ExceptionHandlingIntermediateChallenge {
     // after the cleanup has run. If it succeeds, returns the computed
     // value.
     public static int computeWithCleanup(int divisor, List<String> log) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        log.add("start");
+        try {
+            return 100 / divisor;
+        } finally {
+            log.add("cleanup");
+        }
     }
 
     // CHALLENGE 11 is BankAccount.withdraw(), declared above.
