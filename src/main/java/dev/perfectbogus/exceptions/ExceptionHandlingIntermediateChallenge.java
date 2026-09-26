@@ -267,6 +267,10 @@ public class ExceptionHandlingIntermediateChallenge {
     // throwable in that chain: the one whose own getCause() is null. If t
     // itself has no cause, returns t.
     public static Throwable getRootCause(Throwable t) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Throwable root = t;
+        while (root.getCause() != null) {
+            root = root.getCause();
+        }
+        return root;
     }
 }
