@@ -126,7 +126,8 @@ public class ExceptionHandlingIntermediateChallenge {
     // the message "Cannot divide by zero" instead of letting the JVM's
     // own ArithmeticException propagate.
     public static int divideExact(int a, int b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (b == 0) throw new DivisionByZeroException("Cannot divide by zero");
+        return a/b;
     }
 
     // CHALLENGE 2
