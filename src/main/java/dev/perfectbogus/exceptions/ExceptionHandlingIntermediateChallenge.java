@@ -1,5 +1,6 @@
 package dev.perfectbogus.exceptions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -205,7 +206,10 @@ public class ExceptionHandlingIntermediateChallenge {
     // order, in a single try-with-resources statement, then appends
     // "using" to log inside the try block before the resources close.
     public static void useResources(List<String> log) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try (LoggingResource logA = new LoggingResource("A", log);
+             LoggingResource logB = new LoggingResource("B", log)) {
+            log.add("using");
+        }
     }
 
     // CHALLENGE 8
