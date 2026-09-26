@@ -193,7 +193,11 @@ public class ExceptionHandlingIntermediateChallenge {
     // multi-catch clause (catching both exception types together), not by
     // two separate catch blocks.
     public static int parseFlexible(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return Integer.parseInt(s.trim());
+        } catch (NumberFormatException | NullPointerException e) {
+            return -1;
+        }
     }
 
     // CHALLENGE 7
