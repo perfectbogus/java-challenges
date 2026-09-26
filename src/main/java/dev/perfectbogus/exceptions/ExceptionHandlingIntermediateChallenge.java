@@ -163,7 +163,8 @@ public class ExceptionHandlingIntermediateChallenge {
     // Looks up name in users. If present, returns its value. If absent,
     // throws NotFoundException with the message "User not found: " + name.
     public static int lookupUser(Map<String, Integer> users, String name) throws NotFoundException {
-
+        if (!users.containsKey(name)) throw new NotFoundException("User not found: " + name);
+        return users.get(name);
     }
 
     // CHALLENGE 5
