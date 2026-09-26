@@ -174,7 +174,12 @@ public class ExceptionHandlingIntermediateChallenge {
     // Integer.MIN_VALUE at that index instead and continue with the rest.
     // Returns the resulting array.
     public static int[] safeDivideAll(int[] numerators, int[] denominators) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int min = Math.min(numerators.length, denominators.length);
+        int[] results = new int[min];
+        for (int idx = 0; idx < min; idx ++) {
+            results[idx] = denominators[idx] == 0 ? Integer.MIN_VALUE : numerators[idx] / denominators[idx];
+        }
+        return results;
     }
 
     // CHALLENGE 6
