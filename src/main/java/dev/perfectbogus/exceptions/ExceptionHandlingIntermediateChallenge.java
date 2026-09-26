@@ -139,7 +139,15 @@ public class ExceptionHandlingIntermediateChallenge {
     // positive: " + s (no cause needed in this case). Otherwise returns
     // the parsed value.
     public static int parsePositiveInt(String s) throws ValidationException {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            int i = Integer.parseInt(s);
+            if (i < 1) {
+                throw new ValidationException("Value must be positive: " + s);
+            }
+            return i;
+        } catch (NumberFormatException e) {
+            throw new ValidationException("Invalid number format: " + s, e);
+        }
     }
 
     // CHALLENGE 3
