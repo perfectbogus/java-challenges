@@ -155,14 +155,15 @@ public class ExceptionHandlingIntermediateChallenge {
     // 0 and 150 inclusive. Otherwise throws IllegalArgumentException with
     // the message "Age must be between 0 and 150".
     public static int validateAge(int age) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (age < 0 || age > 150 ) throw new IllegalArgumentException("Age must be between 0 and 150");
+        return age;
     }
 
     // CHALLENGE 4
     // Looks up name in users. If present, returns its value. If absent,
     // throws NotFoundException with the message "User not found: " + name.
     public static int lookupUser(Map<String, Integer> users, String name) throws NotFoundException {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 5
