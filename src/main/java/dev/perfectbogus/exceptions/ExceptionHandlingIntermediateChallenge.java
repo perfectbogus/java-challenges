@@ -1,5 +1,6 @@
 package dev.perfectbogus.exceptions;
 
+import javax.security.auth.login.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -233,7 +234,12 @@ public class ExceptionHandlingIntermediateChallenge {
     // underlying parsing exception set as its cause. Otherwise returns
     // the parsed value.
     public static int readConfigValue(Map<String, String> config, String key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (!config.containsKey(key)) throw new ConfigurationException("Missing configuration key: " + key);
+        try {
+            return Integer.parseInt(config.get(key));
+        } catch (NumberFormatException e) {
+            throw new ConfigurationException("Invalid configuration value for key: " + key, e);
+        }
     }
 
     // CHALLENGE 10
