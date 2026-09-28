@@ -1,8 +1,6 @@
 package dev.perfectbogus.sorting;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -192,7 +190,7 @@ public class SortingIntermediateChallenge2 {
     // products in the same category. Does not modify products.
     public static List<Product> sortByCategoryThenPriceDesc(List<Product> products) {
         Comparator<Product> byCategory = Comparator.comparing(Product::getCategory);
-        Comparator<Product> byPriceDesc = Comparator.comparing(Product::getPrice).reversed();
+        Comparator<Product> byPriceDesc = Comparator.comparing(Product::getPrice, Comparator.reverseOrder());
         return products.stream().sorted(byCategory.thenComparing(byPriceDesc)).collect(Collectors.toList());
     }
 
@@ -204,7 +202,13 @@ public class SortingIntermediateChallenge2 {
     // polling from a PriorityQueue with an appropriate Comparator — not
     // by sorting a list directly.
     public static List<Integer> maxHeapDrainOrder(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        maxHeap.addAll(nums);
+        List<Integer> drain = new ArrayList<>();
+        while (!maxHeap.isEmpty()) {
+            drain.add(maxHeap.poll());
+        }
+        return drain;
     }
 
     // CHALLENGE 12
@@ -215,7 +219,12 @@ public class SortingIntermediateChallenge2 {
     // count 1 the first time it's seen). The key stored for each group
     // keeps whichever casing was encountered first.
     public static Map<String, Integer> countWordsCaseInsensitive(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.toMap(
+                Function.identity(),
+                (s -> 1),
+                Integer::sum,
+                () -> new TreeMap<>(String::compareToIgnoreCase)
+        ));
     }
 
     // CHALLENGE 13
