@@ -11,4 +11,5 @@ public interface Electric {
     default boolean isFullyCharged() {
         return getBatteryLevel() == 100;
     }
+
 }
