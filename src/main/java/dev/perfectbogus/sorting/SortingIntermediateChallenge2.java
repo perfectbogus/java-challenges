@@ -1,6 +1,7 @@
 package dev.perfectbogus.sorting;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -243,7 +244,8 @@ public class SortingIntermediateChallenge2 {
     // Returns the Person in people with the highest age, found using a
     // Comparator rather than by sorting the whole list.
     public static Person mostExperiencedPerson(List<Person> people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Person> byAge = Comparator.comparingInt(Person::getAge);
+        return people.stream().max(byAge).orElseThrow();
     }
 
     // CHALLENGE 15
