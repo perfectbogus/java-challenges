@@ -160,7 +160,8 @@ public class SortingIntermediateChallenge2 {
     // and "bob"), their relative order from the original list must be
     // preserved. Does not modify words.
     public static List<String> sortCaseInsensitiveStable(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byAlphaIgnoringCase = String::compareToIgnoreCase;
+        return words.stream().sorted(byAlphaIgnoringCase).collect(Collectors.toList());
     }
 
     // CHALLENGE 8
