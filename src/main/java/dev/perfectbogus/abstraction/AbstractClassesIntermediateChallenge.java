@@ -167,7 +167,7 @@ public class AbstractClassesIntermediateChallenge {
         // Appends "playing audio" to the shared log.
         @Override
         public void play() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            super.log.add("playing audio");
         }
     }
 
