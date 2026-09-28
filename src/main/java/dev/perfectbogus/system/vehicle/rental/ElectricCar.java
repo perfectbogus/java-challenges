@@ -8,7 +8,7 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
     private int currentBatteryLevel;
     private String currentLocation;
 
-    ElectricCar(String id, String brand, String model, int year, double baseDailyRate, int numberOfDoors) {
+    public ElectricCar(String id, String brand, String model, int year, double baseDailyRate, int numberOfDoors) {
         super(id, brand, model, year, baseDailyRate, numberOfDoors);
         this.currentBatteryLevel = 100;// Missing Requirement
     }

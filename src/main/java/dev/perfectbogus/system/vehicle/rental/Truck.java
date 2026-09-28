@@ -10,7 +10,7 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
     private String currentLocation;
     private int kmsSinceService;
 
-    Truck(String id, String brand, String model, int year, double baseDailyRate, double cargoCapacityKg) {
+    public Truck(String id, String brand, String model, int year, double baseDailyRate, double cargoCapacityKg) {
         super(id, brand, model, year, baseDailyRate);
         this.cargoCapacityKg = cargoCapacityKg;
         this.currentLocation = ""; //Missing requirement
@@ -18,7 +18,7 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
     }
 
     @Override
-    double getInsuranceCostPerDay() {
+    public double getInsuranceCostPerDay() {
         return insurancePerDay + getExtraPerCapacity();
     }
 
@@ -26,13 +26,18 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
         return (int) cargoCapacityKg / 1000;
     }
 
+    public void addKilometers(int km) {
+        if (km <= 0) throw new IllegalArgumentException("km must be positive");
+        this.kmsSinceService += km;
+    }
+
     @Override
-    String getVehicleType() {
+    public String getVehicleType() {
         return "TRUCK";
     }
 
     @Override
-    double applyDiscount(double total, int days) {
+    protected double applyDiscount(double total, int days) {
         if (days >= 5) return total * 0.85;
         return total;
     }
@@ -49,7 +54,7 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
 
     @Override
     public int getKilometersSinceService() {
-        return 0; // Missing Requirement
+        return kmsSinceService;
     }
 
     @Override

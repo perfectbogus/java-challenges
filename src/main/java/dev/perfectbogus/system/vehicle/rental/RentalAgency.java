@@ -1,5 +1,7 @@
 package dev.perfectbogus.system.vehicle.rental;
 
+import dev.perfectbogus.system.vehicle.rental.interfaces.Maintainable;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +26,9 @@ public class RentalAgency {
         double subTotalDaily = toRent.getBaseDailyRate() * days;
         double subTotalInsurance = toRent.getInsuranceCostPerDay() * days;
         return subTotalDaily + subTotalInsurance;
+    }
+
+    public List<Vehicle> getVehiclesNeedingService() {
+        return fleet.stream().filter(v -> v instanceof Maintainable && ((Maintainable) v).needsService()).toList();
     }
 }
