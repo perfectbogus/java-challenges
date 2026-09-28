@@ -132,7 +132,7 @@ public class AbstractClassesIntermediateChallenge {
         // would have returned, plus a flat 500 on top.
         @Override
         public double bonus() {
-
+            return super.bonus() + 500;
         }
     }
 
