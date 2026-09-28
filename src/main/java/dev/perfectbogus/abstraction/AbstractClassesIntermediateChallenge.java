@@ -258,7 +258,7 @@ public class AbstractClassesIntermediateChallenge {
         // equal). Works for any two Priced items, regardless of their
         // concrete types.
         public boolean isMoreExpensiveThan(Priced other) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return price() > other.price();
         }
     }
 
