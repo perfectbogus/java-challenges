@@ -41,6 +41,18 @@ public abstract class Vehicle {
         available = true;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public double getBaseDailyRate() {
+        return baseDailyRate;
+    }
+
     @Override
     public String toString() {
         return "[ " + getVehicleType() + "] "
