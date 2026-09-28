@@ -9,6 +9,7 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
     private static final double INSURANCE_PER_DAY = 20.0;
     private static final int LONG_RENTAL_DAYS = 5;
     private static final double DISCOUNT_LONG_RENTAL_DAYS = 0.85;
+    private static final double RATE_KM_PRICE = 1000.0;
     private String currentLocation;
     private int kmsSinceService;
 
@@ -24,8 +25,13 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
         return INSURANCE_PER_DAY + getExtraPerCapacity();
     }
 
-    private int getExtraPerCapacity() {
-        return (int) cargoCapacityKg / 1000;
+    /**
+     * 2500 kg truck pay $2.50
+     * 1000 kg truck pay $1.00
+     * @return
+     */
+    private double getExtraPerCapacity() {
+        return Math.floor(cargoCapacityKg / RATE_KM_PRICE);
     }
 
     public void addKilometers(int km) {

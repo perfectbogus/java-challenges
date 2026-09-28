@@ -10,6 +10,10 @@ public class Car extends Vehicle {
         this.numberOfDoors = numberOfDoors;
     }
 
+    public int getNumberOfDoors() {
+        return numberOfDoors;
+    }
+
     @Override
     public double getInsuranceCostPerDay() {
         return INSURANCE_PER_DAY;

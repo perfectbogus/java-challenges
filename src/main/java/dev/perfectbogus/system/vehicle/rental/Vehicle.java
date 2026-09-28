@@ -1,5 +1,7 @@
 package dev.perfectbogus.system.vehicle.rental;
 
+import java.util.Objects;
+
 public abstract class Vehicle {
     private final String id;
     private final String brand;
@@ -13,11 +15,11 @@ public abstract class Vehicle {
     protected Vehicle(String id, String brand, String model, int year, double baseDailyRate) {
         int currentYear = java.time.Year.now().getValue();
         if (year < 1990 || year > currentYear) throw new IllegalArgumentException("Year cannot be before 1990");
-        if (baseDailyRate <= 0) throw new IllegalArgumentException("baseDailyRate must be greater than 0");
+        if (baseDailyRate < 1) throw new IllegalArgumentException("baseDailyRate must be greater than 0");
 
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
+        this.id = Objects.requireNonNull(id, "id cannot be null");
+        this.brand = Objects.requireNonNull(brand, "brand cannot be null");
+        this.model = Objects.requireNonNull(model, "model cannot be null");
         this.year = year;
         this.baseDailyRate = baseDailyRate;
     }
@@ -36,11 +38,12 @@ public abstract class Vehicle {
     }
 
     public void rent() {
-        if (!available) throw new IllegalStateException("Vehicle cannot be rent");
+        if (!available) throw new IllegalStateException("Vehicle " + id + " is already rented");
         this.available = false;
     }
 
     public void returnVehicle() {
+        if (available) throw new IllegalStateException("Vehicle " + id + " is available");
         available = true;
     }
 
@@ -58,12 +61,8 @@ public abstract class Vehicle {
 
     @Override
     public String toString() {
-        return "[ " + getVehicleType() + "] "
-                + model
-                + " " + brand
-                + " " + year
-                + " (ID: " + id + ") - "
-                + baseDailyRate + "/day - "
-                + available;
+        return String.format("[%s] %s %s %d (ID: %s) - $%.2f/day - %s",
+                getVehicleType(), brand, model, year, id, baseDailyRate,
+                available ? "Available" : "Rented");
     }
 }

@@ -11,6 +11,10 @@ public class Motorcycle extends Vehicle {
         this.hasSideCar = hasSideCar;
     }
 
+    public boolean getHasSideCar() {
+        return hasSideCar;
+    }
+
     @Override
     public double getInsuranceCostPerDay() {
         if (hasSideCar) return INSURANCE_PER_DAY + SIDECAR_SURCHARGE;
