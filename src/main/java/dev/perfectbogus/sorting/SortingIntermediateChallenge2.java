@@ -150,7 +150,8 @@ public class SortingIntermediateChallenge2 {
     // with every null entry moved to the end (after all non-null
     // entries). Does not modify words.
     public static List<String> sortWithNullsLast(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byNullEnd = Comparator.nullsLast(Comparator.naturalOrder());
+        return words.stream().sorted(byNullEnd).collect(Collectors.toList());
     }
 
     // CHALLENGE 7
