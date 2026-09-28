@@ -5,19 +5,15 @@ import dev.perfectbogus.system.vehicle.rental.interfaces.GpsTrackable;
 public class Bicycle implements GpsTrackable {
 
     private String currentLocation;
-
-    public Bicycle() {
-
-    }
-
+    private final LocationTracker tracker = new LocationTracker();
 
     @Override
     public String getCurrentLocation() {
-        return currentLocation;
+        return tracker.get();
     }
 
     @Override
     public void updateLocation(String location) {
-        this.currentLocation = location;
+        tracker.update(location);
     }
 }

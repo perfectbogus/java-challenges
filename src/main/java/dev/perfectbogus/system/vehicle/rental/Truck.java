@@ -9,15 +9,13 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
     private static final double INSURANCE_PER_DAY = 20.0;
     private static final int LONG_RENTAL_DAYS = 5;
     private static final double DISCOUNT_LONG_RENTAL_DAYS = 0.85;
-    private static final double RATE_KM_PRICE = 1000.0;
-    private String currentLocation;
+    private static final double KG_PER_INSURANCE_DOLLAR = 1000.0;
     private int kmsSinceService;
+    private final LocationTracker tracker = new LocationTracker();
 
     public Truck(String id, String brand, String model, int year, double baseDailyRate, double cargoCapacityKg) {
         super(id, brand, model, year, baseDailyRate);
         this.cargoCapacityKg = cargoCapacityKg;
-        this.currentLocation = ""; //Missing requirement
-        this.kmsSinceService = 0; //Missing requirement
     }
 
     @Override
@@ -31,12 +29,13 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
      * @return
      */
     private double getExtraPerCapacity() {
-        return Math.floor(cargoCapacityKg / RATE_KM_PRICE);
+        return cargoCapacityKg / KG_PER_INSURANCE_DOLLAR;
     }
 
-    public void addKilometers(int km) {
-        if (km <= 0) throw new IllegalArgumentException("km must be positive");
-        this.kmsSinceService += km;
+    @Override
+    public void addKilometers(int kilometers) {
+        if (kilometers <= 0) throw new IllegalArgumentException("km must be positive");
+        this.kmsSinceService += kilometers;
     }
 
     @Override
@@ -52,12 +51,12 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
 
     @Override
     public String getCurrentLocation() {
-        return this.currentLocation;
+        return tracker.get();
     }
 
     @Override
     public void updateLocation(String location) {
-        this.currentLocation = location;
+        tracker.update(location);
     }
 
     @Override

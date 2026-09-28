@@ -32,3 +32,4 @@ public class RentalAgency {
         return fleet.stream().filter(v -> v instanceof Maintainable && ((Maintainable) v).needsService()).toList();
     }
 }
+

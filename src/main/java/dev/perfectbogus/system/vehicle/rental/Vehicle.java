@@ -7,15 +7,15 @@ public abstract class Vehicle {
     private final String brand;
     private final String model;
     private final int year;
-    private double baseDailyRate;
+    private final double baseDailyRate;
     private boolean available = true;
     private static final int LONG_RENTAL_DAYS = 7;
     private static final double DISCOUNT_LONG_RENTAL_DAYS = 0.90;
 
     protected Vehicle(String id, String brand, String model, int year, double baseDailyRate) {
         int currentYear = java.time.Year.now().getValue();
-        if (year < 1990 || year > currentYear) throw new IllegalArgumentException("Year cannot be before 1990");
-        if (baseDailyRate < 1) throw new IllegalArgumentException("baseDailyRate must be greater than 0");
+        if (year < 1990 || year > currentYear) throw new IllegalArgumentException("Year cannot be before 1990 or after " + currentYear);
+        if (baseDailyRate <= 0) throw new IllegalArgumentException("baseDailyRate must be greater than 0");
 
         this.id = Objects.requireNonNull(id, "id cannot be null");
         this.brand = Objects.requireNonNull(brand, "brand cannot be null");
@@ -33,6 +33,7 @@ public abstract class Vehicle {
     }
 
     protected double applyDiscount(double total, int days) {
+        if (days <= 0) throw new IllegalArgumentException("days must be positive");
         if (days >= LONG_RENTAL_DAYS) return total * DISCOUNT_LONG_RENTAL_DAYS;
         return total;
     }

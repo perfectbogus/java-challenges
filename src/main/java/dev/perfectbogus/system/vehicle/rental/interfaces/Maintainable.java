@@ -7,4 +7,5 @@ public interface Maintainable {
     default boolean needsService() {
         return getKilometersSinceService() > KMS_PER_SERVICE;
     }
+    void addKilometers(int km);
 }

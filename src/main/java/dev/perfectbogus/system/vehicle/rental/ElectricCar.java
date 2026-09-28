@@ -7,6 +7,7 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
 
     private int currentBatteryLevel;
     private String currentLocation;
+    private final LocationTracker tracker = new LocationTracker();
 
     public ElectricCar(String id, String brand, String model, int year, double baseDailyRate, int numberOfDoors) {
         super(id, brand, model, year, baseDailyRate, numberOfDoors);
@@ -20,7 +21,8 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
 
     @Override
     public void charge(int percent) {
-        this.currentBatteryLevel = percent;
+        if (percent < 0) throw new IllegalArgumentException("percent must be positive");
+        currentBatteryLevel = Math.min(100, currentBatteryLevel + percent);
     }
 
     @Override
@@ -30,11 +32,19 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
 
     @Override
     public String getCurrentLocation() {
-        return currentLocation;
+        return tracker.get();
     }
 
     @Override
     public void updateLocation(String location) {
-        this.currentLocation = location;
+        tracker.update(location);
+    }
+
+    @Override
+    public void rent() {
+        if (currentBatteryLevel < MIN_BATTERY_TO_RENT)
+            throw new IllegalStateException(
+                    "Vehicle " + getId() + " battery too low " + currentBatteryLevel + "%");
+        super.rent();
     }
 }
