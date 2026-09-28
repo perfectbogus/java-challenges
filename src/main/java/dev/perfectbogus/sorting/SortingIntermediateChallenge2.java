@@ -181,7 +181,9 @@ public class SortingIntermediateChallenge2 {
     // broken by start time (index 0), ascending. Does not modify
     // intervals or its elements.
     public static List<int[]> sortIntervalsByEndThenStart(List<int[]> intervals) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<int[]> byEnd = Comparator.comparingInt(a -> a[1]);
+        Comparator<int[]> byStart = Comparator.comparingInt(a -> a[0]);
+        return intervals.stream().sorted(byEnd.thenComparing(byStart)).collect(Collectors.toList());
     }
 
     // CHALLENGE 10
