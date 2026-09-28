@@ -233,7 +233,10 @@ public class SortingIntermediateChallenge2 {
     // alphabetical order). Ties (equal priority) are broken by name,
     // ascending. Does not modify tasks.
     public static List<Task> sortByPriorityDescending(List<Task> tasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Integer> priorityMap = Map.of("HIGH", 0 ,"MEDIUM", 1, "LOW", 2);
+        Comparator<Task> byPriority = Comparator.comparing(t -> priorityMap.get(t.getPriority()));
+        Comparator<Task> byName = Comparator.comparing(Task::getName);
+        return tasks.stream().sorted(byPriority.thenComparing(byName)).collect(Collectors.toList());
     }
 
     // CHALLENGE 14
