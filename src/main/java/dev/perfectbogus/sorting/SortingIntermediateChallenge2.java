@@ -3,6 +3,7 @@ package dev.perfectbogus.sorting;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SortingIntermediateChallenge2 {
 
@@ -120,7 +121,8 @@ public class SortingIntermediateChallenge2 {
     // Returns a new list containing people sorted by age, descending.
     // Does not modify people.
     public static List<Person> sortByAgeDescending(List<Person> people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Person> byAgeDesc = Comparator.comparingInt(Person::getAge).reversed();
+        return people.stream().sorted(byAgeDesc).collect(Collectors.toList());
     }
 
     // CHALLENGE 4
