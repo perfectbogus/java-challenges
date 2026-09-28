@@ -130,7 +130,9 @@ public class SortingIntermediateChallenge2 {
     // (youngest first), and by name (alphabetically) among people of
     // equal age. Does not modify people.
     public static List<Person> sortByAgeThenName(List<Person> people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Person> byAge = Comparator.comparingInt(Person::getAge);
+        Comparator<Person> byAlpha = Comparator.comparing(Person::getName);
+        return people.stream().sorted(byAge.thenComparing(byAlpha)).collect(Collectors.toList());
     }
 
     // CHALLENGE 5
