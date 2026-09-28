@@ -6,7 +6,9 @@ import dev.perfectbogus.system.vehicle.rental.interfaces.Maintainable;
 public class Truck extends Vehicle implements GpsTrackable, Maintainable {
 
     private final double cargoCapacityKg;
-    private final double insurancePerDay = 20.0;
+    private static final double INSURANCE_PER_DAY = 20.0;
+    private static final int LONG_RENTAL_DAYS = 5;
+    private static final double DISCOUNT_LONG_RENTAL_DAYS = 0.85;
     private String currentLocation;
     private int kmsSinceService;
 
@@ -19,7 +21,7 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
 
     @Override
     public double getInsuranceCostPerDay() {
-        return insurancePerDay + getExtraPerCapacity();
+        return INSURANCE_PER_DAY + getExtraPerCapacity();
     }
 
     private int getExtraPerCapacity() {
@@ -38,7 +40,7 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
 
     @Override
     protected double applyDiscount(double total, int days) {
-        if (days >= 5) return total * 0.85;
+        if (days >= LONG_RENTAL_DAYS) return total * DISCOUNT_LONG_RENTAL_DAYS;
         return total;
     }
 

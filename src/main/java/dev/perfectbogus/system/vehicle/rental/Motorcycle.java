@@ -2,7 +2,8 @@ package dev.perfectbogus.system.vehicle.rental;
 
 public class Motorcycle extends Vehicle {
 
-    private final double insurancePerDay = 15;
+    private static final double INSURANCE_PER_DAY = 15;
+    private static final double SIDECAR_SURCHARGE = 5;
     private final boolean hasSideCar;
 
     public Motorcycle(String id, String brand, String model, int year, double baseDailyRate, boolean hasSideCar) {
@@ -12,8 +13,8 @@ public class Motorcycle extends Vehicle {
 
     @Override
     public double getInsuranceCostPerDay() {
-        if (hasSideCar) return insurancePerDay + 5;
-        return insurancePerDay;
+        if (hasSideCar) return INSURANCE_PER_DAY + SIDECAR_SURCHARGE;
+        return INSURANCE_PER_DAY;
     }
 
     @Override

@@ -7,6 +7,8 @@ public abstract class Vehicle {
     private final int year;
     private double baseDailyRate;
     private boolean available = true;
+    private static final int LONG_RENTAL_DAYS = 7;
+    private static final double DISCOUNT_LONG_RENTAL_DAYS = 0.90;
 
     protected Vehicle(String id, String brand, String model, int year, double baseDailyRate) {
         int currentYear = java.time.Year.now().getValue();
@@ -23,13 +25,13 @@ public abstract class Vehicle {
     public abstract double getInsuranceCostPerDay();
     public abstract String getVehicleType();
 
-    final double calculateRentalCost(int days) {
+    public final double calculateRentalCost(int days) {
         double total = (baseDailyRate + getInsuranceCostPerDay()) * days;
         return applyDiscount(total, days);
     }
 
     protected double applyDiscount(double total, int days) {
-        if (days >= 7) return total * 0.90;
+        if (days >= LONG_RENTAL_DAYS) return total * DISCOUNT_LONG_RENTAL_DAYS;
         return total;
     }
 

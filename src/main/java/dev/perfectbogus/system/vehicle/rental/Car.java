@@ -3,7 +3,7 @@ package dev.perfectbogus.system.vehicle.rental;
 public class Car extends Vehicle {
 
     private final int numberOfDoors;
-    private final double insurancePerDay = 10;
+    private static final double INSURANCE_PER_DAY = 10;
 
     public Car(String id, String brand, String model, int year, double baseDailyRate, int numberOfDoors) {
         super(id, brand, model, year, baseDailyRate);
@@ -12,7 +12,7 @@ public class Car extends Vehicle {
 
     @Override
     public double getInsuranceCostPerDay() {
-        return this.insurancePerDay;
+        return INSURANCE_PER_DAY;
     }
 
     @Override
