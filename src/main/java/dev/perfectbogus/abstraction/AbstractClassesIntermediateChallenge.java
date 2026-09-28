@@ -15,7 +15,7 @@ public class AbstractClassesIntermediateChallenge {
         // area() formatted to exactly two decimal places (String.format
         // with "%.2f").
         public String describe() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return String.format("Area: %.2f", area());
         }
     }
 
@@ -60,7 +60,7 @@ public class AbstractClassesIntermediateChallenge {
         // Returns the area of the square (side * side).
         @Override
         public double area() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return side * side;
         }
     }
 
@@ -89,8 +89,8 @@ public class AbstractClassesIntermediateChallenge {
         // Passes name up to the Vehicle constructor and stores topSpeed
         // in this object's own field.
         public Car(String name, int topSpeed) {
-            super(null);
-            throw new UnsupportedOperationException("Not implemented yet");
+            super(name);
+            this.topSpeed = topSpeed;
         }
 
         @Override
@@ -132,7 +132,7 @@ public class AbstractClassesIntermediateChallenge {
         // would have returned, plus a flat 500 on top.
         @Override
         public double bonus() {
-            throw new UnsupportedOperationException("Not implemented yet");
+
         }
     }
 
