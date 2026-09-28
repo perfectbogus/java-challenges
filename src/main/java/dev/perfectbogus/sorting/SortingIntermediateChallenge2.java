@@ -140,7 +140,9 @@ public class SortingIntermediateChallenge2 {
     // descending (highest first), and by name, ascending, among players
     // with equal scores. Does not modify players.
     public static List<Player> sortByScoreDescThenNameAsc(List<Player> players) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Player> byScoreDesc = Comparator.comparingInt(Player::getScore).reversed();
+        Comparator<Player> byName = Comparator.comparing(Player::getName);
+        return players.stream().sorted(byScoreDesc.thenComparing(byName)).collect(Collectors.toList());
     }
 
     // CHALLENGE 6
