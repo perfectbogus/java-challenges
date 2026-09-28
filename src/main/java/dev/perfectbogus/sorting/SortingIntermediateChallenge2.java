@@ -3,6 +3,7 @@ package dev.perfectbogus.sorting;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SortingIntermediateChallenge2 {
@@ -169,7 +170,9 @@ public class SortingIntermediateChallenge2 {
     // target (ascending — closest first). Ties (equal distance) are
     // broken by the values themselves, ascending. Does not modify nums.
     public static List<Integer> sortByDistanceFromTarget(List<Integer> nums, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Integer> byDistanceFromTarget = Comparator.comparingInt(a -> Math.abs(target - a));
+        Comparator<Integer> byItself = Comparator.comparingInt(a -> a);
+        return nums.stream().sorted(byDistanceFromTarget.thenComparing(byItself)).collect(Collectors.toList());
     }
 
     // CHALLENGE 9
