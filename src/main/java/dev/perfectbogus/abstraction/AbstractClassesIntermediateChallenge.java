@@ -316,7 +316,8 @@ public class AbstractClassesIntermediateChallenge {
         // Adds balance * interestRate() to balance, and returns the new
         // balance.
         public double applyInterest() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            balance += balance * interestRate();
+            return balance;
         }
     }
 
@@ -339,6 +340,6 @@ public class AbstractClassesIntermediateChallenge {
     // individual element.
     // ==========================================================
     public static double totalArea(List<Shape> shapes) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return shapes.stream().mapToDouble(Shape::area).sum();
     }
 }
