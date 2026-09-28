@@ -191,7 +191,9 @@ public class SortingIntermediateChallenge2 {
     // category (alphabetically), and by price, descending, among
     // products in the same category. Does not modify products.
     public static List<Product> sortByCategoryThenPriceDesc(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Product> byCategory = Comparator.comparing(Product::getCategory);
+        Comparator<Product> byPriceDesc = Comparator.comparing(Product::getPrice).reversed();
+        return products.stream().sorted(byCategory.thenComparing(byPriceDesc)).collect(Collectors.toList());
     }
 
     // CHALLENGE 11
