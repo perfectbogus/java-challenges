@@ -185,7 +185,7 @@ public class AbstractClassesIntermediateChallenge {
         // ("\n"). This method is final: every subclass shares this exact
         // assembly logic and can only customize the three parts.
         public final String generate() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return header() + "\n" +body() + "\n" + footer();
         }
     }
 
