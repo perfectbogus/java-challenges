@@ -242,7 +242,7 @@ public class AbstractClassesIntermediateChallenge {
         // Returns "User".
         @Override
         public String type() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return "User";
         }
     }
 
