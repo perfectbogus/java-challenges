@@ -31,4 +31,9 @@ public class Motorcycle extends Vehicle {
         return total;
     }
 
+    @Override
+    public void checkCanBeRented() {
+        // Nothing to check
+    }
+
 }

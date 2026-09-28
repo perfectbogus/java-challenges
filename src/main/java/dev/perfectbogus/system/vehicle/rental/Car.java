@@ -23,4 +23,9 @@ public class Car extends Vehicle {
     public String getVehicleType() {
         return "CAR";
     }
+
+    @Override
+    public void checkCanBeRented() {
+        // Nothing to check
+    }
 }

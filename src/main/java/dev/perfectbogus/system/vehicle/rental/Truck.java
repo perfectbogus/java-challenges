@@ -18,9 +18,54 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
         this.cargoCapacityKg = cargoCapacityKg;
     }
 
+    // Vehicle
     @Override
     public double getInsuranceCostPerDay() {
         return INSURANCE_PER_DAY + getExtraPerCapacity();
+    }
+
+    @Override
+    public String getVehicleType() {
+        return "TRUCK";
+    }
+
+    @Override
+    public void checkCanBeRented() {
+        // Nothing to check
+    }
+
+    @Override
+    protected double applyDiscount(double total, int days) {
+        if (days >= LONG_RENTAL_DAYS) return total * DISCOUNT_LONG_RENTAL_DAYS;
+        return total;
+    }
+
+    // GpsTrackable
+    @Override
+    public String getCurrentLocation() {
+        return tracker.get();
+    }
+
+    @Override
+    public void updateLocation(String location) {
+        tracker.update(location);
+    }
+
+    //Maintainable
+    @Override
+    public int getKilometersSinceService() {
+        return kmsSinceService;
+    }
+
+    @Override
+    public void performService() {
+        this.kmsSinceService = 0;
+    }
+
+    @Override
+    public void addKilometers(int kilometers) {
+        if (kilometers <= 0) throw new IllegalArgumentException("km must be positive");
+        this.kmsSinceService += kilometers;
     }
 
     /**
@@ -32,40 +77,4 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
         return cargoCapacityKg / KG_PER_INSURANCE_DOLLAR;
     }
 
-    @Override
-    public void addKilometers(int kilometers) {
-        if (kilometers <= 0) throw new IllegalArgumentException("km must be positive");
-        this.kmsSinceService += kilometers;
-    }
-
-    @Override
-    public String getVehicleType() {
-        return "TRUCK";
-    }
-
-    @Override
-    protected double applyDiscount(double total, int days) {
-        if (days >= LONG_RENTAL_DAYS) return total * DISCOUNT_LONG_RENTAL_DAYS;
-        return total;
-    }
-
-    @Override
-    public String getCurrentLocation() {
-        return tracker.get();
-    }
-
-    @Override
-    public void updateLocation(String location) {
-        tracker.update(location);
-    }
-
-    @Override
-    public int getKilometersSinceService() {
-        return kmsSinceService;
-    }
-
-    @Override
-    public void performService() {
-        this.kmsSinceService = 0;
-    }
 }

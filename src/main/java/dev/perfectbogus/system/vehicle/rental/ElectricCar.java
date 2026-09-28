@@ -41,10 +41,9 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
     }
 
     @Override
-    public void rent() {
+    public void checkCanBeRented() {
         if (currentBatteryLevel < MIN_BATTERY_TO_RENT)
             throw new IllegalStateException(
                     "Vehicle " + getId() + " battery too low " + currentBatteryLevel + "%");
-        super.rent();
     }
 }

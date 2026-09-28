@@ -26,6 +26,7 @@ public abstract class Vehicle {
 
     public abstract double getInsuranceCostPerDay();
     public abstract String getVehicleType();
+    public abstract void checkCanBeRented();
 
     public final double calculateRentalCost(int days) {
         double total = (baseDailyRate + getInsuranceCostPerDay()) * days;
@@ -38,8 +39,9 @@ public abstract class Vehicle {
         return total;
     }
 
-    public void rent() {
+    public final void rent() {
         if (!available) throw new IllegalStateException("Vehicle " + id + " is already rented");
+        checkCanBeRented();
         this.available = false;
     }
 
