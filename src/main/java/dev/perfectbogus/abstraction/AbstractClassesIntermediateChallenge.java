@@ -167,7 +167,7 @@ public class AbstractClassesIntermediateChallenge {
         // Appends "playing audio" to the shared log.
         @Override
         public void play() {
-            super.log.add("playing audio");
+            log.add("playing audio");
         }
     }
 
