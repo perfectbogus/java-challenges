@@ -35,7 +35,20 @@ public class LinkedHashMapIntermediateChallenge {
     // IndexOutOfBoundsException if index is negative or >= map.size().
     // Does not modify map.
     public static String keyAtPosition(LinkedHashMap<String, Integer> map, int index) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (index < 0 || index >= map.size()) throw new IndexOutOfBoundsException("index must be positive");
+
+        int i = 0;
+        for (String key : map.keySet()) {
+            if (i == index) return key;
+            i++;
+        }
+
+        throw new IllegalStateException("unreachable");
+    }
+
+    public static String keyAtPositionFunctional(LinkedHashMap<String, Integer> map, int index) {
+        if (index < 0 || index >= map.size()) throw new IndexOutOfBoundsException("Invalid index: " + index);
+        return map.keySet().stream().skip(index).findFirst().orElseThrow();
     }
 
     // CHALLENGE 4

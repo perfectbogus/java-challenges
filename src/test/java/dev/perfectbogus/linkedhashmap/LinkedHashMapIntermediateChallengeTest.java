@@ -60,6 +60,16 @@ class LinkedHashMapIntermediateChallengeTest {
         }
 
         @Test
+        void testReturnsKeyAtGivenInsertionIndexFunctional() {
+            LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+            map.put("x", 1);
+            map.put("y", 2);
+            map.put("z", 3);
+            assertEquals("x", LinkedHashMapIntermediateChallenge.keyAtPositionFunctional(map, 0));
+            assertEquals("z", LinkedHashMapIntermediateChallenge.keyAtPositionFunctional(map, 2));
+        }
+
+        @Test
         void testOutOfBoundsThrows() {
             LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
             map.put("x", 1);
