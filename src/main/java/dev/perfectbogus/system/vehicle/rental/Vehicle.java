@@ -29,6 +29,7 @@ public abstract class Vehicle {
     public abstract void checkCanBeRented();
 
     public final double calculateRentalCost(int days) {
+        if(days <= 0) throw new IllegalArgumentException("days must be positive");
         double total = (baseDailyRate + getInsuranceCostPerDay()) * days;
         return applyDiscount(total, days);
     }

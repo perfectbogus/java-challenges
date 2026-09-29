@@ -51,7 +51,26 @@ public class RentalAgency {
     }
 
     public void printFleetReport() {
-        fleet.forEach(System.out::println);
+        List<Electric> electrics = fleet.stream()
+                .filter(Electric.class::isInstance)
+                .map(Electric.class::cast)
+                .toList();
+
+        electrics.forEach(e -> System.out.println(e.toString()));
+
+        List<Maintainable> maintainables = fleet.stream()
+                .filter(Maintainable.class::isInstance)
+                .map(Maintainable.class::cast)
+                .toList();
+
+        maintainables.forEach(m -> System.out.println(m.toString()));
+
+        List<Vehicle> others = fleet.stream()
+                .filter(v -> !Maintainable.class.isInstance(v))
+                .filter(v -> !Electric.class.isInstance(v))
+                .toList();
+
+        others.forEach(o -> System.out.println(o.toString()));
     }
 }
 

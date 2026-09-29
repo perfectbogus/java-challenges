@@ -2,8 +2,8 @@ package dev.perfectbogus.system.vehicle.rental;
 
 public class Motorcycle extends Vehicle {
 
-    private static final double INSURANCE_PER_DAY = 15;
-    private static final double SIDECAR_SURCHARGE = 5;
+    private static final double INSURANCE_PER_DAY = 15.0;
+    private static final double SIDECAR_SURCHARGE = 5.0;
     private final boolean hasSideCar;
 
     public Motorcycle(String id, String brand, String model, int year, double baseDailyRate, boolean hasSideCar) {
