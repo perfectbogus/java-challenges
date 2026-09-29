@@ -26,7 +26,10 @@ public abstract class Vehicle {
 
     public abstract double getInsuranceCostPerDay();
     public abstract String getVehicleType();
-    public abstract void checkCanBeRented();
+
+    protected void checkCanBeRented() {
+        // Default: no extra rules. subclasses override this if they need one.
+    }
 
     public final double calculateRentalCost(int days) {
         if(days <= 0) throw new IllegalArgumentException("days must be positive");
@@ -35,7 +38,6 @@ public abstract class Vehicle {
     }
 
     protected double applyDiscount(double total, int days) {
-        if (days <= 0) throw new IllegalArgumentException("days must be positive");
         if (days >= LONG_RENTAL_DAYS) return total * DISCOUNT_LONG_RENTAL_DAYS;
         return total;
     }

@@ -6,12 +6,12 @@ import dev.perfectbogus.system.vehicle.rental.interfaces.GpsTrackable;
 public class ElectricCar extends Car implements Electric, GpsTrackable {
 
     private int currentBatteryLevel;
-    private String currentLocation;
+    private static final int KM_PER_BATTERY_LEVEL = 3;
     private final LocationTracker tracker = new LocationTracker();
 
     public ElectricCar(String id, String brand, String model, int year, double baseDailyRate, int numberOfDoors) {
         super(id, brand, model, year, baseDailyRate, numberOfDoors);
-        this.currentBatteryLevel = 100;// Missing Requirement
+        this.currentBatteryLevel = 100;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
 
     @Override
     public int getRangeKm() {
-        return 0; // Missing Requirement
+        return currentBatteryLevel * KM_PER_BATTERY_LEVEL;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
     }
 
     @Override
-    public void checkCanBeRented() {
+    protected void checkCanBeRented() {
         if (currentBatteryLevel < MIN_BATTERY_TO_RENT)
             throw new IllegalStateException(
                     "Vehicle " + getId() + " battery too low " + currentBatteryLevel + "%");

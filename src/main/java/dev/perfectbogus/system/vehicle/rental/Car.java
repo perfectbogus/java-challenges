@@ -24,8 +24,4 @@ public class Car extends Vehicle {
         return "CAR";
     }
 
-    @Override
-    public void checkCanBeRented() {
-        // Nothing to check
-    }
 }

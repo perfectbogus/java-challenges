@@ -15,6 +15,7 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
 
     public Truck(String id, String brand, String model, int year, double baseDailyRate, double cargoCapacityKg) {
         super(id, brand, model, year, baseDailyRate);
+        if (cargoCapacityKg <= 0) throw new IllegalArgumentException("Capacity must be positive");
         this.cargoCapacityKg = cargoCapacityKg;
     }
 
@@ -27,11 +28,6 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
     @Override
     public String getVehicleType() {
         return "TRUCK";
-    }
-
-    @Override
-    public void checkCanBeRented() {
-        // Nothing to check
     }
 
     @Override
@@ -71,7 +67,6 @@ public class Truck extends Vehicle implements GpsTrackable, Maintainable {
     /**
      * 2500 kg truck pay $2.50
      * 1000 kg truck pay $1.00
-     * @return
      */
     private double getExtraPerCapacity() {
         return cargoCapacityKg / KG_PER_INSURANCE_DOLLAR;

@@ -38,10 +38,6 @@ class VehicleTest {
             return "TEST";
         }
 
-        @Override
-        public void checkCanBeRented() {
-            // Nothing to check
-        }
     }
 
     @Test
@@ -170,7 +166,7 @@ class VehicleTest {
     void rent_whenHookRejects_throwsAndStaysAvailable() {
         Vehicle picky = new TestVehicle(ID, BRAND, MODEL, YEAR, RATE) {
             @Override
-            public void checkCanBeRented() {
+            protected void checkCanBeRented() {
                 throw new IllegalStateException("not today");
             }
         };
