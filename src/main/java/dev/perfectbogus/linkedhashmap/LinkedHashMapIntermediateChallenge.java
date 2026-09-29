@@ -95,12 +95,13 @@ public class LinkedHashMapIntermediateChallenge {
         private final int capacity;
 
         public LruCache(int capacity) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            super(capacity, 0.75f, true);
+            this.capacity = capacity;
         }
 
         @Override
         protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return size() > capacity;
         }
     }
 
