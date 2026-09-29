@@ -96,9 +96,14 @@ class ElectricCarTest {
         assertEquals(expected, car.calculateRentalCost(days), 0.001);
     }
 
-    @Test
-    void getRangeKm_withCurrentBatteryLeve() {
-        assertEquals(300.0, car.getRangeKm(), 0.001);
+    @ParameterizedTest(name = "{0}% battery -> {1} km")
+    @CsvSource({
+            "100, 300",
+            "50, 150",
+            "0, 0"
+    })
+    void getRangeKm_withCurrentBatteryLeve(int batteryLevel, int expectedRange) {
+        assertEquals(expectedRange, electricCarWithBatteryLevel(batteryLevel).getRangeKm());
     }
 
     private ElectricCar electricCarWithBatteryLevel(int batteryLevel) {
