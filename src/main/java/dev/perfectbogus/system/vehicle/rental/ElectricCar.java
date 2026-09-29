@@ -9,9 +9,14 @@ public class ElectricCar extends Car implements Electric, GpsTrackable {
     private static final int KM_PER_BATTERY_LEVEL = 3;
     private final LocationTracker tracker = new LocationTracker();
 
-    public ElectricCar(String id, String brand, String model, int year, double baseDailyRate, int numberOfDoors) {
+    public ElectricCar(String id, String brand, String model, int year, double baseDailyRate, int numberOfDoors, int currentBatteryLevel) {
         super(id, brand, model, year, baseDailyRate, numberOfDoors);
-        this.currentBatteryLevel = 100;
+        if (currentBatteryLevel < 0 || currentBatteryLevel > 100) throw new IllegalArgumentException("Battery Level range 0 and 100");
+        this.currentBatteryLevel = currentBatteryLevel;
+    }
+
+    public boolean isFullyCharged() {
+        return currentBatteryLevel == 100;
     }
 
     @Override
