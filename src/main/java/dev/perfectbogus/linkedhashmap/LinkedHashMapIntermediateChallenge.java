@@ -10,7 +10,7 @@ public class LinkedHashMapIntermediateChallenge {
     // Returns the keys of map in the order the map itself iterates them
     // (i.e., insertion order). Does not modify map.
     public static List<String> keysInIterationOrder(LinkedHashMap<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.keySet().stream().toList();
     }
 
     // CHALLENGE 2
