@@ -172,7 +172,9 @@ public class LinkedHashMapIntermediateChallenge {
     // last-inserted entry of map becomes the first entry of the result,
     // and vice versa). Does not modify map.
     public static LinkedHashMap<String, Integer> reverseInsertionOrder(LinkedHashMap<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashMap<String, Integer> result = new LinkedHashMap<>();
+        map.forEach(result::putFirst);
+        return result;
     }
 
     // CHALLENGE 12
