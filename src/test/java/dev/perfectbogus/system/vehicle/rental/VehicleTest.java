@@ -70,10 +70,9 @@ class VehicleTest {
     }
 
     @Test
-    @DisplayName("Create Vehicle with Current year")
-    void constructor_currentYear_ok() {
-        final int year = java.time.Year.now().getValue();
-        assertNotNull(vehicleWithYear(year));
+    @DisplayName("Create a vehicle on 1990")
+    void constructor_validYear_succeed() {
+        assertDoesNotThrow(() -> vehicleWithYear(1990));
     }
 
     @ParameterizedTest
@@ -83,23 +82,30 @@ class VehicleTest {
         assertThrows(IllegalArgumentException.class, () -> vehicleWithRate(rate));
     }
 
+    @Test
+    void constructor_smallValidRate_succeed() {
+        double smallValidRate = 0.01;
+        Vehicle t = vehicleWithRate(smallValidRate);
+        assertEquals(smallValidRate, t.getBaseDailyRate(), 0.0001);
+    }
+
 
     @Test
     @DisplayName("Positive valid rate on new vehicles")
     void constructor_validRate_createVehicle() {
-        assertEquals(RATE, vehicle.getBaseDailyRate());
+        assertEquals(RATE, vehicle.getBaseDailyRate(), 0.0001);
     }
 
     @Test
     @DisplayName("Id Null not allowed")
     void constructor_nullId_throws() {
-        assertThrows(NullPointerException.class, () -> new TestVehicle(null, BRAND, MODEL, 2000, 0.5));
+        assertThrows(NullPointerException.class, () -> new TestVehicle(null, BRAND, MODEL, YEAR, RATE));
     }
 
     @Test
     @DisplayName("Brand Null not allowed")
     void constructor_nullBrand_throws() {
-        assertThrows(NullPointerException.class, () -> new TestVehicle(ID, null, MODEL, 2000, 0.5));
+        assertThrows(NullPointerException.class, () -> new TestVehicle(ID, null, MODEL, YEAR, RATE));
     }
 
     @Test
@@ -115,7 +121,7 @@ class VehicleTest {
     }
 
     @Test
-    @DisplayName("Calculate Rental Cost over 7 days")
+    @DisplayName("Calculate Rental Cost over 7 days or more days")
     void calculateRentalCost_sevenDays_applyDiscount() {
         assertEquals(378.0, vehicle.calculateRentalCost(7), 0.001);
     }
@@ -128,16 +134,11 @@ class VehicleTest {
     }
 
     @Test
-    @DisplayName("Calculate Insurance Cost Per Day")
-    void getInsuranceCostPerDay_ok() {
-        assertEquals(INSURANCE, vehicle.getInsuranceCostPerDay());
-    }
-
-    @Test
     @DisplayName("Try to rent a vehicle twice")
     void rent_twice_throws() {
         vehicle.rent();
         assertThrows(IllegalStateException.class, vehicle::rent);
+        assertFalse(vehicle::isAvailable);
     }
 
     @Test
@@ -152,9 +153,16 @@ class VehicleTest {
     }
 
     @Test
-    @DisplayName("Validate Format")
+    @DisplayName("Validate Format when Available")
     void toString_available_matchesExactFormat() {
         assertEquals("[TEST] brand-test model-test " + YEAR + " (ID: T-001) - $50.00/day - Available", vehicle.toString());
+    }
+
+    @Test
+    @DisplayName("Validate Format when Rented")
+    void toString_rented_matchesExactFormat() {
+        vehicle.rent();
+        assertEquals("[TEST] brand-test model-test " + YEAR + " (ID: T-001) - $50.00/day - Rented", vehicle.toString());
     }
 
     @Test
@@ -171,23 +179,22 @@ class VehicleTest {
     }
 
     @Test
-    @DisplayName("Calculate Rental Cost when hook fixed return fixed value")
-    void calculateRentalCost_whenHookFixed_returnFixed() {
-        double FIXED = 0.0;
-        double INSURANCE = 10.0;
-        Vehicle anonymous = new TestVehicle(ID, BRAND, MODEL, YEAR, RATE) {
-            @Override
-            public double getInsuranceCostPerDay() {
-                return INSURANCE;
-            }
+    void calculateRentalCost_passesTotalAndDaysToHook() {
+        double[] receivedTotal = new double[1];
+        int[] receivedDays = new int[1];
 
+        Vehicle spy = new TestVehicle(ID, BRAND, MODEL, YEAR, RATE) {
             @Override
-            public double applyDiscount(double total , int days) {
-                return FIXED;
+            protected double applyDiscount(double total, int days) {
+                receivedTotal[0] = total;
+                receivedDays[0] = days;
+                return 123.45;
             }
         };
 
-        assertEquals(FIXED, anonymous.calculateRentalCost(3));
+        assertEquals(123.45, spy.calculateRentalCost(3), 0.001);
+        assertEquals(180.0, receivedTotal[0], 0.001);
+        assertEquals(3, receivedDays[0]);
     }
 
     private TestVehicle vehicleWithYear(int year) {
