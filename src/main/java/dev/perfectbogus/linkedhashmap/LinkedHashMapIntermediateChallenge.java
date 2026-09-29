@@ -79,7 +79,10 @@ public class LinkedHashMapIntermediateChallenge {
     // without changing its associated value. If key is not present in the
     // map, does nothing.
     public static void touchKey(LinkedHashMap<String, Integer> insertionOrderedMap, String key) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Integer value = insertionOrderedMap.remove(key);
+        if (value != null) {
+            insertionOrderedMap.put(key, value);
+        }
     }
 
     // CHALLENGE 7
