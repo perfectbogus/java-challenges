@@ -185,6 +185,8 @@ public class LinkedHashMapIntermediateChallenge {
     // After processing every key in accessSequence in order, returns the
     // keys still resident in the cache, ordered most-recently-used first.
     public static List<String> simulateLruAccessPattern(List<String> accessSequence, int capacity) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LruCache<String, Integer> cache = new LruCache<>(capacity);
+        accessSequence.forEach(w -> cache.merge(w, 1, Integer::sum));
+        return cache.keySet().stream().toList().reversed();
     }
 }
