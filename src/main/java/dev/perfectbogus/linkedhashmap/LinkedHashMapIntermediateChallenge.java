@@ -1,8 +1,6 @@
 package dev.perfectbogus.linkedhashmap;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -146,7 +144,26 @@ public class LinkedHashMapIntermediateChallenge {
     // they were first encountered). If items has fewer than n distinct
     // entries, all of them are returned. Does not modify items.
     public static LinkedHashMap<String, Integer> topNByCountStableOrder(List<String> items, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashMap<String, Integer> freqMap = items.stream().collect(Collectors.toMap(
+                Function.identity(),
+                w -> 1,
+                Integer::sum,
+                LinkedHashMap::new
+        ));
+
+        Comparator<Map.Entry<String, Integer>> byValueDesc = Map.Entry.<String, Integer>comparingByValue().reversed();
+        List<Map.Entry<String, Integer>> sortedFreqMap = freqMap.entrySet().stream()
+                .sorted(byValueDesc).toList();
+
+        System.out.println(sortedFreqMap);
+
+        return sortedFreqMap.stream().limit(n).collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue,
+                (existing, incoming) -> existing,
+                LinkedHashMap::new
+        ));
+
     }
 
     // CHALLENGE 11
