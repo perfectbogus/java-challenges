@@ -3,6 +3,8 @@ package dev.perfectbogus.linkedhashmap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LinkedHashMapIntermediateChallenge {
 
@@ -19,7 +21,12 @@ public class LinkedHashMapIntermediateChallenge {
     // matches the order in which each distinct word was first encountered
     // in words, regardless of how many more times it appears later.
     public static LinkedHashMap<String, Integer> countPreservingFirstSeenOrder(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.toMap(
+                Function.identity(),
+                w -> 1,
+                Integer::sum,
+                LinkedHashMap::new
+        ));
     }
 
     // CHALLENGE 3
