@@ -68,7 +68,8 @@ public class LinkedHashMapIntermediateChallenge {
     // Afterward, returns the map's keys in its now-updated iteration
     // order. Does not add or remove any entries.
     public static List<String> keysAfterAccessSequence(LinkedHashMap<String, Integer> accessOrderedMap, List<String> keysToGet) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        keysToGet.forEach(accessOrderedMap::get);
+        return accessOrderedMap.keySet().stream().toList();
     }
 
     // CHALLENGE 6
