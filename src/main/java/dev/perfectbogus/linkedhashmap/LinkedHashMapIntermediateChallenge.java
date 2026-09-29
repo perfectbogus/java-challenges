@@ -95,7 +95,7 @@ public class LinkedHashMapIntermediateChallenge {
         private final int capacity;
 
         public LruCache(int capacity) {
-            super(capacity, 0.75f, true);
+            super(16, 0.75f, true);
             this.capacity = capacity;
         }
 
@@ -114,12 +114,13 @@ public class LinkedHashMapIntermediateChallenge {
         private final int capacity;
 
         public FifoCache(int capacity) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            super(16, 0.75f, false);
+            this.capacity = capacity;
         }
 
         @Override
         protected boolean removeEldestEntry(Map.Entry<K, V> eldest) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return size() > capacity;
         }
     }
 
