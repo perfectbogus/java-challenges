@@ -57,7 +57,7 @@ public class LinkedHashMapIntermediateChallenge {
     // that key to the end of the iteration order (most-recently-accessed
     // last).
     public static LinkedHashMap<String, Integer> newAccessOrderedMap() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new LinkedHashMap<>(16, 0.75f, true);
     }
 
     // CHALLENGE 5
