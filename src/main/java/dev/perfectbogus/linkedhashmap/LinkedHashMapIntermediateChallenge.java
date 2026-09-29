@@ -133,7 +133,9 @@ public class LinkedHashMapIntermediateChallenge {
     // first, in second's own iteration order. Does not modify first or
     // second.
     public static LinkedHashMap<String, Integer> mergeTwoMapsPreservingOrder(Map<String, Integer> first, Map<String, Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashMap<String, Integer> mergeMap = new LinkedHashMap<>(first);
+        second.forEach((k, v) -> mergeMap.merge(k, v, Integer::sum));
+        return mergeMap;
     }
 
     // CHALLENGE 10
