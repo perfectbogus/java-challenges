@@ -24,10 +24,10 @@ class ElectricCarTest {
     void setup() {
         car = new ElectricCar(ID, BRAND, MODEL, YEAR, BASE_DAILY_RATE, NUMBER_OF_DOORS, FULL_BATTERY_LEVEL);
     }
+
     @Test
-    void charge_neverAbove_100() {
-        car.charge(10);
-        assertEquals(100, car.getBatteryLevel());
+    void constructor_batteryLevelZero_succeed() {
+        assertDoesNotThrow(() -> electricCarWithBatteryLevel(0));
     }
 
     @Test
@@ -43,9 +43,9 @@ class ElectricCarTest {
 
     @Test
     void rent_batteryLevelLow_throws() {
-        ElectricCar lowLevelBatteryCar = electricCarWithBatteryLevel(19);
-        assertThrows(IllegalStateException.class, lowLevelBatteryCar::rent);
-        assertTrue(lowLevelBatteryCar.isAvailable());
+        ElectricCar minimumBatteryCar = electricCarWithBatteryLevel(19);
+        assertThrows(IllegalStateException.class, minimumBatteryCar::rent);
+        assertTrue(minimumBatteryCar.isAvailable());
     }
 
     @Test
@@ -61,23 +61,23 @@ class ElectricCarTest {
     }
 
     @Test
-    void isFullCharged_whenBattery99_false() {
-        ElectricCar car = electricCarWithBatteryLevel(99);
-        assertFalse(car.isFullyCharged());
+    void isFullyCharged_whenBattery99_false() {
+        ElectricCar almostFullCar = electricCarWithBatteryLevel(99);
+        assertFalse(almostFullCar.isFullyCharged());
     }
 
     @Test
     void charge_nearFull_capsAt100() {
-        ElectricCar car = electricCarWithBatteryLevel(95);
-        car.charge(10);
-        assertEquals(100, car.getBatteryLevel());
+        ElectricCar almostFullCar = electricCarWithBatteryLevel(95);
+        almostFullCar.charge(10);
+        assertEquals(100, almostFullCar.getBatteryLevel());
     }
 
     @Test
     void charge_normalAmount_addToLevel() {
-        ElectricCar car = electricCarWithBatteryLevel(50);
-        car.charge(10);
-        assertEquals(60, car.getBatteryLevel());
+        ElectricCar electricCar = electricCarWithBatteryLevel(50);
+        electricCar.charge(10);
+        assertEquals(60, electricCar.getBatteryLevel());
     }
 
     @ParameterizedTest(name = "invalidBatteryLevel: {0}")
@@ -88,7 +88,7 @@ class ElectricCarTest {
 
     @ParameterizedTest(name = "{0} days -> ${1}")
     @CsvSource({
-            "5, 300.0",
+            "6, 360.0",
             "7, 378.0",
             "10, 540.0"
     })
@@ -102,7 +102,7 @@ class ElectricCarTest {
             "50, 150",
             "0, 0"
     })
-    void getRangeKm_withCurrentBatteryLeve(int batteryLevel, int expectedRange) {
+    void getRangeKm_withCurrentBatteryLevel(int batteryLevel, int expectedRange) {
         assertEquals(expectedRange, electricCarWithBatteryLevel(batteryLevel).getRangeKm());
     }
 
