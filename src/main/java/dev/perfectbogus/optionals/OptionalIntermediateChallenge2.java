@@ -124,7 +124,7 @@ public class OptionalIntermediateChallenge2 {
     // fallbackSupplier must not be invoked at all when primary already
     // has a value.
     public static Optional<String> firstNonEmpty(Optional<String> primary, Supplier<Optional<String>> fallbackSupplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return primary.or(fallbackSupplier);
     }
 
     // CHALLENGE 11
