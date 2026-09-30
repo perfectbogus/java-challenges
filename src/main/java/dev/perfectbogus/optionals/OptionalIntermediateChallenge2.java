@@ -67,7 +67,7 @@ public class OptionalIntermediateChallenge2 {
     // produce a nested Optional (i.e. the result type is Optional<Character>,
     // not Optional<Optional<Character>>).
     public static Optional<Character> firstCharacter(Optional<String> opt) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return opt.flatMap(s -> firstCharOf(s));
     }
 
     // CHALLENGE 4
