@@ -90,14 +90,17 @@ public class OptionalIntermediateChallenge2 {
     // to obtain an exception and throws it. exceptionSupplier must not be
     // invoked at all when opt already has a value.
     public static String orElseThrowCustom(Optional<String> opt, Supplier<? extends RuntimeException> exceptionSupplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return opt.orElseThrow(exceptionSupplier);
     }
 
     // CHALLENGE 7
     // If username has a value, appends "Found: " followed by that value
     // to log. Otherwise, appends "Not found" to log.
     public static void logUserStatus(Optional<String> username, List<String> log) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        username.ifPresentOrElse(
+                u -> log.add("Found: " + u),
+                () -> log.add("Not found")
+        );
     }
 
     // CHALLENGE 8
