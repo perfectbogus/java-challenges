@@ -74,7 +74,7 @@ public class OptionalIntermediateChallenge2 {
     // Returns opt unchanged if it holds a positive value (> 0), or an
     // empty Optional otherwise (including when opt was already empty).
     public static Optional<Integer> keepIfPositive(Optional<Integer> opt) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return opt.filter(i -> i > 0);
     }
 
     // CHALLENGE 5
@@ -82,7 +82,7 @@ public class OptionalIntermediateChallenge2 {
     // and returns the value it produces. fallbackSupplier must not be
     // invoked at all when opt already has a value.
     public static int orElseWithSideEffect(Optional<Integer> opt, Supplier<Integer> fallbackSupplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return opt.orElseGet(fallbackSupplier);
     }
 
     // CHALLENGE 6
