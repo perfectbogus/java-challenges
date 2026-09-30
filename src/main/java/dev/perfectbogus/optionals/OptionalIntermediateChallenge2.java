@@ -46,7 +46,11 @@ public class OptionalIntermediateChallenge2 {
     // empty Optional if s is null or is not a valid integer (instead of
     // letting any exception propagate).
     public static Optional<Integer> safeParseInt(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return Optional.of(Integer.parseInt(s));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
     }
 
     // CHALLENGE 2
