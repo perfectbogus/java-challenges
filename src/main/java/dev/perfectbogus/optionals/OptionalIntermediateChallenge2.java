@@ -115,7 +115,7 @@ public class OptionalIntermediateChallenge2 {
     // both are present. Returns an empty Optional if either (or both) is
     // empty.
     public static Optional<Integer> combineIfBothPresent(Optional<Integer> a, Optional<Integer> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return a.flatMap(av -> b.map(bv -> av + bv));
     }
 
     // CHALLENGE 10
