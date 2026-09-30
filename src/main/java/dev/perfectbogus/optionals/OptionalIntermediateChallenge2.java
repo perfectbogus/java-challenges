@@ -132,7 +132,7 @@ public class OptionalIntermediateChallenge2 {
     // in list, in the same order, skipping any empty ones entirely. Does
     // not modify list.
     public static List<String> flattenPresentValues(List<Optional<String>> list) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return list.stream().flatMap(Optional::stream).toList();
     }
 
     // CHALLENGE 12
