@@ -57,7 +57,7 @@ public class OptionalIntermediateChallenge2 {
     // Returns an Optional containing the uppercased string if opt has a
     // value, or an empty Optional if opt is empty.
     public static Optional<String> upperCaseIfPresent(Optional<String> opt) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return opt.map(String::toUpperCase);
     }
 
     // CHALLENGE 3
