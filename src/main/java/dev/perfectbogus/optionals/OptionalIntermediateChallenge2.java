@@ -107,7 +107,7 @@ public class OptionalIntermediateChallenge2 {
     // Returns person's address's zip code, or an empty Optional if
     // person has no address, or person's address has no zip code.
     public static Optional<String> getZipCode(Person person) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return person.getAddress().flatMap(Address::getZipCode);
     }
 
     // CHALLENGE 9
