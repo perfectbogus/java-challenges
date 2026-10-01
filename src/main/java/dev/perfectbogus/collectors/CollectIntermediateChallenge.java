@@ -1,6 +1,7 @@
 package dev.perfectbogus.collectors;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CollectIntermediateChallenge {
@@ -54,7 +55,10 @@ public class CollectIntermediateChallenge {
     // Returns a map from each word in words to its length. words is
     // guaranteed to contain no duplicate entries.
     public static Map<String, Integer> mapNameToLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().distinct().collect(Collectors.toMap(
+                Function.identity(),
+                String::length
+        ));
     }
 
     // CHALLENGE 6
