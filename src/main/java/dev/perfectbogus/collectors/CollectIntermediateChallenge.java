@@ -84,7 +84,11 @@ public class CollectIntermediateChallenge {
     // length, each list in original relative order), but the returned
     // map must itself iterate its keys in ascending numeric order.
     public static Map<Integer, List<String>> groupWordsByLengthSortedKeys(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length,
+                TreeMap::new,
+                Collectors.toList()
+        ));
     }
 
     // CHALLENGE 9
