@@ -152,6 +152,10 @@ public class CollectIntermediateChallenge {
     // decimal places (e.g. "count=3, average=60000.00"), computed in a
     // single pass over employees.
     public static String averageAndCountTeeing(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.teeing(
+                Collectors.counting(),
+                Collectors.averagingDouble(Employee::getSalary),
+                (count, avg) -> String.format("count=%d, average=%.2f", count, avg)
+        ));
     }
 }
