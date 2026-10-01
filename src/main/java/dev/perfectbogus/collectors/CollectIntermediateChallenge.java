@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CollectIntermediateChallenge {
 
@@ -36,7 +37,7 @@ public class CollectIntermediateChallenge {
     // Returns a single string containing every word in words, in order,
     // separated by ", ".
     public static String joinWithSeparator(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.joining(", "));
     }
 
     // CHALLENGE 3
