@@ -29,7 +29,7 @@ public class CollectIntermediateChallenge {
     // Returns the distinct lengths of the words in words, sorted
     // ascending. Does not modify words.
     public static List<Integer> uniqueWordLengthsSorted(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().map(String::length).distinct().sorted().toList();
     }
 
     // CHALLENGE 2
