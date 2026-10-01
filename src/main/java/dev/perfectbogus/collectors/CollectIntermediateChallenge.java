@@ -55,7 +55,7 @@ public class CollectIntermediateChallenge {
     // Returns a map from each word in words to its length. words is
     // guaranteed to contain no duplicate entries.
     public static Map<String, Integer> mapNameToLength(List<String> words) {
-        return words.stream().distinct().collect(Collectors.toMap(
+        return words.stream().collect(Collectors.toMap(
                 Function.identity(),
                 String::length
         ));
@@ -65,7 +65,10 @@ public class CollectIntermediateChallenge {
     // Returns a map from each distinct first character among the words in
     // words to how many words start with that character.
     public static Map<Character, Long> countFirstLetterOccurrences(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                w -> w.charAt(0),
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 7
