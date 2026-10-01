@@ -1,10 +1,6 @@
 package dev.perfectbogus.collectors;
 
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CollectIntermediateChallenge {
@@ -44,14 +40,14 @@ public class CollectIntermediateChallenge {
     // Returns a single string containing every word in words, in order,
     // separated by ", ", wrapped in a leading "[" and a trailing "]".
     public static String joinWithPrefixSuffix(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.joining(", ", "[", "]"));
     }
 
     // CHALLENGE 4
     // Returns the set of distinct first characters among the words in
     // words. Does not modify words.
     public static Set<Character> distinctFirstLetters(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().map(s -> s.charAt(0)).collect(Collectors.toSet());
     }
 
     // CHALLENGE 5
