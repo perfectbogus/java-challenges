@@ -142,7 +142,7 @@ public class CollectIntermediateChallenge {
     // unmodifiable list (attempting to modify the returned list must
     // throw UnsupportedOperationException). Does not modify words.
     public static List<String> collectToImmutableSortedList(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().distinct().sorted().toList();
     }
 
     // CHALLENGE 15
