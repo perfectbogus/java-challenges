@@ -107,7 +107,9 @@ public class CollectIntermediateChallenge {
     // in words with even length, and key false maps to the list of words
     // with odd length, each list in the words' original relative order.
     public static Map<Boolean, List<String>> partitionByEvenLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.partitioningBy(
+                w -> w.length() % 2 == 0
+        ));
     }
 
     // CHALLENGE 11
