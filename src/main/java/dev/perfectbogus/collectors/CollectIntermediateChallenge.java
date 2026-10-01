@@ -76,7 +76,7 @@ public class CollectIntermediateChallenge {
     // the list of words of that length, each list in the words' original
     // relative order.
     public static Map<Integer, List<String>> groupWordsByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(String::length));
     }
 
     // CHALLENGE 8
