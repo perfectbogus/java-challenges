@@ -123,7 +123,10 @@ public class CollectIntermediateChallenge {
     // Returns a map from each distinct department among employees to the
     // sum of the salaries of employees in that department.
     public static Map<String, Double> totalSalaryByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::getDepartment,
+                Collectors.summingDouble(Employee::getSalary)
+        ));
     }
 
     // CHALLENGE 13
