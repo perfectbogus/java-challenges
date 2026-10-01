@@ -134,7 +134,7 @@ public class CollectIntermediateChallenge {
     // words tie for longest, either is acceptable), or an empty Optional
     // if words is empty.
     public static Optional<String> longestWordReducing(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().max(Comparator.comparingInt(String::length));
     }
 
     // CHALLENGE 14
