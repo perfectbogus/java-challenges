@@ -96,7 +96,10 @@ public class CollectIntermediateChallenge {
     // words to the list of lengths of the words starting with that
     // character, each list in the words' original relative order.
     public static Map<Character, List<Integer>> groupLengthsByFirstLetter(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                w -> w.charAt(0),
+                Collectors.mapping(String::length, Collectors.toList())
+        ));
     }
 
     // CHALLENGE 10
