@@ -2,6 +2,7 @@ package dev.perfectbogus.optionals;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -141,6 +142,9 @@ public class OptionalIntermediateChallenge2 {
     // present in map. Returns an empty Optional if none of the keys are
     // present in map.
     public static Optional<Integer> findValueForFirstExistingKey(Map<String, Integer> map, List<String> keysInPriorityOrder) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return keysInPriorityOrder.stream()
+                .map(map::get)
+                .filter(Objects::nonNull)
+                .findFirst();
     }
 }
