@@ -116,7 +116,7 @@ public class CollectIntermediateChallenge {
     // Returns summary statistics (count, sum, min, max, average) over the
     // salaries of employees.
     public static DoubleSummaryStatistics summarizeSalaries(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.summarizingDouble(Employee::getSalary));
     }
 
     // CHALLENGE 12
