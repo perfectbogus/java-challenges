@@ -42,7 +42,8 @@ public class GenericsIntermediateChallenge {
     // CHALLENGE 1
     // Returns the first element of list, or null if list is empty.
     public static <T> T firstElement(List<T> list) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (list.isEmpty()) return null;
+        return list.getFirst();
     }
 
     // CHALLENGE 2
