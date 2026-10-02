@@ -215,6 +215,17 @@ public class GenericsIntermediateChallenge {
     // be non-empty. If multiple elements tie for the largest key, returns
     // the first one encountered.
     public static <T, K extends Comparable<K>> T maxByKey(List<T> list, Function<T, K> keyExtractor) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        T best = list.get(0);
+        K bestKey = keyExtractor.apply(best);
+
+        for (T t : list) {
+            K key = keyExtractor.apply(t);
+            if (key.compareTo(bestKey) > 0) {
+                best = t;
+                bestKey = key;
+            }
+        }
+
+        return best;
     }
 }
