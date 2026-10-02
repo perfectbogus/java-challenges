@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class GenericsIntermediateChallenge {
 
@@ -89,7 +90,21 @@ public class GenericsIntermediateChallenge {
     // and a trailing "]" (e.g. "[1, 2, 3]"). list may contain elements of
     // any type.
     public static String describeAll(List<?> list) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < list.size(); i++) {
+            if (i == list.size() - 1) {
+                sb.append(list.get(i));
+            } else {
+                sb.append(list.get(i)).append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    public static String describeAllStream(List<?> list) {
+        return list.stream().map(String::valueOf).collect(Collectors.joining(", ", "[", "]"));
     }
 
     // CHALLENGE 8
