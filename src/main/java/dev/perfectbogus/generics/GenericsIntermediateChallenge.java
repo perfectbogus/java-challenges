@@ -80,7 +80,7 @@ public class GenericsIntermediateChallenge {
     // CHALLENGE 6
     // Appends every element of source to dest, in order.
     public static <T> void copy(List<? extends T> source, List<? super T> dest) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        dest.addAll(source);
     }
 
     // CHALLENGE 7
