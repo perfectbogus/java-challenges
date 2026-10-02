@@ -1,9 +1,6 @@
 package dev.perfectbogus.generics;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -168,7 +165,16 @@ public class GenericsIntermediateChallenge {
     // natural ordering (an empty list or a single-element list counts as
     // sorted).
     public static <T extends Comparable<T>> boolean isSorted(List<T> list) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (list.isEmpty()) return true;
+        T a = list.get(0);
+        for (int i = 1; i < list.size(); i++) {
+            T b = list.get(i);
+            if (a.compareTo(b) > 0) {
+                return false;
+            }
+            a = b;
+        }
+        return true;
     }
 
     // CHALLENGE 14
@@ -176,7 +182,31 @@ public class GenericsIntermediateChallenge {
     // according to natural ordering, into a single new list sorted in
     // ascending order containing all elements of both (duplicates kept).
     public static <T extends Comparable<T>> List<T> mergeSorted(List<T> a, List<T> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<T> result = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+
+        while (i < a.size() && j < b.size()) {
+            if (a.get(i).compareTo(b.get(j)) <= 0) {
+                result.add(a.get(i));
+                i++;
+            } else {
+                result.add(b.get(j));
+                j++;
+            }
+        }
+
+        while (i < a.size()) {
+            result.add(a.get(i));
+            i++;
+        }
+
+        while (j < b.size()) {
+            result.add(b.get(j));
+            j++;
+        }
+
+        return result;
     }
 
     // CHALLENGE 15
