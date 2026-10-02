@@ -151,14 +151,16 @@ public class GenericsIntermediateChallenge {
     // less than min, returns min; if value is greater than max, returns
     // max; otherwise returns value. min is guaranteed to be <= max.
     public static <T extends Number & Comparable<T>> T clamp(T value, T min, T max) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (value.compareTo(min) < 0) return min;
+        if (value.compareTo(max) > 0) return max;
+        return value;
     }
 
     // CHALLENGE 12
     // Returns a new list containing, in order, every element of list that
     // is an instance of type, cast to T.
     public static <T> List<T> filterByType(List<?> list, Class<T> type) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return list.stream().filter(type::isInstance).map(type::cast).toList();
     }
 
     // CHALLENGE 13
