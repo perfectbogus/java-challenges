@@ -1,5 +1,6 @@
 package dev.perfectbogus.generics;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -134,7 +135,11 @@ public class GenericsIntermediateChallenge {
     // result of applying combiner to that pair's first and second
     // components.
     public static <A, B, C> List<C> combinePairs(List<Pair<A, B>> pairs, BiFunction<A, B, C> combiner) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<C> results = new ArrayList<>();
+        for (Pair<A, B> p : pairs) {
+            results.add(combiner.apply(p.getFirst(), p.getSecond()));
+        }
+        return results;
     }
 
     // CHALLENGE 11
