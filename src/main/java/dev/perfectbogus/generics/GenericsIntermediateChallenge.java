@@ -142,6 +142,10 @@ public class GenericsIntermediateChallenge {
         return results;
     }
 
+    public static <A, B, C> List<C> combinePairsStream(List<Pair<A, B>> pairs, BiFunction<A, B, C> combiner) {
+        return pairs.stream().map(p -> combiner.apply(p.getFirst(), p.getSecond())).toList();
+    }
+
     // CHALLENGE 11
     // Returns value, clamped to the inclusive range [min, max]: if value is
     // less than min, returns min; if value is greater than max, returns
