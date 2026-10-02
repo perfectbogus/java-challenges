@@ -1,5 +1,6 @@
 package dev.perfectbogus.generics;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiFunction;
@@ -50,7 +51,7 @@ public class GenericsIntermediateChallenge {
     // Returns the largest element of list according to its natural
     // ordering. list is guaranteed to be non-empty.
     public static <T extends Comparable<T>> T max(List<T> list) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return list.stream().max(Comparator.naturalOrder()).orElseThrow();
     }
 
     // CHALLENGE 3
