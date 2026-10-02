@@ -58,7 +58,7 @@ public class GenericsIntermediateChallenge {
     // Returns the number of elements in list that are strictly greater
     // than threshold, according to natural ordering.
     public static <T extends Comparable<T>> long countGreaterThan(List<T> list, T threshold) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return list.stream().filter(element -> element.compareTo(threshold) > 0).count();
     }
 
     // CHALLENGE 4
