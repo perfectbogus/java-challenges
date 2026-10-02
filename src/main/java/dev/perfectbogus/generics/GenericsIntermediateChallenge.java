@@ -126,7 +126,7 @@ public class GenericsIntermediateChallenge {
     // first component of the result is pair's second component and vice
     // versa.
     public static <A, B> Pair<B, A> swap(Pair<A, B> pair) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new Pair<>(pair.getSecond(), pair.getFirst());
     }
 
     // CHALLENGE 10
