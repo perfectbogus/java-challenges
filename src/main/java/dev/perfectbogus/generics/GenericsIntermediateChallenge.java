@@ -72,7 +72,9 @@ public class GenericsIntermediateChallenge {
     // Appends the integers 1 through count (inclusive) to list, in
     // ascending order.
     public static void addIntegers(List<? super Integer> list, int count) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (int i = 1; i <= count; i++) {
+            list.add(i);
+        }
     }
 
     // CHALLENGE 6
