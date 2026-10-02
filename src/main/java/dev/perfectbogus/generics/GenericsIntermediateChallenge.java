@@ -65,7 +65,7 @@ public class GenericsIntermediateChallenge {
     // Returns the sum of the values in numbers as a double. numbers may
     // contain any mix of Number subtypes (Integer, Double, Long, etc.).
     public static double sumNumbers(List<? extends Number> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().mapToDouble(Number::doubleValue).sum();
     }
 
     // CHALLENGE 5
