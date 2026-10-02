@@ -112,7 +112,13 @@ public class GenericsIntermediateChallenge {
     // guaranteed to contain at least two elements. list may contain
     // elements of any type.
     public static void swapFirstAndLast(List<?> list) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        swapHelper(list, 0, list.size() - 1);
+    }
+
+    private static <T> void swapHelper(List<T> list, int i, int j) {
+        T temp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, temp);
     }
 
     // CHALLENGE 9
