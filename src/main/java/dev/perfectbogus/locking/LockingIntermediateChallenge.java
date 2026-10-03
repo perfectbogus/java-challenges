@@ -243,6 +243,8 @@ public class LockingIntermediateChallenge {
     // does not currently hold lock, whether because nobody holds it or
     // because a different thread holds it.
     public static void unlockIfHeld(ReentrantLock lock) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (lock.isHeldByCurrentThread()) {
+            lock.unlock();
+        }
     }
 }
