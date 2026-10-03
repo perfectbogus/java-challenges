@@ -64,7 +64,13 @@ public class LockingIntermediateChallenge {
         // Demonstrates that a thread already holding the lock can safely
         // reacquire it.
         public int recursiveSum(int n) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (n <= 0) return 0;
+            lock.lock();
+            try {
+                return n + recursiveSum(n - 1);
+            } finally {
+                lock.unlock();
+            }
         }
 
         // CHALLENGE 5
@@ -74,7 +80,15 @@ public class LockingIntermediateChallenge {
         // held by another thread, returns false immediately, without
         // waiting and without modifying count.
         public boolean tryIncrementIfAvailable() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (lock.tryLock()) {
+                try{
+                    count++;
+                    return true;
+                } finally {
+                    lock.unlock();
+                }
+            }
+            return false;
         }
 
         // CHALLENGE 6
