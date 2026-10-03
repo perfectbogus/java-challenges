@@ -151,7 +151,7 @@ public class LockingIntermediateChallenge {
                     notFull.await();
                 }
                 queue.add(value);
-                notEmpty.signal();
+                notEmpty.signalAll();
             } finally {
                 lock.unlock();
             }
@@ -220,7 +220,21 @@ public class LockingIntermediateChallenge {
     // transfer(a, b, amount) while another thread simultaneously calls
     // transfer(b, a, amount)).
     public static void transfer(Account from, Account to, int amount) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Account first = from.getId() < to.getId() ? from : to;
+        Account second = from.getId() < to.getId() ? to : from;
+
+        first.lock.lock();
+        try {
+            second.lock.lock();
+            try {
+                from.balance -= amount;
+                to.balance += amount;
+            } finally {
+                second.lock.unlock();
+            }
+        } finally {
+            first.lock.unlock();
+        }
     }
 
     // CHALLENGE 10
