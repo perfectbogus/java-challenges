@@ -97,7 +97,15 @@ public class LockingIntermediateChallenge {
         // count if the lock was acquired within that time; returns false
         // if the timeout elapsed before the lock became available.
         public boolean incrementWithTimeout(long timeoutMillis) throws InterruptedException {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (lock.tryLock(timeoutMillis, TimeUnit.MILLISECONDS)) {
+                try {
+                    count++;
+                    return true;
+                } finally {
+                    lock.unlock();
+                }
+            }
+            return false;
         }
 
         public int getCount() {
