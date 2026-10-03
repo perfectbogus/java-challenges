@@ -145,14 +145,33 @@ public class LockingIntermediateChallenge {
         // capacity, blocks until another thread removes an item (making
         // room), then adds value.
         public void put(int value) throws InterruptedException {
-            throw new UnsupportedOperationException("Not implemented yet");
+            lock.lock();
+            try {
+                while (queue.size() == capacity) {
+                    notFull.await();
+                }
+                queue.add(value);
+                notEmpty.signal();
+            } finally {
+                lock.unlock();
+            }
         }
 
         // CHALLENGE 8
         // Removes and returns the oldest value in the buffer. If the
         // buffer is empty, blocks until another thread adds an item.
         public int take() throws InterruptedException {
-            throw new UnsupportedOperationException("Not implemented yet");
+            lock.lock();
+            try {
+                while (queue.isEmpty()) {
+                    notEmpty.await();
+                }
+                int item = queue.poll();
+                notFull.signal();
+                return item;
+            } finally {
+                lock.unlock();
+            }
         }
 
         public int size() {
