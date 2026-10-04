@@ -1,9 +1,6 @@
 package dev.perfectbogus.regex;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +15,7 @@ public class RegexAdvancedChallenge {
     //   - the final label (the TLD) must consist only of letters and be at least 2 characters long
     //   - the entire string must match this definition exactly, with nothing extra before or after
     public static boolean isValidEmail(String email) {
-        Pattern p = Pattern.compile("[A-Za-z0-9._%+-]+@[a-zA-Z.]+\\.[a-zA-Z]{2,}");
+        Pattern p = Pattern.compile("[A-Za-z0-9._%+-]+@(?:[a-zA-Z0-9]+\\.)+[a-zA-Z]{2,}");
         Matcher m = p.matcher(email);
         return m.matches();
     }
@@ -47,7 +44,15 @@ public class RegexAdvancedChallenge {
     // calls in the method body), returns a Map with exactly those three keys, each mapped to the matching
     // substring of date as a String (not parsed into a number).
     public static Map<String, String> parseDateComponents(String date) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})");
+        Matcher m = p.matcher(date);
+        Map<String, String> map = new HashMap<>();
+        if (m.matches()) {
+            map.put("year", m.group("year"));
+            map.put("month", m.group("month"));
+            map.put("day", m.group("day"));
+        }
+        return map;
     }
 
     // CHALLENGE 4
@@ -57,7 +62,12 @@ public class RegexAdvancedChallenge {
     // them in Java code. The comparison is case-sensitive, so "Hello hello" does not count as a repetition.
     // Returns the repeated word wrapped in an Optional if one is found, or Optional.empty() otherwise.
     public static Optional<String> findRepeatedWord(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Pattern p = Pattern.compile("\\b(\\w+)\\s+\\1\\b");
+        Matcher m = p.matcher(text);
+        while (m.find()) {
+            return Optional.of(m.group(1));
+        }
+        return Optional.empty();
     }
 
     // CHALLENGE 5
@@ -70,7 +80,9 @@ public class RegexAdvancedChallenge {
     //   - contains at least one uppercase letter
     //   - contains at least one of the special characters: @ # $ % ^ & + =
     public static boolean isStrongPassword(String password) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+        Matcher m = Pattern.compile(pattern).matcher(password);
+        return m.matches();
     }
 
     // CHALLENGE 6
