@@ -118,7 +118,13 @@ public class RegexAdvancedChallenge {
     // with a negative lookahead that rules out words ending in "ing" directly, rather than matching every
     // word and then filtering the results afterward with something like String.endsWith in Java code.
     public static List<String> extractWordsNotEndingInIng(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String pattern = "\\b(?!\\w*ing\\b)\\w+\\b";
+        Matcher m = Pattern.compile(pattern).matcher(text);
+        List<String> result = new ArrayList<>();
+        while (m.find()) {
+            result.add(m.group());
+        }
+        return result;
     }
 
     // CHALLENGE 9
