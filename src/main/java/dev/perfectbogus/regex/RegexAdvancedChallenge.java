@@ -92,7 +92,7 @@ public class RegexAdvancedChallenge {
     // Must be implemented using Pattern/Matcher (or String.replaceAll) with a lookahead assertion, not by
     // manually indexing into or building a substring of digits.
     public static String maskAllButLastFourDigits(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return digits.replaceAll("\\d(?=\\d{4})", "*");
     }
 
     // CHALLENGE 7
