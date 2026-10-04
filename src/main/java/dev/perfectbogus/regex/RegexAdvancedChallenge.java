@@ -152,6 +152,7 @@ public class RegexAdvancedChallenge {
     // to String.split (or Pattern.split), not with manual loops or repeated calls to split on one delimiter
     // at a time.
     public static List<String> splitOnMultipleDelimiters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String[] split = text.split("[,;\\s]+");
+        return Arrays.stream(split).filter(s -> !s.isEmpty()).toList();
     }
 }
