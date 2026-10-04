@@ -102,7 +102,14 @@ public class RegexAdvancedChallenge {
     // to require the preceding '$', rather than by separately locating each '$' and taking a substring
     // afterward in Java code.
     public static List<String> extractAmountsAfterDollarSign(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String pattern = "(?<=\\$)\\d+(\\.\\d+)?";
+        Matcher m = Pattern.compile(pattern).matcher(text);
+        List<String> list = new ArrayList<>();
+        while (m.find()) {
+            System.out.println(m.group());
+            list.add(m.group());
+        }
+        return list;
     }
 
     // CHALLENGE 8
