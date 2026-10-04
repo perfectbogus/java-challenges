@@ -136,7 +136,12 @@ public class RegexAdvancedChallenge {
     // it stops at the nearest matching closing tag rather than extending as far as possible through any
     // later tags of the same name.
     public static Optional<String> extractFirstMatchingTagContent(String html) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "<(\\w+)>(.*?)<(/\\1)>";
+        Matcher m = Pattern.compile(regex).matcher(html);
+        if (m.find()) {
+            return Optional.of(m.group(2));
+        }
+        return Optional.empty();
     }
 
     // CHALLENGE 10
