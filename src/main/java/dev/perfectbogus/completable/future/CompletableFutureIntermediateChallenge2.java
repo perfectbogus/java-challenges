@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -63,7 +64,25 @@ public class CompletableFutureIntermediateChallenge2 {
     // completes exceptionally. If futures is empty, the returned future completes exceptionally with an
     // IllegalArgumentException. The calling thread must not be blocked.
     public static <T> CompletableFuture<T> firstSuccessful(List<CompletableFuture<T>> futures) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        AtomicInteger fails = new AtomicInteger(0);
+        CompletableFuture<T> resultFuture = new CompletableFuture<>();
+
+        if (futures.isEmpty())
+            resultFuture.completeExceptionally(new IllegalArgumentException("futures must not be empty"));
+
+        for (CompletableFuture<T> f : futures) {
+            f.whenComplete((value, ex) -> {
+                if (ex == null) {
+                    resultFuture.complete(value);
+                } else {
+                    fails.incrementAndGet();
+                }
+                if (fails.get() == futures.size()) {
+                    resultFuture.completeExceptionally(ex);
+                }
+            });
+        }
+        return resultFuture;
     }
 
     // CHALLENGE 6
