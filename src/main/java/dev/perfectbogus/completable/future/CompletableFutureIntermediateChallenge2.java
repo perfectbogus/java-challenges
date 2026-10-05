@@ -1,7 +1,9 @@
 package dev.perfectbogus.completable.future;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -43,7 +45,14 @@ public class CompletableFutureIntermediateChallenge2 {
     // An empty input list yields an already-completed future holding an empty list. If any input future fails, the
     // returned future fails. The calling thread must not be blocked waiting for any of the futures.
     public static <T> CompletableFuture<List<T>> allOfList(List<CompletableFuture<T>> futures) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).thenApply(
+                ignore -> {
+                    List<T> results = new ArrayList<>();
+                    for (CompletableFuture<T> f : futures) {
+                        results.add(f.join());
+                    }
+                    return results;
+                });
     }
 
     // CHALLENGE 5
