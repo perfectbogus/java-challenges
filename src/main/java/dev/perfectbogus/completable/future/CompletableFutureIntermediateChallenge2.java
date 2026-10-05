@@ -90,7 +90,7 @@ public class CompletableFutureIntermediateChallenge2 {
     // string it produces is not a valid integer, the returned future completes normally with defaultValue instead.
     // The returned future itself must never complete exceptionally because of either of those two problems.
     public static CompletableFuture<Integer> parseOrDefault(CompletableFuture<String> source, int defaultValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return source.thenApply(Integer::parseInt).exceptionally(ex -> defaultValue);
     }
 
     // CHALLENGE 7
