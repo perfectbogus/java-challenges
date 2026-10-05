@@ -36,7 +36,8 @@ public class CompletableFutureIntermediateChallenge2 {
     // for a or b, and the returned future must fail if either a or b fails.
     public static <A, B, R> CompletableFuture<R> combineBoth(CompletableFuture<A> a, CompletableFuture<B> b,
                                                              BiFunction<A, B, R> combiner) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+        return a.thenCombine(b, combiner);
     }
 
     // CHALLENGE 4
