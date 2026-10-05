@@ -25,7 +25,7 @@ public class CompletableFutureIntermediateChallenge2 {
     // be invoked at all if the future returned by first fails (the returned future then fails as well).
     public static <A, B, C> CompletableFuture<C> chain(A input, Function<A, CompletableFuture<B>> first,
                                                        Function<B, CompletableFuture<C>> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return first.apply(input).thenCompose(second);
     }
 
     // CHALLENGE 3
