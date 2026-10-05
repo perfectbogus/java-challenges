@@ -101,7 +101,7 @@ public class CompletableFutureIntermediateChallenge2 {
     // through before reaching future, and regardless of whether future was completed exceptionally directly or because
     // a stage feeding it threw.
     public static <T> CompletableFuture<String> describeOutcome(CompletableFuture<T> future) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return future.handle((v, ex) -> ex != null ? "FAIL:" + ex : "OK:" + v.toString());
     }
 
     // CHALLENGE 8
