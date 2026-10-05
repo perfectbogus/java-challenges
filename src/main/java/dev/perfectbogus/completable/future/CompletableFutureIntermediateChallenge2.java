@@ -2,10 +2,7 @@ package dev.perfectbogus.completable.future;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -122,7 +119,7 @@ public class CompletableFutureIntermediateChallenge2 {
     // be completed, cancelled or otherwise altered by this method, even when the timeout fires.
     public static <T> CompletableFuture<T> withFallbackOnTimeout(CompletableFuture<T> source, long timeoutMillis,
                                                                  T fallback) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return source.copy().completeOnTimeout(fallback, timeoutMillis, TimeUnit.MILLISECONDS);
     }
 
     // CHALLENGE 9
@@ -133,11 +130,26 @@ public class CompletableFutureIntermediateChallenge2 {
     // attempt. Throws IllegalArgumentException immediately (not through the returned future) if maxAttempts is less
     // than 1. The calling thread must not be blocked while waiting for an attempt to complete.
     public static <T> CompletableFuture<T> retry(Supplier<CompletableFuture<T>> task, int maxAttempts) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (maxAttempts < 1) {
+            throw new IllegalArgumentException("maxAttempts must be at least 1");
+        }
+        return task.get()
+                .<CompletableFuture<T>>handle((value, ex) -> {
+                    if (ex == null) {
+                        return CompletableFuture.completedFuture(value);
+                    }
+                    if (maxAttempts == 1) {
+                        return CompletableFuture.failedFuture(ex);
+                    }
+                    return retry(task, maxAttempts - 1);
+                })
+                .thenCompose(Function.identity());
     }
 
     // Used by CHALLENGE 10. You may add private fields and a constructor if you need them.
     public static class AsyncCache<K, V> {
+
+        private final ConcurrentHashMap<K, CompletableFuture<V>> cache = new ConcurrentHashMap<>();
 
         // CHALLENGE 10
         // Returns a future for the value associated with key, calling loader.apply(key) to start loading it when it is
@@ -149,7 +161,13 @@ public class CompletableFutureIntermediateChallenge2 {
         // failed later. Loads for different keys are independent of each other. This method must not block the
         // calling thread waiting for a load to finish.
         public CompletableFuture<V> get(K key, Function<K, CompletableFuture<V>> loader) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            CompletableFuture<V> future = cache.computeIfAbsent(key, loader);
+            future.whenComplete((value, ex) -> {
+                if (ex != null) {
+                    cache.remove(key, future);
+                }
+            });
+            return future;
         }
     }
 }
