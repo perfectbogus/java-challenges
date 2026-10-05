@@ -6,14 +6,7 @@ import org.junit.jupiter.api.Timeout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -413,6 +406,48 @@ class CompletableFutureIntermediateChallenge2Test {
             assertFalse(described.isDone());
             pending.complete("done");
             assertEquals("OK:done", await(described));
+        }
+
+        @Test
+        void testKeepsOriginalExceptionThatCarriesItsOwnCause() throws Exception {
+            CompletableFuture<Integer> future = new CompletableFuture<>();
+            future.completeExceptionally(new IllegalStateException("outer", new java.io.IOException("inner")));
+            assertEquals("FAIL:IllegalStateException",
+                    await(CompletableFutureIntermediateChallenge2.describeOutcome(future)));
+        }
+
+        @Test
+        void testKeepsOriginalExceptionWithItsOwnCauseAfterTravellingThroughStages() throws Exception {
+            CompletableFuture<Integer> future = CompletableFuture
+                    .<Integer>supplyAsync(() -> {
+                        throw new RuntimeException("wrapper", new java.io.IOException("io"));
+                    })
+                    .thenApply(n -> n + 1);
+            assertEquals("FAIL:RuntimeException",
+                    await(CompletableFutureIntermediateChallenge2.describeOutcome(future)));
+        }
+
+        @Test
+        void testUnwrapsSeveralLayersOfCompletionException() throws Exception {
+            CompletableFuture<Integer> future = new CompletableFuture<>();
+            future.completeExceptionally(
+                    new CompletionException(new CompletionException(new IllegalArgumentException("deep"))));
+            assertEquals("FAIL:IllegalArgumentException",
+                    await(CompletableFutureIntermediateChallenge2.describeOutcome(future)));
+        }
+
+        @Test
+        void testCompletionExceptionWithoutCauseIsReportedAsItself() throws Exception {
+            CompletableFuture<Integer> future = new CompletableFuture<>();
+            future.completeExceptionally(new CompletionException("no cause here", null));
+            assertEquals("FAIL:CompletionException",
+                    await(CompletableFutureIntermediateChallenge2.describeOutcome(future)));
+        }
+
+        @Test
+        void testNullValueIsDescribedAsNull() throws Exception {
+            CompletableFuture<String> future = CompletableFuture.completedFuture(null);
+            assertEquals("OK:null", await(CompletableFutureIntermediateChallenge2.describeOutcome(future)));
         }
     }
 

@@ -3,6 +3,7 @@ package dev.perfectbogus.completable.future;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -101,7 +102,17 @@ public class CompletableFutureIntermediateChallenge2 {
     // through before reaching future, and regardless of whether future was completed exceptionally directly or because
     // a stage feeding it threw.
     public static <T> CompletableFuture<String> describeOutcome(CompletableFuture<T> future) {
-        return future.handle((v, ex) -> ex != null ? "FAIL:" + ex : "OK:" + v.toString());
+        return future.handle((v, ex) -> {
+            if (ex != null) {
+                Throwable tmp = ex;
+                while (tmp instanceof CompletionException && tmp.getCause() !=null) {
+                    tmp = tmp.getCause();
+                }
+                return "FAIL:" + tmp.getClass().getSimpleName();
+            } else {
+                return "OK:" + v;
+            }
+        });
     }
 
     // CHALLENGE 8
