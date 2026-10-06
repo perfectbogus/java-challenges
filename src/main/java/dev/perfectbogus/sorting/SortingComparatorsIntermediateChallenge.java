@@ -33,7 +33,17 @@ public class SortingComparatorsIntermediateChallenge {
     // an empty first name. Sorts by last name ascending, then by first name ascending, both ignoring case. Names that
     // are equal on both (ignoring case) keep their original relative order.
     public static List<String> sortByLastNameThenFirstName(List<String> fullNames) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLastName = (a, b) -> reformatName(a).compareToIgnoreCase(reformatName(b));
+        return fullNames.stream().sorted(byLastName).toList();
+    }
+
+    private static String reformatName(String fullName) {
+        int idx = fullName.lastIndexOf(" ");
+        if (idx == -1) {
+            return fullName;
+        } else {
+            return fullName.substring(idx + 1) + " " + fullName.substring(0, idx);
+        }
     }
 
     // CHALLENGE 3
