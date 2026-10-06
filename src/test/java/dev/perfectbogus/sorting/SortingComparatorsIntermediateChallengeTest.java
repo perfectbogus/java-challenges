@@ -45,10 +45,10 @@ class SortingComparatorsIntermediateChallengeTest {
             List<SortingComparatorsIntermediateChallenge.Employee> input = new ArrayList<>(List.of(
                     emp("Zoe", "Sales", 2, 50.0),
                     emp("Ann", "Sales", 3, 40.0),
-                    emp("Bob", "Sales", 3, 60.0),
                     emp("Cid", "Sales", 3, 60.0),
-                    emp("Dan", "Engineering", 1, 10.0),
-                    emp("Eve", "Engineering", 1, 10.0)));
+                    emp("Bob", "Sales", 3, 60.0),
+                    emp("Eve", "Engineering", 1, 10.0),
+                    emp("Dan", "Engineering", 1, 10.0)));
             List<String> before = names(input);
 
             List<SortingComparatorsIntermediateChallenge.Employee> result =

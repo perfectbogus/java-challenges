@@ -17,7 +17,13 @@ public class SortingComparatorsIntermediateChallenge {
     // less than 1 (for example 100.25 and 100.75). Employees that are equal on all four fields keep their original
     // relative order.
     public static List<Employee> sortEmployees(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Employee> byDept = Comparator.comparing(Employee::department);
+        Comparator<Employee> byLevelDesc = Comparator.comparingInt(Employee::level).reversed();
+        Comparator<Employee> bySalaryDesc = Comparator.comparingDouble(Employee::salary).reversed();
+        Comparator<Employee> byName = Comparator.comparing(Employee::name);
+        return employees.stream().sorted(
+                byDept.thenComparing(byLevelDesc).thenComparing(bySalaryDesc).thenComparing(byName)
+        ).toList();
     }
 
     // CHALLENGE 2
