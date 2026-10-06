@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Lesson1 {
@@ -34,13 +35,8 @@ public class Lesson1 {
         return CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getName());
             sleep(1000);
+            if (product.equals("monitor")) throw new IllegalArgumentException("Unknown product: " + product);
             return product.length() * 100.0;
-        });
-    }
-
-    static CompletableFuture<Double> getPriceError(String product) {
-        return CompletableFuture.supplyAsync(() -> {
-            throw new IllegalArgumentException("Unknown product: " + product);
         });
     }
 
@@ -119,7 +115,12 @@ public class Lesson1 {
             return prices;
         });
 
-        System.out.println(pricesCf.join());
+        try {
+            System.out.println(pricesCf.join());
+        } catch (CompletionException e) {
+            System.out.println("Outer: " + e.getClass());
+            System.out.println("Cause: " + e.getCause());
+        }
         System.out.println("Exercise 2 Part B: Took " + (System.currentTimeMillis() - startPartB) + " ms");
 
         // Lesson 3
