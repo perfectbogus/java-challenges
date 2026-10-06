@@ -102,28 +102,31 @@ public class Lesson1 {
         //Exercise 2 Part B:
         long startPartB = System.currentTimeMillis();
         List<String> products = List.of("laptop", "mouse", "monitor");
-        Map<String, CompletableFuture<Double>> futuresByProduct = new LinkedHashMap<>();
+        Map<String, CompletableFuture<String>> futuresByProduct = new LinkedHashMap<>();
         for (String p : products) {
             futuresByProduct.put(
                     p,
-                    getPrice(p).thenCompose(Lesson1::applyDiscount).handle((d, ex) -> ex != null ? -1.0 : d)
+                    getPrice(p).thenCompose(Lesson1::applyDiscount).handle((d, ex) -> {
+                        if (ex != null) {
+                            Throwable cause = ex instanceof CompletionException ? ex.getCause() : ex;
+                            return "ERROR " + cause.getMessage();
+                        } else {
+                            return String.format("%.2f",d);
+                        }
+                    })
             );
         }
 
         CompletableFuture<Void> allCf = CompletableFuture.allOf(futuresByProduct.values().toArray(new CompletableFuture[0]));
 
-        CompletableFuture<Map<String, Double>> pricesCf = allCf.thenApply(v -> {
-            Map<String, Double> prices = new LinkedHashMap<>();
+        CompletableFuture<Map<String, String>> pricesCf = allCf.thenApply(v -> {
+            Map<String, String> prices = new LinkedHashMap<>();
             futuresByProduct.forEach((p, future) -> prices.put(p, future.join()));
             return prices;
         });
 
-        try {
-            System.out.println(pricesCf.join());
-        } catch (CompletionException e) {
-            System.out.println("Outer: " + e.getClass());
-            System.out.println("Cause: " + e.getCause());
-        }
+        System.out.println(pricesCf.join());
+
         System.out.println();
         System.out.println("Exercise 2 Part B: Took " + (System.currentTimeMillis() - startPartB) + " ms");
 
