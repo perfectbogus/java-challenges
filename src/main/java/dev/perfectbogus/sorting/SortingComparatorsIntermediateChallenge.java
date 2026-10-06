@@ -1,7 +1,8 @@
 package dev.perfectbogus.sorting;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class SortingComparatorsIntermediateChallenge {
 
@@ -60,7 +61,9 @@ public class SortingComparatorsIntermediateChallenge {
     // The spelling that is kept for each group is the one that occurs FIRST in the input. The input contains no
     // nulls.
     public static List<String> sortedDistinctIgnoringCase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<String> set = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        set.addAll(words);
+        return set.stream().toList();
     }
 
     // CHALLENGE 5
