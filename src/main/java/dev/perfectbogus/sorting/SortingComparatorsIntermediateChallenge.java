@@ -51,7 +51,8 @@ public class SortingComparatorsIntermediateChallenge {
     // start, and the non-null numbers are still in descending order). All int values are possible, including
     // Integer.MIN_VALUE and Integer.MAX_VALUE. The number of nulls in the result equals the number in the input.
     public static List<Integer> sortDescendingNullsLast(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Integer> byDescAndNullsEnd = Comparator.nullsLast(Comparator.reverseOrder());
+        return numbers.stream().sorted(byDescAndNullsEnd).toList();
     }
 
     // CHALLENGE 4
