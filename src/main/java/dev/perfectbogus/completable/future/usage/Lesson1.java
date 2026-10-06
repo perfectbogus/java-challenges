@@ -106,7 +106,7 @@ public class Lesson1 {
         for (String p : products) {
             futuresByProduct.put(
                     p,
-                    getPrice(p).thenCompose(Lesson1::applyDiscount).exceptionally(ex -> -1.0)
+                    getPrice(p).thenCompose(Lesson1::applyDiscount).handle((d, ex) -> ex != null ? -1.0 : d)
             );
         }
 
