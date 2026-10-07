@@ -178,7 +178,17 @@ public class SortingComparatorsIntermediateChallenge {
     // the same sum compare as equal (return 0), even if their contents differ. The comparator must obey the usual
     // contract: compare(a, b) and compare(b, a) have opposite signs, and the ordering is transitive.
     public static Comparator<int[]> bySumAscending() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (int[] a, int[] b) -> {
+            long sumA = 0L;
+            for (int i : a) {
+                sumA += i;
+            }
+            long sumB = 0L;
+            for (int i : b) {
+                sumB += i;
+            }
+            return Long.compare(sumA, sumB);
+        };
     }
 
     // CHALLENGE 10
