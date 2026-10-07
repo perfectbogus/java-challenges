@@ -286,6 +286,16 @@ class SortingComparatorsIntermediateChallengeTest {
         }
 
         @Test
+        void testMostFrequentFirstThenAlphabeticalImproved() {
+            List<String> input = new ArrayList<>(List.of("b", "a", "c", "b", "c", "b", "d", "c", "a"));
+
+            List<String> result = SortingComparatorsIntermediateChallenge.sortByFrequencyImproved(input);
+
+            assertEquals(List.of("b", "c", "a", "d"), result);
+            assertEquals(List.of("b", "a", "c", "b", "c", "b", "d", "c", "a"), input);
+        }
+
+        @Test
         void testTiesAreResolvedAlphabeticallyNotByFirstOccurrence() {
             assertEquals(List.of("apple", "mango", "zebra"),
                     SortingComparatorsIntermediateChallenge.sortByFrequency(List.of("zebra", "mango", "apple")));

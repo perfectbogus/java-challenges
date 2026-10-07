@@ -142,6 +142,17 @@ public class SortingComparatorsIntermediateChallenge {
         return words.stream().distinct().sorted(byFreqDesc.thenComparing(byOrder)).toList();
     }
 
+    public static List<String> sortByFrequencyImproved(List<String> words) {
+        Map<String, Long> freq = words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ));
+
+        Comparator<String> byFreqDesc = Comparator.comparing(freq::get, Comparator.reverseOrder());
+        Comparator<String> byOrder = Comparator.naturalOrder();
+        return words.stream().distinct().sorted(byFreqDesc.thenComparing(byOrder)).toList();
+    }
+
     // CHALLENGE 8
     // Every point is an int[] {x, y} with |x| and |y| at most 2_000_000_000. Sorts the points by their exact distance
     // to the origin (0, 0), nearest first. Points at exactly the same distance are ordered by x ascending and then
