@@ -129,7 +129,17 @@ public class SortingComparatorsIntermediateChallenge {
     // it occurs in the input, most frequent first; words that occur the same number of times are ordered ascending in
     // plain String order.
     public static List<String> sortByFrequency(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Long> freq = words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting())
+        );
+        Comparator<String> byFreqDesc = (a, b) -> {
+            Long orderA = freq.get(a);
+            Long orderB = freq.get(b);
+            return Long.compare(orderB, orderA);
+        };
+        Comparator<String> byOrder = Comparator.naturalOrder();
+        return words.stream().distinct().sorted(byFreqDesc.thenComparing(byOrder)).toList();
     }
 
     // CHALLENGE 8
