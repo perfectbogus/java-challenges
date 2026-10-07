@@ -73,7 +73,26 @@ public class SortingComparatorsIntermediateChallenge {
     // keeping their original relative order. pinned has no duplicates, and entries of pinned that do not occur in
     // items are ignored.
     public static List<String> sortWithPinnedFirst(List<String> items, List<String> pinned) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, List<String>> pinnedGroups = new LinkedHashMap<>();
+        for (String w : pinned) {
+            pinnedGroups.put(w, new ArrayList<>());
+        }
+
+        List<String> rest = new ArrayList<>();
+        for (String item : items) {
+            List<String> group = pinnedGroups.get(item);
+            if (group != null) {
+                group.add(item);
+            } else {
+                rest.add(item);
+            }
+        }
+        rest.sort(String.CASE_INSENSITIVE_ORDER);
+
+        List<String> result = new ArrayList<>();
+        pinnedGroups.values().forEach(result::addAll);
+        result.addAll(rest);
+        return result;
     }
 
     // CHALLENGE 6
