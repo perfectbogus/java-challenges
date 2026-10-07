@@ -369,6 +369,16 @@ class SortingComparatorsIntermediateChallengeTest {
         }
 
         @Test
+        void testOrdersBySumImproved() {
+            List<int[]> input = new ArrayList<>(List.of(
+                    new int[] {5}, new int[] {1, 1}, new int[] {}, new int[] {-4, 3}));
+
+            input.sort(SortingComparatorsIntermediateChallenge.bySumAscendingImproved());
+
+            assertEquals(List.of("[-4, 3]", "[]", "[1, 1]", "[5]"), asStrings(input));
+        }
+
+        @Test
         void testSumsOutsideTheIntRangeAreComparedCorrectly() {
             Comparator<int[]> comparator = SortingComparatorsIntermediateChallenge.bySumAscending();
             int[] huge = {Integer.MAX_VALUE, Integer.MAX_VALUE};

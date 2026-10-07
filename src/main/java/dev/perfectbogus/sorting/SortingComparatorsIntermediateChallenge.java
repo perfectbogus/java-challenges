@@ -191,6 +191,14 @@ public class SortingComparatorsIntermediateChallenge {
         };
     }
 
+    public static Comparator<int[]> bySumAscendingImproved() {
+        return Comparator.comparingLong(a -> Arrays.stream(a).mapToLong(i -> i).sum());
+    }
+
+    public static Comparator<int[]> bySumAscending2() {
+        return (a, b) -> Long.compare(Arrays.stream(a).mapToLong(i -> i).sum(), Arrays.stream(b).mapToLong(i -> i).sum());
+    }
+
     // CHALLENGE 10
     // Every string is a non-empty sequence of decimal digits, of ANY length (far more digits than a long can hold),
     // and may have leading zeros ("007" has the value 7). Sorts the strings ascending by their numeric value.
