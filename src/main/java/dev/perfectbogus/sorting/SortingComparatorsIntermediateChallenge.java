@@ -101,28 +101,27 @@ public class SortingComparatorsIntermediateChallenge {
     // alphabet: the words are compared character by character using the position of each character in alphabet, and
     // a word that is a proper prefix of another one comes first. Equal words keep their original relative order.
     public static List<String> sortByCustomAlphabet(List<String> words, String alphabet) {
-        Comparator<String> byCustomAlpha = (a, b) -> compare(a, b, alphabet);
-        return words.stream().sorted(byCustomAlpha).toList();
-    }
-
-    private static int compare(String a, String b, String alphabet) {
-        int i = 0;
-        int min = Math.min(a.length(), b.length());
-        while (i < min) {
-            char letterA = a.charAt(i);
-            char letterB = b.charAt(i);
-            int idxA = alphabet.indexOf(letterA);
-            int idxB = alphabet.indexOf(letterB);
-            if (idxA == idxB) {
-                i++;
-            } else if (idxA < idxB) {
-                return -1;
-            } else {
-                return 1;
-            }
+        Map<Character, Integer> priority = new HashMap<>();
+        for (int i = 0; i < alphabet.length(); i++) {
+            priority.put(alphabet.charAt(i), i);
         }
 
-        return Integer.compare(a.length(), b.length());
+        Comparator<String> byCustomAlpha = (a, b) -> {
+            int minLen = Math.min(a.length(), b.length());
+
+            for (int i = 0; i < minLen; i++) {
+                int orderA = priority.get(a.charAt(i));
+                int orderB = priority.get(b.charAt(i));
+
+                if (orderA != orderB) {
+                    return Integer.compare(orderA, orderB);
+                }
+            }
+
+            return Integer.compare(a.length(), b.length());
+        };
+
+        return words.stream().sorted(byCustomAlpha).toList();
     }
 
     // CHALLENGE 7
