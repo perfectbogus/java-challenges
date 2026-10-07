@@ -101,7 +101,28 @@ public class SortingComparatorsIntermediateChallenge {
     // alphabet: the words are compared character by character using the position of each character in alphabet, and
     // a word that is a proper prefix of another one comes first. Equal words keep their original relative order.
     public static List<String> sortByCustomAlphabet(List<String> words, String alphabet) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byCustomAlpha = (a, b) -> compare(a, b, alphabet);
+        return words.stream().sorted(byCustomAlpha).toList();
+    }
+
+    private static int compare(String a, String b, String alphabet) {
+        int i = 0;
+        int min = Math.min(a.length(), b.length());
+        while (i < min) {
+            char letterA = a.charAt(i);
+            char letterB = b.charAt(i);
+            int idxA = alphabet.indexOf(letterA);
+            int idxB = alphabet.indexOf(letterB);
+            if (idxA == idxB) {
+                i++;
+            } else if (idxA < idxB) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+
+        return Integer.compare(a.length(), b.length());
     }
 
     // CHALLENGE 7
