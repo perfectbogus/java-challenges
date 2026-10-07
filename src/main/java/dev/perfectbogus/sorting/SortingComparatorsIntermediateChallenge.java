@@ -205,7 +205,40 @@ public class SortingComparatorsIntermediateChallenge {
     // Strings with the same numeric value ("7", "007", "0007") keep their original relative order and their original
     // spelling.
     public static List<String> sortNumericStrings(List<String> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byNumChar = (a, b) -> {
+            int minLen = Math.min(a.length(), b.length());
+            int idxA = firstNonZeroDigitIndexOf(a);
+            int idxB = firstNonZeroDigitIndexOf(b);
+
+            int remainA = a.length() - idxA;
+            int remainB = b.length() - idxB;
+            if (remainA == remainB) {
+                while (idxA < a.length() && idxB < b.length()) {
+                    char orderA = a.charAt(idxA);
+                    char orderB = b.charAt(idxB);
+                    if (orderA != orderB) {
+                        return Character.compare(orderA, orderB);
+                    }
+                    idxA++;
+                    idxB++;
+                }
+            }
+            return Integer.compare(remainA, remainB);
+        };
+
+        return numbers.stream().sorted(byNumChar).toList();
+    }
+
+    private static int firstNonZeroDigitIndexOf(String w) {
+        int i = 0;
+        while (i < w.length()) {
+            if (w.charAt(i) == '0') {
+                i++;
+            } else {
+                break;
+            }
+        }
+        return i;
     }
 
     // CHALLENGE 11
