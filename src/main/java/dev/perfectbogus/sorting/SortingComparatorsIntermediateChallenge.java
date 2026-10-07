@@ -158,7 +158,18 @@ public class SortingComparatorsIntermediateChallenge {
     // to the origin (0, 0), nearest first. Points at exactly the same distance are ordered by x ascending and then
     // by y ascending, and identical points keep their original relative order.
     public static List<int[]> sortPointsByDistanceFromOrigin(List<int[]> points) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<int[], Long> map = new IdentityHashMap<>();
+        for (int[] p : points) {
+            long x = p[0];
+            long y = p[1];
+            long distance = x * x + y * y;
+            map.put(p, distance);
+        }
+
+        Comparator<int[]> byDistance = Comparator.comparing(map::get, Comparator.naturalOrder());
+        Comparator<int[]> byX = Comparator.comparingInt(a -> a[0]);
+        Comparator<int[]> byY = Comparator.comparingInt(a -> a[1]);
+        return points.stream().sorted(byDistance.thenComparing(byX).thenComparing(byY)).toList();
     }
 
     // CHALLENGE 9
