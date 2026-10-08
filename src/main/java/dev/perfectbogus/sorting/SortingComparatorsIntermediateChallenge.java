@@ -206,7 +206,6 @@ public class SortingComparatorsIntermediateChallenge {
     // spelling.
     public static List<String> sortNumericStrings(List<String> numbers) {
         Comparator<String> byNumChar = (a, b) -> {
-            int minLen = Math.min(a.length(), b.length());
             int idxA = firstNonZeroDigitIndexOf(a);
             int idxB = firstNonZeroDigitIndexOf(b);
 
@@ -223,7 +222,7 @@ public class SortingComparatorsIntermediateChallenge {
                     idxB++;
                 }
             }
-            return Integer.compare(remainA, remainB);
+            return 0;
         };
 
         return numbers.stream().sorted(byNumChar).toList();
@@ -247,7 +246,39 @@ public class SortingComparatorsIntermediateChallenge {
     // comes after "1.9"). A missing segment counts as 0, so "1.0" and "1.0.0" are equal; versions that are equal
     // keep their original relative order and spelling.
     public static List<String> sortVersions(List<String> versions) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byVersion = (a, b) -> {
+            String[] segmentsA = a.split("\\.");
+            String[] segmentsB = b.split("\\.");
+            int longest = Math.max(segmentsA.length, segmentsB.length);
+            for (int i = 0; i < longest; i++) {
+                int valueA = i < segmentsA.length ? Integer.parseInt(segmentsA[i]) : 0;
+                int valueB = i < segmentsB.length ? Integer.parseInt(segmentsB[i]) : 0;
+                if (valueA != valueB) {
+                    return Integer.compare(valueA, valueB);
+                }
+            }
+            return 0;
+        };
+
+        return versions.stream().sorted(byVersion).toList();
+    }
+
+    public static List<String> sortVersionsAnother(List<String> versions) {
+        Comparator<String> byVersion = (a, b) -> {
+            String[] partsA = a.split("\\.");
+            String[] partsB = b.split("\\.");
+            int longest = Math.max(partsA.length, partsB.length);
+            int[] numbersA = new int[longest];
+            int[] numbersB = new int[longest];
+            for (int i = 0; i < partsA.length; i++) {
+                numbersA[i] = Integer.parseInt(partsA[i]);
+            }
+            for (int i = 0; i < partsB.length; i++) {
+                numbersB[i] = Integer.parseInt(partsB[i]);
+            }
+            return Arrays.compare(numbersA, numbersB);
+        };
+        return versions.stream().sorted(byVersion).toList();
     }
 
     // CHALLENGE 12
