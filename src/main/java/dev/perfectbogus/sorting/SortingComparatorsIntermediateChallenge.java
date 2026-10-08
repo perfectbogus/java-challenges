@@ -281,6 +281,21 @@ public class SortingComparatorsIntermediateChallenge {
         return versions.stream().sorted(byVersion).toList();
     }
 
+    public static List<String> sortVersionPreComputed(List<String> versions) {
+        Map<String, int[]> numbersByVersion = new HashMap<>();
+        int longest = versions.stream().mapToInt(w -> w.split("\\.").length).max().orElse(0);
+        for (String version : versions) {
+            int[] numbers = new int[longest];
+            String[] parts = version.split("\\.");
+            for (int i = 0; i < parts.length; i++) {
+                numbers[i] = Integer.parseInt(parts[i]);
+            }
+            numbersByVersion.put(version, numbers);
+        }
+        Comparator<String> byVersion = (a, b) -> Arrays.compare(numbersByVersion.get(a), numbersByVersion.get(b));
+        return versions.stream().sorted(byVersion).toList();
+    }
+
     // CHALLENGE 12
     // Returns a comparator for "natural" ordering of names such as "file2" and "file10". Each string is split into
     // maximal runs of digits and maximal runs of non-digits ("a12bc" -> "a", "12", "bc"). Two strings are compared run

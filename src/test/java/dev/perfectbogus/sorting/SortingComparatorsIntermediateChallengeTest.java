@@ -478,6 +478,16 @@ class SortingComparatorsIntermediateChallengeTest {
         }
 
         @Test
+        void testSegmentsAreComparedNumericallyPreComputed() {
+            List<String> input = new ArrayList<>(List.of("1.10", "1.2", "1.9", "2", "1.2.1", "1.10.1"));
+
+            List<String> result = SortingComparatorsIntermediateChallenge.sortVersionPreComputed(input);
+
+            assertEquals(List.of("1.2", "1.2.1", "1.9", "1.10", "1.10.1", "2"), result);
+            assertEquals(List.of("1.10", "1.2", "1.9", "2", "1.2.1", "1.10.1"), input);
+        }
+
+        @Test
         void testSegmentsAreComparedNumericallyAnother() {
             List<String> input = new ArrayList<>(List.of("1.10", "1.2", "1.9", "2", "1.2.1", "1.10.1"));
 
