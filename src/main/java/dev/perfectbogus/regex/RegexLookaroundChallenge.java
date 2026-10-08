@@ -13,7 +13,8 @@ public class RegexLookaroundChallenge {
     // ("abc123def" becomes "abc 123 def"). Nothing else changes: existing spaces and every other character stay
     // exactly where they are, so no space is added next to a character that is neither a letter nor a digit.
     public static String separateLettersAndDigits(String s) {
-        return s.replaceAll("(?<=\\d)(?=\\D)|(?<=\\D)(?=\\d)", "$1 $2");
+        final String regex = "(?<=[0-9])(?=[a-zA-Z])|(?<=[a-zA-Z])(?=[0-9])";
+        return s.replaceAll(regex, " ");
     }
 
     // CHALLENGE 2
