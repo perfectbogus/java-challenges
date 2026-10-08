@@ -2,6 +2,8 @@ package dev.perfectbogus.sorting;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SortingComparatorsIntermediateChallenge {
@@ -305,7 +307,61 @@ public class SortingComparatorsIntermediateChallenge {
     // strings are still tied, fall back to String.compareTo, so only identical strings compare as 0. The comparator
     // must obey the usual contract (opposite signs when swapped, transitive).
     public static Comparator<String> alphanumericComparator() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (a, b) -> {
+            List<String> runsA = runsOf(a);
+            List<String> runsB = runsOf(b);
+            int shared = Math.min(runsA.size(), runsB.size());
+            for (int i = 0; i < shared; i++) {
+                int result = compareRuns(runsA.get(i), runsB.get(i));
+                if (result != 0) {
+                    return result;
+                }
+            }
+            if (runsA.size() != runsB.size()) {
+                return Integer.compare(runsA.size(), runsB.size());
+            }
+            return a.compareTo(b);
+        };
+    }
+
+    private static final Pattern RUN = Pattern.compile("\\d+|\\D+");
+
+    private static List<String> runsOf(String text) {
+        List<String> runs = new ArrayList<>();
+        Matcher m = RUN.matcher(text);
+        while (m.find()) {
+            runs.add(m.group());
+        }
+        return runs;
+    }
+
+    private static int compareRuns(String runA, String runB) {
+        boolean digitsA = Character.isDigit(runA.charAt(0));
+        boolean digitsB = Character.isDigit(runB.charAt(0));
+        if (digitsA && digitsB) {
+            return compareNumbers(runA, runB);
+        }
+        if (!digitsA && !digitsB) {
+            return String.CASE_INSENSITIVE_ORDER.compare(runA, runB);
+        }
+        return digitsA ? -1 : 1;
+    }
+
+    private static int compareNumbers(String numberA, String numberB) {
+        String a = stripLeadingZeros(numberA);
+        String b = stripLeadingZeros(numberB);
+        if (a.length() != b.length()) {
+            return Integer.compare(a.length(), b.length());
+        }
+        return a.compareTo(b);
+    }
+
+    private static String stripLeadingZeros(String number) {
+        int start = 0;
+        while (start < number.length() - 1 && number.charAt(start) == '0') {
+            start++;
+        }
+        return number.substring(start);
     }
 
     // CHALLENGE 13
