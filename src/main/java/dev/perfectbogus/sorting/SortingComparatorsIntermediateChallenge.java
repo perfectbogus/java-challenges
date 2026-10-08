@@ -372,8 +372,24 @@ public class SortingComparatorsIntermediateChallenge {
     // "-") is not one of the four names, throws IllegalArgumentException, even when the list is empty or has one
     // element.
     public static List<Employee> sortByKeys(List<Employee> employees, List<String> keys) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Employee> byKeys = (a, b) -> 0;
+        for (String key : keys) {
+            boolean descending = key.startsWith("-");
+            Comparator<Employee> comparator = COMPARATORS.get(descending ? key.substring(1) : key);
+            if (comparator == null) {
+                throw new IllegalArgumentException("Unknown key: " + key);
+            }
+            byKeys = byKeys.thenComparing(descending ? comparator.reversed() : comparator);
+        }
+        return employees.stream().sorted(byKeys).toList();
     }
+
+    private static final Map<String, Comparator<Employee>> COMPARATORS = Map.of(
+            "name", Comparator.comparing(Employee::name),
+            "department", Comparator.comparing(Employee::department),
+            "level", Comparator.comparingInt(Employee::level),
+            "salary", Comparator.comparingDouble(Employee::salary)
+    );
 
     // CHALLENGE 14
     // Every inner list is already sorted according to comparator. Returns one list with all the elements of all the
