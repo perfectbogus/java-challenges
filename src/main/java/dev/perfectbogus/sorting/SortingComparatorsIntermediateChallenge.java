@@ -397,8 +397,31 @@ public class SortingComparatorsIntermediateChallenge {
     // with the lower index goes first; two equal elements of the same list keep their order. The inner lists may be
     // empty or immutable, the outer list may be empty, and none of them may be modified.
     public static <T> List<T> mergeSorted(List<List<T>> sortedLists, Comparator<? super T> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Cursor<T>> byCursorValue = (a, b) -> comparator.compare(a.value(), b.value());
+        Comparator<Cursor<T>> byList = Comparator.comparingInt(Cursor::list);
+        PriorityQueue<Cursor<T>> q = new PriorityQueue<>(byCursorValue.thenComparing(byList));
+
+        for (int i = 0; i < sortedLists.size(); i++) {
+            List<T> l = sortedLists.get(i);
+            if (!l.isEmpty()) {
+                q.offer(new Cursor<>(l.get(0), i, 0));
+            }
+        }
+
+        List<T> result = new ArrayList<>();
+        while (!q.isEmpty()) {
+            Cursor<T> top = q.poll();
+            result.add(top.value());
+            List<T> list = sortedLists.get(top.list());
+            int next = top.index() + 1;
+            if (next < list.size()) {
+                q.offer(new Cursor<>(list.get(next), top.list(), next));
+            }
+        }
+        return result;
     }
+
+    private record Cursor<E>(E value, int list, int index) {}
 
     // CHALLENGE 15
     // Returns the k greatest elements according to comparator, greatest first. The result must be exactly the first k
@@ -408,6 +431,36 @@ public class SortingComparatorsIntermediateChallenge {
     // list can contain hundreds of thousands of elements while k is tiny, so the number of calls to comparator.compare
     // must stay far below what sorting the whole list would need.
     public static <T> List<T> topK(List<T> items, int k, Comparator<? super T> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (k < 0) {
+            throw new IllegalArgumentException("k must not be negative");
+        }
+
+        Comparator<Entry<T>> better = (a, b) -> {
+            int c = comparator.compare(b.value(), a.value());
+            return c != 0 ? c : Integer.compare(a.index(), b.index());
+        };
+
+        PriorityQueue<Entry<T>> kept = new PriorityQueue<>(better.reversed());
+        if (k > 0) {
+            for (int i = 0; i < items.size(); i++) {
+                Entry<T> entry = new Entry<>(items.get(i), i);
+                if (kept.size() < k) {
+                    kept.add(entry);
+                } else if (better.compare(entry, kept.peek()) < 0) {
+                    kept.poll();
+                    kept.add(entry);
+                }
+            }
+        }
+        List<Entry<T>> entries = new ArrayList<>(kept);
+        entries.sort(better);
+        List<T> result = new ArrayList<>();
+        for (Entry<T> entry : entries) {
+            result.add(entry.value());
+        }
+        return result;
+    }
+
+    private record Entry<E>(E value, int index) {
     }
 }
