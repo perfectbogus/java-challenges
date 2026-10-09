@@ -1,6 +1,9 @@
 package dev.perfectbogus.regex;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexLookaroundBasicsChallenge {
 
@@ -14,7 +17,13 @@ public class RegexLookaroundBasicsChallenge {
     // "name: Ann, age: 30" gives [name, age]. A word followed by anything else (a space, a digit, the end of the
     // text) is not returned.
     public static List<String> extractWordsBeforeColon(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> results = new ArrayList<>();
+        final String regex = "[a-z]+(?=:)";
+        Matcher m = Pattern.compile(regex, Pattern.CASE_INSENSITIVE).matcher(text);
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 2
