@@ -136,7 +136,8 @@ public class RegexLookaroundPracticeChallenge {
     // The text may contain line breaks (a line break between two equal digits separates them). An empty text
     // returns true.
     public static boolean hasNoDigitRepeatedInARow(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("(?s)^(?!.*(\\d)\\1)").matcher(text);
+        return m.find();
     }
 
     // CHALLENGE 15
