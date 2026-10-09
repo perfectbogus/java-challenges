@@ -91,7 +91,7 @@ public class RegexLookaroundBasicsChallenge {
     // "Smith" are not part of the result. A word followed by two spaces, or by punctuation, before "Smith" is not
     // returned.
     public static List<String> extractFirstNamesBeforeSmith(String text) {
-        final String regex = "\\w+(?= Smith\\b)";
+        final String regex = "[a-zA-Z]+(?= Smith\\b)";
         Matcher m = Pattern.compile(regex).matcher(text);
         List<String> r = new ArrayList<>();
         while (m.find()) {
@@ -104,7 +104,9 @@ public class RegexLookaroundBasicsChallenge {
     // Returns true if text contains at least one letter (A-Z or a-z) AND at least one digit (0-9), in any order and
     // anywhere in the text. The text may contain line breaks. An empty text returns false.
     public static boolean containsLetterAndDigit(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "(?=.*[a-zA-Z])(?=.*[0-9]).*";
+        Matcher m = Pattern.compile(regex, Pattern.DOTALL).matcher(text);
+        return m.matches();
     }
 
     // CHALLENGE 10
