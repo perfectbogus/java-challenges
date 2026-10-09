@@ -91,7 +91,13 @@ public class RegexLookaroundBasicsChallenge {
     // "Smith" are not part of the result. A word followed by two spaces, or by punctuation, before "Smith" is not
     // returned.
     public static List<String> extractFirstNamesBeforeSmith(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "\\w+(?= Smith\\b)";
+        Matcher m = Pattern.compile(regex).matcher(text);
+        List<String> r = new ArrayList<>();
+        while (m.find()) {
+            r.add(m.group());
+        }
+        return r;
     }
 
     // CHALLENGE 9
