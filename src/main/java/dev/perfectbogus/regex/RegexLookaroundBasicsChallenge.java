@@ -113,6 +113,8 @@ public class RegexLookaroundBasicsChallenge {
     // Returns true if text contains at least one digit (0-9) and contains no whitespace character at all (no space,
     // tab or line break). The text may contain line breaks. An empty text returns false.
     public static boolean hasDigitAndNoWhitespace(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "^(?=.*\\d)(?!.*\\s)";
+        Matcher m = Pattern.compile(regex, Pattern.DOTALL).matcher(text);
+        return m.find();
     }
 }
