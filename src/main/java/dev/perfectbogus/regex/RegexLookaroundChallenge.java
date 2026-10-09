@@ -41,7 +41,8 @@ public class RegexLookaroundChallenge {
     // ("john.doe@mail.com" becomes "j******e@mail.com"). A part of one or two characters has no characters in the
     // middle, so it stays unchanged. The part after the '@' is never changed.
     public static String maskEmailLocalPart(String email) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "(?<=\\w)[a-zA-Z](?=\\w+@)";
+        return email.replaceAll(regex, "*");
     }
 
     // CHALLENGE 4
