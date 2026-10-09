@@ -74,7 +74,7 @@ public class RegexLookaroundBasicsChallenge {
     // Inserts a '-' between every two digits that are next to each other. "1234" becomes "1-2-3-4" and "ab12cd345"
     // becomes "ab1-2cd3-4-5". Digits that are next to a letter or to the start or the end of the text get nothing.
     public static String dashBetweenDigits(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<=\\d)(?=\\d)", "-");
     }
 
     // CHALLENGE 7
