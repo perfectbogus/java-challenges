@@ -55,7 +55,8 @@ public class RegexLookaroundPracticeChallenge {
     // "a,b,c" gives the pieces "a,", "b," and "c", and "a,,b" gives the pieces "a,", "," and "b". No piece is empty,
     // and an empty text returns an empty list.
     public static List<String> splitAfterCommas(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(text.split("(?<=,)")));
     }
 
     // CHALLENGE 6
