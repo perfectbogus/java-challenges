@@ -95,7 +95,7 @@ public class RegexLookaroundPracticeChallenge {
     // , . ! or ?. "Hello , world !" becomes "Hello, world!" and "a  ,b" becomes "a,b". Spaces that are not followed
     // by one of those characters, and every other character, are unchanged.
     public static String removeSpacesBeforePunctuation(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll(" +(?=[,.!?])", "");
     }
 
     // CHALLENGE 10
