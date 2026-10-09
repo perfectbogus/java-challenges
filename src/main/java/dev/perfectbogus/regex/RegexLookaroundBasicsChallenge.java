@@ -59,7 +59,7 @@ public class RegexLookaroundBasicsChallenge {
     // followed by 'u' stays as it is, and so does every other character (including the uppercase 'Q'). "queen and
     // Iraq" becomes "queen and Ira#". A 'q' at the very end of the text is not followed by anything, so it is replaced.
     public static String hideQWithoutU(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("q(?!u)", "#");
     }
 
     // CHALLENGE 5
