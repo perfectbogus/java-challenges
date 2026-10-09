@@ -120,7 +120,7 @@ public class RegexLookaroundPracticeChallenge {
     // three digits, counted from the right: "1234567" becomes "1,234,567", "1234" becomes "1,234", and "123" or
     // fewer digits are returned unchanged.
     public static String groupDigitsWithCommas(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return digits.replaceAll("(?<=\\d)(?=(?:\\d{3})+\\z)", ",");
     }
 
     // CHALLENGE 13
