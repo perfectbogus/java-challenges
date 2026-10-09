@@ -45,7 +45,13 @@ public class RegexLookaroundBasicsChallenge {
     // number. "id=42 and id=7" gives [42, 7]. Only the digits are returned, so "id=12ab" gives [12]. An "id=" that
     // is not followed by a digit returns nothing.
     public static List<String> extractIdValues(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> results = new ArrayList<>();
+        final String regex = "(?<=id=)\\d+";
+        Matcher m = Pattern.compile(regex).matcher(text);
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 4
