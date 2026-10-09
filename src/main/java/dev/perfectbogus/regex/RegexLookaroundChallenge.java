@@ -1,6 +1,9 @@
 package dev.perfectbogus.regex;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexLookaroundChallenge {
 
@@ -23,7 +26,13 @@ public class RegexLookaroundChallenge {
     // ("knot" and "cannot" do not count; "nothing" does not count either). A word is the maximal run of letters
     // (A-Z, a-z) that starts right after "not ". The word "not" itself can be returned when it follows another "not".
     public static List<String> wordsAfterNot(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "(?<=\\bnot) ([a-zA-Z]+)";
+        Matcher m = Pattern.compile(regex, Pattern.CASE_INSENSITIVE).matcher(text);
+        List<String> results = new ArrayList<>();
+        while (m.find()) {
+            results.add(m.group(1));
+        }
+        return results;
     }
 
     // CHALLENGE 3
