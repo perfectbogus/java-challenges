@@ -87,7 +87,7 @@ public class RegexLookaroundPracticeChallenge {
     // Returns true if name ends with the exact text ".txt" (lowercase) and does not start with a '.'. name contains
     // no line breaks. "notes.txt" is true; ".hidden.txt", "a.TXT", ".txt", "txt" and "a.txt.bak" are false.
     public static boolean isVisibleTextFile(String name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return name.matches("(?=[^.]).*(?<=\\.txt)");
     }
 
     // CHALLENGE 9
