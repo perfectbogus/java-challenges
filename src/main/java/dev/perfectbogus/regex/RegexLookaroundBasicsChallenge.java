@@ -31,7 +31,13 @@ public class RegexLookaroundBasicsChallenge {
     // part of the number. "5kg of rice and 12kg of beans" gives [5, 12]. A number followed by a space and then "kg",
     // or by "KG", or by anything else, is not returned.
     public static List<String> extractNumbersBeforeKg(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> results = new ArrayList<>();
+        final String regex = "\\d+(?=kg)";
+        Matcher m = Pattern.compile(regex).matcher(text);
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 3
