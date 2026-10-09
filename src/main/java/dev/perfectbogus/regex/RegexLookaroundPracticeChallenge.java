@@ -30,7 +30,7 @@ public class RegexLookaroundPracticeChallenge {
     // Replaces every digit that is directly preceded by a letter (A-Z or a-z) with '#'. "a12b3" becomes "a#2b#": the
     // '2' is preceded by a digit, not by a letter, so it stays. Everything else is unchanged.
     public static String hashDigitsAfterLetters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?i)(?<=[a-z])\\d","#");
     }
 
     // CHALLENGE 3
