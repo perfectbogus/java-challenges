@@ -67,7 +67,7 @@ public class RegexLookaroundBasicsChallenge {
     // so does every other character. "1,000 apples, pears" becomes "1,000 apples pears". A comma at the start of the
     // text or right after another comma is not preceded by a digit either, so it is removed.
     public static String removeCommasNotAfterDigits(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<!\\d),", "");
     }
 
     // CHALLENGE 6
