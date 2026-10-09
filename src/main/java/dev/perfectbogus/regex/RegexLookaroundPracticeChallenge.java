@@ -76,7 +76,11 @@ public class RegexLookaroundPracticeChallenge {
     // The text may contain line breaks anywhere, and a line break at the end of the text is its last character (so it
     // is not a digit). A text of one character, or an empty text, returns false.
     public static boolean startsWithLetterEndsWithDigit(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.matches("(?s)[A-Za-z].*[0-9]");
+    }
+
+    public static boolean startsWithLetterEndsWithDigitLookaround(String text) {
+        return text.matches("(?s)(?=[A-Za-z]).*(?<=[0-9])");
     }
 
     // CHALLENGE 8
