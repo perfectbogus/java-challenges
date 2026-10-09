@@ -37,7 +37,7 @@ public class RegexLookaroundPracticeChallenge {
     // Replaces every letter (A-Z or a-z) that is directly followed by a digit with '_'. "a1b22" becomes "_1_22".
     // Everything else is unchanged.
     public static String underscoreLettersBeforeDigits(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?i)[a-z](?=\\d)", "_");
     }
 
     // CHALLENGE 4
