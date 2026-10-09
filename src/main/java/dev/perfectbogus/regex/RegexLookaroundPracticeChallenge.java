@@ -1,6 +1,7 @@
 package dev.perfectbogus.regex;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -45,7 +46,8 @@ public class RegexLookaroundPracticeChallenge {
     // characters. "HelloWorldFoo" gives [Hello, World, Foo], "helloWorld" gives [hello, World] and "ABC" gives
     // [A, B, C]. No piece is empty, and an empty s returns an empty list.
     public static List<String> splitBeforeUppercase(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (s.isEmpty()) return new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(s.split("(?=[A-Z])")));
     }
 
     // CHALLENGE 5
