@@ -103,7 +103,7 @@ public class RegexLookaroundPracticeChallenge {
     // "helloWorld" becomes "hello World" and "fooBarBaz" becomes "foo Bar Baz". Runs of capitals and every other
     // character stay as they are ("ABC" stays "ABC" and "HelloWORLD" becomes "Hello WORLD").
     public static String spaceBetweenLowerAndUpper(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return s.replaceAll("(?<=[a-z])(?=[A-Z])", " ");
     }
 
     // CHALLENGE 11
