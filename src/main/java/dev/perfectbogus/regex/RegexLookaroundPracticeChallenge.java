@@ -127,7 +127,7 @@ public class RegexLookaroundPracticeChallenge {
     // Returns true if pin is made of exactly 4 digits (0-9), does not start with '0', and its four digits are not all
     // the same digit. "1234" and "1112" are true; "0123", "1111", "7777", "123", "12345" and "12a4" are false.
     public static boolean isValidPin(String pin) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return pin.matches("(?!0)(?!([0-9])\\1{3})[0-9]{4}");
     }
 
     // CHALLENGE 14
