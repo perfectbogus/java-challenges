@@ -82,7 +82,7 @@ public class RegexLookaroundBasicsChallenge {
     // comma that is already followed by a space (one or more) is left alone, and a comma at the very end of the text
     // also gets a space after it ("a," becomes "a, "). Nothing is ever removed.
     public static String spaceAfterCommas(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<=,)(?! )", " ");
     }
 
     // CHALLENGE 8
