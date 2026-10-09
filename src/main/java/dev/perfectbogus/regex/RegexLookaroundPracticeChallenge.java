@@ -112,7 +112,7 @@ public class RegexLookaroundPracticeChallenge {
     // "hello world" becomes "h***o w***d" and "ab cde" becomes "ab c*e". Digits and other characters are never
     // changed, and they end a word ("abc123def" becomes "a*c123d*f").
     public static String maskInnerLetters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?i)(?<=[a-z])[a-z](?=[a-z])", "*");
     }
 
     // CHALLENGE 12
