@@ -63,7 +63,12 @@ public class RegexLookaroundPracticeChallenge {
     // Returns how many digits in text have no digit directly before them and no digit directly after them.
     // "a1b22c333d4" has 2 of them (the '1' and the '4'). An empty text returns 0.
     public static int countIsolatedDigits(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("(?<!\\d)\\d(?!\\d)").matcher(text);
+        int i = 0;
+        while (m.find()) {
+            i++;
+        }
+        return i;
     }
 
     // CHALLENGE 7
