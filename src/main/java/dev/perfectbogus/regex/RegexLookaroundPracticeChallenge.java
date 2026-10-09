@@ -144,7 +144,7 @@ public class RegexLookaroundPracticeChallenge {
     // Replaces every run of two or more spaces (' ') with a single space. "a   b" becomes "a b", "  a" becomes " a"
     // and "a  " becomes "a ". Single spaces, tabs, line breaks and every other character are unchanged.
     public static String collapseSpaces(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<= ) ", "");
     }
 
     // CHALLENGE 16
