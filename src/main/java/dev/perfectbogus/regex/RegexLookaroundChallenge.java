@@ -139,8 +139,11 @@ public class RegexLookaroundChallenge {
     //   - has no two underscores in a row
     //   - does not contain the text "admin" in any combination of upper and lower case
     //   - contains at most 3 digits in total
+    private static final Pattern USERNAME = Pattern.compile(
+            "(?i)^(?=[a-z])(?!.*_$)(?!.*__)(?!.*admin)(?!(?:\\D*\\d){4})[a-z0-9_]{4,16}$");
+
     public static boolean isValidUsername(String username) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return USERNAME.matcher(username).matches();
     }
 
     // CHALLENGE 11
