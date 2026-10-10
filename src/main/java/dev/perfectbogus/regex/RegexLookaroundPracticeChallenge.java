@@ -174,7 +174,12 @@ public class RegexLookaroundPracticeChallenge {
     // "Hello hello", "the then" and "athe the" give nothing. Words separated by two spaces, punctuation or a line
     // break are not repeated words.
     public static List<String> extractRepeatedWords(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("(?<![A-Za-z])([A-Za-z]+)(?= \\1(?![A-Za-z]))").matcher(text);
+        List<String> result = new ArrayList<>();
+        while (m.find()) {
+            result.add(m.group(1));
+        }
+        return result;
     }
 
     // CHALLENGE 19
