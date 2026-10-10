@@ -1,6 +1,7 @@
 package dev.perfectbogus.regex;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -67,7 +68,9 @@ public class RegexLookaroundChallenge {
     // ("parseHTTPResponse" gives [parse, HTTP, Response], "HTTPServer" gives [HTTP, Server], "ABC" gives [ABC]).
     // The words keep their original case. An empty s returns an empty list.
     public static List<String> splitCamelCase(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (s.isEmpty()) return new ArrayList<>();
+        final String regex = "(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])";
+        return new ArrayList<>(Arrays.asList(s.split(regex)));
     }
 
     // CHALLENGE 6
