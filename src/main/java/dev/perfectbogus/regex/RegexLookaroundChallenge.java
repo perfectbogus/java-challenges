@@ -90,7 +90,13 @@ public class RegexLookaroundChallenge {
     // followed by '%' is skipped completely: "50% of 200" gives [200], not [5, 200]. Digits separated by anything else
     // (for example "3.5") are different runs, so "3.5%" gives [3].
     public static List<String> extractNumbersNotPercentages(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "\\d++(?!%)";
+        Matcher m = Pattern.compile(regex).matcher(text);
+        List<String> results = new ArrayList<>();
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 8
