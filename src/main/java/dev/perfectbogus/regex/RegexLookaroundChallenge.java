@@ -107,7 +107,13 @@ public class RegexLookaroundChallenge {
     // (A-Z or a-z), the amount is rejected completely: "$12.5k" gives nothing, not "12". Any other character after it
     // (a space, a comma, a period, the end of the text) is fine, so "pay $12." gives [12].
     public static List<String> extractAmountsWithCurrency(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "(?<=(\\$|€|USD |EUR ))\\d++(\\.\\d++)?+(?![a-zA-Z])";
+        Matcher m = Pattern.compile(regex).matcher(text);
+        List<String> results = new ArrayList<>();
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 9
