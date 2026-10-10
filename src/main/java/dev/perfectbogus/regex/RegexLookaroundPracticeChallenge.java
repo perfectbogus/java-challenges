@@ -152,7 +152,7 @@ public class RegexLookaroundPracticeChallenge {
     // inside a pair of parentheses: "a (b c) d (e f)" becomes "a (b_c) d (e_f)", and "( a )" becomes "(_a_)". Spaces
     // that are outside the parentheses, and every other character, are unchanged. The text may contain line breaks.
     public static String underscoreSpacesInParentheses(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll(" (?=[^()]*\\))", "_");
     }
 
     // CHALLENGE 17
@@ -161,7 +161,11 @@ public class RegexLookaroundPracticeChallenge {
     // [a, (b;c), d], "a;;b" gives [a, , b], "a;" gives [a, ] and ";" gives [, ]. An empty text returns a list with a
     // single empty piece. The ';' characters that split the text are not part of any piece.
     public static List<String> splitSemicolonsOutsideParentheses(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> results = new ArrayList<>();
+        for (String s : text.split(";(?![^()]*\\))", -1)) {
+            results.add(s);
+        }
+        return results;
     }
 
     // CHALLENGE 18
