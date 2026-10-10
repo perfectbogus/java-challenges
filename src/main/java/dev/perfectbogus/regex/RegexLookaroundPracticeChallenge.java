@@ -189,7 +189,12 @@ public class RegexLookaroundPracticeChallenge {
     // only has uppercase letters after its first letter ("iPhone") is not capitalized, and the whole word is
     // returned ("NASA" gives [NASA] when it is not at the start of a sentence).
     public static List<String> extractCapitalizedMidSentence(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("(?<![A-Za-z])(?<!^)(?<!\\. )[A-Z][A-Za-z]*").matcher(text);
+        List<String> result = new ArrayList<>();
+        while (m.find()) {
+            result.add(m.group());
+        }
+        return result;
     }
 
     // CHALLENGE 20
@@ -197,6 +202,7 @@ public class RegexLookaroundPracticeChallenge {
     // no letters. "Hello big world!" gives "world", "abc1" gives "abc" and "x y1 z2" gives "z". The text may contain
     // line breaks ("first\nlast" gives "last").
     public static Optional<String> findLastWord(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("(?s)[A-Za-z]+(?!.*[A-Za-z])").matcher(text);
+        return m.find() ? Optional.of(m.group()) : Optional.empty();
     }
 }
