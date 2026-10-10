@@ -79,7 +79,10 @@ public class RegexLookaroundChallenge {
     // token and every operator character is a token of its own ("12+3*4" gives [12, +, 3, *, 4], "--3" gives
     // [-, -, 3]). No token is empty. An empty expr returns an empty list.
     public static List<String> tokenizeExpression(String expr) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (expr.isEmpty()) return new ArrayList<>();
+
+        final String regex = "(?<=\\d)(?=[-+*/])|(?<=[-+*/])(?=\\d)|(?<=[-+*/])(?=[-+*/])";
+        return new ArrayList<>(Arrays.asList(expr.split(regex)));
     }
 
     // CHALLENGE 7
