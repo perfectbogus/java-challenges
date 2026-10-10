@@ -121,7 +121,13 @@ public class RegexLookaroundChallenge {
     // Returns the start index of every occurrence of target in text, in ascending order, counting occurrences that
     // overlap each other ("aaaa" contains "aa" at 0, 1 and 2). If there is no occurrence the result is empty.
     public static List<Integer> indexesOfOverlapping(String text, String target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Integer> res = new ArrayList<>();
+        final String regex = "(?=" + Pattern.quote(target) + ")";
+        Matcher m = Pattern.compile(regex).matcher(text);
+        while (m.find()) {
+            res.add(m.start());
+        }
+        return res;
     }
 
     // CHALLENGE 10
