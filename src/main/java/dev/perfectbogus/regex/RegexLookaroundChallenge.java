@@ -51,7 +51,13 @@ public class RegexLookaroundChallenge {
     // from left to right, and characters that were already returned as part of one content are never returned again
     // as part of another. A content may itself contain '<' and '>' characters ("<<a>b>>" has the content "a>b").
     public static List<String> extractDoubleAngleContents(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String regex = "(?<=<<)(.+?)(?=>>)";
+        Matcher m = Pattern.compile(regex).matcher(text);
+        List<String> results = new ArrayList<>();
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 5
