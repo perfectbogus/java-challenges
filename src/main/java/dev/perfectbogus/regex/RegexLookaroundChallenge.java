@@ -151,7 +151,7 @@ public class RegexLookaroundChallenge {
     // true and "Hello" is false. Characters that are not ASCII letters (spaces, digits, hyphens, line breaks...) are
     // ignored and may repeat. An empty s returns true.
     public static boolean isIsogram(String s) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Pattern.compile("(?is)^(?!.*([a-z]).*\\1).*$").matcher(s).matches();
     }
 
     // CHALLENGE 12
@@ -161,7 +161,7 @@ public class RegexLookaroundChallenge {
     // The leading '-' and the digits after the '.' are never grouped, and a number whose integer part has three
     // digits or fewer is returned unchanged.
     public static String formatWithThousands(String number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return number.replaceAll("(?<=[0-9])(?=(?:[0-9]{3})+(?![0-9]))(?<!\\.[0-9]{0,60})", ",");
     }
 
     // CHALLENGE 13
@@ -171,7 +171,13 @@ public class RegexLookaroundChallenge {
     // literal text: they are non-empty and may contain characters that are special in regular expressions, such as
     // "c++" or "a.b". Duplicated words are fine. An empty words list returns true.
     public static boolean containsAllWords(String text, List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder("(?is)^");
+        for (String w : words) {
+            sb.append("(?=.*(?<![A-Za-z0-9_])").append(Pattern.quote(w))
+                    .append("(?![A-Za-z0-9_]))");
+        }
+        sb.append(".*$");
+        return Pattern.compile(sb.toString()).matcher(text).matches();
     }
 
     // CHALLENGE 14
@@ -181,7 +187,21 @@ public class RegexLookaroundChallenge {
     // the whole token) to one of keywords. A token that merely starts or ends with a keyword ("iffy", "elsewhere")
     // is not excluded. keywords may be empty, and its words are literal text that contains only letters.
     public static List<String> extractIdentifiersExcludingKeywords(String code, List<String> keywords) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder("(?<![A-Za-z0-9_])");
+        if (!keywords.isEmpty()) {
+            sb.append("(?!(?:");
+            for (int i = 0; i < keywords.size(); i++) {
+                sb.append(i > 0 ? "|" : "").append(Pattern.quote(keywords.get(i)));
+            }
+            sb.append(")(?![A-Za-z0-9_]))");
+        }
+        sb.append("[A-Za-z_][A-Za-z0-9_]*");
+        List<String> out = new ArrayList<>();
+        Matcher m = Pattern.compile(sb.toString()).matcher(code);
+        while (m.find()) {
+            out.add(m.group());
+        }
+        return out;
     }
 
     // CHALLENGE 15
@@ -190,6 +210,6 @@ public class RegexLookaroundChallenge {
     // section goes from an opening quote to the next quote, both quote characters included, so the spaces between
     // them are kept. Tabs, line breaks and every other character are never changed.
     public static String replaceSpacesOutsideQuotes(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*\\z)", "_");
     }
 }
