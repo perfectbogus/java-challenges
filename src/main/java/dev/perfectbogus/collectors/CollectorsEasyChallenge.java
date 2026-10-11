@@ -85,7 +85,7 @@ public class CollectorsEasyChallenge {
     // CHALLENGE 8
     // Returns how many students are 18 years old or older.
     public static long countAdults(List<Student> students) {
-        return students.stream().collect(Collectors.counting());
+        return students.stream().filter(s -> s.getAge() >= 18).collect(Collectors.counting());
     }
 
     // CHALLENGE 9
