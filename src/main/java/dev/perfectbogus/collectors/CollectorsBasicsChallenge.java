@@ -57,7 +57,10 @@ public class CollectorsBasicsChallenge {
     // Returns a map from each title to its number of pages.
     // Titles are unique within books. Returns an empty map if books is empty.
     public static Map<String, Integer> pagesByTitle(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().collect(Collectors.toMap(
+                Book::getTitle,
+                Book::getPages
+        ));
     }
 
     // CHALLENGE 5
