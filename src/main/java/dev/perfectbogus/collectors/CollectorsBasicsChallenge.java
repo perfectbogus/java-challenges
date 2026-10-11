@@ -67,7 +67,10 @@ public class CollectorsBasicsChallenge {
     // Returns how many books there are in each genre.
     // Only genres that appear in books are keys.
     public static Map<String, Long> countByGenre(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().collect(Collectors.groupingBy(
+                Book::getGenre,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 6
