@@ -42,7 +42,7 @@ public class CollectorsBasicsChallenge {
     // Returns the set of distinct genres that appear in books.
     // Returns an empty set if books is empty.
     public static Set<String> distinctGenres(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().map(Book::getGenre).collect(Collectors.toSet());
     }
 
     // CHALLENGE 3
