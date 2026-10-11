@@ -1,10 +1,7 @@
 package dev.perfectbogus.collectors;
 
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CollectorsEasyChallenge {
 
@@ -35,14 +32,14 @@ public class CollectorsEasyChallenge {
     // Returns the names of all students in upper case, in the same order as
     // in students. Returns an empty list if students is empty.
     public static List<String> upperCaseNames(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().map(Student::getName).map(String::toUpperCase).collect(Collectors.toList());
     }
 
     // CHALLENGE 2
     // Returns the distinct cities of the students as a Set whose iteration
     // order is alphabetical (natural String order).
     public static Set<String> sortedDistinctCities(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().map(Student::getCity).collect(Collectors.toCollection(TreeSet::new));
     }
 
     // CHALLENGE 3
