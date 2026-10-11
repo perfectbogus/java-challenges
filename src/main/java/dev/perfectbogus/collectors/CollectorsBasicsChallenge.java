@@ -92,7 +92,7 @@ public class CollectorsBasicsChallenge {
     // counts as not more than 300). Each list keeps the order of books.
     // Both keys are always present, even if one of the lists is empty.
     public static Map<Boolean, List<Book>> partitionByLongBook(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().collect(Collectors.partitioningBy(b -> b.getPages() > 300));
     }
 
     // CHALLENGE 8
