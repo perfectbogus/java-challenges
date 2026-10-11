@@ -55,7 +55,7 @@ public class CollectorsEasyChallenge {
     // the same order as in students, wrapped in square brackets.
     // Example: "[Ann | Bob | Cy]". Returns "[]" if students is empty.
     public static String bracketedNames(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().map(Student::getName).collect(Collectors.joining(" | ", "[", "]"));
     }
 
     // CHALLENGE 5
