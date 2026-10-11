@@ -50,7 +50,7 @@ public class CollectorsBasicsChallenge {
     // separated by ", " (comma and one space), with no leading or trailing
     // separator. Returns "" if books is empty.
     public static String joinTitles(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().map(Book::getTitle).collect(Collectors.joining(", "));
     }
 
     // CHALLENGE 4
