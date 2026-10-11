@@ -110,7 +110,10 @@ public class CollectorsBasicsChallenge {
     // Returns the average price of the books of each genre.
     // Only genres that appear in books are keys.
     public static Map<String, Double> averagePriceByGenre(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().collect(Collectors.groupingBy(
+                Book::getGenre,
+                Collectors.averagingDouble(Book::getPrice)
+        ));
     }
 
     // CHALLENGE 10
