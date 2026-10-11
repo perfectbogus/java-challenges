@@ -99,7 +99,10 @@ public class CollectorsEasyChallenge {
     // Returns how many students attend each course. The keys of the returned
     // map must come out in alphabetical order when iterated.
     public static Map<String, Long> countByCourseSorted(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.groupingBy(
+                Student::getCourse,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 11
