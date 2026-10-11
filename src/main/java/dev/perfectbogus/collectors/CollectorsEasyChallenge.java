@@ -92,7 +92,7 @@ public class CollectorsEasyChallenge {
     // Returns the count, sum, minimum, maximum and average of the scores of
     // all students in a single IntSummaryStatistics object.
     public static IntSummaryStatistics scoreStatistics(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.summarizingInt(Student::getScore));
     }
 
     // CHALLENGE 10
