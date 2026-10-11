@@ -77,7 +77,13 @@ public class CollectorsBasicsChallenge {
     // Returns the titles of the books of each genre, in the same order as in
     // books. Only genres that appear in books are keys.
     public static Map<String, List<String>> titlesByGenre(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().collect(Collectors.groupingBy(
+                Book::getGenre,
+                Collectors.mapping(
+                        Book::getTitle,
+                        Collectors.toList()
+                )
+        ));
     }
 
     // CHALLENGE 7
