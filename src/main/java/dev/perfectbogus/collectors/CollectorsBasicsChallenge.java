@@ -1,9 +1,6 @@
 package dev.perfectbogus.collectors;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CollectorsBasicsChallenge {
@@ -121,6 +118,7 @@ public class CollectorsBasicsChallenge {
     // price, returns the first of them in books. Returns an empty Optional if
     // books is empty.
     public static Optional<Book> cheapestBook(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Book> byPrice = Comparator.comparingDouble(Book::getPrice);
+        return books.stream().min(byPrice);
     }
 }
