@@ -99,7 +99,11 @@ public class CollectorsBasicsChallenge {
     // Returns the total number of pages written by each author (the sum of the
     // pages of all their books). Only authors that appear in books are keys.
     public static Map<String, Integer> totalPagesByAuthor(List<Book> books) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().collect(Collectors.toMap(
+                Book::getAuthor,
+                Book::getPages,
+                Integer::sum
+        ));
     }
 
     // CHALLENGE 9
