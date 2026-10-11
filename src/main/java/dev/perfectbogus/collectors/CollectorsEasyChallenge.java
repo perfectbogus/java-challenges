@@ -62,7 +62,10 @@ public class CollectorsEasyChallenge {
     // Returns a map from each student's name to their score.
     // Names are unique within students.
     public static Map<String, Integer> scoreByName(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.toMap(
+                Student::getName,
+                Student::getScore
+        ));
     }
 
     // CHALLENGE 6
