@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CollectorsBasicsChallenge {
 
@@ -34,7 +35,7 @@ public class CollectorsBasicsChallenge {
     // Returns the titles of all books with at least minPages pages, in the
     // same order as in books. Does not modify books.
     public static List<String> titlesOfLongBooks(List<Book> books, int minPages) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return books.stream().filter(b -> b.getPages() >= minPages).map(Book::getTitle).collect(Collectors.toList());
     }
 
     // CHALLENGE 2
