@@ -119,6 +119,6 @@ public class CollectorsBasicsChallenge {
     // books is empty.
     public static Optional<Book> cheapestBook(List<Book> books) {
         Comparator<Book> byPrice = Comparator.comparingDouble(Book::getPrice);
-        return books.stream().min(byPrice);
+        return books.stream().collect(Collectors.minBy(byPrice));
     }
 }
