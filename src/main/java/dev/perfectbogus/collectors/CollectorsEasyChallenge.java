@@ -79,7 +79,7 @@ public class CollectorsEasyChallenge {
     // Returns the average score of all students. Returns 0.0 if students is
     // empty.
     public static double averageScore(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().mapToInt(Student::getScore).average().orElse(0.0);
     }
 
     // CHALLENGE 8
