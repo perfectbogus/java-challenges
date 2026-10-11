@@ -47,7 +47,7 @@ public class CollectorsEasyChallenge {
     // The returned list must be unmodifiable: any attempt to add to it or
     // remove from it throws UnsupportedOperationException.
     public static List<String> unmodifiableNames(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().map(Student::getName).collect(Collectors.toUnmodifiableList());
     }
 
     // CHALLENGE 4
