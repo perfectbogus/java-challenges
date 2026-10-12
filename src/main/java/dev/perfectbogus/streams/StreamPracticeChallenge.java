@@ -98,7 +98,20 @@ public class StreamPracticeChallenge {
     // versions of a letter count as the same letter. Characters that are not
     // letters (digits, spaces, punctuation) are ignored.
     public static long distinctLetterCount(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars()
+                .mapToObj(c -> (char)c)
+                .map(Character::toLowerCase)
+                .filter(Character::isLetter)
+                .distinct()
+                .count();
+    }
+
+    public static long distinctLetterCountSimplified(String text) {
+        return text.chars()
+                .filter(Character::isLetter)
+                .map(Character::toLowerCase)
+                .distinct()
+                .count();
     }
 
     // CHALLENGE 10
