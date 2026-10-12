@@ -225,7 +225,11 @@ public class CollectorsEasyChallenge {
     // String in the format "<count>:<total>". Example: "3:210".
     // Returns "0:0" if students is empty.
     public static String countAndTotal(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.teeing(
+                Collectors.counting(),
+                Collectors.summingInt(Student::getScore),
+                (count, total) -> String.format("%d:%d", count, total)
+        ));
     }
 
     // CHALLENGE 20
