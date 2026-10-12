@@ -46,7 +46,7 @@ public class StreamPracticeChallenge {
     // The comparison is case-sensitive. Returns an empty Optional if no word
     // matches.
     public static Optional<String> firstWithPrefix(List<String> words, String prefix) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().filter(w -> w.startsWith(prefix)).findFirst();
     }
 
     // CHALLENGE 6
