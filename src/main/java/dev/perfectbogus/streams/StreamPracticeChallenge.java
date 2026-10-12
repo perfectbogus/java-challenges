@@ -21,7 +21,7 @@ public class StreamPracticeChallenge {
     // characters, in the same order as in words. If fewer than three words
     // qualify, returns all that do.
     public static List<String> firstThreeLongWords(List<String> words, int minLength) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().filter(w -> w.length() >= minLength).limit(3).toList();
     }
 
     // CHALLENGE 3
