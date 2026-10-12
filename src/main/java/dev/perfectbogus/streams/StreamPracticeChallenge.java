@@ -2,10 +2,13 @@ package dev.perfectbogus.streams;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 public class StreamPracticeChallenge {
 
@@ -74,7 +77,13 @@ public class StreamPracticeChallenge {
     // Returns all the numbers of a and b together, without repeated values,
     // sorted in ascending order. Does not modify a or b.
     public static List<Integer> mergeDistinctSorted(List<Integer> a, List<Integer> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> set = new TreeSet<>(a);
+        set.addAll(b);
+        return set.stream().toList();
+    }
+
+    public static List<Integer> mergeDistinctSortedStream(List<Integer> a, List<Integer> b) {
+        return Stream.concat(a.stream(), b.stream()).distinct().sorted().toList();
     }
 
     // CHALLENGE 8
