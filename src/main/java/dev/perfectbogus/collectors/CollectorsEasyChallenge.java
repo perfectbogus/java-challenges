@@ -168,7 +168,11 @@ public class CollectorsEasyChallenge {
     // Returns, for each city, the name of the first student from that city in
     // students. Only cities that appear in students are keys.
     public static Map<String, String> firstNameByCity(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.toMap(
+                Student::getCity,
+                Student::getName,
+                (existing, incoming) -> existing
+        ));
     }
 
     // CHALLENGE 16
