@@ -159,7 +159,13 @@ public class StreamPracticeChallenge {
     // returns the distinct words converted to lower case, sorted
     // alphabetically.
     public static List<String> uniqueWordsSorted(List<String> sentences) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return sentences.stream()
+                .flatMap(s -> Arrays.stream(s.split("\\s+")))
+                .filter(w -> !w.isEmpty())
+                .map(String::toLowerCase)
+                .distinct()
+                .sorted()
+                .toList();
     }
 
     // CHALLENGE 13
