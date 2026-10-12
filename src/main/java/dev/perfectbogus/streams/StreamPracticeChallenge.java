@@ -118,7 +118,10 @@ public class StreamPracticeChallenge {
     // Returns the first count multiples of base, starting with base itself:
     // base, 2*base, 3*base, ... Returns an empty list if count is 0.
     public static List<Integer> firstMultiples(int base, int count) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return IntStream.rangeClosed(1, count)
+                .map(n -> n * base)
+                .boxed()
+                .toList();
     }
 
     // ==========================================================
