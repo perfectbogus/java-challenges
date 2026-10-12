@@ -194,7 +194,20 @@ public class CollectorsEasyChallenge {
     // or more). Every course that appears in students is a key, including
     // courses where nobody passed, whose value is 0.
     public static Map<String, Long> passedCountByCourse(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.groupingBy(
+                Student::getCourse,
+                Collectors.summingLong(s -> s.getScore() >= 60 ? 1L : 0L)
+        ));
+    }
+
+    public static Map<String, Long> passedCountByCourseV2(List<Student> students) {
+        return students.stream().collect(Collectors.groupingBy(
+                Student::getCourse,
+                Collectors.filtering(
+                        s -> s.getScore() >= 60,
+                        Collectors.counting()
+                )
+        ));
     }
 
     // CHALLENGE 18
