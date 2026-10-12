@@ -133,7 +133,10 @@ public class CollectorsEasyChallenge {
     // students of a course share the highest score, the first of them in
     // students is chosen. Only courses that appear in students are keys.
     public static Map<String, Optional<Student>> topStudentByCourse(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.groupingBy(
+                Student::getCourse,
+                Collectors.maxBy(Comparator.comparingInt(Student::getScore))
+        ));
     }
 
     // CHALLENGE 13
