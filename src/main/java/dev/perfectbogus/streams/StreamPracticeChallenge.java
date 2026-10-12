@@ -1,9 +1,6 @@
 package dev.perfectbogus.streams;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.LongPredicate;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
@@ -91,7 +88,9 @@ public class StreamPracticeChallenge {
     // length are ordered alphabetically (natural String order). Does not modify
     // words.
     public static List<String> sortByLengthThenAlphabetical(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().sorted(
+                Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder())
+        ).toList();
     }
 
     // CHALLENGE 9
