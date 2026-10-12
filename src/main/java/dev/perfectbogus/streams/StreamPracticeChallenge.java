@@ -124,6 +124,10 @@ public class StreamPracticeChallenge {
                 .toList();
     }
 
+    public static List<Integer> firstMultiplesStream(int base, int count) {
+        return Stream.iterate(base, n -> n * base).limit(count).toList();
+    }
+
     // ==========================================================
     // INTERMEDIATE
     // ==========================================================
@@ -133,7 +137,19 @@ public class StreamPracticeChallenge {
     // result is the sum of nums[0] through nums[i]. The result has the same
     // size as nums. Does not modify nums.
     public static List<Integer> runningTotals(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (nums.isEmpty()) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        res.add(nums.get(0));
+        for (int i = 1; i < nums.size(); i++) {
+            res.add(res.get(i - 1) + nums.get(i));
+        }
+        return res;
+    }
+
+    public static List<Integer> runningTotalsStream(List<Integer> nums) {
+        return IntStream.range(0, nums.size())
+                .mapToObj(i -> nums.subList(0, i + 1).stream().mapToInt(Integer::intValue).sum())
+                .toList();
     }
 
     // CHALLENGE 12

@@ -366,6 +366,11 @@ class StreamPracticeChallengeTest {
         }
 
         @Test
+        void testPrefixSumsStream() {
+            assertEquals(List.of(1, 3, 6, 10), StreamPracticeChallenge.runningTotalsStream(List.of(1, 2, 3, 4)));
+        }
+
+        @Test
         void testNegativeNumbers() {
             assertEquals(List.of(3, 2, 0, 4), StreamPracticeChallenge.runningTotals(List.of(3, -1, -2, 4)));
         }
