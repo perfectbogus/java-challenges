@@ -119,7 +119,13 @@ public class CollectorsEasyChallenge {
     // Returns the names of the students of each course, as a Set per course.
     // Only courses that appear in students are keys.
     public static Map<String, Set<String>> namesByCourse(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.groupingBy(
+                Student::getCourse,
+                Collectors.mapping(
+                        Student::getName,
+                        Collectors.toSet()
+                )
+        ));
     }
 
     // CHALLENGE 12
