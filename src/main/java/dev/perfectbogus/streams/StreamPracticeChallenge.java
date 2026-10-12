@@ -38,7 +38,7 @@ public class StreamPracticeChallenge {
     // Returns true if every number in nums is between min and max, both ends
     // included. Returns true if nums is empty.
     public static boolean allWithinRange(List<Integer> nums, int min, int max) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().allMatch(n -> n >= min && n <= max);
     }
 
     // CHALLENGE 5
