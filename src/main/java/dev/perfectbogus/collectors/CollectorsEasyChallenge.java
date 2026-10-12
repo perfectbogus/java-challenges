@@ -180,7 +180,13 @@ public class CollectorsEasyChallenge {
     // the same order as in students. Example value: "Ann, Cy".
     // Only cities that appear in students are keys.
     public static Map<String, String> joinedNamesByCity(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.groupingBy(
+                Student::getCity,
+                Collectors.mapping(
+                        Student::getName,
+                        Collectors.joining(", ")
+                )
+        ));
     }
 
     // CHALLENGE 17
