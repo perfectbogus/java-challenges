@@ -155,7 +155,13 @@ public class CollectorsEasyChallenge {
     // the students who are 18 or older, the key false the names of the others.
     // Each list keeps the order of students. Both keys are always present.
     public static Map<Boolean, List<String>> namesByAdulthood(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.partitioningBy(
+                s -> s.getAge() >= 18,
+                Collectors.mapping(
+                        Student::getName,
+                        Collectors.toList()
+                )
+        ));
     }
 
     // CHALLENGE 15
