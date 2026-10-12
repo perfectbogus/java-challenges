@@ -31,7 +31,7 @@ public class StreamPracticeChallenge {
     // items. A page that starts after the end of items is an empty list.
     // page and pageSize are always at least 1.
     public static List<String> pageOf(List<String> items, int page, int pageSize) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return items.stream().skip((long) (page - 1) * pageSize).limit(pageSize).toList();
     }
 
     // CHALLENGE 4
