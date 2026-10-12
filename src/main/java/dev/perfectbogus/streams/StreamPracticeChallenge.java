@@ -1,8 +1,10 @@
 package dev.perfectbogus.streams;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.LongPredicate;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
@@ -174,7 +176,15 @@ public class StreamPracticeChallenge {
     // elements [nums[i], nums[j]]. The pairs are ordered by i and then by j.
     // Equal values at different positions form separate pairs.
     public static List<List<Integer>> pairsWithSum(List<Integer> nums, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = i + 1; j < nums.size(); j++) {
+                if (nums.get(i) + nums.get(j) == target) {
+                    res.add(List.of(nums.get(i), nums.get(j)));
+                }
+            }
+        }
+        return res;
     }
 
     // CHALLENGE 14
@@ -183,7 +193,31 @@ public class StreamPracticeChallenge {
     // elements. If size is larger than nums.size(), returns an empty list.
     // size is always at least 1.
     public static List<Double> windowAverages(List<Integer> nums, int size) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Double> res = new ArrayList<>();
+        if (size > nums.size()) {
+            return res;
+        }
+
+        long sum = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            sum += nums.get(i);
+            if (i >= size) {
+                sum -= nums.get(i - size);
+            }
+            if (i >= size - 1) {
+                res.add((double) sum / size);
+            }
+        }
+        return res;
+    }
+
+    public static List<Double> windowAverageStream(List<Integer> nums, int size) {
+        return IntStream.rangeClosed(0, nums.size() - size)
+                .mapToObj(i -> nums.subList(i, i + size).stream()
+                        .mapToInt(Integer::intValue)
+                        .average()
+                        .orElse(0.0)
+                ).toList();
     }
 
     // CHALLENGE 15
@@ -191,6 +225,15 @@ public class StreamPracticeChallenge {
     // with the same frequency are ordered alphabetically (natural String
     // order). If there are fewer than k distinct words, returns all of them.
     public static List<String> topKFrequentWords(List<String> words, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Map.Entry<String, Long>> byFreqDesc = Map.Entry.<String, Long>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Long>> byAlpha = Map.Entry.comparingByKey();
+        return words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        )).entrySet().stream()
+                .sorted(byFreqDesc.thenComparing(byAlpha))
+                .limit(k)
+                .map(Map.Entry::getKey)
+                .toList();
     }
 }

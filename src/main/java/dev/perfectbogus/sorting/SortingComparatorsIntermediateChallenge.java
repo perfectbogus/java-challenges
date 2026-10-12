@@ -213,16 +213,17 @@ public class SortingComparatorsIntermediateChallenge {
 
             int remainA = a.length() - idxA;
             int remainB = b.length() - idxB;
-            if (remainA == remainB) {
-                while (idxA < a.length() && idxB < b.length()) {
-                    char orderA = a.charAt(idxA);
-                    char orderB = b.charAt(idxB);
-                    if (orderA != orderB) {
-                        return Character.compare(orderA, orderB);
-                    }
-                    idxA++;
-                    idxB++;
+            if (remainA != remainB) {
+                return Integer.compare(remainA, remainB);
+            }
+            while (idxA < a.length() && idxB < b.length()) {
+                char orderA = a.charAt(idxA);
+                char orderB = b.charAt(idxB);
+                if (orderA != orderB) {
+                    return Character.compare(orderA, orderB);
                 }
+                idxA++;
+                idxB++;
             }
             return 0;
         };
