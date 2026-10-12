@@ -237,6 +237,10 @@ public class CollectorsEasyChallenge {
     // the returned map must come out from the highest score to the lowest when
     // iterated. The names of each score keep the order of students.
     public static Map<Integer, List<String>> namesByScoreDescending(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.groupingBy(
+                Student::getScore,
+                () -> new TreeMap<>(Comparator.reverseOrder()),
+                Collectors.mapping(Student::getName, Collectors.toList())
+        ));
     }
 }
