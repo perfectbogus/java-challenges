@@ -2,6 +2,10 @@ package dev.perfectbogus.streams;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.LongPredicate;
+import java.util.function.Predicate;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class StreamPracticeChallenge {
 
@@ -54,7 +58,16 @@ public class StreamPracticeChallenge {
     // multiples of 3 or multiples of 5 (a number that is a multiple of both is
     // counted once). Returns 0 if limit is 0 or negative.
     public static long sumOfMultiples(int limit) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LongPredicate multipleThree = n -> n % 3L == 0L;
+        LongPredicate multipleFive = n -> n % 5L == 0L;
+        return LongStream.range(1L, limit).filter(multipleThree.or(multipleFive)).sum();
+    }
+
+    public static long sumOfMultiplesV2(int limit) {
+        return IntStream.range(1, Math.max(limit, 1))
+                .filter(n -> n % 3 == 0 || n % 5 == 0)
+                .asLongStream()
+                .sum();
     }
 
     // CHALLENGE 7
