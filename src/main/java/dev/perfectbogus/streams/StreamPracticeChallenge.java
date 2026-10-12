@@ -13,7 +13,7 @@ public class StreamPracticeChallenge {
     // Returns the squares of the odd numbers in nums, in the same order as in
     // nums. Negative numbers can be odd too (-3 is odd). Does not modify nums.
     public static List<Integer> squaresOfOdds(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().filter(n -> n % 2 != 0).map(n -> n * n).toList();
     }
 
     // CHALLENGE 2
