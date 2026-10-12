@@ -144,7 +144,10 @@ public class CollectorsEasyChallenge {
     // with a score of 60 or more. The key true holds the number that passed,
     // the key false the number that did not. Both keys are always present.
     public static Map<Boolean, Long> countPassedAndFailed(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().collect(Collectors.partitioningBy(
+                s -> s.getScore() >= 60,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 14
