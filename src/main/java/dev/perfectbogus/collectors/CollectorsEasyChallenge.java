@@ -214,7 +214,10 @@ public class CollectorsEasyChallenge {
     // Returns the number of distinct cities among the students.
     // Returns 0 if students is empty.
     public static int distinctCityCount(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream().map(Student::getCity).collect(Collectors.collectingAndThen(
+                Collectors.toSet(),
+                Set::size
+        ));
     }
 
     // CHALLENGE 19
