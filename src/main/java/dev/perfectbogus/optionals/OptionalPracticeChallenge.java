@@ -57,7 +57,7 @@ public class OptionalPracticeChallenge {
     // (for example "Value: 5", "Value: 0", "Value: -3"), or "No value" when
     // the Optional is empty.
     public static String describe(Optional<Integer> number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return number.map(v -> String.format("Value: %d", v)).orElse("No value");
     }
 
     // CHALLENGE 6
