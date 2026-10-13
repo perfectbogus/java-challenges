@@ -80,7 +80,7 @@ public class OptionalPracticeChallenge {
     // value is greater than 0. In every other case (empty Optional, zero or
     // negative number) throws an IllegalArgumentException.
     public static int requirePositive(Optional<Integer> value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return value.filter(v -> v > 0).orElseThrow(IllegalArgumentException::new);
     }
 
     // CHALLENGE 9
