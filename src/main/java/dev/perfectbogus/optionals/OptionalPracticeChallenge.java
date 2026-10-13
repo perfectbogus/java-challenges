@@ -80,14 +80,14 @@ public class OptionalPracticeChallenge {
     // value is greater than 0. In every other case (empty Optional, zero or
     // negative number) throws an IllegalArgumentException.
     public static int requirePositive(Optional<Integer> value) {
-        return value.filter(v -> v > 0).orElseThrow(IllegalArgumentException::new);
+        return value.filter(v -> v > 0).orElseThrow(() -> new IllegalArgumentException("value must be a positive number"));
     }
 
     // CHALLENGE 9
     // Returns true only when the Optional has an age and that age is 18 or
     // more. An empty Optional is not an adult.
     public static boolean isAdult(Optional<Integer> age) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return age.filter(n -> n >= 18).isPresent();
     }
 
     // CHALLENGE 10
