@@ -426,6 +426,28 @@ class OptionalPracticeChallengeTest {
         }
 
         @Test
+        void testBlankFileValueIsSkippedToo() {
+            calls = 0;
+
+            String result = OptionalPracticeChallenge.resolveSetting("port",
+                    Map.of(), Map.of("port", "   "), this::supply);
+
+            assertEquals("default", result);
+            assertEquals(1, calls);
+        }
+
+        @Test
+        void testBlankValuesInBothMapsFallBackToTheDefault() {
+            calls = 0;
+
+            String result = OptionalPracticeChallenge.resolveSetting("port",
+                    Map.of("port", " "), Map.of("port", ""), this::supply);
+
+            assertEquals("default", result);
+            assertEquals(1, calls);
+        }
+
+        @Test
         void testValueIsReturnedAsItIsWithoutTrimming() {
             calls = 0;
 

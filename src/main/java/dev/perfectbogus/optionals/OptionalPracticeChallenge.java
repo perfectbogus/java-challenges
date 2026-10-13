@@ -146,6 +146,7 @@ public class OptionalPracticeChallenge {
         return Optional.ofNullable(env.get(key))
                 .filter(v -> !v.isBlank())
                 .or(() -> Optional.ofNullable(file.get(key)))
+                .filter( v -> !v.isBlank())
                 .orElseGet(defaultSupplier);
     }
 
