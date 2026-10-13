@@ -90,12 +90,16 @@ public class OptionalPracticeChallenge {
         return age.filter(n -> n >= 18).isPresent();
     }
 
+    public static boolean isAdultImproved(Optional<Integer> age) {
+        return age.map(n -> n >= 18).orElse(false);
+    }
+
     // CHALLENGE 10
     // Returns the values of the non-empty Optionals of items, in the same
     // order, skipping the empty ones. Repeated values are kept. Returns an
     // empty list if items is empty or contains only empty Optionals.
     public static List<String> presentValues(List<Optional<String>> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return items.stream().flatMap(Optional::stream).toList();
     }
 
     // ==========================================================
