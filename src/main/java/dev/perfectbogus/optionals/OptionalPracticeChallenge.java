@@ -29,14 +29,14 @@ public class OptionalPracticeChallenge {
     // Returns the name inside the Optional exactly as it is (even if it is an
     // empty string). If the Optional is empty, returns "Anonymous".
     public static String displayName(Optional<String> name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return name.orElse("Anonymous");
     }
 
     // CHALLENGE 3
     // Returns the length of the text inside the Optional, or 0 if the Optional
     // is empty.
     public static int lengthOrZero(Optional<String> text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.map(String::length).orElse(0);
     }
 
     // CHALLENGE 4
