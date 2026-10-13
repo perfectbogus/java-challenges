@@ -1,9 +1,6 @@
 package dev.perfectbogus.optionals;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -169,8 +166,17 @@ public class OptionalPracticeChallenge {
     // value, and compare how many you got with how many ids there were.
     // Hint 3: a plain for loop that returns as soon as one lookup is empty is
     // also a correct solution.
-    public static Optional<List<Integer>> pricesOfAll(List<String> ids,
-                                                      Function<String, Optional<Integer>> priceLookup) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public static Optional<List<Integer>> pricesOfAll(
+            List<String> ids, Function<String, Optional<Integer>> priceLookup) {
+        List<Integer> res = new ArrayList<>();
+        for (String id : ids) {
+            Optional<Integer> opt = priceLookup.apply(id);
+            if (opt.isEmpty()) {
+                return Optional.empty();
+            } else {
+                res.add(opt.get());
+            }
+        }
+        return Optional.of(res);
     }
 }
