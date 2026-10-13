@@ -48,6 +48,10 @@ public class OptionalPracticeChallenge {
         return Optional.of(text);
     }
 
+    public static Optional<String> nonBlankChained(String text) {
+        return Optional.ofNullable(text).filter(t -> !t.isBlank());
+    }
+
     // CHALLENGE 5
     // Returns "Value: " followed by the number when the Optional has a value
     // (for example "Value: 5", "Value: 0", "Value: -3"), or "No value" when

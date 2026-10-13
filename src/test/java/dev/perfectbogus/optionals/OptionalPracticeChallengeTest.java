@@ -109,6 +109,11 @@ class OptionalPracticeChallengeTest {
         }
 
         @Test
+        void testKeepsNormalTextChained() {
+            assertEquals(Optional.of("hello"), OptionalPracticeChallenge.nonBlankChained("hello"));
+        }
+
+        @Test
         void testDoesNotTrimTheText() {
             assertEquals(Optional.of("  hi "), OptionalPracticeChallenge.nonBlank("  hi "));
         }
