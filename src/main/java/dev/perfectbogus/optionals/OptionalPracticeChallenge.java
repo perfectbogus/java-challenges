@@ -44,7 +44,8 @@ public class OptionalPracticeChallenge {
     // when text is neither null nor blank (blank = empty or only whitespace).
     // Otherwise returns an empty Optional.
     public static Optional<String> nonBlank(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text == null || text.isBlank()) return Optional.empty();
+        return Optional.of(text);
     }
 
     // CHALLENGE 5
