@@ -18,7 +18,11 @@ public class OptionalPracticeChallenge {
     // not a valid int: blank text, text with surrounding spaces, decimals,
     // letters, or numbers outside the range of int. Never throws.
     public static Optional<Integer> parseInteger(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return Optional.of(Integer.parseInt(text));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
     }
 
     // CHALLENGE 2
