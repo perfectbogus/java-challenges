@@ -143,7 +143,10 @@ public class OptionalPracticeChallenge {
     // and finish with the terminal operation that also takes a Supplier.
     public static String resolveSetting(String key, Map<String, String> env, Map<String, String> file,
                                         Supplier<String> defaultSupplier) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(env.get(key))
+                .filter(v -> !v.isBlank())
+                .or(() -> Optional.ofNullable(file.get(key)))
+                .orElseGet(defaultSupplier);
     }
 
     // ==========================================================
