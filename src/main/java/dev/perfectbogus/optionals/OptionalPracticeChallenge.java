@@ -1,5 +1,6 @@
 package dev.perfectbogus.optionals;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public class OptionalPracticeChallenge {
     // Returns the greatest number of nums, or an empty Optional if nums is
     // empty. The numbers can be negative. Does not modify nums.
     public static Optional<Integer> maxOf(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().max(Comparator.naturalOrder());
     }
 
     // CHALLENGE 7
