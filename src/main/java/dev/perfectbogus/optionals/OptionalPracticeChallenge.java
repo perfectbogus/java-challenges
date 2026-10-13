@@ -72,7 +72,7 @@ public class OptionalPracticeChallenge {
     // Returns primary when it has a value; otherwise returns fallback (which
     // may be empty too). When both have a value, primary wins.
     public static Optional<String> firstAvailable(Optional<String> primary, Optional<String> fallback) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return primary.or(() -> fallback);
     }
 
     // CHALLENGE 8
