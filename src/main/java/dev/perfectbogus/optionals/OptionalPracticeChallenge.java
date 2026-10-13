@@ -126,7 +126,7 @@ public class OptionalPracticeChallenge {
     // Hint 2: map already treats a null result of the function as "no value",
     // so the chain does not need a single if.
     public static Optional<String> ownerCity(Company company) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(company).map(Company::owner).map(User::address).map(Address::city);
     }
 
     // CHALLENGE 12
