@@ -23,7 +23,7 @@ public class CharactersChallenge {
     // alphabet (an upper-case 'E' with an accent counts). Lower-case letters,
     // digits, spaces and punctuation do not count.
     public static int countUpperCase(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().filter(Character::isUpperCase).map(c -> 1).sum();
     }
 
     // CHALLENGE 4
