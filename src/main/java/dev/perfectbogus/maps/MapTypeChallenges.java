@@ -236,7 +236,7 @@ public class MapTypeChallenges {
     //
     // Use TreeMap.subMap(lo, true, hi, true) for the range!
     //
-    // Input:  map={10="pen",20="book",30="bag",40="laptop",50="phone"}
+    // Input:  map={10="pen",20="book",30="bag",40="laptop",50="phoneNumber"}
     //         lo=20, hi=40
     // Output: ["book","bag","laptop"]  ← prices 20,30,40 inclusive!
     //

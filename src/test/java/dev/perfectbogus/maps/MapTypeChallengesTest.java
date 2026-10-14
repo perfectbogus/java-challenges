@@ -356,7 +356,7 @@ class MapTypeChallengesTest {
             map.put(20, "book");
             map.put(30, "bag");
             map.put(40, "laptop");
-            map.put(50, "phone");
+            map.put(50, "phoneNumber");
             return map;
         }
 
@@ -379,7 +379,7 @@ class MapTypeChallengesTest {
 
         @Test
         void fullRange() {
-            assertEquals(List.of("pen","book","bag","laptop","phone"),
+            assertEquals(List.of("pen","book","bag","laptop","phoneNumber"),
                     MapTypeChallenges.challenge7(makeMap(), 1, 100));
         }
 
@@ -387,7 +387,7 @@ class MapTypeChallengesTest {
         void sortedAscending() {
             List<String> result = MapTypeChallenges.challenge7(makeMap(), 10, 50);
             assertEquals("pen",   result.get(0)); // cheapest first!
-            assertEquals("phone", result.get(4)); // most expensive last!
+            assertEquals("phoneNumber", result.get(4)); // most expensive last!
         }
 
         @Test

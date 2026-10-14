@@ -138,7 +138,7 @@ public class StringIntermediateChallenge {
     }
 
     // CHALLENGE 9
-    // Masks the portion of email before '@', keeping the first and last
+    // Masks the portion of emailAddress before '@', keeping the first and last
     // character visible and replacing every character between them with
     // '*'. The domain portion (including '@') is left unchanged. If the
     // portion before '@' has 2 or fewer characters, it is returned
@@ -146,7 +146,7 @@ public class StringIntermediateChallenge {
     public static String maskEmail(String email) {
         Objects.requireNonNull(email);
         String[] split = email.split("@");
-        if (split.length != 2) throw new IllegalArgumentException("Invalid email");
+        if (split.length != 2) throw new IllegalArgumentException("Invalid emailAddress");
         String before = split[0];
         if (before.length() < 3) return email;
 

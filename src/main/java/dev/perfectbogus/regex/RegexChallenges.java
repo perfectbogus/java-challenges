@@ -9,8 +9,8 @@ public class RegexChallenges {
 
     // ─────────────────────────────────────────────────────────────
     // CHALLENGE 1 — String.matches()
-    // Validate an email address using regex.
-    // A valid email:
+    // Validate an emailAddress address using regex.
+    // A valid emailAddress:
     // → one or more word chars, dots, hyphens or plus before @
     //   [a-zA-Z0-9._%+-]+
     // → @ symbol

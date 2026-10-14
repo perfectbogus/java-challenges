@@ -114,7 +114,7 @@ public class AccountValidationService {
     // Throws ValidationException if:
     //   account is null
     //   username is null, blank, or not between 3 and 20 chars
-    //   email is null, blank, or does not contain '@'
+    //   emailAddress is null, blank, or does not contain '@'
     //   password is null or shorter than 8 characters
     //   age < 18 or age > 120
     // Returns normally if all checks pass

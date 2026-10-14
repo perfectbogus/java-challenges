@@ -2,5 +2,5 @@ package dev.perfectbogus.design.patterns.creational.factory.method.notification.
 
 public interface NotificationClient {
     void connect();
-    void send(String message);
+    void send(String recipient, String message);
 }

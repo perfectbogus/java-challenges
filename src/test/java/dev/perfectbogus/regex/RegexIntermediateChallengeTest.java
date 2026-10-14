@@ -26,7 +26,7 @@ class RegexIntermediateChallengeTest {
 
         @Test
         void testMissingAtSign() {
-            assertFalse(RegexIntermediateChallenge.isValidEmail("not-an-email"));
+            assertFalse(RegexIntermediateChallenge.isValidEmail("not-an-emailAddress"));
         }
 
         @Test

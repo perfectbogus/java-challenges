@@ -1029,7 +1029,7 @@ public class ThreadingChallenges {
     //
     // Return Map<String, Long> (category → total count of items)
     //
-    // Input:  items=["FOOD:apple","TECH:phone","FOOD:banana","TECH:laptop","FOOD:cherry"]
+    // Input:  items=["FOOD:apple","TECH:phoneNumber","FOOD:banana","TECH:laptop","FOOD:cherry"]
     //         producerCount=2, consumerCount=3
     // Output: {"FOOD"=3, "TECH"=2}
     //

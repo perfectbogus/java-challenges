@@ -1,8 +1,8 @@
 package dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.notification;
 
-public class EmailNotificationClient implements NotificationClient {
+import dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.User;
 
-    private final String address = "smtp.bank.com";
+public class EmailNotificationClient implements NotificationClient {
 
     @Override
     public void connect() {
@@ -10,7 +10,7 @@ public class EmailNotificationClient implements NotificationClient {
     }
 
     @Override
-    public void send(String message) {
-        System.out.println("send from email, message: " + message);
+    public void send(String recipient, String message) {
+        System.out.println("send from emailAddress, message: " + message + " to " + recipient);
     }
 }

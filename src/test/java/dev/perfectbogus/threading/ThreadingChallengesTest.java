@@ -750,7 +750,7 @@ class ThreadingChallengesTest {
         @Test
         void basicCase() throws InterruptedException {
             Map<String, Long> result = ThreadingChallenges.challenge20(
-                    List.of("FOOD:apple","TECH:phone","FOOD:banana",
+                    List.of("FOOD:apple","TECH:phoneNumber","FOOD:banana",
                             "TECH:laptop","FOOD:cherry"),
                     2, 3);
 

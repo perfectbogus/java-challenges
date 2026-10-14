@@ -418,9 +418,9 @@ class AccountValidationServiceTest {
         }
 
         @Test
-        @DisplayName("Should throw ValidationException for email without @")
+        @DisplayName("Should throw ValidationException for emailAddress without @")
         void shouldThrowForInvalidEmail() {
-            var account = new UserAccount("alice", "invalid-email", "password1", 25, "USA");
+            var account = new UserAccount("alice", "invalid-emailAddress", "password1", 25, "USA");
             assertThrows(ValidationException.class,
                     () -> AccountValidationService.validateAccount(account));
         }
@@ -537,7 +537,7 @@ class AccountValidationServiceTest {
         @Test
         @DisplayName("Should return Result.failure when account fails validation")
         void shouldReturnFailureForInvalidAccount() {
-            var account  = new UserAccount("ab", "bad-email", "short", 10, "USA");
+            var account  = new UserAccount("ab", "bad-emailAddress", "short", 10, "USA");
             var registry = new HashMap<String, UserAccount>();
             var result   = AccountValidationService.registerAccount(account, registry);
 
@@ -571,7 +571,7 @@ class AccountValidationServiceTest {
         @Test
         @DisplayName("Should not add invalid account to registry")
         void shouldNotAddInvalidAccountToRegistry() {
-            var account  = new UserAccount("ab", "bad-email", "short", 10, "USA");
+            var account  = new UserAccount("ab", "bad-emailAddress", "short", 10, "USA");
             var registry = new HashMap<String, UserAccount>();
             AccountValidationService.registerAccount(account, registry);
             assertTrue(registry.isEmpty());

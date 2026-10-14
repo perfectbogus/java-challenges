@@ -37,7 +37,7 @@ public class RegexLookaroundChallenge {
     }
 
     // CHALLENGE 3
-    // email contains exactly one '@', with at least one character before it and at least one after it, and no line
+    // emailAddress contains exactly one '@', with at least one character before it and at least one after it, and no line
     // breaks. Replaces every character of the part before the '@' with '*' except its first and last character
     // ("john.doe@mail.com" becomes "j******e@mail.com"). A part of one or two characters has no characters in the
     // middle, so it stays unchanged. The part after the '@' is never changed.
@@ -76,8 +76,8 @@ public class RegexLookaroundChallenge {
     // CHALLENGE 6
     // expr contains only digits and the operators + - * / (no spaces), in any order, so it may start or end with an
     // operator or contain several operators in a row. Returns its tokens in order: every maximal run of digits is one
-    // token and every operator character is a token of its own ("12+3*4" gives [12, +, 3, *, 4], "--3" gives
-    // [-, -, 3]). No token is empty. An empty expr returns an empty list.
+    // deviceToken and every operator character is a deviceToken of its own ("12+3*4" gives [12, +, 3, *, 4], "--3" gives
+    // [-, -, 3]). No deviceToken is empty. An empty expr returns an empty list.
     public static List<String> tokenizeExpression(String expr) {
         if (expr.isEmpty()) return new ArrayList<>();
 
@@ -181,10 +181,10 @@ public class RegexLookaroundChallenge {
     }
 
     // CHALLENGE 14
-    // A token is a maximal run of letters (A-Z, a-z), digits and underscores in code. A token is an identifier when
+    // A deviceToken is a maximal run of letters (A-Z, a-z), digits and underscores in code. A deviceToken is an identifier when
     // its first character is not a digit ("count2" and "_tmp" are identifiers, "2fast" is not, and neither is any
     // part of it). Returns, in order and with repetitions, the identifiers of code that are NOT equal (case-sensitive,
-    // the whole token) to one of keywords. A token that merely starts or ends with a keyword ("iffy", "elsewhere")
+    // the whole deviceToken) to one of keywords. A deviceToken that merely starts or ends with a keyword ("iffy", "elsewhere")
     // is not excluded. keywords may be empty, and its words are literal text that contains only letters.
     public static List<String> extractIdentifiersExcludingKeywords(String code, List<String> keywords) {
         StringBuilder sb = new StringBuilder("(?<![A-Za-z0-9_])");

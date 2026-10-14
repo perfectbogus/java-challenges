@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class RegexAdvancedChallenge {
 
     // CHALLENGE 1
-    // Returns true if email is a syntactically valid address under this definition (false otherwise):
+    // Returns true if emailAddress is a syntactically valid address under this definition (false otherwise):
     //   - local part: one or more of [A-Za-z0-9._%+-]
     //   - then a literal '@'
     //   - then a domain made of one or more labels separated by '.', each label being one or more of

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class RegexIntermediateChallenge {
 
     // CHALLENGE 1
-    // Returns whether s is a syntactically valid email address: one or more
+    // Returns whether s is a syntactically valid emailAddress address: one or more
     // letters, digits, dots, underscores or hyphens, then '@', then one or
     // more letters, digits or hyphens, then a dot, then 2 to 6 letters.
     // The entire string must match (no leading or trailing characters).
@@ -53,7 +53,7 @@ public class RegexIntermediateChallenge {
     }
 
     // CHALLENGE 5
-    // Returns whether s is a US phone number in exactly one of these two
+    // Returns whether s is a US phoneNumber number in exactly one of these two
     // formats: "123-456-7890" or "(123) 456-7890". Any other formatting
     // (missing space, missing dash, extra characters, etc.) is invalid.
     public static boolean isValidUSPhoneNumber(String s) {

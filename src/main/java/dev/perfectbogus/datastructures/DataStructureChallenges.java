@@ -447,7 +447,7 @@ public class DataStructureChallenges {
     public static int challenge9(String[] tokens) {
         if (tokens == null) throw new IllegalArgumentException("Tokens cannot be null");
         // TODO — use ArrayDeque<Integer> as stack
-        //        for each token: if number → push; if operator → pop two, compute, push
+        //        for each deviceToken: if number → push; if operator → pop two, compute, push
         //        Set<String> operators = Set.of("+","-","*","/")
         ArrayDeque<Integer> stack = new ArrayDeque<>();
         for (String s : tokens) {

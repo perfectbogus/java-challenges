@@ -1,8 +1,8 @@
 package dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.notification;
 
-public class PushNotificationClient implements NotificationClient {
+import dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.User;
 
-    private final String key = "firebase-key";
+public class PushNotificationClient implements NotificationClient {
 
     @Override
     public void connect() {
@@ -10,7 +10,7 @@ public class PushNotificationClient implements NotificationClient {
     }
 
     @Override
-    public void send(String message) {
-        System.out.println("send from push, message: " + message);
+    public void send(String recipient, String message) {
+        System.out.println("send from push, message: " + message + " to " + recipient);
     }
 }
