@@ -12,7 +12,7 @@ public class AlertNotifier {
         String message = "[ALERT] " + event + " at " + LocalDateTime.now();
         NotificationClient notificationClient = createChannel(user);
         notificationClient.connect();
-        notificationClient.send(message, "a recipient?");
+        notificationClient.send(user.name(), message);
         System.out.println("Alert sent to " + user.name());
     }
 

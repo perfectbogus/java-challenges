@@ -1,7 +1,6 @@
 package dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.notifier;
 
 import dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.User;
-import dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.notification.FakeNotificationClient;
 import dev.perfectbogus.design.patterns.creational.factory.method.notification.dispatcher.notification.NotificationClient;
 
 public class FakeAlertNotifier extends AlertNotifier {

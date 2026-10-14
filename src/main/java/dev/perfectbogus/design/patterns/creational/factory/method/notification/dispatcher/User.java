@@ -5,5 +5,4 @@ public record User(
         String emailAddress,
         String phoneNumber,
         String deviceToken) {
-
 }

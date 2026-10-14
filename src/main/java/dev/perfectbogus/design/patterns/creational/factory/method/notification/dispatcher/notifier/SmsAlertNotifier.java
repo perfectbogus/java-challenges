@@ -7,6 +7,6 @@ import dev.perfectbogus.design.patterns.creational.factory.method.notification.d
 public class SmsAlertNotifier extends AlertNotifier {
     @Override
     protected NotificationClient createChannel(User user) {
-        return new SmsNotificationClient(user);
+        return new SmsNotificationClient();
     }
 }
