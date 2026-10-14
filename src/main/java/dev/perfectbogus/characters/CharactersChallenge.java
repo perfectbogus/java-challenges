@@ -15,7 +15,7 @@ public class CharactersChallenge {
     // (for example 'a', 'Z', 'n' with a tilde, 'e' with an accent, or a Greek
     // letter). Digits, spaces and punctuation do not count.
     public static int countLetters(String text) {
-
+        return text.chars().filter(Character::isLetter).map(c -> 1).sum();
     }
 
     // CHALLENGE 3
