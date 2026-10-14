@@ -147,7 +147,18 @@ public class CharactersChallenge {
     // repeated spaces, tabs and new lines. Characters that are not letters
     // stay as they are.
     public static String capitalizeWords(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder();
+        boolean startOfWord = true;
+        for (char c : text.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                startOfWord = true;
+                sb.append(c);
+            } else {
+                sb.append(startOfWord ? Character.toUpperCase(c) : Character.toLowerCase(c));
+                startOfWord = false;
+            }
+        }
+        return sb.toString();
     }
 
     // CHALLENGE 11
