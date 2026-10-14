@@ -1,5 +1,7 @@
 package dev.perfectbogus.characters;
 
+import java.util.stream.Collectors;
+
 public class CharactersChallenge {
 
     // CHALLENGE 1
@@ -33,7 +35,24 @@ public class CharactersChallenge {
     // length as text. Characters that are not letters, and letters that have
     // no other case (such as the German sharp s), stay as they are.
     public static String swapCase(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars()
+                .map(c -> Character.isUpperCase(c) ? Character.toLowerCase(c) : Character.toUpperCase(c))
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining());
+    }
+
+    public static String swapCaseLoop(String text) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                sb.append(Character.toLowerCase(c));
+            } else if (Character.isLowerCase(c)) {
+                sb.append(Character.toUpperCase(c));
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 
     // CHALLENGE 5
