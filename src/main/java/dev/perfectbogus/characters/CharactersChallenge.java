@@ -118,7 +118,25 @@ public class CharactersChallenge {
     // '9' for 0 to 9 and 'a' to 'f' for 10 to 15. If value is less than 0 or
     // greater than 15 returns '?'.
     public static char hexDigit(int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (value < 0 || value > 15 ) return '?';
+        if (value <= 9) return (char) ('0' + value);
+        if (value == 10) {
+            return 'a';
+        } else if (value == 11) {
+            return 'b';
+        } else if (value == 12) {
+            return 'c';
+        } else if (value == 13) {
+            return 'd';
+        } else if (value == 14) {
+            return 'e';
+        } else {
+            return 'f';
+        }
+    }
+
+    public static char hexDigitExtra(int value) {
+        return Character.forDigit(value, 16);
     }
 
     // CHALLENGE 10
