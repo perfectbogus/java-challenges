@@ -7,7 +7,7 @@ public class CharactersChallenge {
     // scripts count too (for example the Arabic-Indic digit three, ٣).
     // Letters, spaces and punctuation do not count.
     public static int countDigits(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().filter(Character::isDigit).map(c -> 1).sum();
     }
 
     // CHALLENGE 2
@@ -15,7 +15,7 @@ public class CharactersChallenge {
     // (for example 'a', 'Z', 'n' with a tilde, 'e' with an accent, or a Greek
     // letter). Digits, spaces and punctuation do not count.
     public static int countLetters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 3
