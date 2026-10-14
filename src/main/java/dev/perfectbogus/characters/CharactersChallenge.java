@@ -1,5 +1,7 @@
 package dev.perfectbogus.characters;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CharactersChallenge {
@@ -226,7 +228,10 @@ public class CharactersChallenge {
     // symbol. A symbol is a character that is not a letter, not a digit and
     // not whitespace. A null password gives false.
     public static boolean isStrongPassword(String password) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (password == null) return false;
+        final String regex = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9\\s]).{8,}";
+        Matcher m = Pattern.compile(regex).matcher(password);
+        return m.matches();
     }
 
     // CHALLENGE 15
@@ -236,6 +241,9 @@ public class CharactersChallenge {
     // same ones, plus digits). Reserved words are not checked, so "class" is
     // accepted. A null name gives false.
     public static boolean isValidJavaIdentifier(String name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (name == null || name.isEmpty() || !Character.isJavaIdentifierStart(name.charAt(0))) {
+            return false;
+        }
+        return name.chars().skip(1).allMatch(Character::isJavaIdentifierPart);
     }
 }

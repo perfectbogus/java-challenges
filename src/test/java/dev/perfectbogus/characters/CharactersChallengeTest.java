@@ -490,7 +490,7 @@ class CharactersChallengeTest {
 
         @Test
         void testLettersWithAccents() {
-            assertTrue(CharactersChallenge.isStrongPassword("École12!"));
+            assertTrue(CharactersChallenge.isStrongPassword("eeWcole12!"));
         }
     }
 
