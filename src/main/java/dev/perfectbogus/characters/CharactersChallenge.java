@@ -206,7 +206,18 @@ public class CharactersChallenge {
     // or larger than 26. Every other character (digits, spaces, punctuation,
     // letters with accents) stays as it is.
     public static String caesar(String text, int shift) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder();
+        int s = Math.floorMod(shift, 26);
+        for (char c : text.toCharArray()) {
+            if (c >= 'a' && c <= 'z') {
+                sb.append((char) ('a' + (c - 'a' + s) % 26));
+            } else if (c >= 'A' && c <= 'Z') {
+                sb.append((char) ('A' + (c - 'A' + s) % 26));
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 
     // CHALLENGE 14
