@@ -167,7 +167,26 @@ public class CharactersChallenge {
     // treated as equal. Every other character is skipped. Text without any
     // letter or digit (including the empty text) is a palindrome.
     public static boolean isPalindrome(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        final String norm = text.toLowerCase().replaceAll("[^a-z0-9]", "");
+        int i = 0;
+        int j = norm.length() - 1;
+        while (i < j) {
+            char l = norm.charAt(i);
+            char r = norm.charAt(j);
+            if (l != r) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    public static boolean isPalindromeFunctional(String text) {
+        String clean = text.chars()
+                .filter(Character::isLetterOrDigit)
+                .map(Character::toLowerCase)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        return new StringBuilder(clean).reverse().toString().equals(clean);
     }
 
     // CHALLENGE 12
