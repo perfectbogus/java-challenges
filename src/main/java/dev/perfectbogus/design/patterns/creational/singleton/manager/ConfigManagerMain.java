@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.creational.configuration.manager;
+package dev.perfectbogus.design.patterns.creational.singleton.manager;
 
 public class ConfigManagerMain {
 

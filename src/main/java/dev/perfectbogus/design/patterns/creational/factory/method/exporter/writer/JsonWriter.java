@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.creational.report.exporter.writer;
+package dev.perfectbogus.design.patterns.creational.factory.method.exporter.writer;
 
 public class JsonWriter implements ReportWriter {
 

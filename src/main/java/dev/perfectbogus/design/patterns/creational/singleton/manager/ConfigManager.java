@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.creational.configuration.manager;
+package dev.perfectbogus.design.patterns.creational.singleton.manager;
 
 import java.io.IOException;
 import java.io.InputStream;

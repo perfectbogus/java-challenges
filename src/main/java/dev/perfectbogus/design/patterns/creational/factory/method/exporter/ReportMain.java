@@ -1,13 +1,13 @@
-package dev.perfectbogus.design.patterns.creational.report.exporter;
+package dev.perfectbogus.design.patterns.creational.factory.method.exporter;
 
-import dev.perfectbogus.design.patterns.creational.report.exporter.report.CsvReportExporter;
-import dev.perfectbogus.design.patterns.creational.report.exporter.report.JsonReportExporter;
-import dev.perfectbogus.design.patterns.creational.report.exporter.report.PdfReportExporter;
-import dev.perfectbogus.design.patterns.creational.report.exporter.report.ReportExporter;
-import dev.perfectbogus.design.patterns.creational.report.exporter.writer.CsvWriter;
-import dev.perfectbogus.design.patterns.creational.report.exporter.writer.JsonWriter;
-import dev.perfectbogus.design.patterns.creational.report.exporter.writer.PdfWriter;
-import dev.perfectbogus.design.patterns.creational.report.exporter.writer.ReportWriter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.report.CsvReportExporter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.report.JsonReportExporter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.report.PdfReportExporter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.report.ReportExporter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.writer.CsvWriter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.writer.JsonWriter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.writer.PdfWriter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.writer.ReportWriter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ReportMain {
         List<Sale> sales = List.of(new Sale(100.0), new Sale(250.5), new Sale(75.25));
 
         List<ReportExporter> exporters = List.of(
-                new ReportExporter(PdfWriter::new),
+                new PdfReportExporter(PdfWriter::new),
                 new CsvReportExporter(CsvWriter::new),
                 new JsonReportExporter(JsonWriter::new)
         );

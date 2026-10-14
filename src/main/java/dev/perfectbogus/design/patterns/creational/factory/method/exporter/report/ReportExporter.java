@@ -1,7 +1,7 @@
-package dev.perfectbogus.design.patterns.creational.report.exporter.report;
+package dev.perfectbogus.design.patterns.creational.factory.method.exporter.report;
 
-import dev.perfectbogus.design.patterns.creational.report.exporter.Sale;
-import dev.perfectbogus.design.patterns.creational.report.exporter.writer.ReportWriter;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.Sale;
+import dev.perfectbogus.design.patterns.creational.factory.method.exporter.writer.ReportWriter;
 
 import java.util.List;
 import java.util.function.Supplier;
