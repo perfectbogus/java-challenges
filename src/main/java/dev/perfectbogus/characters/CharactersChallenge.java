@@ -68,7 +68,8 @@ public class CharactersChallenge {
     // a letter or a digit (of any alphabet or script). A space or any
     // punctuation makes it false. The empty text gives false.
     public static boolean isAlphanumeric(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return false;
+        return text.chars().allMatch(Character::isLetterOrDigit);
     }
 
     // CHALLENGE 7
