@@ -60,7 +60,7 @@ public class CharactersChallenge {
     // space, tab, newline, carriage return, form feed and so on. The no-break
     // space ( ) is NOT whitespace for this challenge.
     public static int countWhitespace(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().filter(Character::isWhitespace).map(c -> 1).sum();
     }
 
     // CHALLENGE 6
