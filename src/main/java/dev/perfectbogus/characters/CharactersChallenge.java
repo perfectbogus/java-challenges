@@ -88,8 +88,8 @@ public class CharactersChallenge {
     // Returns the value, from 0 to 15, of the hexadecimal digit c. The valid
     // hexadecimal digits are '0' to '9', 'a' to 'f' and 'A' to 'F'. Any other
     // character gives -1.
-    public static int hexValueWrong(char c) {
-        if (Character.isDigit(c)) {
+    public static int hexValue(char c) {
+        if (Character.isDigit(c) && c < 128) {
             return Character.getNumericValue(c);
         } else if (Character.isLetter(c)) {
             if (c == 'a' || c == 'A') {
@@ -109,7 +109,7 @@ public class CharactersChallenge {
         return -1;
     }
 
-    public static int hexValue(char c) {
+    public static int hexValueExtra(char c) {
         return c < 128 ? Character.digit(c, 16) : -1;
     }
 
