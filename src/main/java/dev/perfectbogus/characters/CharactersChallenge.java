@@ -78,7 +78,10 @@ public class CharactersChallenge {
     // digit three, ٣, is worth 3). Any character that is not a digit is
     // ignored. Text without digits gives 0.
     public static int digitSum(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars()
+                .filter(Character::isDigit)
+                .map(Character::getNumericValue)
+                .sum();
     }
 
     // CHALLENGE 8
