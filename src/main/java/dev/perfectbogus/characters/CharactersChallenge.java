@@ -196,7 +196,7 @@ public class CharactersChallenge {
     // Unicode code point (negative or greater than 0x10FFFF) throws an
     // IllegalArgumentException.
     public static String fromCodePoint(int codePoint) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new String(Character.toChars(codePoint));
     }
 
     // CHALLENGE 13
