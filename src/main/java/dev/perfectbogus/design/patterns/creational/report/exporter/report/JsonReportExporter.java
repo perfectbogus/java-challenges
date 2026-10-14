@@ -3,9 +3,11 @@ package dev.perfectbogus.design.patterns.creational.report.exporter.report;
 import dev.perfectbogus.design.patterns.creational.report.exporter.writer.JsonWriter;
 import dev.perfectbogus.design.patterns.creational.report.exporter.writer.ReportWriter;
 
+import java.util.function.Supplier;
+
 public class JsonReportExporter extends ReportExporter {
-    @Override
-    protected ReportWriter createWriter() {
-        return new JsonWriter();
+
+    public JsonReportExporter(Supplier<? extends ReportWriter> writerFactory) {
+        super(writerFactory);
     }
 }

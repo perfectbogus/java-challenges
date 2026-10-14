@@ -4,7 +4,6 @@ public class CsvWriter implements ReportWriter {
 
     private final String delimiter = ",";
 
-
     @Override
     public void open(String reportName) {
         System.out.println("[CSV] Opening " + reportName + ".csv (delimiter '" + delimiter + "')");
