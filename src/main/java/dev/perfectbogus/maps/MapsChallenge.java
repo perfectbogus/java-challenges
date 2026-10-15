@@ -184,6 +184,13 @@ public class MapsChallenge {
     //          zip([a, b, c], [1, 2])    returns {a=1, b=2}
     //          zip([a, a], [1, 2])       returns {a=2}
     public static Map<String, Integer> zip(List<String> keys, List<Integer> values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Integer> map = new HashMap<>();
+        int min = Math.min(keys.size(), values.size());
+        for (int i = 0; i < min; i++) {
+            String key = keys.get(i);
+            Integer value = values.get(i);
+            map.put(key, value);
+        }
+        return map;
     }
 }
