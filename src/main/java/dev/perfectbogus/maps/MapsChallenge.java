@@ -38,7 +38,10 @@ public class MapsChallenge {
     // Example: invert({a=1, b=2}) returns {1=a, 2=b}
     //          invert({})         returns {}
     public static Map<Integer, String> invert(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getValue,
+                Map.Entry::getKey
+        ));
     }
 
     // CHALLENGE 4
