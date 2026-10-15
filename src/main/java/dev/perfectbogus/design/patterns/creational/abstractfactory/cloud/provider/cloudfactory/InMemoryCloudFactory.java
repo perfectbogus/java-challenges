@@ -18,12 +18,12 @@ public class InMemoryCloudFactory implements CloudFactory {
 
 
     @Override
-    public FileStorage createFileStorage() {
+    public InMemoryStorage createFileStorage() {
         return storage;
     }
 
     @Override
-    public MessageQueue createMessageQueue() {
+    public InMemoryQueue createMessageQueue() {
         return queue;
     }
 }
