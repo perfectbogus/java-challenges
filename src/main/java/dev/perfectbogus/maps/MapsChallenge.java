@@ -105,7 +105,11 @@ public class MapsChallenge {
     // Example: map = {a=5}, keys = [a, b, c, b]: returns 2 and map becomes {a=5, b=0, c=0}
     //          map = {a=5}, keys = []:           returns 0 and map stays {a=5}
     public static int addMissingKeys(Map<String, Integer> map, List<String> keys) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int originalSize = map.size();
+        for (String k : keys) {
+            map.putIfAbsent(k, 0);
+        }
+        return map.size() - originalSize;
     }
 
     // CHALLENGE 10
