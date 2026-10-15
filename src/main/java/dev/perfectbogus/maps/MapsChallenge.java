@@ -61,6 +61,7 @@ public class MapsChallenge {
         return scores.entrySet().stream()
                 .filter(e -> e.getValue() > threshold)
                 .map(Map.Entry::getKey)
+                .sorted()
                 .toList();
     }
 
@@ -70,7 +71,9 @@ public class MapsChallenge {
     // Example: mergeSum({a=1, b=2}, {b=10, c=3}) returns {a=1, b=12, c=3}
     //          mergeSum({a=1}, {})               returns {a=1}
     public static Map<String, Integer> mergeSum(Map<String, Integer> a, Map<String, Integer> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Integer> merge = new HashMap<>(a);
+        b.forEach((key, value) -> merge.merge(key, value, Integer::sum));
+        return merge;
     }
 
     // CHALLENGE 7
