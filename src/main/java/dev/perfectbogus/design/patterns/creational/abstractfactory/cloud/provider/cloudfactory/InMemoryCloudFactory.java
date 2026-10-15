@@ -8,13 +8,22 @@ import dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provide
 
 public class InMemoryCloudFactory implements CloudFactory {
 
+    private final InMemoryStorage storage;
+    private final InMemoryQueue queue;
+
+    public InMemoryCloudFactory() {
+        this.storage = new InMemoryStorage();
+        this.queue = new InMemoryQueue();
+    }
+
+
     @Override
     public FileStorage createFileStorage() {
-        return new InMemoryStorage();
+        return storage;
     }
 
     @Override
     public MessageQueue createMessageQueue() {
-        return new InMemoryQueue();
+        return queue;
     }
 }
