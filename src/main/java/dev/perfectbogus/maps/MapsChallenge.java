@@ -58,7 +58,10 @@ public class MapsChallenge {
     // Example: keysAbove({bob=70, ana=90, cy=85}, 80) returns [ana, cy]
     //          keysAbove({bob=70, ana=90, cy=85}, 90) returns []
     public static List<String> keysAbove(Map<String, Integer> scores, int threshold) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return scores.entrySet().stream()
+                .filter(e -> e.getValue() > threshold)
+                .map(Map.Entry::getKey)
+                .toList();
     }
 
     // CHALLENGE 6
