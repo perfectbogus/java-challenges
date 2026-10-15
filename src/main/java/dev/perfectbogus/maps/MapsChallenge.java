@@ -1,9 +1,6 @@
 package dev.perfectbogus.maps;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -143,7 +140,13 @@ public class MapsChallenge {
     //          sameKeys({a=1}, {a=1, b=2})      returns false
     //          sameKeys({}, {})                 returns true
     public static boolean sameKeys(Map<String, Integer> a, Map<String, Integer> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (a.size() != b.size()) return false;
+        for (Map.Entry<String, Integer> entry : a.entrySet()) {
+            if (!b.containsKey(entry.getKey())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // CHALLENGE 13
