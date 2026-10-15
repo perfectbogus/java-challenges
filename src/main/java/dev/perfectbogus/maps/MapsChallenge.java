@@ -171,7 +171,9 @@ public class MapsChallenge {
     // (z before a). map is not modified.
     // Example: sortedByKeyDescending({a=1, c=3, b=2}) returns a map that iterates c=3, then b=2, then a=1
     public static Map<String, Integer> sortedByKeyDescending(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Integer> reversedMap = new TreeMap<>(Comparator.reverseOrder());
+        reversedMap.putAll(map);
+        return reversedMap;
     }
 
     // CHALLENGE 15
