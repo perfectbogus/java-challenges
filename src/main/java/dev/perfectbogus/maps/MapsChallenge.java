@@ -160,7 +160,10 @@ public class MapsChallenge {
     //          entriesToText({x=7})            returns "x=7"
     //          entriesToText({})               returns ""
     public static String entriesToText(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(e -> e.getKey() + "=" + e.getValue())
+                .collect(Collectors.joining(", "));
     }
 
     // CHALLENGE 14
