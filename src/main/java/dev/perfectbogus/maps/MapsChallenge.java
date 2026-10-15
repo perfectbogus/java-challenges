@@ -40,7 +40,8 @@ public class MapsChallenge {
     public static Map<Integer, String> invert(Map<String, Integer> map) {
         return map.entrySet().stream().collect(Collectors.toMap(
                 Map.Entry::getValue,
-                Map.Entry::getKey
+                Map.Entry::getKey,
+                (existing, incoming) -> existing
         ));
     }
 
@@ -49,7 +50,7 @@ public class MapsChallenge {
     // Example: totalOfValues({apple=3, pear=4, kiwi=10}) returns 17
     //          totalOfValues({})                         returns 0
     public static int totalOfValues(Map<String, Integer> stock) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return stock.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     // CHALLENGE 5
