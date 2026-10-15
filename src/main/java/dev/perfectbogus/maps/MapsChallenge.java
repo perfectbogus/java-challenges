@@ -94,7 +94,9 @@ public class MapsChallenge {
     // Example: map = {a=1, b=5, c=2}, removeBelow(map, 2) returns 1 and map becomes {b=5, c=2}
     //          map = {a=1, b=5, c=2}, removeBelow(map, 0) returns 0 and map stays {a=1, b=5, c=2}
     public static int removeBelow(Map<String, Integer> map, int min) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int originalSize = map.size();
+        map.entrySet().removeIf(e -> e.getValue() < min);
+        return originalSize - map.size();
     }
 
     // CHALLENGE 9
