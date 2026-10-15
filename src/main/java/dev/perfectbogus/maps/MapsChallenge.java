@@ -1,7 +1,10 @@
 package dev.perfectbogus.maps;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MapsChallenge {
 
@@ -20,7 +23,13 @@ public class MapsChallenge {
     // Example: countCharacters("hello") returns {h=1, e=1, l=2, o=1}
     //          countCharacters("")      returns {}
     public static Map<Character, Integer> countCharacters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars()
+                .mapToObj(c -> (char)c)
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        c -> 1,
+                        Integer::sum
+                ));
     }
 
     // CHALLENGE 3
