@@ -118,7 +118,9 @@ public class MapsChallenge {
     // Example: groupByLength([a, bb, cc, d]) returns {1=[a, d], 2=[bb, cc]}
     //          groupByLength([])             returns {}
     public static Map<Integer, List<String>> groupByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length
+        ));
     }
 
     // CHALLENGE 11
