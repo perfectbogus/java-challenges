@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.messageQueue;
+package dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.messagequeue;
 
 import dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.MessageQueue;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 public class InMemoryQueue implements MessageQueue {
 
-    private List<String> publishedMessages = new ArrayList<>();
+    private final List<String> publishedMessages = new ArrayList<>();
 
     @Override
     public void publish(String message) {

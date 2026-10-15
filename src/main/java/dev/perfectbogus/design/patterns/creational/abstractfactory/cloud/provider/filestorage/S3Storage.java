@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.fileStorage;
+package dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.filestorage;
 
 import dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.FileStorage;
 

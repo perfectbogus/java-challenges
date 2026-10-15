@@ -1,4 +1,4 @@
-package dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.messageQueue;
+package dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.messagequeue;
 
 import dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provider.MessageQueue;
 
@@ -12,6 +12,6 @@ public class SqsQueue implements MessageQueue {
 
     @Override
     public void publish(String message) {
-        System.out.println("[AWS SQS] Published 'Invoice uploaded: " + message + "' to queue " + topicName);
+        System.out.println("[AWS SQS] Published '" + message + "' to queue " + topicName);
     }
 }
