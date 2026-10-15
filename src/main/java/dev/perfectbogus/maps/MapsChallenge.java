@@ -149,6 +149,10 @@ public class MapsChallenge {
         return true;
     }
 
+    public static boolean sameKeysFunctional(Map<String, Integer> a, Map<String, Integer> b) {
+        return a.keySet().equals(b.keySet());
+    }
+
     // CHALLENGE 13
     // Returns the entries of map as text: every entry is written as key=value, the entries are sorted alphabetically
     // by key and separated by a comma and a space. An empty map gives an empty text.
