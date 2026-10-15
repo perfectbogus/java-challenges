@@ -128,7 +128,13 @@ public class MapsChallenge {
     // Example: map = {a=1, b=5, c=-3} becomes {a=2, b=10, c=-6}
     //          map = {} stays {}
     public static void doubleValues(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (Map.Entry<String, Integer> entry: map.entrySet()) {
+            entry.setValue(entry.getValue() * 2);
+        }
+    }
+
+    public static void doubleValuesFunctional(Map<String, Integer> map) {
+        map.replaceAll((k, v) -> v * 2);
     }
 
     // CHALLENGE 12
