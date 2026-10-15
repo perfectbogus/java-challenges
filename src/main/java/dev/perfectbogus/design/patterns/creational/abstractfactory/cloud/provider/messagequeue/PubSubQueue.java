@@ -4,15 +4,15 @@ import dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provide
 
 public class PubSubQueue implements MessageQueue {
 
-    private final String topicName;
+    private final String destination;
 
-    public PubSubQueue(String topicName) {
-        this.topicName = topicName;
+    public PubSubQueue(String destination) {
+        this.destination = destination;
     }
 
     @Override
     public void publish(String message) {
-        System.out.println("[Google PubSubQueue] Published '" + message + "' to queue " + topicName);
+        System.out.println("[Google PubSubQueue] Published '" + message + "' to queue " + destination);
 
     }
 }

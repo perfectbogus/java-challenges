@@ -4,14 +4,14 @@ import dev.perfectbogus.design.patterns.creational.abstractfactory.cloud.provide
 
 public class SqsQueue implements MessageQueue {
 
-    private final String topicName;
+    private final String destination;
 
-    public SqsQueue(String topicName) {
-        this.topicName = topicName;
+    public SqsQueue(String destination) {
+        this.destination = destination;
     }
 
     @Override
     public void publish(String message) {
-        System.out.println("[AWS SQS] Published '" + message + "' to queue " + topicName);
+        System.out.println("[AWS SQS] Published '" + message + "' to queue " + destination);
     }
 }
