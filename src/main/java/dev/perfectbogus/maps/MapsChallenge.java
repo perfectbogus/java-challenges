@@ -1,5 +1,6 @@
 package dev.perfectbogus.maps;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +84,9 @@ public class MapsChallenge {
     //          keyWithMaxValue({x=-5, y=-2})    returns "y"
     //          keyWithMaxValue({})              returns null
     public static String keyWithMaxValue(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Map.Entry<String, Integer>> byValue = Map.Entry.comparingByValue();
+        Comparator<Map.Entry<String, Integer>> byAlpha = Map.Entry.comparingByKey(Comparator.reverseOrder());
+        return map.entrySet().stream().max(byValue.thenComparing(byAlpha)).map(Map.Entry::getKey).orElse(null);
     }
 
     // CHALLENGE 8
