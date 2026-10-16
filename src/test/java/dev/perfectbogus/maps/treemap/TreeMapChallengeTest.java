@@ -442,6 +442,18 @@ class TreeMapChallengeTest {
         }
 
         @Test
+        void testCountsIgnoringCaseStream() {
+            TreeMap<String, Integer> result =
+                    TreeMapChallenge.countIgnoringCaseStream(List.of("Apple", "banana", "apple", "BANANA", "Cherry"));
+
+            assertEquals(3, result.size());
+            assertEquals(2, result.get("apple"));
+            assertEquals(2, result.get("banana"));
+            assertEquals(1, result.get("cherry"));
+        }
+
+
+        @Test
         void testTheKeyIsTheFirstSpelling() {
             TreeMap<String, Integer> result =
                     TreeMapChallenge.countIgnoringCase(List.of("Apple", "banana", "apple", "BANANA", "Cherry"));

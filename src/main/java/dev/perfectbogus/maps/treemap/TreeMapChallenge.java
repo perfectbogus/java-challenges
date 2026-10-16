@@ -1,6 +1,8 @@
 package dev.perfectbogus.maps.treemap;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class TreeMapChallenge {
 
@@ -132,7 +134,20 @@ public class TreeMapChallenge {
     //          and for that result, result.get("CHERRY") returns 1 and result.containsKey("kiwi") is false
     //          countIgnoringCase([]) returns {}
     public static TreeMap<String, Integer> countIgnoringCase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        TreeMap<String, Integer> res = new TreeMap<>(String::compareToIgnoreCase);
+        for (String w : words) {
+            res.merge(w, 1, Integer::sum);
+        }
+        return res;
+    }
+
+    public static TreeMap<String, Integer> countIgnoringCaseStream(List<String> words) {
+        return words.stream().collect(Collectors.toMap(
+                Function.identity(),
+                w -> 1,
+                Integer::sum,
+                () -> new TreeMap<>(String::compareToIgnoreCase)
+        ));
     }
 
     // CHALLENGE 10
