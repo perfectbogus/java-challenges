@@ -81,10 +81,8 @@ public class TreeMapChallenge {
     //          keysBetween(map, 4, 8) returns [5, 7]
     //          keysBetween(map, 8, 4) returns []
     public static List<Integer> keysBetween(TreeMap<Integer, String> map, int from, int to) {
-        List<Integer> res = new ArrayList<>();
-        if (from > to) return res;
-        res.addAll(map.subMap(from, true, to, true).keySet());
-        return res;
+        if (from > to) return new ArrayList<>();
+        return new ArrayList<>(map.subMap(from, true, to, true).keySet());
     }
 
     // CHALLENGE 7
@@ -94,7 +92,11 @@ public class TreeMapChallenge {
     //          map = {a=1}, removeSmallest(map, 5) returns [a] and map becomes {}
     //          map = {a=1}, removeSmallest(map, 0) returns [] and map stays {a=1}
     public static List<String> removeSmallest(TreeMap<String, Integer> map, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> removed = new ArrayList<>();
+        while (removed.size() < n && !map.isEmpty()) {
+            removed.add(map.pollFirstEntry().getKey());
+        }
+        return removed;
     }
 
     // CHALLENGE 8
