@@ -10,7 +10,8 @@ public class TreeMapChallenge {
     // Example: map = {5=e, 2=b, 9=i}  smallestKey(map) returns 2
     //          map = {}               smallestKey(map) returns null
     public static Integer smallestKey(TreeMap<Integer, String> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (map.isEmpty()) return null;
+        return map.firstKey();
     }
 
     // CHALLENGE 2
