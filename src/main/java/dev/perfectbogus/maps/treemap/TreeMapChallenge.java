@@ -1,8 +1,6 @@
 package dev.perfectbogus.maps.treemap;
 
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class TreeMapChallenge {
 
@@ -83,7 +81,10 @@ public class TreeMapChallenge {
     //          keysBetween(map, 4, 8) returns [5, 7]
     //          keysBetween(map, 8, 4) returns []
     public static List<Integer> keysBetween(TreeMap<Integer, String> map, int from, int to) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Integer> res = new ArrayList<>();
+        if (from > to) return res;
+        res.addAll(map.subMap(from, true, to, true).keySet());
+        return res;
     }
 
     // CHALLENGE 7
