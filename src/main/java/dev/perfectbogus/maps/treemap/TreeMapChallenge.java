@@ -47,7 +47,11 @@ public class TreeMapChallenge {
     //          firstKeyAtLeast(map, 20) returns 20
     //          firstKeyAtLeast(map, 31) returns null
     public static Integer firstKeyAtLeast(TreeMap<Integer, String> map, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map.Entry<Integer, String> entry = map.ceilingEntry(value);
+        if (entry == null) {
+            return null;
+        }
+        return entry.getKey();
     }
 
     // CHALLENGE 5
