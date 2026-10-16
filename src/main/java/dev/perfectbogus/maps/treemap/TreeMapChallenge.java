@@ -159,6 +159,11 @@ public class TreeMapChallenge {
     //          entriesFrom(map, "z") returns {}
     //          after result.put("x", 9), map still has only a, c, e and g
     public static TreeMap<String, Integer> entriesFrom(TreeMap<String, Integer> map, String from) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        TreeMap<String, Integer> treeMap = new TreeMap<>();
+        for (var entry : map.descendingMap().entrySet()) {
+            if (entry.getKey().compareTo(from) < 0) break;
+            treeMap.put(entry.getKey(), entry.getValue());
+        }
+        return treeMap;
     }
 }
