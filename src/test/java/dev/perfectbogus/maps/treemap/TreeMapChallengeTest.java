@@ -523,6 +523,11 @@ class TreeMapChallengeTest {
         }
 
         @Test
+        void testIncludesTheKeyEqualToFromStream() {
+            assertEquals(Map.of("c", 3, "e", 5, "g", 7), TreeMapChallenge.entriesFromStream(map(), "c"));
+        }
+
+        @Test
         void testFromThatIsNotAKey() {
             assertEquals(Map.of("e", 5, "g", 7), TreeMapChallenge.entriesFrom(map(), "d"));
         }

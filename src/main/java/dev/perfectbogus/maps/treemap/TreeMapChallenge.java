@@ -166,4 +166,8 @@ public class TreeMapChallenge {
         }
         return treeMap;
     }
+
+    public static TreeMap<String, Integer> entriesFromStream(TreeMap<String, Integer> map, String from) {
+        return new TreeMap<>(map.tailMap(from, true));
+    }
 }
