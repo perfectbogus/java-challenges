@@ -63,7 +63,16 @@ public class TreeMapChallenge {
     //          closestKey(map, 30) returns 20   (20 and 40 are equally close, so the smaller one)
     //          closestKey(map, 99) returns 40
     public static Integer closestKey(TreeMap<Integer, String> map, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Integer ceil = map.ceilingKey(target);
+        Integer floor = map.floorKey(target);
+
+        if (floor == null) return ceil;
+        if (ceil == null) return floor;
+
+        long distanceToFloor = (long) target - floor;
+        long distanceToCeil = (long) ceil - target;
+
+        return distanceToFloor <= distanceToCeil ? floor : ceil;
     }
 
     // CHALLENGE 6
