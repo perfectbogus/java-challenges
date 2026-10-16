@@ -107,7 +107,21 @@ public class TreeMapChallenge {
     //          greatestKeys(map, 9) returns [d, c, b, a]
     //          greatestKeys(map, 0) returns []
     public static List<String> greatestKeys(TreeMap<String, Integer> map, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        TreeMap<String, Integer> copy = new TreeMap<>(map);
+        List<String> res = new ArrayList<>();
+        while (res.size() < n && !copy.isEmpty()) {
+            res.add(copy.pollLastEntry().getKey());
+        }
+        return res;
+    }
+
+    public static List<String> greatestKeysImproved(TreeMap<String, Integer> map, int n) {
+        List<String> res = new ArrayList<>();
+        for (String k : map.descendingKeySet()) {
+            if (res.size() >= n) break;
+            res.add(k);
+        }
+        return res;
     }
 
     // CHALLENGE 9
