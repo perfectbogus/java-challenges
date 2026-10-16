@@ -19,7 +19,8 @@ public class TreeMapChallenge {
     // Example: map = {ana=3, bob=8, cy=5}  valueOfLastKey(map) returns 5   (the greatest key is "cy")
     //          map = {}                    valueOfLastKey(map) returns -1
     public static int valueOfLastKey(TreeMap<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (map.isEmpty()) return -1;
+        return map.lastEntry().getValue();
     }
 
     // CHALLENGE 3
