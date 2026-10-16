@@ -1,6 +1,7 @@
 package dev.perfectbogus.maps.treemap;
 
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class TreeMapChallenge {
@@ -32,7 +33,11 @@ public class TreeMapChallenge {
     //          gradeOf(thresholds, 90) returns "A"
     //          gradeOf(thresholds, -4) returns "None"
     public static String gradeOf(TreeMap<Integer, String> thresholds, int score) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map.Entry<Integer, String> floorEntry = thresholds.floorEntry(score);
+        if (floorEntry == null) {
+            return "None";
+        }
+        return floorEntry.getValue();
     }
 
     // CHALLENGE 4
