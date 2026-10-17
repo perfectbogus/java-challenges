@@ -38,7 +38,7 @@ public class ArraySortStreamChallenge {
     // Example: sortedIgnoringCase([banana, Apple, cherry]) returns [Apple, banana, cherry]
     //          sortedIgnoringCase([b, A, B, a])            returns [A, a, b, B]
     public static String[] sortedIgnoringCase(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(words).sorted(String::compareToIgnoreCase).toArray(String[]::new);
     }
 
     // CHALLENGE 5
