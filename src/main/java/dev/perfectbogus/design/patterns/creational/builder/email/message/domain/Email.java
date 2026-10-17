@@ -7,6 +7,7 @@ import dev.perfectbogus.design.patterns.creational.builder.email.message.steps.T
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public final class Email {
 
@@ -88,18 +89,23 @@ public final class Email {
 
         @Override
         public ToStep from(String from) {
+            Objects.requireNonNull(from);
+            if (!from.contains("@")) throw new IllegalArgumentException("Invalid from address");
             this.from = from;
             return this;
         }
 
         @Override
         public Steps to(String to) {
+            requireValidAddress(to);
             this.to.add(to);
             return this;
         }
 
         @Override
         public OptionalStep subject(String subject) {
+            if (subject == null) throw new IllegalStateException("subject must not be null");
+            if (subject.isBlank()) throw new IllegalStateException("subject mut not be blank");
             this.subject = subject;
             return this;
         }
@@ -112,24 +118,28 @@ public final class Email {
 
         @Override
         public OptionalStep cc(String cc) {
+            requireValidAddress(cc);
             this.cc.add(cc);
             return this;
         }
 
         @Override
         public OptionalStep bcc(String bcc) {
+            requireValidAddress(bcc);
             this.bcc.add(bcc);
             return this;
         }
 
         @Override
         public OptionalStep attachment(Attachment a) {
+            Objects.requireNonNull(a, "a must not be null");
             this.attachments.add(a);
             return this;
         }
 
         @Override
         public OptionalStep priority(Priority priority) {
+            Objects.requireNonNull(priority, "priority must not be null");
             this.priority = priority;
             return this;
         }
@@ -144,6 +154,12 @@ public final class Email {
         public Email build() {
             // Validation
             return new Email(this);
+        }
+
+        private static String requireValidAddress(String address) {
+            Objects.requireNonNull(address, "address must not be null");
+            if (!address.contains("@")) throw new IllegalArgumentException("Invalid address: " + address);
+            return address;
         }
     }
 }
