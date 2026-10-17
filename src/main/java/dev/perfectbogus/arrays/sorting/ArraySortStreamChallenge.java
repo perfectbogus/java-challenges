@@ -20,7 +20,7 @@ public class ArraySortStreamChallenge {
     //          sortedDescending([2, 2, -4]) returns [2, 2, -4]
     //          sortedDescending([])         returns []
     public static int[] sortedDescending(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(numbers).boxed().sorted(Comparator.reverseOrder()).mapToInt(Integer::intValue).toArray();
     }
 
     // CHALLENGE 3
