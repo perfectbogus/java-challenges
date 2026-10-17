@@ -29,7 +29,7 @@ public class ArraySortStreamChallenge {
     // Example: sortedByLength([pear, fig, apple, kiwi]) returns [fig, pear, kiwi, apple]
     //          sortedByLength([bb, aa, c])              returns [c, bb, aa]
     public static String[] sortedByLength(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(words).sorted(Comparator.comparingInt(String::length)).toArray(String[]::new);
     }
 
     // CHALLENGE 4
