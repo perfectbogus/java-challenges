@@ -91,7 +91,8 @@ public class ComparatorSortChallenge {
     // stay in the same order they have in students. students is not modified.
     // Example: sortedByGrade([Ana(70), Bob(90), Cy(70), Di(85)]) returns [Bob(90), Di(85), Ana(70), Cy(70)]
     public static Student[] sortedByGrade(Student[] students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Student> byGradeDesc = Comparator.comparing(Student::grade, Comparator.reverseOrder());
+        return Arrays.stream(students).sorted(byGradeDesc).toArray(Student[]::new);
     }
 
     // CHALLENGE 8
