@@ -111,7 +111,9 @@ public class ComparatorSortChallenge {
     // Example: with closestTo(10), sorting [4, 12, 9, 15, 10, 8] gives [10, 9, 8, 12, 15, 4]
     //          with closestTo(0),  sorting [-3, 3, -1, 2] gives [-1, 2, -3, 3]
     public static Comparator<Integer> closestTo(int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Integer> byCloser = Comparator.comparingInt(i -> Math.abs(target - i));
+        Comparator<Integer> bySmall = Comparator.naturalOrder();
+        return byCloser.thenComparing(bySmall);
     }
 
     // CHALLENGE 10
