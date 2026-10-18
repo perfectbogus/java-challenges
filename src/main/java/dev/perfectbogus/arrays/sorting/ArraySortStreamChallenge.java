@@ -61,7 +61,7 @@ public class ArraySortStreamChallenge {
     //          topThree([5, 5, 5, 1])    returns [5, 5, 5]
     //          topThree([2, 8])          returns [8, 2]
     public static int[] topThree(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(numbers).boxed().sorted(Comparator.reverseOrder()).limit(3).mapToInt(Integer::intValue).toArray();
     }
 
     // CHALLENGE 7
