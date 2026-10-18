@@ -2,6 +2,7 @@ package dev.perfectbogus.arrays.sorting;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.IntStream;
 
 public class ArraySortStreamChallenge {
 
@@ -103,7 +104,7 @@ public class ArraySortStreamChallenge {
     //          isSortedAscending([1, 3, 2])    returns false
     //          isSortedAscending([])           returns true
     public static boolean isSortedAscending(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return IntStream.range(1, numbers.length).allMatch(i -> numbers[i-1] <= numbers[i]);
     }
 
     // CHALLENGE 11
