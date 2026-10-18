@@ -26,7 +26,7 @@ public class ComparatorSortChallenge {
     //          numbers = [4, 3, 2, 1],    sortRange(numbers, 0, 4) leaves numbers as [1, 2, 3, 4]
     //          numbers = [4, 3, 2, 1],    sortRange(numbers, 2, 2) leaves numbers as [4, 3, 2, 1]
     public static void sortRange(int[] numbers, int from, int to) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Arrays.sort(numbers, from, to);
     }
 
     // CHALLENGE 3
