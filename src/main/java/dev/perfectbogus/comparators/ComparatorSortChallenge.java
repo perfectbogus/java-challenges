@@ -100,7 +100,9 @@ public class ComparatorSortChallenge {
     // are in alphabetical order by name (the normal order of Strings). students is not modified.
     // Example: sortedByGradeThenName([Cy(70), Bob(90), Ana(70), Di(90)]) returns [Bob(90), Di(90), Ana(70), Cy(70)]
     public static Student[] sortedByGradeThenName(Student[] students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Student> byGradeDesc = Comparator.comparing(Student::grade, Comparator.reverseOrder());
+        Comparator<Student> byName = Comparator.comparing(Student::name);
+        return Arrays.stream(students).sorted(byGradeDesc.thenComparing(byName)).toArray(Student[]::new);
     }
 
     // CHALLENGE 9
