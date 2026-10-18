@@ -21,7 +21,7 @@ public final class Email {
 
     private Email(Steps s) {
         this.from = s.from;
-        this.to = s.to;
+        this.to = List.copyOf(s.to);
         this.subject = s.subject;
         this.body = s.body;
         this.cc = List.copyOf(s.cc);
@@ -89,8 +89,7 @@ public final class Email {
 
         @Override
         public ToStep from(String from) {
-            Objects.requireNonNull(from);
-            if (!from.contains("@")) throw new IllegalArgumentException("Invalid from address");
+            requireValidAddress(from);
             this.from = from;
             return this;
         }
@@ -105,13 +104,14 @@ public final class Email {
         @Override
         public OptionalStep subject(String subject) {
             if (subject == null) throw new IllegalStateException("subject must not be null");
-            if (subject.isBlank()) throw new IllegalStateException("subject mut not be blank");
+            if (subject.isBlank()) throw new IllegalStateException("subject must not be blank");
             this.subject = subject;
             return this;
         }
 
         @Override
         public OptionalStep body(String body) {
+            Objects.requireNonNull(body, "body must not be null");
             this.body = body;
             return this;
         }
@@ -132,7 +132,7 @@ public final class Email {
 
         @Override
         public OptionalStep attachment(Attachment a) {
-            Objects.requireNonNull(a, "a must not be null");
+            Objects.requireNonNull(a, "attachment must not be null");
             this.attachments.add(a);
             return this;
         }
@@ -153,29 +153,31 @@ public final class Email {
         @Override
         public Email build() {
             if (to.size() + cc.size() + bcc.size() > 50) throw new IllegalStateException("Allow up to 50 recipients");
-            if (isDuplicated(to)) throw new IllegalStateException("duplicated not allowed in to");
-            if (isDuplicated(cc)) throw new IllegalStateException("duplicated not allowed in cc");
-            if (isDuplicated(bcc)) throw new IllegalStateException("duplicate not allowed in bcc");
-
+            requireNoDuplicates();
+            requireAttachmentsValidSize();
             return new Email(this);
         }
 
-        private static String requireValidAddress(String address) {
+        private void requireValidAddress(String address) {
             Objects.requireNonNull(address, "address must not be null");
             if (!address.contains("@")) throw new IllegalArgumentException("Invalid address: " + address);
-            return address;
         }
 
-        private static boolean isDuplicated(List<String> list) {
+        private void requireNoDuplicates() {
+            List<String> allRecipients = new ArrayList<>();
+            allRecipients.addAll(to);
+            allRecipients.addAll(cc);
+            allRecipients.addAll(bcc);
             Set<String> set = new HashSet<>();
-            for (String w : list) {
-                if (!set.add(w)) return true;
+            for (String w : allRecipients) {
+                if (!set.add(w.toLowerCase())) throw new IllegalStateException("Duplicate recipient: " + w);
             }
-            return false;
         }
 
-        private static boolean isValidSize(List<Attachment> attachments) {
-            return attachments.stream().mapToLong(Attachment::sizeBytes).sum() <= MAX_ATTACHMENTS_BYTES;
+        private void requireAttachmentsValidSize() {
+            if (attachments.stream().mapToLong(Attachment::sizeBytes).sum() <= MAX_ATTACHMENTS_BYTES) {
+                throw new IllegalStateException("Attachments size must be less than 25 MB");
+            }
         }
     }
 }
