@@ -31,8 +31,18 @@ public final class Email {
         this.html = s.html;
     }
 
-    public static FromStep builder() {
-        return new Steps();
+    public OptionalStep toBuilder() {
+        return new Steps(this);
+    }
+
+    public Email forward(String newRecipient) {
+        Steps steps = new Steps(this);
+        steps.to.clear();
+        steps.cc.clear();
+        steps.bcc.clear();
+        steps.subject = "Fwd: " + subject;
+        return steps.to(newRecipient)
+                .build();
     }
 
     public String getFrom() {
@@ -86,6 +96,22 @@ public final class Email {
         private String body = "";
         private Priority priority = Priority.NORMAL;
         private boolean html = false;
+
+        private Steps() {
+
+        }
+
+        private Steps(Email email) {
+            this.from = email.getFrom();
+            this.subject = email.getSubject();
+            this.to.addAll(email.getTo());
+            this.cc.addAll(email.getCc());
+            this.bcc.addAll(email.getBcc());
+            this.attachments.addAll(email.getAttachments());
+            this.body = email.getBody();
+            this.priority = email.getPriority();
+            this.html = email.isHtml();
+        }
 
         @Override
         public ToStep from(String from) {
@@ -175,7 +201,7 @@ public final class Email {
         }
 
         private void requireAttachmentsValidSize() {
-            if (attachments.stream().mapToLong(Attachment::sizeBytes).sum() <= MAX_ATTACHMENTS_BYTES) {
+            if (attachments.stream().mapToLong(Attachment::sizeBytes).sum() > MAX_ATTACHMENTS_BYTES) {
                 throw new IllegalStateException("Attachments size must be less than 25 MB");
             }
         }
