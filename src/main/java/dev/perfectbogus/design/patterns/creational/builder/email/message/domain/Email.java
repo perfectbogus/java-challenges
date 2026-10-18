@@ -73,6 +73,8 @@ public final class Email {
 
     private static final class Steps implements FromStep, ToStep, SubjectStep, OptionalStep {
 
+        private static final long MAX_ATTACHMENTS_BYTES = 25L * 1024 * 1024;
+
         private String from;
         private String subject;
 
@@ -151,7 +153,10 @@ public final class Email {
         @Override
         public Email build() {
             if (to.size() + cc.size() + bcc.size() > 50) throw new IllegalStateException("Allow up to 50 recipients");
-            if (isDuplicated(to)) throw new IllegalStateException("duplicated not allowed in cc");
+            if (isDuplicated(to)) throw new IllegalStateException("duplicated not allowed in to");
+            if (isDuplicated(cc)) throw new IllegalStateException("duplicated not allowed in cc");
+            if (isDuplicated(bcc)) throw new IllegalStateException("duplicate not allowed in bcc");
+
             return new Email(this);
         }
 
@@ -167,6 +172,10 @@ public final class Email {
                 if (!set.add(w)) return true;
             }
             return false;
+        }
+
+        private static boolean isValidSize(List<Attachment> attachments) {
+            return attachments.stream().mapToLong(Attachment::sizeBytes).sum() <= MAX_ATTACHMENTS_BYTES;
         }
     }
 }
