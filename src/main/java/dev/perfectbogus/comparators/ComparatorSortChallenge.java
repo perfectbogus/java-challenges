@@ -67,7 +67,12 @@ public class ComparatorSortChallenge {
     //          median([7])          returns 7.0
     //          median([])           returns 0.0
     public static double median(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (numbers.length == 0) return 0.0;
+        int[] copy = numbers.clone();
+        Arrays.sort(copy);
+        int middle = copy.length / 2;
+        if (copy.length % 2 == 1) return copy[middle];
+        return ((long) copy[middle - 1] + copy[middle]) / 2.0;
     }
 
     // CHALLENGE 6
