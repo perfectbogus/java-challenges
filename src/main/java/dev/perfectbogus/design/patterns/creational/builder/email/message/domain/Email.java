@@ -5,9 +5,7 @@ import dev.perfectbogus.design.patterns.creational.builder.email.message.steps.O
 import dev.perfectbogus.design.patterns.creational.builder.email.message.steps.SubjectStep;
 import dev.perfectbogus.design.patterns.creational.builder.email.message.steps.ToStep;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public final class Email {
 
@@ -152,7 +150,8 @@ public final class Email {
 
         @Override
         public Email build() {
-            // Validation
+            if (to.size() + cc.size() + bcc.size() > 50) throw new IllegalStateException("Allow up to 50 recipients");
+            if (isDuplicated(to)) throw new IllegalStateException("duplicated not allowed in cc");
             return new Email(this);
         }
 
@@ -160,6 +159,14 @@ public final class Email {
             Objects.requireNonNull(address, "address must not be null");
             if (!address.contains("@")) throw new IllegalArgumentException("Invalid address: " + address);
             return address;
+        }
+
+        private static boolean isDuplicated(List<String> list) {
+            Set<String> set = new HashSet<>();
+            for (String w : list) {
+                if (!set.add(w)) return true;
+            }
+            return false;
         }
     }
 }

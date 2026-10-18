@@ -126,6 +126,7 @@ public class ArraySortStreamChallenge {
     //          sortedNumbersFromText(" -4 , 7 ")    returns [-4, 7]
     //          sortedNumbersFromText("")            returns []
     public static int[] sortedNumbersFromText(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isBlank()) return new int[0];
+        return Arrays.stream(text.split(",")).map(String::trim).mapToInt(Integer::parseInt).sorted().toArray();
     }
 }
