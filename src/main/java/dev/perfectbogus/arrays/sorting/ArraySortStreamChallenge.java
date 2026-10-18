@@ -70,7 +70,7 @@ public class ArraySortStreamChallenge {
     //          sortedDistinct([7, 7, 7])        returns [7]
     //          sortedDistinct([])               returns []
     public static int[] sortedDistinct(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(numbers).boxed().sorted().distinct().mapToInt(Integer::intValue).toArray();
     }
 
     // CHALLENGE 8
