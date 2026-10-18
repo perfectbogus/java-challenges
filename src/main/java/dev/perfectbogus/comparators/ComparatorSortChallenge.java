@@ -36,7 +36,9 @@ public class ComparatorSortChallenge {
     //          sortedLetters("Dog")    returns "Dgo"
     //          sortedLetters("")       returns ""
     public static String sortedLetters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        char[] chars = text.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
     }
 
     // CHALLENGE 4
