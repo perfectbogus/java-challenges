@@ -91,7 +91,9 @@ public class ArraySortStreamChallenge {
     // Example: evensThenOdds([5, 2, 8, 3, 1, 4]) returns [2, 4, 8, 1, 3, 5]
     //          evensThenOdds([-3, -2, 7, 0])      returns [-2, 0, -3, 7]
     public static int[] evensThenOdds(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Integer> byFirstEven = Comparator.comparingInt(i -> i % 2 == 0 ? 0 : 1);
+        Comparator<Integer> byOrder = Comparator.naturalOrder();
+        return Arrays.stream(numbers).boxed().sorted(byFirstEven.thenComparing(byOrder)).mapToInt(Integer::intValue).toArray();
     }
 
     // CHALLENGE 10
