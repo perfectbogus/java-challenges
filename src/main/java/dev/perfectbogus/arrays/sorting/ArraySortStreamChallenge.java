@@ -115,7 +115,7 @@ public class ArraySortStreamChallenge {
     //          secondLargest([-7, -2])     returns -7
     //          secondLargest([])           returns null
     public static Integer secondLargest(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(numbers).boxed().distinct().sorted(Comparator.reverseOrder()).skip(1).findFirst().orElse(null);
     }
 
     // CHALLENGE 12
