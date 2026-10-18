@@ -52,7 +52,11 @@ public class ComparatorSortChallenge {
     //          positionToInsert([10, 20, 30, 40], 99) returns 4
     //          positionToInsert([], 7)                returns 0
     public static int positionToInsert(int[] sorted, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int idx = Arrays.binarySearch(sorted, value);
+        if (idx < 0) {
+            return Math.abs(idx + 1);
+        }
+        return idx;
     }
 
     // CHALLENGE 5
