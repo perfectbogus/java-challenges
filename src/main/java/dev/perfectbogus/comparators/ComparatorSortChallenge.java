@@ -82,7 +82,8 @@ public class ComparatorSortChallenge {
     // Example: sortedByLastLetter([dog, cat, bird, tea]) returns [tea, bird, dog, cat]
     //          sortedByLastLetter([ab, cb, aa])          returns [aa, ab, cb]
     public static String[] sortedByLastLetter(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLastChar = Comparator.comparing(s -> s.charAt(s.length() - 1));
+        return Arrays.stream(words).sorted(byLastChar).toArray(String[]::new);
     }
 
     // CHALLENGE 7
