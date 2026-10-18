@@ -122,6 +122,6 @@ public class ComparatorSortChallenge {
     // Example: sorting [pear, null, apple, null, fig] gives [apple, fig, pear, null, null]
     //          sorting [b, null, B, a]                gives [B, a, b, null]
     public static Comparator<String> nullsLastAlphabetical() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Comparator.nullsLast(Comparator.naturalOrder());
     }
 }
