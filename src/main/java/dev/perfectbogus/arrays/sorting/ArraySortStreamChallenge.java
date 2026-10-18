@@ -48,7 +48,9 @@ public class ArraySortStreamChallenge {
     // Example: sortedByAbsoluteValue([3, -1, -3, 2]) returns [-1, 2, -3, 3]
     //          sortedByAbsoluteValue([-5, 4, 0])     returns [0, 4, -5]
     public static int[] sortedByAbsoluteValue(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Integer> byAbsValue = Comparator.comparingInt(Math::abs);
+        Comparator<Integer> byAsc = Comparator.naturalOrder();
+        return Arrays.stream(numbers).boxed().sorted(byAbsValue.thenComparing(byAsc)).mapToInt(Integer::intValue).toArray();
     }
 
     // CHALLENGE 6
