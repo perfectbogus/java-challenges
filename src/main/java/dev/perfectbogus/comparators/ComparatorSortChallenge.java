@@ -1,5 +1,6 @@
 package dev.perfectbogus.comparators;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class ComparatorSortChallenge {
@@ -14,7 +15,7 @@ public class ComparatorSortChallenge {
     // Example: numbers = [5, 3, 9, 1]  after sortInPlace(numbers), numbers is [1, 3, 5, 9]
     //          numbers = [2, 2, -4]    after sortInPlace(numbers), numbers is [-4, 2, 2]
     public static void sortInPlace(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Arrays.sort(numbers);
     }
 
     // CHALLENGE 2
