@@ -70,7 +70,7 @@ public class ArraySortStreamChallenge {
     //          sortedDistinct([7, 7, 7])        returns [7]
     //          sortedDistinct([])               returns []
     public static int[] sortedDistinct(int[] numbers) {
-        return Arrays.stream(numbers).boxed().sorted().distinct().mapToInt(Integer::intValue).toArray();
+        return Arrays.stream(numbers).sorted().distinct().toArray();
     }
 
     // CHALLENGE 8
@@ -79,7 +79,9 @@ public class ArraySortStreamChallenge {
     // Example: sortedByLengthThenAlphabet([fig, apple, kiwi, pear, plum]) returns [apple, kiwi, pear, plum, fig]
     //          sortedByLengthThenAlphabet([b, a, cc])                      returns [cc, a, b]
     public static String[] sortedByLengthThenAlphabet(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLengthDesc = Comparator.comparing(String::length, Comparator.reverseOrder());
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+        return Arrays.stream(words).sorted(byLengthDesc.thenComparing(byAlpha)).toArray(String[]::new);
     }
 
     // CHALLENGE 9
