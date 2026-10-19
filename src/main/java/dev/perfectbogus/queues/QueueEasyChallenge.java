@@ -41,7 +41,20 @@ public class QueueEasyChallenge {
     //          queue = [1, 2],          removeValue(queue, 9) returns 0 and queue stays [1, 2]
     //          queue = [],              removeValue(queue, 4) returns 0
     public static int removeValue(Queue<Integer> queue, int value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int count = 0;
+        int size = queue.size();
+        int i = 0;
+        while (i < size) {
+            Integer v = queue.poll();
+            Objects.requireNonNull(v);
+            if (v == value) {
+                count++;
+            } else {
+                queue.offer(v);
+            }
+            i++;
+        }
+        return count;
     }
 
     // CHALLENGE 5
