@@ -1,5 +1,7 @@
 package dev.perfectbogus.queues;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 import java.util.Queue;
 
@@ -118,7 +120,18 @@ public class QueueEasyChallenge {
     //          lastPlayer([Ana, Bob, Cy, Di, Eve], 2)  returns "Di"
     //          lastPlayer([Ana, Bob], 2)               returns "Bob"
     public static String lastPlayer(List<String> players, int steps) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<String> q = new ArrayDeque<>(players);
+        int i = 0;
+        while (q.size() >= 2) {
+            if (i == steps) {
+                q.poll();
+                i = 0;
+            } else {
+                i++;
+                q.offer(q.poll());
+            }
+        }
+        return q.poll();
     }
 
     // CHALLENGE 12
