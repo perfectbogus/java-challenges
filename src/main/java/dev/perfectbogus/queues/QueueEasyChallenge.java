@@ -121,7 +121,21 @@ public class QueueEasyChallenge {
     //          lastN([8, 9], 5)             returns [8, 9]
     //          lastN([8, 9], 0)             returns []
     public static Queue<Integer> lastN(int[] numbers, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Queue<Integer> q = new ArrayDeque<>();
+        int min = Math.min(n, numbers.length);
+        for (int i = numbers.length - min; i < numbers.length; i++) {
+            q.offer(numbers[i]);
+        }
+        return q;
+    }
+
+    public static Queue<Integer> lastNImproved(int[] numbers, int n) {
+        Queue<Integer> q = new ArrayDeque<>();
+        for (int number : numbers) {
+            q.offer(number);
+            if (q.size() > n) q.poll();
+        }
+        return q;
     }
 
     // CHALLENGE 8
