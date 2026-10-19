@@ -21,7 +21,7 @@ public class QueueEasyChallenge {
     //          line = [Ana]           after moveFrontToBack(line), line is [Ana]
     //          line = []              after moveFrontToBack(line), line is []
     public static void moveFrontToBack(Queue<String> line) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (!line.isEmpty()) line.offer(line.poll());
     }
 
     // CHALLENGE 3
