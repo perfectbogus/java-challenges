@@ -1,0 +1,137 @@
+package dev.perfectbogus.queues;
+
+import java.util.List;
+import java.util.Queue;
+
+public class QueueEasyChallenge {
+
+    // CHALLENGE 1
+    // Removes the first person of line and returns that name. If the line is empty, returns "nobody" and the line
+    // stays empty.
+    // Example: line = [Ana, Bob, Cy]  serveNext(line) returns "Ana" and line becomes [Bob, Cy]
+    //          line = []              serveNext(line) returns "nobody"
+    public static String serveNext(Queue<String> line) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 2
+    // Takes the first person of line and sends that person to the back of the same queue. An empty line stays empty
+    // and a line with only one person stays the same.
+    // Example: line = [Ana, Bob, Cy]  after moveFrontToBack(line), line is [Bob, Cy, Ana]
+    //          line = [Ana]           after moveFrontToBack(line), line is [Ana]
+    //          line = []              after moveFrontToBack(line), line is []
+    public static void moveFrontToBack(Queue<String> line) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 3
+    // Returns the greatest number in queue without changing the queue: it keeps the same numbers in the same order.
+    // An empty queue gives null.
+    // Example: queue = [4, 9, 2]  largestWaiting(queue) returns 9 and queue is still [4, 9, 2]
+    //          queue = [-5, -2]   largestWaiting(queue) returns -2
+    //          queue = []         largestWaiting(queue) returns null
+    public static Integer largestWaiting(Queue<Integer> queue) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 4
+    // Removes from queue, in place, every number equal to value. The other numbers keep their order. Returns how
+    // many numbers were removed.
+    // Example: queue = [3, 7, 3, 5, 3], removeValue(queue, 3) returns 3 and queue becomes [7, 5]
+    //          queue = [1, 2],          removeValue(queue, 9) returns 0 and queue stays [1, 2]
+    //          queue = [],              removeValue(queue, 4) returns 0
+    public static int removeValue(Queue<Integer> queue, int value) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 5
+    // Returns a new queue with the numbers of queue in reverse order: the last number of queue is the first one to
+    // come out of the result. queue is not modified.
+    // Example: queue = [1, 2, 3]  reversed(queue) returns [3, 2, 1] and queue is still [1, 2, 3]
+    //          queue = [7]        reversed(queue) returns [7]
+    //          queue = []         reversed(queue) returns []
+    public static Queue<Integer> reversed(Queue<Integer> queue) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 6
+    // Moves the first k numbers of queue to the back, in place, keeping their order. k is never negative, and it can
+    // be greater than the number of elements in the queue. An empty queue stays empty.
+    // Example: queue = [1, 2, 3, 4, 5], rotate(queue, 2) leaves queue as [3, 4, 5, 1, 2]
+    //          queue = [1, 2, 3, 4, 5], rotate(queue, 7) leaves queue as [3, 4, 5, 1, 2]
+    //          queue = [1, 2, 3],       rotate(queue, 3) leaves queue as [1, 2, 3]
+    //          queue = [],              rotate(queue, 3) leaves queue as []
+    public static void rotate(Queue<Integer> queue, int k) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 7
+    // The numbers arrive one by one, in the order of the array. Returns a queue with only the last n numbers that
+    // arrived, the oldest one first. If fewer than n numbers arrived, the queue has all of them. If n is 0, the queue
+    // is empty.
+    // Example: lastN([1, 2, 3, 4, 5, 6], 3) returns [4, 5, 6]
+    //          lastN([8, 9], 5)             returns [8, 9]
+    //          lastN([8, 9], 0)             returns []
+    public static Queue<Integer> lastN(int[] numbers, int n) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 8
+    // Returns a new queue that takes one number from first, then one from second, and so on, starting with first.
+    // When one of the queues runs out, the numbers that are left in the other one follow in their order. first and
+    // second are not modified.
+    // Example: first = [1, 2, 3], second = [10, 20]  interleave(first, second) returns [1, 10, 2, 20, 3]
+    //          first = [],        second = [5, 6]    interleave(first, second) returns [5, 6]
+    public static Queue<Integer> interleave(Queue<Integer> first, Queue<Integer> second) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 9
+    // The customers are served one at a time, in the order of the array. serviceTimes[i] is how many minutes the
+    // customer i takes to be served. Each customer waits until all the customers before have been served, so the
+    // first one waits 0 minutes. Returns the sum of the waiting times of all the customers.
+    // Example: totalWaitingTime([3, 2, 4]) returns 8   (waits: 0, 3 and 3 + 2 = 5)
+    //          totalWaitingTime([5])       returns 0
+    //          totalWaitingTime([])        returns 0
+    public static int totalWaitingTime(int[] serviceTimes) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 10
+    // Returns the first n positive whole numbers (1, 2, 3, ...) written in binary, as Strings, in order. If n is 0,
+    // the result is empty.
+    // Example: binaryNumbers(5) returns [1, 10, 11, 100, 101]
+    //          binaryNumbers(1) returns [1]
+    //          binaryNumbers(0) returns []
+    public static List<String> binaryNumbers(int n) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 11
+    // Hot potato. The players are in a circle, in the order of the list. The potato starts with the first player and
+    // is passed to the next player, steps times. The player that holds the potato after the last pass is out, and the
+    // next round starts with the player that comes after the one who left. This repeats until only one player is
+    // left, and that player is returned. steps is at least 1. With only one player, that player wins. players is not
+    // modified.
+    // Example: lastPlayer([Ana, Bob, Cy], 1)           returns "Cy"
+    //          (Ana passes to Bob, who is out. Cy starts and passes to Ana, who is out.)
+    //          lastPlayer([Ana, Bob, Cy, Di, Eve], 2)  returns "Di"
+    //          lastPlayer([Ana, Bob], 2)               returns "Bob"
+    public static String lastPlayer(List<String> players, int steps) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // CHALLENGE 12
+    // The customers wait in line in the order of names, and units[i] is how many units of work customer i needs (at
+    // least 1). The cashier works in turns: the customer at the front of the line gets up to quantum units of work
+    // (quantum is at least 1). If that customer still needs more work, they go to the back of the line, and if not,
+    // they leave. Returns the names in the order the customers leave.
+    // Example: finishingOrder([Ana, Bob, Cy], [3, 1, 2], 1) returns [Bob, Cy, Ana]
+    //          (Ana goes back, Bob leaves, Cy goes back, Ana goes back again, Cy leaves and Ana leaves)
+    //          finishingOrder([Ana, Bob], [6, 5], 3)         returns [Ana, Bob]
+    //          (Ana goes back with 3 left, Bob goes back with 2 left, then Ana leaves and Bob leaves)
+    //          finishingOrder([], [], 2)                     returns []
+    public static List<String> finishingOrder(String[] names, int[] units, int quantum) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+}
