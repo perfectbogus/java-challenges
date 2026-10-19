@@ -10,7 +10,8 @@ public class QueueEasyChallenge {
     // Example: line = [Ana, Bob, Cy]  serveNext(line) returns "Ana" and line becomes [Bob, Cy]
     //          line = []              serveNext(line) returns "nobody"
     public static String serveNext(Queue<String> line) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (line.isEmpty()) return "nobody";
+        return line.poll();
     }
 
     // CHALLENGE 2
