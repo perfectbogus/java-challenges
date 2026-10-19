@@ -57,6 +57,26 @@ public class QueueEasyChallenge {
         return count;
     }
 
+    public static int removeValueImproved(Queue<Integer> queue, int value) {
+        int removed = 0;
+        int size = queue.size();
+        for (int i = 0; i < size; i++) {
+            int n = queue.poll();
+            if (n == value) {
+                removed++;
+            } else {
+                queue.offer(n);
+            }
+        }
+        return removed;
+    }
+
+    public static int removeValueImprovedV2(Queue<Integer> queue, int value) {
+        int before = queue.size();
+        queue.removeIf(n -> n == value);
+        return before - queue.size();
+    }
+
     // CHALLENGE 5
     // Returns a new queue with the numbers of queue in reverse order: the last number of queue is the first one to
     // come out of the result. queue is not modified.
@@ -64,7 +84,12 @@ public class QueueEasyChallenge {
     //          queue = [7]        reversed(queue) returns [7]
     //          queue = []         reversed(queue) returns []
     public static Queue<Integer> reversed(Queue<Integer> queue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (Integer i : queue) {
+            stack.push(i);
+        }
+
+        return new LinkedList<>(stack);
     }
 
     // CHALLENGE 6
@@ -75,7 +100,17 @@ public class QueueEasyChallenge {
     //          queue = [1, 2, 3],       rotate(queue, 3) leaves queue as [1, 2, 3]
     //          queue = [],              rotate(queue, 3) leaves queue as []
     public static void rotate(Queue<Integer> queue, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int i = 0;
+        while (!queue.isEmpty() && i < k) {
+            queue.offer(queue.poll());
+            i++;
+        }
+    }
+
+    public static void rotateImproved(Queue<Integer> queue, int k) {
+        if (queue.isEmpty()) return;
+        int times = k % queue.size();
+        for (int i = 0; i < times; i++) queue.offer(queue.poll());
     }
 
     // CHALLENGE 7
