@@ -31,7 +31,7 @@ public class QueueEasyChallenge {
     //          queue = [-5, -2]   largestWaiting(queue) returns -2
     //          queue = []         largestWaiting(queue) returns null
     public static Integer largestWaiting(Queue<Integer> queue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return queue.stream().max(Comparator.naturalOrder()).orElse(null);
     }
 
     // CHALLENGE 4
