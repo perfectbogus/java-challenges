@@ -1,9 +1,6 @@
 package dev.perfectbogus.queues;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class QueueEasyChallenge {
 
@@ -132,6 +129,17 @@ public class QueueEasyChallenge {
             }
         }
         return q.poll();
+    }
+
+    public static String lastPlayerImproved(List<String> players, int steps) {
+        Queue<String> circle = new LinkedList<>(players);
+        while (circle.size() > 1) {
+            for (int i = 0; i < steps; i++) {
+                circle.offer(circle.poll());
+            }
+            circle.poll();
+        }
+        return circle.poll();
     }
 
     // CHALLENGE 12

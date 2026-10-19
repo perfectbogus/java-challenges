@@ -670,6 +670,11 @@ class QueueEasyChallengeTest {
         }
 
         @Test
+        void testOnePassPerRoundImproved() {
+            assertEquals("Cy", QueueEasyChallenge.lastPlayerImproved(List.of("Ana", "Bob", "Cy"), 1));
+        }
+
+        @Test
         void testFivePlayersTwoPasses() {
             assertEquals("Di", QueueEasyChallenge.lastPlayer(five, 2));
         }
