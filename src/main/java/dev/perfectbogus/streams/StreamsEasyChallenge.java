@@ -66,7 +66,7 @@ public class StreamsEasyChallenge {
     // Example: sumOfDigits(1234) returns 10
     //          sumOfDigits(907)  returns 16
     //          sumOfDigits(0)    returns 0
-    public static int sumOfDigitsF(int number) {
+    public static int sumOfDigitsNoFunctional(int number) {
         String digits = String.valueOf(number);
         int sum = 0;
         for (char n : digits.toCharArray()) {
@@ -88,7 +88,7 @@ public class StreamsEasyChallenge {
     //          page(items, 3, 2) returns [e]
     //          page(items, 4, 2) returns []
     public static List<String> page(List<String> items, int pageNumber, int pageSize) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return items.stream().skip((long) (pageNumber - 1) * pageSize).limit(pageSize).toList();
     }
 
     // CHALLENGE 7
