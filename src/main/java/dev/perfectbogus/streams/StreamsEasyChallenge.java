@@ -1,6 +1,7 @@
 package dev.perfectbogus.streams;
 
 import java.util.Arrays;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -121,7 +122,9 @@ public class StreamsEasyChallenge {
     //          minAndMaxAge(employees) returns [25, 40]
     //          minAndMaxAge([])        returns [0, 0]
     public static int[] minAndMaxAge(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (employees.isEmpty()) return new int[2];
+        IntSummaryStatistics stats = employees.stream().mapToInt(Employee::age).summaryStatistics();
+        return new int[]{stats.getMin(), stats.getMax()};
     }
 
     // CHALLENGE 10
