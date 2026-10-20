@@ -17,7 +17,7 @@ public class StreamsEasyChallenge {
     //          namesOlderThan(employees, 28) returns [Ana, Cy]
     //          namesOlderThan(employees, 40) returns []
     public static List<String> namesOlderThan(List<Employee> employees, int age) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().filter(e -> e.age() > age).map(Employee::name).toList();
     }
 
     // CHALLENGE 2
