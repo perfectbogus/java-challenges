@@ -3,6 +3,7 @@ package dev.perfectbogus.streams;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class StreamsEasyChallenge {
@@ -97,7 +98,7 @@ public class StreamsEasyChallenge {
     //          employees = [Ana(IT, 30, 5000)]                     formatNames(employees) returns "[Ana]"
     //          employees = []                                      formatNames(employees) returns "[]"
     public static String formatNames(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().map(Employee::name).collect(Collectors.joining(", ", "[", "]"));
     }
 
     // CHALLENGE 8
