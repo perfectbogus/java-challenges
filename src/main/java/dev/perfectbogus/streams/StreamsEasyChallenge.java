@@ -108,7 +108,10 @@ public class StreamsEasyChallenge {
     //          totalSalaryByDepartment(employees) returns {IT=11000, HR=4000}
     //          totalSalaryByDepartment([])        returns {}
     public static Map<String, Integer> totalSalaryByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.summingInt(Employee::salary)
+        ));
     }
 
     // CHALLENGE 9
