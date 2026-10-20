@@ -37,7 +37,11 @@ public class StreamsEasyChallenge {
     //          firstNameStartingWith(employees, 'a') returns "none"
     //          firstNameStartingWith(employees, 'Z') returns "none"
     public static String firstNameStartingWith(List<Employee> employees, char letter) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream()
+                .map(Employee::name)
+                .filter(name -> name.charAt(0) == letter)
+                .findFirst()
+                .orElse("none");
     }
 
     // CHALLENGE 4
