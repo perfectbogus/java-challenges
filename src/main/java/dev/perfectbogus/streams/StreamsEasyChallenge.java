@@ -1,5 +1,6 @@
 package dev.perfectbogus.streams;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -65,8 +66,17 @@ public class StreamsEasyChallenge {
     // Example: sumOfDigits(1234) returns 10
     //          sumOfDigits(907)  returns 16
     //          sumOfDigits(0)    returns 0
+    public static int sumOfDigitsF(int number) {
+        String digits = String.valueOf(number);
+        int sum = 0;
+        for (char n : digits.toCharArray()) {
+            sum += Character.getNumericValue(n);
+        }
+        return sum;
+    }
+
     public static int sumOfDigits(int number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return String.valueOf(number).chars().map(Character::getNumericValue).sum();
     }
 
     // CHALLENGE 6
