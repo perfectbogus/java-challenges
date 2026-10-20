@@ -184,7 +184,13 @@ public class QueueEasyChallenge {
     //          totalWaitingTime([5])       returns 0
     //          totalWaitingTime([])        returns 0
     public static int totalWaitingTime(int[] serviceTimes) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int total = 0;
+        int elapsed = 0;
+        for (int time : serviceTimes) {
+            total += elapsed;
+            elapsed += time;
+        }
+        return total;
     }
 
     // CHALLENGE 10
@@ -194,7 +200,16 @@ public class QueueEasyChallenge {
     //          binaryNumbers(1) returns [1]
     //          binaryNumbers(0) returns []
     public static List<String> binaryNumbers(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Queue<String> queue = new LinkedList<>();
+        if (n > 0) queue.offer("1");
+        for (int i = 0; i < n; i++) {
+            String s = queue.poll();
+            res.add(s);
+            queue.offer(s + "0");
+            queue.offer(s + "1");
+        }
+        return res;
     }
 
     // CHALLENGE 11
