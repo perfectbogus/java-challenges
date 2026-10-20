@@ -165,6 +165,17 @@ public class QueueEasyChallenge {
         return q;
     }
 
+    public static Queue<Integer> interleaveImproved(Queue<Integer> first, Queue<Integer> second) {
+        Iterator<Integer> a = first.iterator();
+        Iterator<Integer> b = second.iterator();
+        Queue<Integer> res = new LinkedList<>();
+        while (a.hasNext() || b.hasNext()) {
+            if (a.hasNext()) res.offer(a.next());
+            if (b.hasNext()) res.offer(b.next());
+        }
+        return res;
+    }
+
     // CHALLENGE 9
     // The customers are served one at a time, in the order of the array. serviceTimes[i] is how many minutes the
     // customer i takes to be served. Each customer waits until all the customers before have been served, so the
