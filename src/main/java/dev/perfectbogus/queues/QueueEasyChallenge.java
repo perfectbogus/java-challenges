@@ -259,6 +259,60 @@ public class QueueEasyChallenge {
     //          (Ana goes back with 3 left, Bob goes back with 2 left, then Ana leaves and Bob leaves)
     //          finishingOrder([], [], 2)                     returns []
     public static List<String> finishingOrder(String[] names, int[] units, int quantum) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int min = Math.min(names.length, units.length);
+        Queue<Pair> data = new LinkedList<>();
+        for (int i = 0; i < min; i++) {
+            data.offer(new Pair(names[i], units[i]));
+        }
+
+        List<String> leaves = new ArrayList<>();
+        while (!data.isEmpty()) {
+            Pair current = data.poll();
+            int result = current.decrease(quantum);
+            if (result > 0) {
+                data.offer(current);
+            } else {
+                leaves.add(current.getName());
+            }
+        }
+        return leaves;
+    }
+
+    private static class Pair {
+        private final String name;
+        private int unit;
+
+        public Pair(String name, int unit) {
+            this.name = name;
+            this.unit = unit;
+        }
+
+        public int decrease(int units) {
+            unit = unit - units;
+            return unit;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
+
+    public static List<String> finishingOrderImproved(String[] names, int[] units, int quantum) {
+        Queue<Integer> line = new LinkedList<>();
+        int[] left = units.clone();
+        for (int i = 0; i < names.length; i++) {
+            line.offer(i);
+        }
+        List<String> order = new ArrayList<>();
+        while (!line.isEmpty()) {
+            int i = line.poll();
+            left[i] -= quantum;
+            if (left[i] > 0) {
+                line.offer(i);
+            } else {
+                order.add(names[i]);
+            }
+        }
+        return order;
     }
 }
