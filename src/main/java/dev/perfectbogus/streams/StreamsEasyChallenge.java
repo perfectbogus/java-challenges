@@ -2,6 +2,7 @@ package dev.perfectbogus.streams;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class StreamsEasyChallenge {
 
@@ -52,7 +53,11 @@ public class StreamsEasyChallenge {
     //          evenSquares(1) returns []
     //          evenSquares(0) returns []
     public static List<Integer> evenSquares(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return IntStream.range(1, n + 1).filter(i -> i % 2 == 0).map(i -> i * i).boxed().toList();
+    }
+
+    public static List<Integer> evenSquaresImproved(int n) {
+        return IntStream.rangeClosed(1, n).filter(i -> i % 2 == 0).map(i -> i * i).boxed().toList();
     }
 
     // CHALLENGE 5
