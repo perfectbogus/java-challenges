@@ -145,7 +145,24 @@ public class QueueEasyChallenge {
     // Example: first = [1, 2, 3], second = [10, 20]  interleave(first, second) returns [1, 10, 2, 20, 3]
     //          first = [],        second = [5, 6]    interleave(first, second) returns [5, 6]
     public static Queue<Integer> interleave(Queue<Integer> first, Queue<Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Queue<Integer> firstCopy = new LinkedList<>(first);
+        Queue<Integer> secondCopy = new LinkedList<>(second);
+        Queue<Integer> q = new LinkedList<>();
+
+        while (!firstCopy.isEmpty() && !secondCopy.isEmpty()) {
+            q.offer(firstCopy.poll());
+            q.offer(secondCopy.poll());
+        }
+
+        while (!firstCopy.isEmpty() && secondCopy.isEmpty()) {
+            q.offer(firstCopy.poll());
+        }
+
+        while (firstCopy.isEmpty() && !secondCopy.isEmpty()) {
+            q.offer(secondCopy.poll());
+        }
+
+        return q;
     }
 
     // CHALLENGE 9
