@@ -26,7 +26,7 @@ public class StreamsEasyChallenge {
     //          employees = [Ana(IT, 30, 5000), Bob(HR, 17, 4000)]  allAdults(employees) returns false
     //          employees = []                                      allAdults(employees) returns true
     public static boolean allAdults(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().allMatch(e -> e.age() >= 18);
     }
 
     // CHALLENGE 3
