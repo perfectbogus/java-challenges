@@ -225,7 +225,13 @@ public class CollectorsFunctionsChallenge {
     //          priciestNameByCategory([Pen(Office, 2, 1), Cup(Office, 2, 9)]) returns {Office=Pen}
     //          priciestNameByCategory([]) returns {}
     public static Map<String, String> priciestNameByCategory(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.groupingBy(
+                Product::category,
+                Collectors.collectingAndThen(
+                        Collectors.maxBy(Comparator.comparingInt(Product::price)),
+                        optional -> optional.get().name()
+                )
+        ));
     }
 
     // CHALLENGE 20
