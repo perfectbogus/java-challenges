@@ -135,7 +135,7 @@ public class StreamsEasyChallenge {
     //          untilFirstNegative([5, 0, 7])     returns [5, 0, 7]
     //          untilFirstNegative([-1, 5])       returns []
     public static List<Integer> untilFirstNegative(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().takeWhile(n -> n >= 0).toList();
     }
 
     // CHALLENGE 11 (intermediate)
