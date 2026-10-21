@@ -2,6 +2,8 @@ package dev.perfectbogus.design.patterns.creational.builder.email.message.domain
 
 import dev.perfectbogus.design.patterns.creational.builder.email.message.steps.OptionalStep;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -63,6 +65,13 @@ class EmailTest {
                 () -> assertEquals(Priority.HIGH, email.getPriority()),
                 () -> assertTrue(email.isHtml())
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", "ana.mail.com", "ana"})
+    void to_addressWithoutAt_throws(String badAddress) {
+        var toStep = Email.builder().from(FROM);
+        assertThrows(IllegalArgumentException.class, () -> toStep.to(badAddress));
     }
 
 }
