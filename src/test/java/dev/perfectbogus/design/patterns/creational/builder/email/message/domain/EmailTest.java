@@ -133,4 +133,41 @@ class EmailTest {
         assertThrows(IllegalStateException.class, builder::build);
     }
 
+    @Test
+    void getTo_isUnmodifiable() {
+        Email email = minimal().build();
+        assertThrows(UnsupportedOperationException.class, () -> email.getTo().add("hacker@evil.com"));
+    }
+
+    @Test
+    void toBuilder_createsModifiedCopy_originalUnchanged() {
+        Email original = minimal().build();
+
+        Email copy = original.toBuilder().priority(Priority.HIGH).build();
+
+        assertAll(
+                () -> assertEquals(Priority.HIGH, copy.getPriority()),
+                () -> assertEquals(original.getSubject(), copy.getSubject()),
+                () -> assertEquals(Priority.NORMAL, original.getPriority()),
+                () -> assertNotSame(original, copy)
+        );
+    }
+
+    @Test
+    void forward_replacesAllRecipients_andPrefixesSubject() {
+        Email original = minimal()
+                .cc("boss@bank.com")
+                .bcc("audit@bank.com")
+                .build();
+
+        Email fwd = original.forward("luis@mail.com");
+
+        assertAll(
+                () -> assertEquals(List.of("luis@mail.com"), fwd.getTo()),
+                () -> assertTrue(fwd.getCc().isEmpty()),
+                () -> assertTrue(fwd.getBcc().isEmpty()),
+                () -> assertEquals("Fwd: Hi", fwd.getSubject())
+        );
+    }
+
 }
