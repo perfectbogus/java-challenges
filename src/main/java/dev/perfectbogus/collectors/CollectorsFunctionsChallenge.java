@@ -107,7 +107,18 @@ public class CollectorsFunctionsChallenge {
     //          totalLengthByInitial([ox, Ox, ox])             returns {o=4, O=2}
     //          totalLengthByInitial([])                       returns {}
     public static Map<Character, Integer> totalLengthByInitial(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                s -> s.charAt(0),
+                Collectors.summingInt(String::length)
+        ));
+    }
+
+    public static Map<Character, Integer> totalLengthByInitialMap(List<String> words) {
+        return words.stream().collect(Collectors.toMap(
+                w -> w.charAt(0),
+                String::length,
+                Integer::sum
+        ));
     }
 
     // CHALLENGE 11
