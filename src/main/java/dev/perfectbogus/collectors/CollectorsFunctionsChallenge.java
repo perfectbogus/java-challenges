@@ -241,6 +241,8 @@ public class CollectorsFunctionsChallenge {
     //          priceRange([Pen(Office, 2, 100)])   returns "2-2"
     //          priceRange([])                      returns "none"
     public static String priceRange(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (products.isEmpty()) return "none";
+        IntSummaryStatistics stats = products.stream().collect(Collectors.summarizingInt(Product::price));
+        return stats.getMin() + "-" + stats.getMax();
     }
 }
