@@ -115,4 +115,22 @@ class EmailTest {
         assertDoesNotThrow(() -> minimal().build());
     }
 
+    @Test
+    void attachmentExactly25MB_succeeds() {
+        var builder = minimal()
+                .attachment(new Attachment("a.pdf", 20 * MB))
+                .attachment(new Attachment("b.pdf", 5 * MB));
+
+        assertDoesNotThrow(builder::build);
+    }
+
+    @Test
+    void attachmentsOver25MB_throws() {
+        var builder = minimal()
+                .attachment(new Attachment("a.pdf", 25 * MB))
+                .attachment(new Attachment("b.pdf", 1 ));
+
+        assertThrows(IllegalStateException.class, builder::build);
+    }
+
 }
