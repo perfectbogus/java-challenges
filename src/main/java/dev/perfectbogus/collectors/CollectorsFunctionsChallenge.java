@@ -84,7 +84,7 @@ public class CollectorsFunctionsChallenge {
     // Example: sortedUniqueNames([Pen(Office, 2, 100), Desk(Home, 150, 5), Pen(Home, 3, 10)]) returns [Desk, Pen]
     //          sortedUniqueNames([])                                                          returns []
     public static TreeSet<String> sortedUniqueNames(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().map(Product::name).collect(Collectors.toCollection(TreeSet::new));
     }
 
     // CHALLENGE 9
