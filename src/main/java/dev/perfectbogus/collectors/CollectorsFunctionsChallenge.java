@@ -92,7 +92,11 @@ public class CollectorsFunctionsChallenge {
     // Example: priceByName(shop) returns {Pen=2, Desk=150, Clip=1}
     //          priceByName([])   returns {}
     public static Map<String, Integer> priceByName(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.toMap(
+                Product::name,
+                Product::price,
+                (existing, incoming) -> existing
+        ));
     }
 
     // CHALLENGE 10
