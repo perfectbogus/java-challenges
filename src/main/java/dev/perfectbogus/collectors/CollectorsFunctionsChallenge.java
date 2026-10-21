@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class CollectorsFunctionsChallenge {
 
@@ -21,7 +22,7 @@ public class CollectorsFunctionsChallenge {
     // Example: distinctCategories(shop) returns {Office, Home}
     //          distinctCategories([])   returns {}
     public static Set<String> distinctCategories(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().map(Product::category).collect(Collectors.toSet());
     }
 
     // CHALLENGE 2
