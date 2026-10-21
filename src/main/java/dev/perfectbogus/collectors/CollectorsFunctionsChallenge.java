@@ -175,7 +175,10 @@ public class CollectorsFunctionsChallenge {
     //          countByPriceLimit(shop, 1000) returns {false=3, true=0}
     //          countByPriceLimit([], 5)      returns {false=0, true=0}
     public static Map<Boolean, Long> countByPriceLimit(List<Product> products, int limit) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.partitioningBy(
+                p -> p.price >= limit,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 16
