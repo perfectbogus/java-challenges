@@ -206,7 +206,16 @@ public class CollectorsFunctionsChallenge {
     //          inStockNamesByCategory([Pen(Office, 2, 100), Desk(Home, 150, 0)])
     //              returns {Office=[Pen], Home=[]}
     public static Map<String, List<String>> inStockNamesByCategory(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.groupingBy(
+                Product::category,
+                Collectors.filtering(
+                        p -> p.stock() > 0,
+                        Collectors.mapping(
+                                Product::name,
+                                Collectors.toList()
+                        )
+                )
+        ));
     }
 
     // CHALLENGE 19
