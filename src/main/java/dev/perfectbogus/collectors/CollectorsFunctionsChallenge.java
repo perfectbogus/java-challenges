@@ -137,7 +137,10 @@ public class CollectorsFunctionsChallenge {
     // Example: namesByCategory(shop) returns {Office=[Pen, Clip], Home=[Desk]}
     //          namesByCategory([])   returns {}
     public static Map<String, List<String>> namesByCategory(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.groupingBy(
+                Product::category,
+                Collectors.mapping(Product::name, Collectors.toList())
+        ));
     }
 
     // CHALLENGE 13
