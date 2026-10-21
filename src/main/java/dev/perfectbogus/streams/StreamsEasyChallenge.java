@@ -1,9 +1,6 @@
 package dev.perfectbogus.streams;
 
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -147,6 +144,17 @@ public class StreamsEasyChallenge {
     //          topEarnerByDepartment(employees) returns {IT=Cy, HR=Eve}
     //          (Cy and Di earn the same in IT, and Cy comes first. OPS has only Flo, so it is left out.)
     public static Map<String, String> topEarnerByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream()
+                .collect(Collectors.groupingBy(Employee::department))
+                .entrySet().stream()
+                .filter(e -> e.getValue().size() >= 2)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        e -> e.getValue().stream()
+                                .max(Comparator.comparingInt(Employee::salary))
+                                .get()
+                                .name()
+                ));
     }
+
 }
