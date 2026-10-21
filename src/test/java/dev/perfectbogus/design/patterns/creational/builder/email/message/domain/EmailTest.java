@@ -98,4 +98,21 @@ class EmailTest {
         assertThrows(IllegalStateException.class, builder::build);
     }
 
+    @Test
+    void sameAddressInToAndCc_throws() {
+        var builder = minimal().cc("ana@mail.com");
+        assertThrows(IllegalStateException.class, builder::build);
+    }
+
+    @Test
+    void duplicateDifferentCase_throws() {
+        var builder = minimal().cc("Ana@mail.com");
+        assertThrows(IllegalStateException.class, builder::build);
+    }
+
+    @Test
+    void noAttachments_succeeds() {
+        assertDoesNotThrow(() -> minimal().build());
+    }
+
 }
