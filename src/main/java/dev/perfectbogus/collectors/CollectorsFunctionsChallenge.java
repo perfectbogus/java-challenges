@@ -149,7 +149,11 @@ public class CollectorsFunctionsChallenge {
     // Example: totalStockByCategorySorted(shop) returns {Home=5, Office=600}   (Home comes first)
     //          totalStockByCategorySorted([])   returns {}
     public static TreeMap<String, Integer> totalStockByCategorySorted(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.groupingBy(
+                Product::category,
+                TreeMap::new,
+                Collectors.summingInt(Product::stock)
+        ));
     }
 
     // CHALLENGE 14
