@@ -31,7 +31,7 @@ public class CollectorsFunctionsChallenge {
     // Example: namesUnmodifiable(shop) returns [Pen, Desk, Clip]
     //          namesUnmodifiable([])   returns []
     public static List<String> namesUnmodifiable(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().map(Product::name).collect(Collectors.toUnmodifiableList());
     }
 
     // CHALLENGE 3
@@ -41,7 +41,11 @@ public class CollectorsFunctionsChallenge {
     //          initials([Kiwi])                   returns "K"
     //          initials([])                       returns ""
     public static String initials(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().map(s -> s.charAt(0)).map(String::valueOf).collect(Collectors.joining());
+    }
+
+    public static String initialsImproved(List<String> words) {
+        return words.stream().map(s -> s.substring(0, 1)).collect(Collectors.joining());
     }
 
     // CHALLENGE 4
