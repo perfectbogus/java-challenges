@@ -19,7 +19,7 @@ class EmailTest {
     }
 
     private static OptionalStep withRecipients(int total) {
-        OptionalStep builder = Email.builder().from(FROM).to("r@email.com").subject("Hi");
+        OptionalStep builder = Email.builder().from(FROM).to("r0@mail.com").subject("Hi");
         for (int i = 1; i < total; i++) {
             builder.cc("r" + i + "@mail.com");
         }
@@ -86,6 +86,16 @@ class EmailTest {
         assertThrows(IllegalArgumentException.class, () -> subjectStep.subject(blank));
     }
 
+    @Test
+    void exactly50Recipients_succeeds() {
+        Email email = withRecipients(50).build();
+        assertEquals(50, email.getTo().size() + email.getCc().size());
+    }
 
+    @Test
+    void recipients51_throws() {
+        var builder = withRecipients(51);
+        assertThrows(IllegalStateException.class, builder::build);
+    }
 
 }
