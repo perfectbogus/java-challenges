@@ -31,6 +31,10 @@ public final class Email {
         this.html = s.html;
     }
 
+    public static FromStep builder() {
+        return new Steps();
+    }
+
     public OptionalStep toBuilder() {
         return new Steps(this);
     }
@@ -129,8 +133,8 @@ public final class Email {
 
         @Override
         public OptionalStep subject(String subject) {
-            if (subject == null) throw new IllegalStateException("subject must not be null");
-            if (subject.isBlank()) throw new IllegalStateException("subject must not be blank");
+            if (subject == null) throw new IllegalArgumentException("subject must not be null");
+            if (subject.isBlank()) throw new IllegalArgumentException("subject must not be blank");
             this.subject = subject;
             return this;
         }
