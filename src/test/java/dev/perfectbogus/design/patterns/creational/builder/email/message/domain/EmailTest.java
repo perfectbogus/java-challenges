@@ -74,4 +74,10 @@ class EmailTest {
         assertThrows(IllegalArgumentException.class, () -> toStep.to(badAddress));
     }
 
+    @Test
+    void from_null_throws() {
+        assertThrows(NullPointerException.class, () -> Email.builder().from(null));
+    }
+
+
 }
