@@ -74,6 +74,19 @@ class EmailTest {
         assertThrows(IllegalArgumentException.class, () -> toStep.to(badAddress));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"", "ana.mail.com", "ana"})
+    void cc_addressWithoutAt_throws(String badAddress) {
+        var optionalStep = minimal();
+        assertThrows(IllegalArgumentException.class, () -> optionalStep.cc(badAddress));
+    }
+
+    @Test
+    void duplicateInBcc_throws() {
+        var builder = minimal().bcc("ana@mail.com");
+        assertThrows(IllegalStateException.class, builder::build);
+    }
+
     @Test
     void from_null_throws() {
         assertThrows(NullPointerException.class, () -> Email.builder().from(null));
@@ -167,6 +180,24 @@ class EmailTest {
                 () -> assertTrue(fwd.getCc().isEmpty()),
                 () -> assertTrue(fwd.getBcc().isEmpty()),
                 () -> assertEquals("Fwd: Hi", fwd.getSubject())
+        );
+    }
+
+    @Test
+    void forward_keepsContent() {
+        Attachment pdf = new Attachment("a.pdf", 5 * MB);
+        Email original = minimal()
+                .body("Quarterly numbers")
+                .attachment(pdf)
+                .priority(Priority.HIGH)
+                .build();
+
+        Email fwd = original.forward("new@mail.com");
+
+        assertAll(
+                () -> assertEquals("Quarterly numbers", fwd.getBody()),
+                () -> assertEquals(List.of(pdf), fwd.getAttachments()),
+                () -> assertEquals(Priority.HIGH, fwd.getPriority())
         );
     }
 
