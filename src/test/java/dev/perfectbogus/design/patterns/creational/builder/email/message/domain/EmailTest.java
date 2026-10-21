@@ -79,5 +79,13 @@ class EmailTest {
         assertThrows(NullPointerException.class, () -> Email.builder().from(null));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"", "   "})
+    void blankSubject_throws(String blank) {
+        var subjectStep = Email.builder().from(FROM).to("ana@mail.com");
+        assertThrows(IllegalArgumentException.class, () -> subjectStep.subject(blank));
+    }
+
+
 
 }
