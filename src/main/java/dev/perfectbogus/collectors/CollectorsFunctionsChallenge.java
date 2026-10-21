@@ -126,7 +126,10 @@ public class CollectorsFunctionsChallenge {
     // Example: countByCategory(shop) returns {Office=2, Home=1}
     //          countByCategory([])   returns {}
     public static Map<String, Long> countByCategory(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.groupingBy(
+                Product::category,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 12
