@@ -1,12 +1,6 @@
 package dev.perfectbogus.collectors;
 
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CollectorsFunctionsChallenge {
@@ -81,7 +75,7 @@ public class CollectorsFunctionsChallenge {
     //          cheapest([Pen(Office, 2, 5), Cup(Home, 2, 7)])   returns Optional[Pen(Office, 2, 5)]
     //          cheapest([])                                     returns Optional.empty
     public static Optional<Product> cheapest(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.minBy(Comparator.comparingDouble(Product::price)));
     }
 
     // CHALLENGE 8
