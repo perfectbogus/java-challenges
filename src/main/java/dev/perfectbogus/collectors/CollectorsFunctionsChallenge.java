@@ -54,7 +54,7 @@ public class CollectorsFunctionsChallenge {
     //          countAtLeast(shop, 1)   returns 3
     //          countAtLeast(shop, 151) returns 0
     public static long countAtLeast(List<Product> products, int minPrice) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().filter(p -> p.price() >= minPrice).collect(Collectors.counting());
     }
 
     // CHALLENGE 5
