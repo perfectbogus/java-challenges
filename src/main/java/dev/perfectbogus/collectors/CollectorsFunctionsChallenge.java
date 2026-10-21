@@ -161,7 +161,10 @@ public class CollectorsFunctionsChallenge {
     // Example: averagePriceByCategory(shop) returns {Office=1.5, Home=150.0}
     //          averagePriceByCategory([])   returns {}
     public static Map<String, Double> averagePriceByCategory(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.groupingBy(
+                Product::category,
+                Collectors.averagingDouble(Product::price)
+        ));
     }
 
     // CHALLENGE 15
