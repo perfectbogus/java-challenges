@@ -186,7 +186,7 @@ public class CollectorsFunctionsChallenge {
     // highest price and the average. For an empty list the count and the sum are 0.
     // Example: priceStatistics(shop) has count 3, sum 153, min 1, max 150 and average 51.0
     public static IntSummaryStatistics priceStatistics(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.summarizingInt(Product::price));
     }
 
     // CHALLENGE 17
