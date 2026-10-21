@@ -195,7 +195,7 @@ public class CollectorsFunctionsChallenge {
     // Example: inventoryValue(shop) returns 1450   (2 * 100 + 150 * 5 + 1 * 500)
     //          inventoryValue([])   returns 0
     public static int inventoryValue(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.summingInt(p -> p.price() * p.stock()));
     }
 
     // CHALLENGE 18
