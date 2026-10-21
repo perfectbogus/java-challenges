@@ -41,4 +41,28 @@ class EmailTest {
         );
     }
 
+    @Test
+    void allFields_areStored() {
+        Attachment pdf = new Attachment("report.pdf", 2 * MB);
+        Email email = minimal()
+                .to("luis@mail.com")
+                .cc("boss@bank.com")
+                .bcc("audit@bank.com")
+                .body("<p>Hello</p>")
+                .attachment(pdf)
+                .priority(Priority.HIGH)
+                .html(true)
+                .build();
+
+        assertAll(
+                () -> assertEquals(List.of("ana@mail.com", "luis@mail.com"), email.getTo()),
+                () -> assertEquals(List.of("boss@bank.com"), email.getCc()),
+                () -> assertEquals(List.of("audit@bank.com"), email.getBcc()),
+                () -> assertEquals("<p>Hello</p>", email.getBody()),
+                () -> assertEquals(List.of(pdf), email.getAttachments()),
+                () -> assertEquals(Priority.HIGH, email.getPriority()),
+                () -> assertTrue(email.isHtml())
+        );
+    }
+
 }
