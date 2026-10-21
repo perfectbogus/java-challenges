@@ -62,7 +62,7 @@ public class CollectorsFunctionsChallenge {
     // Example: totalStock(shop) returns 605
     //          totalStock([])   returns 0
     public static int totalStock(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.summingInt(Product::stock));
     }
 
     // CHALLENGE 6
@@ -71,7 +71,7 @@ public class CollectorsFunctionsChallenge {
     //          averagePrice([Pen(Office, 1, 5), Cup(Home, 2, 5)]) returns 1.5
     //          averagePrice([])                                returns 0.0
     public static double averagePrice(List<Product> products) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return products.stream().collect(Collectors.averagingDouble(Product::price));
     }
 
     // CHALLENGE 7
