@@ -24,4 +24,9 @@ public class Style {
     public int getFontSize() {
         return fontSize;
     }
+
+    public Style(Style other) {
+        this.font = other.getFont();
+        this.fontSize = other.getFontSize();
+    }
 }
