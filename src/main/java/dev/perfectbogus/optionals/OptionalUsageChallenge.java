@@ -63,7 +63,13 @@ public class OptionalUsageChallenge {
     // Example: person = Ana(ana@mail.com, 30, null)  emailDomain(person) returns "mail.com"
     //          person = Bob(null, 25, null)          emailDomain(person) returns "no email"
     public static String emailDomain(Person person) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(person).map(Person::email).map(s -> s.split("@")[1]).orElse("no email");
+    }
+
+    public static String emailDomainImproved(Person person) {
+        return Optional.ofNullable(person.email())
+                .map(email -> email.substring(email.indexOf('@') + 1))
+                .orElse("no email");
     }
 
     // CHALLENGE 5
