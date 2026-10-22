@@ -54,7 +54,7 @@ public class OptionalUsageChallenge {
     //          lengthOrZero(Optional.of(""))       returns 0
     //          lengthOrZero(Optional.empty())      returns 0
     public static int lengthOrZero(Optional<String> text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.map(String::length).orElse(0);
     }
 
     // CHALLENGE 4
