@@ -1,5 +1,7 @@
 package dev.perfectbogus.design.patterns.creational.prototype.document.template;
 
+import java.util.Objects;
+
 public class Style {
     private String font;
     private int fontSize;
@@ -26,6 +28,7 @@ public class Style {
     }
 
     public Style(Style other) {
+        Objects.requireNonNull(other, "Style cannot be null");
         this.font = other.getFont();
         this.fontSize = other.getFontSize();
     }

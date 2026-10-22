@@ -10,14 +10,14 @@ public class Section {
 
     public Section(String heading, List<String> paragraphs, Style style) {
         this.heading = heading;
-        this.paragraphs = paragraphs;
-        this.style = style;
+        this.paragraphs = new ArrayList<>(paragraphs);
+        this.style = new Style(style);
     }
 
     public Section(Section other) {
         heading = other.getHeading();
         paragraphs = new ArrayList<>(other.getParagraphs());
-        style = new Style(other.getStyle().getFont(), other.getStyle().getFontSize());
+        style = new Style(other.getStyle());
     }
 
     public void setStyle(Style style) {
