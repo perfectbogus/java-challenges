@@ -20,7 +20,7 @@ public class OptionalUsageChallenge {
     //          nameOrDefault("")     returns ""
     //          nameOrDefault(null)   returns "unknown"
     public static String nameOrDefault(String name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(name).orElse("unknown");
     }
 
     // CHALLENGE 2
@@ -32,7 +32,20 @@ public class OptionalUsageChallenge {
     //          parseNumber("abc")   returns Optional.empty
     //          parseNumber(null)    returns Optional.empty
     public static Optional<Integer> parseNumber(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        try {
+            return Optional.of(Integer.parseInt(text));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+
+    public static Optional<Integer> parseNumberImproved(String text) {
+        if (text == null) return Optional.empty();
+        try {
+            return Optional.of(Integer.parseInt(text));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
     }
 
     // CHALLENGE 3
