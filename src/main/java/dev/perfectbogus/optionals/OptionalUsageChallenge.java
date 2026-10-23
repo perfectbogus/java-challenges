@@ -91,7 +91,7 @@ public class OptionalUsageChallenge {
     //          findByName(people, "ana") returns Optional.empty
     //          findByName([], "Ana")     returns Optional.empty
     public static Optional<Person> findByName(List<Person> people, String name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return people.stream().filter(p -> p.name().equals(name)).findFirst();
     }
 
     // CHALLENGE 7
