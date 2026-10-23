@@ -33,7 +33,7 @@ public class OptionalDrillsChallenge {
     //                                      priceOf(prices, "chair")  returns Optional.empty
     //          prices = {ghost=null}       priceOf(prices, "ghost")  returns Optional.empty
     public static Optional<Integer> priceOf(Map<String, Integer> prices, String item) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(prices.get(item));
     }
 
     // CHALLENGE 3
