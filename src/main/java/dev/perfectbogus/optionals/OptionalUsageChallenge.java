@@ -101,7 +101,11 @@ public class OptionalUsageChallenge {
     //          presentValues([Optional.empty])                            returns []
     //          presentValues([])                                          returns []
     public static List<String> presentValues(List<Optional<String>> values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return values.stream().filter(Optional::isPresent).map(Optional::get).toList();
+    }
+
+    public static List<String> presentValuesImproved(List<Optional<String>> values) {
+        return values.stream().flatMap(Optional::stream).toList();
     }
 
     // CHALLENGE 8
