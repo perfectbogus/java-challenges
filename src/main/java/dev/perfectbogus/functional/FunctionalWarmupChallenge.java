@@ -62,7 +62,7 @@ public class FunctionalWarmupChallenge {
     //          goodWord().test("xray")  returns false
     //          goodWord().test("Xray")  returns true
     public static Predicate<String> goodWord() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text -> text.length() >= 3 && !text.startsWith("x");
     }
 
     // CHALLENGE 6
