@@ -136,7 +136,7 @@ public class OptionalUsageChallenge {
     //          firstAvailable(Optional.of("a"), Optional.empty())  returns "a"
     //          firstAvailable(Optional.empty(), Optional.empty())  returns "none"
     public static String firstAvailable(Optional<String> first, Optional<String> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return first.or(() -> second).orElse("none");
     }
 
     // CHALLENGE 10
