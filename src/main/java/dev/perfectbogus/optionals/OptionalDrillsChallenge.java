@@ -42,7 +42,7 @@ public class OptionalDrillsChallenge {
     // Example: valueOrLoad(Optional.of("old"), loader)  returns "old" and loader is not called
     //          valueOrLoad(Optional.empty(), loader)    returns what loader.get() returns, and loader is called once
     public static String valueOrLoad(Optional<String> cached, Supplier<String> loader) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return cached.orElseGet(loader);
     }
 
     // CHALLENGE 4
