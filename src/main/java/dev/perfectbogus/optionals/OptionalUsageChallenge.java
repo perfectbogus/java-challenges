@@ -114,7 +114,18 @@ public class OptionalUsageChallenge {
     // Example: log = [], logValue(Optional.of("x"), log)    log becomes [found: x]
     //          log = [found: x], logValue(Optional.empty(), log)   log becomes [found: x, missing]
     public static void logValue(Optional<String> value, List<String> log) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (value.isPresent()) {
+            log.add("found: " + value.get());
+        } else {
+            log.add("missing");
+        }
+    }
+
+    public static void logValueImproved(Optional<String> value, List<String> log) {
+        value.ifPresentOrElse(
+                v -> log.add("found: " + v),
+                () -> log.add("missing")
+        );
     }
 
     // CHALLENGE 9
