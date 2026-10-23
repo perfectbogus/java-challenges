@@ -65,6 +65,12 @@ public class FunctionalWarmupChallenge {
         return text -> text.length() >= 3 && !text.startsWith("x");
     }
 
+    public static Predicate<String> goodWordImproved() {
+        Predicate<String> longEnough = text -> text.length() >= 3;
+        Predicate<String> startsWithX = text -> text.startsWith("x");
+        return longEnough.and(startsWithX.negate());
+    }
+
     // CHALLENGE 6
     // Returns a new list with only the items for which test is true, in the same order. test is called exactly one
     // time for each item. items is not modified.
