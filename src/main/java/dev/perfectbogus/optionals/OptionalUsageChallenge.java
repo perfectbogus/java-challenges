@@ -1,5 +1,6 @@
 package dev.perfectbogus.optionals;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,7 +147,7 @@ public class OptionalUsageChallenge {
     //          requireName(Person("", null, null, null))     returns ""
     //          requireName(Person(null, null, null, null))   throws IllegalArgumentException("name is required")
     public static String requireName(Person person) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(person.name()).orElseThrow(() -> new IllegalArgumentException("name is required"));
     }
 
     // CHALLENGE 11 (medium)
@@ -161,6 +162,11 @@ public class OptionalUsageChallenge {
     //          people = [Ana(null, null, Main St/Lima)]
     //          cityOfOldest(people) returns Optional.empty  (nobody has an age)
     public static Optional<String> cityOfOldest(List<Person> people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return people.stream()
+                .filter(p -> p.age() != null)
+                .max(Comparator.comparingInt(Person::age))
+                .flatMap(person -> Optional.ofNullable(person.address()))
+                .flatMap(address -> Optional.ofNullable(address.city()))
+                .map(String::toUpperCase);
     }
 }
