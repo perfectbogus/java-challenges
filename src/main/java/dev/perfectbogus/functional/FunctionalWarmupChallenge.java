@@ -15,7 +15,7 @@ public class FunctionalWarmupChallenge {
     //          adder(-2).apply(10)  returns 8
     //          adder(0).apply(7)    returns 7
     public static Function<Integer, Integer> adder(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return a -> n + a;
     }
 
     // CHALLENGE 2
@@ -25,7 +25,7 @@ public class FunctionalWarmupChallenge {
     //          applyTwice(x -> x * x, 3)  returns 81
     //          applyTwice(x -> x - 1, 0)  returns -2
     public static int applyTwice(Function<Integer, Integer> f, int x) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return f.apply(f.apply(x));
     }
 
     // CHALLENGE 3
