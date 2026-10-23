@@ -35,7 +35,7 @@ public class FunctionalWarmupChallenge {
     //          trimmedLength().apply(" a b ")    returns 3
     //          trimmedLength().apply("   ")      returns 0
     public static Function<String, Integer> trimmedLength() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text -> text.trim().length();
     }
 
     // CHALLENGE 4
