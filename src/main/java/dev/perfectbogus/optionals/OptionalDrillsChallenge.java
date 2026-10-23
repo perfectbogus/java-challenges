@@ -109,7 +109,17 @@ public class OptionalDrillsChallenge {
     //          sameValue(Optional.of("x"), Optional.of("X"))   returns false
     //          sameValue(Optional.of("x"), Optional.empty())   returns false
     public static boolean sameValue(Optional<String> a, Optional<String> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (a.isEmpty() && b.isEmpty()) {
+            return true;
+        } else if (a.isPresent() && b.isPresent()) {
+            return a.get().equals(b.get());
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean sameValueImproved(Optional<String> a, Optional<String> b) {
+        return a.equals(b);
     }
 
     // CHALLENGE 10

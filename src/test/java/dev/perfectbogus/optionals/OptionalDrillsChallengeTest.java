@@ -471,6 +471,11 @@ class OptionalDrillsChallengeTest {
         }
 
         @Test
+        void testEqualValuesImproved() {
+            assertTrue(OptionalDrillsChallenge.sameValueImproved(Optional.of("x"), Optional.of("x")));
+        }
+
+        @Test
         void testBothEmpty() {
             assertTrue(OptionalDrillsChallenge.sameValue(Optional.empty(), Optional.empty()));
         }
