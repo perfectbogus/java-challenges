@@ -79,7 +79,14 @@ public class OptionalDrillsChallenge {
     //          addOptionals(Optional.empty(), Optional.of(3))  returns Optional.empty
     //          addOptionals(Optional.empty(), Optional.empty()) returns Optional.empty
     public static Optional<Integer> addOptionals(Optional<Integer> a, Optional<Integer> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (a.isPresent() && b.isPresent()) {
+            return Optional.of(a.get() + b.get());
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<Integer> addOptionalsImproved(Optional<Integer> a, Optional<Integer> b) {
+        return a.flatMap(x -> b.map(y -> x + y));
     }
 
     // CHALLENGE 8
