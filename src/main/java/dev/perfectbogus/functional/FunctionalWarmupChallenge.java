@@ -1,6 +1,7 @@
 package dev.perfectbogus.functional;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -124,7 +125,8 @@ public class FunctionalWarmupChallenge {
     // Example: Supplier<Integer> c = counter();  c.get() gives 1, then 2, then 3
     //          Supplier<Integer> d = counter();  d.get() gives 1, even if c was used before
     public static Supplier<Integer> counter() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        AtomicInteger i = new AtomicInteger(0);
+        return i::incrementAndGet;
     }
 
     // CHALLENGE 10
