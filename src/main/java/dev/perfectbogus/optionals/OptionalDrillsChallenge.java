@@ -51,7 +51,7 @@ public class OptionalDrillsChallenge {
     //          allPresent([Optional[a], Optional.empty])    returns false
     //          allPresent([])                               returns true
     public static boolean allPresent(List<Optional<String>> values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return values.stream().allMatch(Optional::isPresent);
     }
 
     // CHALLENGE 5
