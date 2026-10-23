@@ -114,7 +114,7 @@ public class FunctionalWarmupChallenge {
     //          fold([1, 2, 3], 0, (acc, n) -> acc * 10 + n)  returns 123
     //          fold([], 7, (acc, n) -> acc + n)              returns 7
     public static int fold(List<Integer> numbers, int start, BinaryOperator<Integer> op) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().reduce(start, op);
     }
 
     // CHALLENGE 9
