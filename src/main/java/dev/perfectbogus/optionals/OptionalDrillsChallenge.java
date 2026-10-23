@@ -98,7 +98,7 @@ public class OptionalDrillsChallenge {
     //          firstNonNull([null, null])        returns Optional.empty
     //          firstNonNull([])                  returns Optional.empty
     public static Optional<String> firstNonNull(List<String> values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return values.stream().filter(Objects::nonNull).findFirst();
     }
 
     // CHALLENGE 9
