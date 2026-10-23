@@ -22,6 +22,10 @@ public class OptionalDrillsChallenge {
         return Optional.of(text);
     }
 
+    public static Optional<String> nonBlankImproved(String text) {
+        return Optional.ofNullable(text).filter(t -> !t.isBlank());
+    }
+
     // CHALLENGE 2
     // Returns the price of item in the map, or an empty Optional when the map has no price for it. The map can have
     // an item whose price is null, and that item has no price either.

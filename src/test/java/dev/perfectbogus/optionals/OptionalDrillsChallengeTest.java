@@ -37,6 +37,11 @@ class OptionalDrillsChallengeTest {
         }
 
         @Test
+        void testEmptyTextImproved() {
+            assertEquals(Optional.empty(), OptionalDrillsChallenge.nonBlankImproved(""));
+        }
+
+        @Test
         void testOnlySpaces() {
             assertEquals(Optional.empty(), OptionalDrillsChallenge.nonBlank("   "));
         }
