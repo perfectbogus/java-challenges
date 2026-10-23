@@ -136,6 +136,6 @@ public class FunctionalWarmupChallenge {
     //          partial((a, b) -> a - b, 3).apply(10)  returns -7
     //          partial((a, b) -> a * b, 4).apply(5)   returns 20
     public static Function<Integer, Integer> partial(BiFunction<Integer, Integer, Integer> f, int first) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (x) -> f.apply(first, x);
     }
 }
