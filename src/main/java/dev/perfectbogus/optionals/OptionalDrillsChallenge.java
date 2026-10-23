@@ -68,7 +68,7 @@ public class OptionalDrillsChallenge {
     //          greeting(Optional.of(""))     returns "Hello, !"
     //          greeting(Optional.empty())    returns "Hello, stranger!"
     public static String greeting(Optional<String> name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return name.map(v -> "Hello, " + v + "!").orElse("Hello, stranger!");
     }
 
     // CHALLENGE 7
