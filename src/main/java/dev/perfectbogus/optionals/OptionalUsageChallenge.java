@@ -80,7 +80,7 @@ public class OptionalUsageChallenge {
     //          Cy(null, 17, null)   isAdult(cy) returns false
     //          Di(null, null, null) isAdult(di) returns false
     public static boolean isAdult(Person person) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Optional.ofNullable(person.age()).filter(i -> i >= 18).isPresent();
     }
 
     // CHALLENGE 6
