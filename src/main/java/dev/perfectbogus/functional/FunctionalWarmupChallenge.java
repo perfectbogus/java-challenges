@@ -88,8 +88,22 @@ public class FunctionalWarmupChallenge {
     // Example: pipeline([x -> x + 1, x -> x * 2]).apply(3)  returns 8
     //          pipeline([x -> x * 2, x -> x + 1]).apply(3)  returns 7
     //          pipeline([]).apply(3)                        returns 3
+    public static Function<Integer, Integer> pipelineV1(List<Function<Integer, Integer>> steps) {
+        Function<Integer, Integer> allF = x -> x;
+        for (Function<Integer, Integer> f : steps) {
+            allF = allF.andThen(f);
+        }
+        return allF;
+    }
+
     public static Function<Integer, Integer> pipeline(List<Function<Integer, Integer>> steps) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return steps.stream().reduce(x -> x, (acc, next) -> acc.andThen(next));
+    }
+
+    public static Function<Integer, Integer> pipelineV3(List<Function<Integer, Integer>> steps) {
+        Function<Integer, Integer> identity = x -> x;
+        BinaryOperator<Function<Integer, Integer>> accumulator = (acc, next) -> acc.andThen(next);
+        return steps.stream().reduce(identity, accumulator);
     }
 
     // CHALLENGE 8
