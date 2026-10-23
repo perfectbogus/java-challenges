@@ -51,7 +51,7 @@ public class FunctionalWarmupChallenge {
     //          inRange(1, 5).test(6)   returns false
     //          inRange(-3, -1).test(-2) returns true
     public static Predicate<Integer> inRange(int low, int high) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return a -> a >= low && a <= high;
     }
 
     // CHALLENGE 5
