@@ -1,9 +1,6 @@
 package dev.perfectbogus.optionals;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class OptionalDrillsChallenge {
@@ -61,7 +58,7 @@ public class OptionalDrillsChallenge {
     //          longestWord([a])                       returns Optional[a]
     //          longestWord([])                        returns Optional.empty
     public static Optional<String> longestWord(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().max(Comparator.comparingInt(String::length));
     }
 
     // CHALLENGE 6
