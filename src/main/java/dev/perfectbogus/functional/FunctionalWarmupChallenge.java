@@ -78,7 +78,7 @@ public class FunctionalWarmupChallenge {
     //          keepIf([a, b], s -> false)                      returns []
     //          keepIf([], s -> true)                           returns []
     public static List<String> keepIf(List<String> items, Predicate<String> test) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return items.stream().filter(test).toList();
     }
 
     // CHALLENGE 7
