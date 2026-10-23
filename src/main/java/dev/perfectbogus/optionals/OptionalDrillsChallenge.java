@@ -2,6 +2,7 @@ package dev.perfectbogus.optionals;
 
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 public class OptionalDrillsChallenge {
 
@@ -130,6 +131,10 @@ public class OptionalDrillsChallenge {
     //          smallestEven([1, 3, 5])        returns OptionalInt.empty
     //          smallestEven([])               returns OptionalInt.empty
     public static OptionalInt smallestEven(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(numbers).filter(i -> i % 2 == 0).min();
+    }
+
+    public static OptionalInt smallestEvenImproved(int[] numbers) {
+        return IntStream.of(numbers).filter(i -> i % 2 == 0).min();
     }
 }
