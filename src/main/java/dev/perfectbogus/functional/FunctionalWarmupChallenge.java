@@ -38,6 +38,11 @@ public class FunctionalWarmupChallenge {
         return text -> text.trim().length();
     }
 
+    public static Function<String, Integer> trimmedLengthImproved() {
+        Function<String, String> trim = String::trim;
+        return trim.andThen(String::length);
+    }
+
     // CHALLENGE 4
     // Returns a test that is true for the numbers between low and high, both of them included. low is never greater
     // than high.
