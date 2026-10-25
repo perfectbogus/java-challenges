@@ -105,7 +105,7 @@ public class ObjectsCoreChallenge {
     //          compareTexts(null, null)                   returns [true, true]
     //          compareTexts(null, "x")                    returns [false, false]
     public static boolean[] compareTexts(String a, String b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new boolean[]{ a == b, Objects.equals(a, b)};
     }
 
     // Used by challenges 8, 9 and 10. A point is written as (x, y).
@@ -135,7 +135,12 @@ public class ObjectsCoreChallenge {
         //          (1, 2) equals "(1, 2)"  returns false
         @Override
         public boolean equals(Object other) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (other == this) return true;
+            if (other instanceof Point) {
+                Point o = (Point) other;
+                return this.x == o.x() && this.y == o.y();
+            }
+            return false;
         }
 
         // CHALLENGE 9
