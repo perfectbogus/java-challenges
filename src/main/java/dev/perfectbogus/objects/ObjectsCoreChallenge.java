@@ -1,5 +1,6 @@
 package dev.perfectbogus.objects;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -167,6 +168,8 @@ public class ObjectsCoreChallenge {
     public static class Person implements Comparable<Person> {
         private final String name;
         private final int age;
+        private static final Comparator<Person> byAge = Comparator.comparingInt(Person::age);
+        private static final Comparator<Person> byName = Comparator.comparing(Person::name);
 
         public Person(String name, int age) {
             this.name = name;
@@ -191,7 +194,7 @@ public class ObjectsCoreChallenge {
         //          Ana(30) compareTo Ana(30)  returns 0
         @Override
         public int compareTo(Person other) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return byAge.thenComparing(byName).compare(this, other);
         }
     }
 
