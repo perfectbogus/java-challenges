@@ -1,6 +1,7 @@
 package dev.perfectbogus.objects;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ObjectsCoreChallenge {
 
@@ -12,7 +13,7 @@ public class ObjectsCoreChallenge {
     //          sameOrBothNull(null, "a")   returns false
     //          sameOrBothNull("a", "A")    returns false
     public static boolean sameOrBothNull(String a, String b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Objects.equals(a, b);
     }
 
     // CHALLENGE 2
