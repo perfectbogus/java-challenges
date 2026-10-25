@@ -159,7 +159,7 @@ public class ObjectsCoreChallenge {
         //          new Point(-1, 0)   toString returns "(-1, 0)"
         @Override
         public String toString() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return "(" + x + ", " + y + ")";
         }
     }
 
