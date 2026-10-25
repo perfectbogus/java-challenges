@@ -24,7 +24,7 @@ public class ObjectsCoreChallenge {
     //          describe("")            returns ""
     //          describe(null)          returns "nothing"
     public static String describe(Object value) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Objects.toString(value, "nothing");
     }
 
     // CHALLENGE 3
