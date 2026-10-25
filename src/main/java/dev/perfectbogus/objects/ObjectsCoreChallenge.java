@@ -53,7 +53,7 @@ public class ObjectsCoreChallenge {
     //          checkName("")     returns ""
     //          checkName(null)   throws NullPointerException("name must not be null")
     public static String checkName(String name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Objects.requireNonNull(name, "name must not be null");
     }
 
     // CHALLENGE 5
