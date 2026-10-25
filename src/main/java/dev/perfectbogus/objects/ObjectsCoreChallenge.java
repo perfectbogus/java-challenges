@@ -260,7 +260,7 @@ public class ObjectsCoreChallenge {
         // Example: Money(150) plus Money(25)  returns a new Money(175); the first one is still 150 and the second
         //                                     one is still 25
         public Money plus(Money other) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return new Money(cents + other.cents());
         }
     }
 
