@@ -150,7 +150,7 @@ public class ObjectsCoreChallenge {
         // Example: (1, 2) hashCode and (1, 2) hashCode  give the same number
         @Override
         public int hashCode() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return Objects.hash(x, y);
         }
 
         // CHALLENGE 10
