@@ -88,7 +88,12 @@ public class ObjectsCoreChallenge {
     //          allSame([a, null])   returns false
     //          allSame([])          returns true
     public static boolean allSame(List<String> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (items.isEmpty()) return true;
+        String item = items.get(0);
+        for (int i = 1; i < items.size(); i++) {
+            if (!Objects.equals(item, items.get(i))) return false;
+        }
+        return true;
     }
 
     // CHALLENGE 7
