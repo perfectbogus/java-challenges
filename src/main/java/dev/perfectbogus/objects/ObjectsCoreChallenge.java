@@ -239,7 +239,7 @@ public class ObjectsCoreChallenge {
         // exception when the title or the author is null. Different books should usually have different hash codes.
         @Override
         public int hashCode() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return Objects.hash(title, author);
         }
     }
 
