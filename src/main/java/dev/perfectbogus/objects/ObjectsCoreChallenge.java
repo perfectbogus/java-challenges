@@ -225,7 +225,13 @@ public class ObjectsCoreChallenge {
         //          Book("Dune", null) equals Book("Dune", "Herbert")       returns false
         @Override
         public boolean equals(Object other) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            if (this == other) return true;
+
+            if (!(other instanceof Book)) {
+                return false;
+            }
+            Book b = (Book) other;
+            return Objects.equals(title, b.title()) && Objects.equals(author, b.author());
         }
 
         // CHALLENGE 13
