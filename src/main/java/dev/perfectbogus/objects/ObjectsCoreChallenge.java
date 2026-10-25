@@ -63,8 +63,20 @@ public class ObjectsCoreChallenge {
     //          firstNonNull(null, "b")   returns "b"
     //          firstNonNull("", "b")     returns ""
     //          firstNonNull(null, null)  throws NullPointerException
+    public static String firstNonNullImproved(String first, String second) {
+        if (!Objects.isNull(first) && !Objects.isNull(second)) {
+            return first;
+        } else if (Objects.isNull(first) && !Objects.isNull(second)) {
+            return second;
+        } else if (!Objects.isNull(first) && Objects.isNull(second)) {
+            return first;
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
     public static String firstNonNull(String first, String second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Objects.requireNonNullElse(first, second);
     }
 
     // CHALLENGE 6
