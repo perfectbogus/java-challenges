@@ -1,8 +1,10 @@
 package dev.perfectbogus.objects;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ObjectsCoreChallenge {
 
@@ -273,12 +275,14 @@ public class ObjectsCoreChallenge {
     //          team.members().add("Di") either throws an exception or changes nothing in the team
     public static class Team {
 
+        private final List<String> members = new ArrayList<>();
+
         public Team(List<String> members) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            this.members.addAll(members);
         }
 
         public List<String> members() {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return new ArrayList<>(members);
         }
     }
 }
