@@ -35,7 +35,15 @@ public class ObjectsCoreChallenge {
     //          countNulls(["null", null])   returns 1
     //          countNulls([])               returns 0
     public static int countNulls(List<String> items) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int i = 0;
+        for (String item : items) {
+            if (Objects.isNull(item)) i++;
+        }
+        return i;
+    }
+
+    public static int countNullsImproved(List<String> items) {
+        return (int) items.stream().filter(Objects::isNull).count();
     }
 
     // CHALLENGE 4
