@@ -134,6 +134,14 @@ public class FunctionalInterfacesChallenge {
         return (value, min, max) -> value >= max ? max : Math.max(value, min);
     }
 
+    public static TriFunction<Integer, Integer, Integer, Integer> clampImproved() {
+        return (value, min, max) -> Math.max(min, Math.min(max, value));
+    }
+
+    public static TriFunction<Integer, Integer, Integer, Integer> clampImprovedV2() {
+        return Math::clamp;
+    }
+
     // A step that changes a value into another value of the same type. It is used by challenge 10.
     @FunctionalInterface
     public interface Transformer<T> {
