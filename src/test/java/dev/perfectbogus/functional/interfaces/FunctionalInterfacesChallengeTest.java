@@ -251,6 +251,11 @@ class FunctionalInterfacesChallengeTest {
         }
 
         @Test
+        void testSecondIsLongerImproved() {
+            assertEquals("bb", FunctionalInterfacesChallenge.longerImproved().apply("a", "bb"));
+        }
+
+        @Test
         void testFirstIsLonger() {
             assertEquals("bb", FunctionalInterfacesChallenge.longer().apply("bb", "a"));
         }

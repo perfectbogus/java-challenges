@@ -1,5 +1,6 @@
 package dev.perfectbogus.functional.interfaces;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
@@ -58,7 +59,11 @@ public class FunctionalInterfacesChallenge {
     //          longer().apply("bb", "a")    returns "bb"
     //          longer().apply("ab", "cd")   returns "ab"
     public static BinaryOperator<String> longer() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (a, b) -> a.length() >= b.length() ? a : b;
+    }
+
+    public static BinaryOperator<String> longerImproved() {
+        return BinaryOperator.maxBy(Comparator.comparingInt(String::length));
     }
 
     // CHALLENGE 5
