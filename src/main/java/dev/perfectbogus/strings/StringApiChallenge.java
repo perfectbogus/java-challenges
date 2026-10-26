@@ -24,6 +24,10 @@ public class StringApiChallenge {
         return true;
     }
 
+    public static boolean isPalindromeImproved(String text) {
+        return new StringBuilder(text).reverse().toString().equalsIgnoreCase(text);
+    }
+
     // CHALLENGE 2
     // Returns the words of the sentence in the opposite order. The words are separated by exactly one space, and the
     // sentence has no spaces at the beginning or at the end. An empty sentence gives an empty text.
