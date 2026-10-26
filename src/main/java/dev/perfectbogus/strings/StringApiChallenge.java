@@ -100,6 +100,11 @@ public class StringApiChallenge {
                 text.substring(1).toLowerCase();
     }
 
+    public static String capitalizeImproved(String text) {
+        if (text.isEmpty()) return "";
+        return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
+    }
+
     // CHALLENGE 5
     // Returns the sentence with every word written as in challenge 4: the first letter of each word in uppercase and
     // the other letters in lowercase. The words are separated by exactly one space, and there are no spaces at the

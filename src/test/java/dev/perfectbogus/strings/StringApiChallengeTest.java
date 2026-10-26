@@ -238,6 +238,11 @@ class StringApiChallengeTest {
         }
 
         @Test
+        void testMixedCaseImproved() {
+            assertEquals("Hello", StringApiChallenge.capitalizeImproved("hELLO"));
+        }
+
+        @Test
         void testSingleLetter() {
             assertEquals("A", StringApiChallenge.capitalize("a"));
         }
