@@ -20,6 +20,10 @@ public class FunctionalInterfacesChallenge {
         return target::add;
     }
 
+    public static Consumer<String> addToImproved(List<String> target) {
+        return text -> target.add(text);
+    }
+
     // CHALLENGE 2
     // Returns a consumer that gives each text it receives first to the consumer first and then to the consumer
     // second. Both receive the same text, and each of them is called exactly once for every text. Nothing is called
