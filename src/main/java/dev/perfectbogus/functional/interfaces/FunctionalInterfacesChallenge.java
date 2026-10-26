@@ -17,7 +17,7 @@ public class FunctionalInterfacesChallenge {
     // Example: list = [], c = addTo(list), c.accept("a"), c.accept("b")  list is now [a, b]
     //          c.accept("a") once more                                     list is now [a, b, a]
     public static Consumer<String> addTo(List<String> target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return target::add;
     }
 
     // CHALLENGE 2
