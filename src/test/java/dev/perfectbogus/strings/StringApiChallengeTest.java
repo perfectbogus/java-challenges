@@ -160,6 +160,11 @@ class StringApiChallengeTest {
         }
 
         @Test
+        void testBananaImproved() {
+            assertEquals(2, StringApiChallenge.countOccurrencesImproved("banana", "an"));
+        }
+
+        @Test
         void testNonOverlappingEven() {
             assertEquals(2, StringApiChallenge.countOccurrences("aaaa", "aa"));
         }
