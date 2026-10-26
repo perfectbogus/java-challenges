@@ -154,7 +154,7 @@ public class FunctionalInterfacesChallenge {
         //          addOne.then(double).transform(3)  returns 8
         //          double.then(addOne).transform(3)  returns 7
         default Transformer<T> then(Transformer<T> next) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            return value -> next.transform(transform(value));
         }
     }
 }
