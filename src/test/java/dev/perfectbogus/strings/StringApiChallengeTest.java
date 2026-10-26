@@ -419,7 +419,7 @@ class StringApiChallengeTest {
 
         @Test
         void testThreeTimesImproved() {
-            assertEquals("ab, ab, ab", StringApiChallenge.repeatWithSeparator("ab", 3, ", "));
+            assertEquals("ab, ab, ab", StringApiChallenge.repeatWithSeparatorImproved("ab", 3, ", "));
         }
 
         @Test
@@ -475,6 +475,16 @@ class StringApiChallengeTest {
         @Test
         void testMixed() {
             assertEquals("abc", StringApiChallenge.removeDigits("a1b22c"));
+        }
+
+        @Test
+        void testMixedImproved() {
+            assertEquals("abc", StringApiChallenge.removeDigitsImproved("a1b22c"));
+        }
+
+        @Test
+        void testMixedSimplified() {
+            assertEquals("abc", StringApiChallenge.removeDigitsSimplified("a1b22c"));
         }
 
         @Test

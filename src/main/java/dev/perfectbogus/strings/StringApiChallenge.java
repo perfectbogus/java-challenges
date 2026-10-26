@@ -169,7 +169,23 @@ public class StringApiChallenge {
     //          removeDigits("a b")     returns "a b"
     //          removeDigits("")        returns ""
     public static String removeDigits(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (!Character.isDigit(c)) sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    public static String removeDigitsImproved(String text) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (c < '0' || c > '9') sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    public static String removeDigitsSimplified(String text) {
+        return text.replaceAll("[0-9]", "");
     }
 
     // CHALLENGE 9
