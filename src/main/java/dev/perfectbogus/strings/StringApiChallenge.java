@@ -95,7 +95,9 @@ public class StringApiChallenge {
     //          capitalize("123ABC")  returns "123abc"
     //          capitalize("")        returns ""
     public static String capitalize(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return "";
+        return Character.toUpperCase(text.charAt(0)) +
+                text.substring(1).toLowerCase();
     }
 
     // CHALLENGE 5
