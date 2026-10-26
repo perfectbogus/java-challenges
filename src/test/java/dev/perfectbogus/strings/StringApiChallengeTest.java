@@ -813,6 +813,11 @@ class StringApiChallengeTest {
         }
 
         @Test
+        void testNormalAmountOperation() {
+            assertEquals("12.05", StringApiChallenge.formatCentsOperation(1205));
+        }
+
+        @Test
         void testLessThanTenCents() {
             assertEquals("0.05", StringApiChallenge.formatCents(5));
         }

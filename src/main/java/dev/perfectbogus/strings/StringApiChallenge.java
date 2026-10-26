@@ -282,7 +282,14 @@ public class StringApiChallenge {
     //          formatCents(100)      returns "1.00"
     //          formatCents(1234567)  returns "12345.67"
     public static String formatCents(long cents) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String s = String.valueOf(cents);
+        if (s.length() == 1) return "0.0" + s;
+        if (s.length() == 2) return "0." + s;
+        return s.substring(0, s.length() - 2) + "." + s.substring(s.length() - 2);
+    }
+
+    public static String formatCentsOperation(long cents) {
+        return String.format("%d.%02d", cents / 100, cents % 100);
     }
 
     // CHALLENGE 14
