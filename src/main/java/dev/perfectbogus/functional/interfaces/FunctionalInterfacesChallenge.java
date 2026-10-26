@@ -37,6 +37,10 @@ public class FunctionalInterfacesChallenge {
         };
     }
 
+    public static Consumer<String> bothImproved(Consumer<String> first, Consumer<String> second) {
+        return first.andThen(second);
+    }
+
     // CHALLENGE 3
     // Returns an operator that repeats the text it receives the given number of times, one after the other. times is
     // never negative, and 0 gives an empty text.

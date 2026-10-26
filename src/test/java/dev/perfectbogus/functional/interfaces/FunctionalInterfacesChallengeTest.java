@@ -111,6 +111,15 @@ class FunctionalInterfacesChallengeTest {
         }
 
         @Test
+        void testOrderImproved() {
+            List<String> log = new ArrayList<>();
+            Consumer<String> first = t -> log.add("1:" + t);
+            Consumer<String> second = t -> log.add("2:" + t);
+            FunctionalInterfacesChallenge.bothImproved(first, second).accept("x");
+            assertEquals(List.of("1:x", "2:x"), log);
+        }
+
+        @Test
         void testOrderIsNotSwapped() {
             List<String> log = new ArrayList<>();
             Consumer<String> a = t -> log.add("A");
