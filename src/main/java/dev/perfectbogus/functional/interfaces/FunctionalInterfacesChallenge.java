@@ -48,7 +48,7 @@ public class FunctionalInterfacesChallenge {
     //          repeat(1).apply("ab")  returns "ab"
     //          repeat(0).apply("ab")  returns ""
     public static UnaryOperator<String> repeat(int times) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return t -> t.repeat(times);
     }
 
     // CHALLENGE 4
