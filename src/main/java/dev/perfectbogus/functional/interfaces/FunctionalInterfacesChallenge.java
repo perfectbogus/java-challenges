@@ -83,7 +83,7 @@ public class FunctionalInterfacesChallenge {
     //          divisibleBy(3).test(-6)   returns true
     //          divisibleBy(3).test(0)    returns true
     public static IntPredicate divisibleBy(int d) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return n -> n % d == 0;
     }
 
     // CHALLENGE 7
