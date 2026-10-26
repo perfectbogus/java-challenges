@@ -1,6 +1,8 @@
 package dev.perfectbogus.strings;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringApiChallenge {
 
@@ -35,7 +37,18 @@ public class StringApiChallenge {
     //          reverseWords("solo")           returns "solo"
     //          reverseWords("")               returns ""
     public static String reverseWords(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String[] split = sentence.split(" ");
+        int left = 0;
+        int right = split.length - 1;
+
+        String[] result = new String[split.length];
+        while (left < split.length) {
+            result[left] = split[right];
+            left++;
+            right--;
+        }
+
+        return String.join(" ", result);
     }
 
     // CHALLENGE 3
