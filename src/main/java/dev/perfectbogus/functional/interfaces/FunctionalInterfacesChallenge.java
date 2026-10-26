@@ -131,7 +131,7 @@ public class FunctionalInterfacesChallenge {
     //          clamp().apply(15, 1, 10)  returns 10
     //          clamp().apply(10, 1, 10)  returns 10
     public static TriFunction<Integer, Integer, Integer, Integer> clamp() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (value, min, max) -> value >= max ? max : Math.max(value, min);
     }
 
     // A step that changes a value into another value of the same type. It is used by challenge 10.
