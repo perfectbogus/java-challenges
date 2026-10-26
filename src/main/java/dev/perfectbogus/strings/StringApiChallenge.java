@@ -212,7 +212,35 @@ public class StringApiChallenge {
     //          compress("aaaaaaaaaaaa")  returns "a12"
     //          compress("")              returns ""
     public static String compress(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return "";
+        int i = 0;
+        char current = text.charAt(0);
+        StringBuilder sb = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (current == c) {
+                i++;
+            } else {
+                sb.append(current).append(i);
+                current = c;
+                i = 1;
+            }
+        }
+        sb.append(current).append(i);
+        return sb.toString();
+    }
+
+    public static String compressSimplified(String text) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while (i < text.length()) {
+            int j = i;
+            while (j < text.length() && text.charAt(j) == text.charAt(i)) {
+                j++;
+            }
+            sb.append(text.charAt(i)).append(j - i);
+            i = j;
+        }
+        return sb.toString();
     }
 
     // CHALLENGE 11

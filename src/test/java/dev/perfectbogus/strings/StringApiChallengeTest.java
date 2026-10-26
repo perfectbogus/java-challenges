@@ -620,6 +620,11 @@ class StringApiChallengeTest {
         }
 
         @Test
+        void testExampleSimplified() {
+            assertEquals("a3b1c2", StringApiChallenge.compressSimplified("aaabcc"));
+        }
+
+        @Test
         void testSameLetterAppearsAgain() {
             assertEquals("a2b2a2", StringApiChallenge.compress("aabbaa"));
         }
