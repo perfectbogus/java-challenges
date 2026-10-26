@@ -113,7 +113,7 @@ public class FunctionalInterfacesChallenge {
     //          safeDivide().applyAsInt(-7, 2)  returns -3
     //          safeDivide().applyAsInt(5, 0)   returns 0
     public static IntBinaryOperator safeDivide() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (a, b) -> b == 0 ? 0 : a / b;
     }
 
     // A function that receives three values. It is used by challenge 9.
