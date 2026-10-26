@@ -197,7 +197,11 @@ public class StringApiChallenge {
     //          isAnagram("abc", "abcd")       returns false
     //          isAnagram("", "")              returns true
     public static boolean isAnagram(String a, String b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        char[] sortA = a.toLowerCase().toCharArray();
+        char[] sortB = b.toLowerCase().toCharArray();
+        Arrays.sort(sortA);
+        Arrays.sort(sortB);
+        return Arrays.equals(sortA, sortB);
     }
 
     // CHALLENGE 10
