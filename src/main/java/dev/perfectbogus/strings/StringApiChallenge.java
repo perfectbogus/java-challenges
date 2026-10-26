@@ -127,7 +127,17 @@ public class StringApiChallenge {
     //          padLeft("", 3, '-')     returns "---"
     //          padLeft("ab", 2, '0')   returns "ab"
     public static String padLeft(String text, int width, char fill) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.length() >= width) return text;
+        int missing = width - text.length();
+        return String.valueOf(fill).repeat(missing) + text;
+    }
+
+    public static String padLeftImproved(String text, int width, char fill) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = text.length(); i < width; i++) {
+            sb.append(fill);
+        }
+        return sb + text;
     }
 
     // CHALLENGE 7

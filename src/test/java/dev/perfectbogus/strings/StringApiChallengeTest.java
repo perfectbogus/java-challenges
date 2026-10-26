@@ -354,6 +354,11 @@ class StringApiChallengeTest {
         }
 
         @Test
+        void testZerosImproved() {
+            assertEquals("007", StringApiChallenge.padLeftImproved("7", 3, '0'));
+        }
+
+        @Test
         void testLongerThanWidth() {
             assertEquals("abc", StringApiChallenge.padLeft("abc", 2, '*'));
         }
