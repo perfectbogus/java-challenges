@@ -446,6 +446,11 @@ class FunctionalInterfacesChallengeTest {
         }
 
         @Test
+        void testBananaImpmroved() {
+            assertEquals(3, FunctionalInterfacesChallenge.vowelCountImproved().applyAsInt("banana"));
+        }
+
+        @Test
         void testUppercaseVowels() {
             assertEquals(5, FunctionalInterfacesChallenge.vowelCount().applyAsInt("AEIOU"));
         }

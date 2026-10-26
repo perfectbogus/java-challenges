@@ -1,7 +1,9 @@
 package dev.perfectbogus.functional.interfaces;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
@@ -94,7 +96,14 @@ public class FunctionalInterfacesChallenge {
     //          vowelCount().applyAsInt("rhythm")  returns 0
     //          vowelCount().applyAsInt("")        returns 0
     public static ToIntFunction<String> vowelCount() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+        return t -> (int) t.chars().mapToObj(c -> (char) c).filter(vowels::contains).count();
+    }
+
+    public static ToIntFunction<String> vowelCountImproved() {
+        return text -> (int) text.toLowerCase().chars()
+                .filter(c -> "aeiou".indexOf(c) >= 0)
+                .count();
     }
 
     // CHALLENGE 8
