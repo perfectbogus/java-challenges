@@ -1,6 +1,7 @@
 package dev.perfectbogus.strings;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,13 @@ public class StringApiChallenge {
         }
 
         return String.join(" ", result);
+    }
+
+    public static String reverseWordsImproved(String sentence) {
+        if (sentence.isEmpty()) return "";
+        List<String> words = Arrays.asList(sentence.split(" "));
+        Collections.reverse(words);
+        return String.join(" ", words);
     }
 
     // CHALLENGE 3
