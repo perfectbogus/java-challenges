@@ -418,6 +418,11 @@ class StringApiChallengeTest {
         }
 
         @Test
+        void testThreeTimesImproved() {
+            assertEquals("ab, ab, ab", StringApiChallenge.repeatWithSeparator("ab", 3, ", "));
+        }
+
+        @Test
         void testOnce() {
             assertEquals("ab", StringApiChallenge.repeatWithSeparator("ab", 1, ", "));
         }

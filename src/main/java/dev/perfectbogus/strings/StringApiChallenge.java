@@ -1,5 +1,6 @@
 package dev.perfectbogus.strings;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -148,7 +149,16 @@ public class StringApiChallenge {
     //          repeatWithSeparator("ab", 0, ", ")  returns ""
     //          repeatWithSeparator("", 3, ",")     returns ",,"
     public static String repeatWithSeparator(String text, int times, String separator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (times == 0) return "";
+        List<String> repeats = new ArrayList<>();
+        for (int i = 0; i < times; i++) {
+            repeats.add(text);
+        }
+        return String.join(separator, repeats);
+    }
+
+    public static String repeatWithSeparatorImproved(String text, int times, String separator) {
+        return String.join(separator, Collections.nCopies(times, text));
     }
 
     // CHALLENGE 8
