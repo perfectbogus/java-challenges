@@ -251,7 +251,9 @@ public class StringApiChallenge {
     //          middleCharacters("a")     returns "a"
     //          middleCharacters("")      returns ""
     public static String middleCharacters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return "";
+        int mid = text.length() / 2;
+        return text.length() % 2 == 0 ? text.substring(mid - 1, mid + 1) : text.substring(mid, mid + 1);
     }
 
     // CHALLENGE 12
