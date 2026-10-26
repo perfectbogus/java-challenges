@@ -774,6 +774,11 @@ class StringApiChallengeTest {
         }
 
         @Test
+        void testSpacesAreMaskedTooRegex() {
+            assertEquals("***************3456", StringApiChallenge.maskCardRegex("1234 5678 9012 3456"));
+        }
+
+        @Test
         void testDashesAreMaskedToo() {
             assertEquals("*****2222", StringApiChallenge.maskCard("1111-2222"));
         }

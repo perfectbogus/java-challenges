@@ -264,7 +264,13 @@ public class StringApiChallenge {
     //          maskCard("1234")              returns "1234"
     //          maskCard("")                  returns ""
     public static String maskCard(String number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (number.length() <= 4) return number;
+        return "*".repeat(number.length() - 4) + number.substring(number.length() - 4);
+    }
+
+    public static String maskCardRegex(String number) {
+        String regex = "(?s).(?=.{4})";
+        return number.replaceAll(regex, "*");
     }
 
     // CHALLENGE 13
