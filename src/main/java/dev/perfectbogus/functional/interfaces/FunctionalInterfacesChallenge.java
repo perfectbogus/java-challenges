@@ -72,7 +72,7 @@ public class FunctionalInterfacesChallenge {
     //          lengthAbove().test("hello", 5)  returns false
     //          lengthAbove().test("", -1)      returns true
     public static BiPredicate<String, Integer> lengthAbove() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (t, n) -> t.length() > n;
     }
 
     // CHALLENGE 6
