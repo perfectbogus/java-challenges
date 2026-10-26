@@ -113,7 +113,10 @@ public class StringApiChallenge {
     //          titleCase("a b c")        returns "A B C"
     //          titleCase("")             returns ""
     public static String titleCase(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (sentence.isEmpty()) return "";
+        return Arrays.stream(sentence.split(" "))
+                .map(s -> s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
     }
 
     // CHALLENGE 6
