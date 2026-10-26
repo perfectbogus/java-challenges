@@ -31,7 +31,10 @@ public class FunctionalInterfacesChallenge {
     // Example: log = [], first adds "1:" + text to log, second adds "2:" + text to log
     //          both(first, second).accept("x")  log is now [1:x, 2:x]
     public static Consumer<String> both(Consumer<String> first, Consumer<String> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return t -> {
+            first.accept(t);
+            second.accept(t);
+        };
     }
 
     // CHALLENGE 3
