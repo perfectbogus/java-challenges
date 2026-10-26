@@ -13,7 +13,15 @@ public class StringApiChallenge {
     //          isPalindrome("abca")    returns false
     //          isPalindrome("")        returns true
     public static boolean isPalindrome(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String norm = text.toLowerCase();
+        int left = 0;
+        int right = norm.length() - 1;
+        while (left < right) {
+            if (norm.charAt(left) != norm.charAt(right)) return false;
+            left++;
+            right--;
+        }
+        return true;
     }
 
     // CHALLENGE 2
