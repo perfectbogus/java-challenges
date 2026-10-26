@@ -313,6 +313,8 @@ public class StringApiChallenge {
     //          wordCount("   ")            returns 0
     //          wordCount("")               returns 0
     public static int wordCount(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (int) Arrays.stream(text.split(" "))
+                .filter(s -> !s.isBlank())
+                .count();
     }
 }
