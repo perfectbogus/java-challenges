@@ -38,7 +38,11 @@ public class FunctionalMapsChallenge {
     // Example: toMapFirstWins([apple, avocado, banana], w -> w.charAt(0), String::length)  returns {a=5, b=6}
     //          toMapFirstWins([avocado, apple], w -> w.charAt(0), String::length)          returns {a=7}
     public static <T, K, V> Map<K, V> toMapFirstWins(List<T> items, Function<T, K> keyFn, Function<T, V> valueFn) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return items.stream().collect(Collectors.toMap(
+                keyFn,
+                valueFn,
+                (existing, incoming) -> existing
+        ));
     }
 
     // CHALLENGE 4
