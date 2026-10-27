@@ -1,43 +1,48 @@
 package dev.perfectbogus.design.patterns.creational.prototype.document.template;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Document {
     private String title;
     private final List<Section> sections;
     private final Map<String, String> metadata;
-    private final byte[] logo;
+    private final Logo logo;
 
-    public Document(String title, List<Section> sections, Map<String,String> metadata, byte[] logo) {
+    public Document(String title, List<Section> sections, Map<String,String> metadata, byte[] bytesLogo) {
         this.title = title;
         this.sections = new ArrayList<>();
         for (Section s : sections) {
-            sections.add(new Section(s));
+            this.sections.add(new Section(s));
         }
         this.metadata = new HashMap<>(metadata);
-        this.logo = logo.clone();
+        this.logo = new Logo(bytesLogo);
     }
 
     public Document(Document other) {
         this.title = other.getTitle();
-        this.sections = other.getSections();
-        this.metadata = other.getMetadata();
+        this.sections = new ArrayList<>();
+        for (Section s : other.getSections()) {
+            this.sections.add(new Section(s));
+        }
+        this.metadata = new HashMap<>(other.metadata);
         this.logo = other.getLogo();
     }
 
-    public byte[] getLogo() {
-        return this.logo.clone();
+    public Logo getLogo() {
+        return this.logo;
     }
 
     public Map<String, String> getMetadata() {
-        return new HashMap<>(metadata);
+        return metadata.entrySet().stream()
+                .collect(Collectors.toUnmodifiableMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
+                ));
     }
 
     public List<Section> getSections() {
-        return new ArrayList<>(sections);
+        return sections.stream().toList();
     }
 
     public void setTitle(String title) {

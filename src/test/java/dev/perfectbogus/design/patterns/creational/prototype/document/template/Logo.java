@@ -13,10 +13,6 @@ public final class Logo {
         return bytes.length;
     }
 
-    public byte[] getBytes() {
-        return bytes.clone();
-    }
-
     public ByteBuffer asReadOnlyBuffer() {
         return ByteBuffer.wrap(bytes).asReadOnlyBuffer();
     }
