@@ -26,7 +26,10 @@ public class FunctionalMapsChallenge {
     // Example: countBy([a, bb, c, dd, eee], String::length)  returns {1=2, 2=2, 3=1}
     //          countBy([x, y, x], Function.identity())        returns {x=2, y=1}
     public static <T, K> Map<K, Long> countBy(List<T> items, Function<T, K> keyFn) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return items.stream().collect(Collectors.groupingBy(
+                keyFn,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 3
