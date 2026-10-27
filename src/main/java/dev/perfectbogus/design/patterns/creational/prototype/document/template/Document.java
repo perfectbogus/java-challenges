@@ -9,14 +9,14 @@ public class Document {
     private final Map<String, String> metadata;
     private final Logo logo;
 
-    public Document(String title, List<Section> sections, Map<String,String> metadata, byte[] bytesLogo) {
+    public Document(String title, List<Section> sections, Map<String,String> metadata, Logo logo) {
         this.title = title;
         this.sections = new ArrayList<>();
         for (Section s : sections) {
             this.sections.add(new Section(s));
         }
         this.metadata = new HashMap<>(metadata);
-        this.logo = new Logo(bytesLogo);
+        this.logo = logo;
     }
 
     public Document(Document other) {

@@ -23,7 +23,7 @@ public class Section {
     }
 
     public void setStyle(Style style) {
-        this.style = style;
+        this.style = new Style(style);
     }
 
     public Style getStyle() {
@@ -31,7 +31,7 @@ public class Section {
     }
 
     public void setParagraphs(List<String> paragraphs) {
-        this.paragraphs = paragraphs;
+        this.paragraphs = new ArrayList<>(paragraphs);
     }
 
     public List<String> getParagraphs() {
