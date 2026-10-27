@@ -8,6 +8,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class FunctionalMapsChallenge {
 
@@ -17,7 +18,7 @@ public class FunctionalMapsChallenge {
     // Example: groupBy([a, bb, c, dd, eee], String::length)  returns {1=[a, c], 2=[bb, dd], 3=[eee]}
     //          groupBy([1, 2, 3, 4, 5], n -> n % 2)          returns {0=[2, 4], 1=[1, 3, 5]}
     public static <T, K> Map<K, List<T>> groupBy(List<T> items, Function<T, K> keyFn) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return items.stream().collect(Collectors.groupingBy(keyFn));
     }
 
     // CHALLENGE 2
