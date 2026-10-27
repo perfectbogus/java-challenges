@@ -2,6 +2,7 @@ package dev.perfectbogus.design.patterns.creational.prototype.document.template;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Section {
     private String heading;
@@ -15,6 +16,7 @@ public class Section {
     }
 
     public Section(Section other) {
+        Objects.requireNonNull(other, "Section cannot be null");
         heading = other.getHeading();
         paragraphs = new ArrayList<>(other.getParagraphs());
         style = new Style(other.getStyle());
