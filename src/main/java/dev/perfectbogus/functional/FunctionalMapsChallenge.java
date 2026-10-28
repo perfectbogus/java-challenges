@@ -52,7 +52,10 @@ public class FunctionalMapsChallenge {
     //          mapValues({a=1}, v -> "n" + v)      returns {a=n1}
     //          mapValues({}, v -> v)               returns {}
     public static <K, V, R> Map<K, R> mapValues(Map<K, V> map, Function<V, R> fn) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getKey,
+                e -> fn.apply(e.getValue())
+        ));
     }
 
     // CHALLENGE 5
