@@ -155,7 +155,10 @@ public class FunctionalMapsChallenge {
     //          wordsByInitial([Ant, ant])                returns {A=Ant, a=ant}
     //          wordsByInitial([])                        returns {}
     public static Map<Character, String> wordsByInitial(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                s -> s.charAt(0),
+                Collectors.joining(",")
+        ));
     }
 
     // CHALLENGE 12
