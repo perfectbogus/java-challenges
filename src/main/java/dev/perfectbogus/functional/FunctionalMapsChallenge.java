@@ -182,7 +182,12 @@ public class FunctionalMapsChallenge {
     //          keysByValueDescending({b=2, a=2, c=5})  returns [c, a, b]
     //          keysByValueDescending({})               returns []
     public static List<String> keysByValueDescending(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Map.Entry<String, Integer>> byValueDesc = Map.Entry.<String, Integer>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Integer>> byKey = Map.Entry.comparingByKey();
+        return map.entrySet().stream()
+                .sorted(byValueDesc.thenComparing(byKey))
+                .map(Map.Entry::getKey)
+                .toList();
     }
 
     // CHALLENGE 14
