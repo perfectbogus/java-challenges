@@ -168,7 +168,11 @@ public class FunctionalMapsChallenge {
     //          countSorted([b, B, a])                 returns {B=1, a=1, b=1}
     //          countSorted([])                        returns {}
     public static TreeMap<String, Long> countSorted(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                () -> new TreeMap<>(),
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 13
