@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FunctionalMapsChallenge {
 
@@ -120,6 +121,15 @@ public class FunctionalMapsChallenge {
         return mergeMap;
     }
 
+    public static <K, V> Map<K, V> mergeWithImproved(Map<K, V> a, Map<K, V> b, BinaryOperator<V> combine) {
+        return Stream.concat(a.entrySet().stream(), b.entrySet().stream())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        combine
+                ));
+    }
+
     // CHALLENGE 10
     // Groups the items by keyFn and, for each key, keeps only the greatest item according to comparator. If two items
     // of a group are equally great, the first of them in the list is kept. keyFn never gives null.
@@ -128,7 +138,7 @@ public class FunctionalMapsChallenge {
     //          maxPerGroup([ab, cd, ax], w -> w.charAt(0), Comparator.comparingInt(String::length))
     //          returns {a=ab, c=cd}  (ab and ax have the same length, and ab comes first)
     public static <T, K> Map<K, T> maxPerGroup(List<T> items, Function<T, K> keyFn, Comparator<T> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 11
