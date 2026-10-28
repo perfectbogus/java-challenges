@@ -772,7 +772,7 @@ class FunctionalMapsChallengeTest {
     @Nested
     class CountSortedTests {
 
-        @Test
+    @Test
         void testCountsAndSorts() {
             TreeMap<String, Long> result = FunctionalMapsChallenge.countSorted(List.of("pear", "apple", "pear", "fig"));
             assertEquals(List.of("apple", "fig", "pear"), new ArrayList<>(result.keySet()));

@@ -207,6 +207,6 @@ public class FunctionalMapsChallenge {
     //          Stream.of(-3, -2).collect(evenOdd())         returns {false=[-3], true=[-2]}
     //          Stream.<Integer>empty().collect(evenOdd())   returns {false=[], true=[]}
     public static Collector<Integer, ?, Map<Boolean, List<Integer>>> evenOdd() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Collectors.partitioningBy(n -> n % 2 == 0);
     }
 }
