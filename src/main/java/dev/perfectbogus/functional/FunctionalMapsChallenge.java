@@ -90,7 +90,11 @@ public class FunctionalMapsChallenge {
     //          totalByKey([x=4])            returns {x=4}
     //          totalByKey([])               returns {}
     public static Map<String, Integer> totalByKey(List<Map.Entry<String, Integer>> entries) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return entries.stream().collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue,
+                Integer::sum
+        ));
     }
 
     // CHALLENGE 8
