@@ -196,7 +196,7 @@ public class FunctionalMapsChallenge {
     // Example: Stream.of("a", "bb", "c", "dd", "eee").collect(countByLength())  returns {1=2, 2=2, 3=1}
     //          Stream.<String>empty().collect(countByLength())                   returns {}
     public static Collector<String, ?, Map<Integer, Long>> countByLength() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Collectors.groupingBy(String::length, Collectors.counting());
     }
 
     // CHALLENGE 15
