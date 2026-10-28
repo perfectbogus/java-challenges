@@ -64,7 +64,10 @@ public class FunctionalMapsChallenge {
     // Example: filterByValue({a=1, b=5, c=8}, v -> v > 3)  returns {b=5, c=8}
     //          filterByValue({a=1}, v -> v > 3)            returns {}
     public static <K, V> Map<K, V> filterByValue(Map<K, V> map, Predicate<V> test) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.entrySet().stream().filter(e -> test.test(e.getValue())).collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue
+        ));
     }
 
     // CHALLENGE 6
