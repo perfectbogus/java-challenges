@@ -78,7 +78,9 @@ public class FunctionalMapsChallenge {
     //          splitByTest([a], w -> w.length() > 1)              returns {false=[a], true=[]}
     //          splitByTest([], w -> true)                         returns {false=[], true=[]}
     public static Map<Boolean, List<String>> splitByTest(List<String> words, Predicate<String> test) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.partitioningBy(
+                test
+        ));
     }
 
     // CHALLENGE 7
