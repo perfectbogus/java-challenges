@@ -1,8 +1,10 @@
 package dev.perfectbogus.collectors;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class CollectingAndThenChallenge {
 
@@ -12,8 +14,15 @@ public class CollectingAndThenChallenge {
     // The order is kept.
     // Example: unmodifiableCopy([a, b, c])  returns [a, b, c]  (and result.add("d") fails)
     //          unmodifiableCopy([])         returns []
+    public static List<String> unmodifiableCopyStream(List<String> words) {
+        return words.stream().toList();
+    }
+
     public static List<String> unmodifiableCopy(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                Collections::unmodifiableList
+        ));
     }
 
     // CHALLENGE 2
