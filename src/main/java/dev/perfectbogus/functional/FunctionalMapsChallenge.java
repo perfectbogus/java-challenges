@@ -104,7 +104,10 @@ public class FunctionalMapsChallenge {
     //          averageByKey([x=4])            returns {x=4.0}
     //          averageByKey([])               returns {}
     public static Map<String, Double> averageByKey(List<Map.Entry<String, Integer>> entries) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return entries.stream().collect(Collectors.groupingBy(
+                Map.Entry::getKey,
+                Collectors.averagingDouble(Map.Entry::getValue)
+        ));
     }
 
     // CHALLENGE 9
