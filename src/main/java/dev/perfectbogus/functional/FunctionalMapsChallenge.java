@@ -1,9 +1,6 @@
 package dev.perfectbogus.functional;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -118,7 +115,9 @@ public class FunctionalMapsChallenge {
     //          mergeWith({y=2}, {y=10}, (p, q) -> p - q)            returns {y=-8}
     //          mergeWith({}, {z=3}, (p, q) -> p + q)                returns {z=3}
     public static <K, V> Map<K, V> mergeWith(Map<K, V> a, Map<K, V> b, BinaryOperator<V> combine) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<K, V> mergeMap = new HashMap<>(a);
+        b.forEach((k, v) -> mergeMap.merge(k, v, combine));
+        return mergeMap;
     }
 
     // CHALLENGE 10
