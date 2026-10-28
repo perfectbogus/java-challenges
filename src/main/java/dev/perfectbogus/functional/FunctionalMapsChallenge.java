@@ -138,7 +138,7 @@ public class FunctionalMapsChallenge {
     //          maxPerGroup([ab, cd, ax], w -> w.charAt(0), Comparator.comparingInt(String::length))
     //          returns {a=ab, c=cd}  (ab and ax have the same length, and ab comes first)
     public static <T, K> Map<K, T> maxPerGroup(List<T> items, Function<T, K> keyFn, Comparator<T> comparator) {
-
+        return items.stream().collect(Collectors.groupingBy());
     }
 
     // CHALLENGE 11
