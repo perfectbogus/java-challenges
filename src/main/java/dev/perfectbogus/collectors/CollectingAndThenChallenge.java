@@ -1,9 +1,7 @@
 package dev.perfectbogus.collectors;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -45,7 +43,24 @@ public class CollectingAndThenChallenge {
     //          sortedUnique([b, B, a])                 returns [B, a, b]
     //          sortedUnique([])                        returns []
     public static List<String> sortedUnique(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.toCollection(TreeSet::new),
+                set -> set.stream().collect(Collectors.toList())
+        ));
+    }
+
+    public static List<String> sortedUniqueSimple(List<String> words) {
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.toCollection(TreeSet::new),
+                ArrayList::new
+        ));
+    }
+
+    public static List<String> sortedUniqueSimpleV2(List<String> words) {
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.toCollection(TreeSet::new),
+                set -> new ArrayList<>(set)
+        ));
     }
 
     // CHALLENGE 4
