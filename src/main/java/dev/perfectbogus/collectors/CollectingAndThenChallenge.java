@@ -186,7 +186,10 @@ public class CollectingAndThenChallenge {
     //          firstAndLast([x])        returns "x-x"
     //          firstAndLast([])         returns ""
     public static String firstAndLast(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> list.isEmpty() ? "" : list.getFirst() + "-" + list.getLast()
+        ));
     }
 
     // CHALLENGE 13
