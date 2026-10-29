@@ -224,6 +224,12 @@ public class CollectingAndThenChallenge {
     //          Stream.of(7).collect(reversedList())                  returns [7]
     //          Stream.<Integer>empty().collect(reversedList())       returns []
     public static Collector<Integer, ?, List<Integer>> reversedList() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> {
+                    Collections.reverse(list);
+                    return list;
+                }
+        );
     }
 }
