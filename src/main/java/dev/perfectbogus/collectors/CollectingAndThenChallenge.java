@@ -146,7 +146,13 @@ public class CollectingAndThenChallenge {
     //          topThree([2, 8])           returns [8, 2]
     //          topThree([])               returns []
     public static List<Integer> topThree(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> list.stream()
+                        .sorted(Comparator.reverseOrder())
+                        .toList()
+                        .subList(0, Math.min(3, list.size()))
+        ));
     }
 
     // CHALLENGE 10
