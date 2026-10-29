@@ -198,7 +198,10 @@ public class CollectingAndThenChallenge {
     //          Stream.of(-4, 1).collect(doubledSum())               returns -6
     //          Stream.<Integer>empty().collect(doubledSum())        returns 0
     public static Collector<Integer, ?, Integer> doubledSum() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Collectors.collectingAndThen(
+                Collectors.summingInt(n -> n),
+                sum -> sum * 2
+        );
     }
 
     // CHALLENGE 14
@@ -208,7 +211,10 @@ public class CollectingAndThenChallenge {
     //          Stream.of("x").collect(upperJoined())                 returns "X"
     //          Stream.<String>empty().collect(upperJoined())         returns ""
     public static Collector<CharSequence, ?, String> upperJoined() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Collectors.collectingAndThen(
+                Collectors.joining("-"),
+                s -> s.toUpperCase()
+        );
     }
 
     // CHALLENGE 15
