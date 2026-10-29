@@ -173,7 +173,10 @@ public class CollectingAndThenChallenge {
     //          countLongWords([a, b], 2)              returns 0
     //          countLongWords([], 1)                  returns 0
     public static int countLongWords(List<String> words, int minLength) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.filtering(w -> w.length() >= minLength, Collectors.counting()),
+                Long::intValue
+        ));
     }
 
     // CHALLENGE 12
