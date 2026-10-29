@@ -43,7 +43,12 @@ public class SortingComparatorsChallenge {
     //          sortedByAbsolute([3, -3, 3])      returns [3, -3, 3]
     //          sortedByAbsolute([])              returns []
     public static int[] sortedByAbsolute(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Integer> byAbs = Comparator.comparing(Math::abs);
+        return Arrays.stream(numbers)
+                .boxed()
+                .sorted(Comparator.comparing(Math::abs))
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 
     // CHALLENGE 4
