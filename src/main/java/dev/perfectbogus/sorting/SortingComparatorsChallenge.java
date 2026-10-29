@@ -43,10 +43,9 @@ public class SortingComparatorsChallenge {
     //          sortedByAbsolute([3, -3, 3])      returns [3, -3, 3]
     //          sortedByAbsolute([])              returns []
     public static int[] sortedByAbsolute(int[] numbers) {
-        Comparator<Integer> byAbs = Comparator.comparing(Math::abs);
         return Arrays.stream(numbers)
                 .boxed()
-                .sorted(Comparator.comparing(Math::abs))
+                .sorted(Comparator.comparingInt(Math::abs))
                 .mapToInt(Integer::intValue)
                 .toArray();
     }
@@ -59,7 +58,32 @@ public class SortingComparatorsChallenge {
     //          evensFirst([-3, -2, 0, 3])   returns [-2, 0, -3, 3]
     //          evensFirst([])               returns []
     public static int[] evensFirst(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Integer> byEvenFirst = Comparator.comparingInt((Integer n) -> n % 2 != 0 ? 1 : 0);
+        Comparator<Integer> byNatural = Comparator.naturalOrder();
+        return Arrays.stream(numbers)
+                .boxed()
+                .sorted(byEvenFirst.thenComparing(byNatural))
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
+
+    public static int[] evensFirstHard(int[] numbers) {
+        Comparator<Integer> byEvenFirst = (a, b) -> {
+            if (a % 2 == 0 && b % 2 == 0) {
+                return Integer.compare(a, b);
+            } else if (a % 2 == 0 && b % 2 != 0) {
+                return -1;
+            } else if (a % 2 != 0 && b % 2 == 0){
+                return 1;
+            } else {
+                return Integer.compare(a, b);
+            }
+        };
+        return Arrays.stream(numbers)
+                .boxed()
+                .sorted(byEvenFirst)
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 
     // CHALLENGE 5
