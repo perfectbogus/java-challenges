@@ -83,7 +83,10 @@ public class CollectingAndThenChallenge {
     //          averageRounded([1, 2])     returns 2   (the average is 1.5)
     //          averageRounded([])         returns 0
     public static long averageRounded(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().collect(Collectors.collectingAndThen(
+                Collectors.averagingInt(Integer::intValue),
+                avg -> Math.round(avg)
+        ));
     }
 
     // CHALLENGE 6
@@ -92,7 +95,7 @@ public class CollectingAndThenChallenge {
     //          bracketed([x])        returns "[x]"
     //          bracketed([])         returns "[]"
     public static String bracketed(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 7
