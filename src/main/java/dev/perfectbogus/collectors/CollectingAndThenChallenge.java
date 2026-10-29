@@ -161,7 +161,10 @@ public class CollectingAndThenChallenge {
     //          maxOrDefault([-5, -2], 0)   returns -2
     //          maxOrDefault([], 42)        returns 42
     public static int maxOrDefault(List<Integer> numbers, int defaultValue) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().collect(Collectors.collectingAndThen(
+                Collectors.maxBy(Comparator.<Integer>naturalOrder()),
+                o -> o.orElse(defaultValue)
+        ));
     }
 
     // CHALLENGE 11
