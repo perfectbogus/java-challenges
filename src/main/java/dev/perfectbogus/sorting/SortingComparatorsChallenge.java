@@ -21,8 +21,6 @@ public class SortingComparatorsChallenge {
         return Arrays.stream(numbers).sorted().toArray();
     }
 
-
-
     // CHALLENGE 2
     // Returns a new array with the same numbers in descending order (the greatest first). The array received is not
     // modified. The numbers can be any int value, including Integer.MIN_VALUE and Integer.MAX_VALUE.
@@ -30,7 +28,11 @@ public class SortingComparatorsChallenge {
     //          sortedDescending([5, 5, -1])  returns [5, 5, -1]
     //          sortedDescending([])          returns []
     public static int[] sortedDescending(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(numbers)
+                .boxed()
+                .sorted(Comparator.reverseOrder())
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 
     // CHALLENGE 3
