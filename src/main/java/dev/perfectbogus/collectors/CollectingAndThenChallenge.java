@@ -131,7 +131,10 @@ public class CollectingAndThenChallenge {
     //          allDistinct([a, b, a])  returns false
     //          allDistinct([])         returns true
     public static boolean allDistinct(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.toList(),
+                list -> list.size() == new HashSet<>(list).size()
+        ));
     }
 
     // CHALLENGE 9
