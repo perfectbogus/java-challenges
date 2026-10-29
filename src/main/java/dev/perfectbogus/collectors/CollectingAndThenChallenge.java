@@ -3,6 +3,7 @@ package dev.perfectbogus.collectors;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,10 @@ public class CollectingAndThenChallenge {
     //          countDistinct([x, X])           returns 2
     //          countDistinct([])               returns 0
     public static int countDistinct(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.toSet(),
+                Set::size
+        ));
     }
 
     // CHALLENGE 3
