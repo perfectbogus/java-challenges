@@ -111,7 +111,17 @@ public class CollectingAndThenChallenge {
     // Example: groupByLengthReadOnly([a, bb, c, dd, eee])  returns {1=[a, c], 2=[bb, dd], 3=[eee]}
     //          groupByLengthReadOnly([])                   returns {}
     public static Map<Integer, List<String>> groupByLengthReadOnly(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.groupingBy(String::length),
+                Collections::unmodifiableMap
+        ));
+    }
+
+    public static Map<Integer, List<String>> groupByLengthReadOnlyExtended(List<String> words) {
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.groupingBy(String::length),
+                map -> Collections.unmodifiableMap(map)
+        ));
     }
 
     // CHALLENGE 8
