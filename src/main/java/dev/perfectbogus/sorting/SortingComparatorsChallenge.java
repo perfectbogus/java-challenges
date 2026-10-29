@@ -1,5 +1,6 @@
 package dev.perfectbogus.sorting;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class SortingComparatorsChallenge {
@@ -11,8 +12,16 @@ public class SortingComparatorsChallenge {
     //          sortedAscending([5, 5, -1])  returns [-1, 5, 5]
     //          sortedAscending([])          returns []
     public static int[] sortedAscending(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] result = numbers.clone();
+        Arrays.sort(result);
+        return result;
     }
+
+    public static int[] sortedAscendingStream(int[] numbers) {
+        return Arrays.stream(numbers).sorted().toArray();
+    }
+
+
 
     // CHALLENGE 2
     // Returns a new array with the same numbers in descending order (the greatest first). The array received is not
