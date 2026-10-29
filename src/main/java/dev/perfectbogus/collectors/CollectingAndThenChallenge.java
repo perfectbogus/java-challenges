@@ -70,7 +70,10 @@ public class CollectingAndThenChallenge {
     //          longestWord([ab, cd, e])    returns "ab"
     //          longestWord([])             returns ""
     public static String longestWord(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.maxBy(Comparator.comparingInt(String::length)),
+                max -> max.orElse("")
+        ));
     }
 
     // CHALLENGE 5
