@@ -94,8 +94,15 @@ public class CollectingAndThenChallenge {
     // Example: bracketed([a, b, c])  returns "[a,b,c]"
     //          bracketed([x])        returns "[x]"
     //          bracketed([])         returns "[]"
-    public static String bracketed(List<String> words) {
+    public static String bracketedCollect(List<String> words) {
+        return words.stream().collect(Collectors.joining(",", "[", "]"));
+    }
 
+    public static String bracketed(List<String> words) {
+        return words.stream().collect(Collectors.collectingAndThen(
+                Collectors.joining(","),
+                s -> "[" + s + "]"
+        ));
     }
 
     // CHALLENGE 7
