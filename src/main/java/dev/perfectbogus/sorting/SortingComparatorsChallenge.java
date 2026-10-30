@@ -122,7 +122,7 @@ public class SortingComparatorsChallenge {
     //          byFirstElement().compare([5], [3, 8])     returns a positive number
     //          byFirstElement().compare([4, 1], [4, 7])  returns 0
     public static Comparator<int[]> byFirstElement() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (a, b) -> Integer.compare(a[0], b[0]);
     }
 
     // CHALLENGE 7
