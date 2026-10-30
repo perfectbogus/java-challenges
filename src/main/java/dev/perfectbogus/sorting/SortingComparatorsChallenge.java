@@ -186,7 +186,9 @@ public class SortingComparatorsChallenge {
     //          sortedPairs([[3, 3]])                          returns [[3, 3]]
     //          sortedPairs([])                                returns []
     public static int[][] sortedPairs(int[][] pairs) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(pairs)
+                .sorted(Comparator.<int[]>comparingInt(a -> a[0]).thenComparing(a -> a[1]))
+                .toArray(n -> new int[n][]);
     }
 
     // CHALLENGE 10
