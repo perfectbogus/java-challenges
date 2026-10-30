@@ -164,7 +164,11 @@ public class SortingComparatorsChallenge {
     //          sortRowsByLengthThenFirst([[1, 2], [1, 1]])            returns [[1, 2], [1, 1]]
     //          sortRowsByLengthThenFirst([])                          returns []
     public static int[][] sortRowsByLengthThenFirst(int[][] rows) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<int[]> byLength = Comparator.comparingInt(a -> a.length);
+        Comparator<int[]> bySmallerFirst = Comparator.comparingInt(a -> a[0]);
+        return Arrays.stream(rows)
+                .sorted(byLength.thenComparing(bySmallerFirst))
+                .toArray(int[][]::new);
     }
 
     // CHALLENGE 9
