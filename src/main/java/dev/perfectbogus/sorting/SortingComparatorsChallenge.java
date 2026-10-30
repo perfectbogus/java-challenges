@@ -1,7 +1,6 @@
 package dev.perfectbogus.sorting;
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 public class SortingComparatorsChallenge {
 
@@ -137,7 +136,12 @@ public class SortingComparatorsChallenge {
     //          sortRowsBySum([[3], [1, 2], [0]])        returns [[3], [1, 2], [0]]
     //          sortRowsBySum([])                        returns []
     public static int[][] sortRowsBySum(int[][] rows) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<int[], Integer> sums = new IdentityHashMap<>();
+        for (int[] row : rows) {
+            sums.put(row, Arrays.stream(row).sum());
+        }
+        Comparator<int[]> bySum = Comparator.comparingInt(sums::get);
+        return Arrays.stream(rows).sorted(bySum.reversed()).toArray(int[][]::new);
     }
 
     // CHALLENGE 8
