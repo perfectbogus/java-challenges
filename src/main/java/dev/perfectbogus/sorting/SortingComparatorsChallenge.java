@@ -135,13 +135,18 @@ public class SortingComparatorsChallenge {
     // Example: sortRowsBySum([[1, 1], [5], [2, 2, 2]])  returns [[2, 2, 2], [5], [1, 1]]
     //          sortRowsBySum([[3], [1, 2], [0]])        returns [[3], [1, 2], [0]]
     //          sortRowsBySum([])                        returns []
-    public static int[][] sortRowsBySum(int[][] rows) {
+    public static int[][] sortRowsBySumLarge(int[][] rows) {
         Map<int[], Integer> sums = new IdentityHashMap<>();
         for (int[] row : rows) {
             sums.put(row, Arrays.stream(row).sum());
         }
         Comparator<int[]> bySum = Comparator.comparingInt(sums::get);
         return Arrays.stream(rows).sorted(bySum.reversed()).toArray(int[][]::new);
+    }
+
+    public static int[][] sortRowsBySum(int[][] rows) {
+        Comparator<int[]> bySumDesc = Comparator.<int[]>comparingInt(a -> Arrays.stream(a).sum()).reversed();
+        return Arrays.stream(rows).sorted(bySumDesc).toArray(int[][]::new);
     }
 
     // CHALLENGE 8
