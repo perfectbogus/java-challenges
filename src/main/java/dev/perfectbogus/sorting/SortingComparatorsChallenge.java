@@ -191,6 +191,12 @@ public class SortingComparatorsChallenge {
                 .toArray(n -> new int[n][]);
     }
 
+    public static int[][] sortedPairsSimplified(int[][] pairs) {
+        return Arrays.stream(pairs)
+                .sorted(Comparator.<int[]>comparingInt(a -> a[0]).thenComparing(a -> a[1]))
+                .toArray(int[][]::new);
+    }
+
     // CHALLENGE 10
     // Returns the positions (indices) of the values, ordered by the value that is at each position, from the smallest
     // value to the greatest. If two positions have the same value, the smaller position goes first. The values can be
