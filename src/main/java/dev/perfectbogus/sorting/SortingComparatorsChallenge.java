@@ -104,6 +104,15 @@ public class SortingComparatorsChallenge {
                 .toArray();
     }
 
+    public static int[] sortedByLastDigitSimplified(int[] numbers) {
+        return Arrays.stream(numbers)
+                .boxed()
+                .sorted(Comparator.comparingInt((Integer n) -> Math.abs(n % 10))
+                        .thenComparing(Comparator.naturalOrder()))
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
+
     // CHALLENGE 6
     // Returns a comparator for arrays of ints that compares two arrays by their first element only: the array with the
     // smaller first element is smaller. If both first elements are equal, the comparator returns 0. The arrays always
