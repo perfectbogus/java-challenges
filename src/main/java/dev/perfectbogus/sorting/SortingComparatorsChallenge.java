@@ -149,6 +149,12 @@ public class SortingComparatorsChallenge {
         return Arrays.stream(rows).sorted(bySumDesc).toArray(int[][]::new);
     }
 
+    public static int[][] sortRowsBySumImproved(int[][] rows) {
+        return Arrays.stream(rows)
+                .sorted(Comparator.<int[]>comparingInt(a -> Arrays.stream(a).sum()).reversed())
+                .toArray(n -> new int[n][]);
+    }
+
     // CHALLENGE 8
     // Returns a new array with the rows ordered by their length, the shortest first. If two rows have the same length,
     // the one with the smaller first element goes first. If they also have the same first element, they keep the same
