@@ -125,6 +125,10 @@ public class SortingComparatorsChallenge {
         return (a, b) -> Integer.compare(a[0], b[0]);
     }
 
+    public static Comparator<int[]> byFirstElementImproved() {
+        return Comparator.comparingInt(a -> a[0]);
+    }
+
     // CHALLENGE 7
     // Returns a new array with the rows ordered by the sum of their numbers, from the greatest sum to the smallest.
     // If two rows have the same sum, they keep the same order they have in rows. A row can be empty (its sum is 0).
