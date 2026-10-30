@@ -171,6 +171,12 @@ public class SortingComparatorsChallenge {
                 .toArray(int[][]::new);
     }
 
+    public static int[][] sortRowsByLengthThenFirstSimplified(int[][] rows) {
+        return Arrays.stream(rows)
+                .sorted(Comparator.<int[]>comparingInt(row -> row.length).thenComparing(row -> row[0]))
+                .toArray(n -> new int[n][]);
+    }
+
     // CHALLENGE 9
     // Each row of pairs has exactly two numbers [a, b]. Returns a new array with the pairs ordered by a, from the
     // smallest to the greatest. If two pairs have the same a, the one with the greater b goes first. If both numbers
