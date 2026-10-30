@@ -187,13 +187,13 @@ public class SortingComparatorsChallenge {
     //          sortedPairs([])                                returns []
     public static int[][] sortedPairs(int[][] pairs) {
         return Arrays.stream(pairs)
-                .sorted(Comparator.<int[]>comparingInt(a -> a[0]).thenComparing(a -> a[1]))
+                .sorted(Comparator.<int[]>comparingInt(a -> a[0]).thenComparing((p, q) -> Integer.compare(q[1], p[1])))
                 .toArray(n -> new int[n][]);
     }
 
     public static int[][] sortedPairsSimplified(int[][] pairs) {
         return Arrays.stream(pairs)
-                .sorted(Comparator.<int[]>comparingInt(a -> a[0]).thenComparing(a -> a[1]))
+                .sorted(Comparator.<int[]>comparingInt(a -> a[0]).thenComparing(a -> a[1], Comparator.reverseOrder()))
                 .toArray(int[][]::new);
     }
 
