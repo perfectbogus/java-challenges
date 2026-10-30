@@ -94,7 +94,14 @@ public class SortingComparatorsChallenge {
     //          sortedByLastDigit([23, 13, 3])       returns [3, 13, 23]
     //          sortedByLastDigit([-13, 2, -2])      returns [-2, 2, -13]
     public static int[] sortedByLastDigit(int[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLastDigit = Comparator.comparing(s -> s.charAt(s.length() - 1));
+        Comparator<String> bySmallerNumber = Comparator.comparing(Integer::parseInt);
+        return Arrays.stream(numbers)
+                .boxed()
+                .map(String::valueOf)
+                .sorted(byLastDigit.thenComparing(bySmallerNumber))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     // CHALLENGE 6
