@@ -130,6 +130,8 @@ public class StreamsBasicsChallenge {
     //          indicesOf([a, b], z)           returns []
     //          indicesOf([], a)               returns []
     public static List<Integer> indicesOf(List<String> words, String target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return IntStream.range(0, words.size())
+                .filter(i -> words.get(i).equals(target))
+                .boxed().toList();
     }
 }
