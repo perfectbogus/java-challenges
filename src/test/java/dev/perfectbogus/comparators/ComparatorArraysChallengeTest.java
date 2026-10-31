@@ -295,6 +295,12 @@ class ComparatorArraysChallengeTest {
         }
 
         @Test
+        void testSortsSimplified() {
+            assertArrayEquals(people(p("Bob", 20), p("Cy", 25), p("Ana", 30)),
+                    ComparatorArraysChallenge.sortedByAgeSimplified(people(p("Ana", 30), p("Bob", 20), p("Cy", 25))));
+        }
+
+        @Test
         void testEqualAgesKeepTheirOrder() {
             assertArrayEquals(people(p("Ana", 30), p("Bob", 30)),
                     ComparatorArraysChallenge.sortedByAge(people(p("Ana", 30), p("Bob", 30))));

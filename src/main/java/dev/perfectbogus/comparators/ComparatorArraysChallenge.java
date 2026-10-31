@@ -103,6 +103,12 @@ public class ComparatorArraysChallenge {
                 .toArray(p -> new Person[p]);
     }
 
+    public static Person[] sortedByAgeSimplified(Person[] people) {
+        return Arrays.stream(people)
+                .sorted(Comparator.comparingInt(Person::age))
+                .toArray(Person[]::new);
+    }
+
     // CHALLENGE 6
     // Returns a new array with the oldest people first. If two people have the same age, they are ordered by name,
     // alphabetically using the normal comparison of texts. The array received is not modified. Ages can be any int
