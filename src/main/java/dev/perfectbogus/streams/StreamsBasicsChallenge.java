@@ -1,5 +1,6 @@
 package dev.perfectbogus.streams;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -33,7 +34,7 @@ public class StreamsBasicsChallenge {
     //          flatten([[], [x], []])          returns [x]
     //          flatten([])                     returns []
     public static List<String> flatten(List<List<String>> lists) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return lists.stream().flatMap(Collection::stream).toList();
     }
 
     // CHALLENGE 4
