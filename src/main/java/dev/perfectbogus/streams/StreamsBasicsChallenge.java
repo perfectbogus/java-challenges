@@ -60,6 +60,10 @@ public class StreamsBasicsChallenge {
         return numbers.stream().mapToDouble(i -> i).average().orElse(0.0);
     }
 
+    public static double averageSimplified(List<Integer> numbers) {
+        return numbers.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+    }
+
     // CHALLENGE 6
     // Returns the first "count" powers of two, starting with 1: [1, 2, 4, 8, ...]. count is between 0 and 30, so
     // the numbers always fit in an int. A count of 0 gives an empty list.
