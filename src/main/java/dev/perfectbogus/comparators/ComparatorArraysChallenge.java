@@ -123,6 +123,14 @@ public class ComparatorArraysChallenge {
                 .toArray(Person[]::new);
     }
 
+    public static Person[] sortedByAgeDescThenNameExtended(Person[] people) {
+        Comparator<Person> byAgeDesc = Comparator.comparingInt(Person::age).reversed();
+        Comparator<Person> byName = Comparator.comparing(Person::name);
+        return Arrays.stream(people)
+                .sorted(byAgeDesc.thenComparing(byName))
+                .toArray(p -> new Person[p]);
+    }
+
     // CHALLENGE 7
     // Sorts the array that it receives, in place (the same array changes, nothing is returned), by name in
     // alphabetical order using the normal comparison of texts. If two people have the same name, they keep the same
