@@ -88,6 +88,10 @@ public class StreamsBasicsChallenge {
         return numbers.stream().allMatch(i -> i >= 0);
     }
 
+    public static boolean noneNegativeSimplified(List<Integer> numbers) {
+        return numbers.stream().noneMatch(i -> i < 0);
+    }
+
     // CHALLENGE 8
     // Returns how many words there are in total in all the sentences. In a sentence, the words are separated by
     // exactly one space, and there are no spaces at the beginning or at the end. An empty sentence has 0 words.
