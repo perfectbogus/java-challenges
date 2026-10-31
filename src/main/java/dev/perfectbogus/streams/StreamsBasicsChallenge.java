@@ -57,7 +57,7 @@ public class StreamsBasicsChallenge {
     //          average([1, 2])     returns 1.5
     //          average([])         returns 0.0
     public static double average(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().mapToDouble(i -> i).average().orElse(0.0);
     }
 
     // CHALLENGE 6
