@@ -56,7 +56,11 @@ public class ComparatorArraysChallenge {
     //          sortedByLastCharacter([zz, ba, aa])  returns [aa, ba, zz]
     //          sortedByLastCharacter([])            returns []
     public static String[] sortedByLastCharacter(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLastChar = Comparator.comparingInt(s -> s.charAt(s.length() - 1));
+        Comparator<String> byAlpha = String::compareTo;
+        return Arrays.stream(words)
+                .sorted(byLastChar.thenComparing(byAlpha))
+                .toArray(String[]::new);
     }
 
     // CHALLENGE 4
