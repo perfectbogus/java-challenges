@@ -120,7 +120,7 @@ public class StreamsBasicsChallenge {
     //          product([-2, 3])    returns -6
     //          product([])         returns 1
     public static int product(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().reduce(1, (acc, next) -> acc * next);
     }
 
     // CHALLENGE 10
