@@ -1,5 +1,6 @@
 package dev.perfectbogus.streams;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -99,7 +100,9 @@ public class StreamsBasicsChallenge {
     //          countWords([a b c d, , e])    returns 5
     //          countWords([])                returns 0
     public static int countWords(List<String> sentences) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return sentences.stream()
+                .mapToInt(s -> (int) Arrays.stream(s.split(" ")).filter(str -> !str.isBlank()).count())
+                .sum();
     }
 
     // CHALLENGE 9
