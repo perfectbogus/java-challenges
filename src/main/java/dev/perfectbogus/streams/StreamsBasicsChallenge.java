@@ -105,6 +105,13 @@ public class StreamsBasicsChallenge {
                 .sum();
     }
 
+    public static int countWordsSimplified(List<String> sentences) {
+        return (int) sentences.stream()
+                .filter(s -> !s.isEmpty())
+                .flatMap(s -> Arrays.stream(s.split(" ")))
+                .count();
+    }
+
     // CHALLENGE 9
     // Returns the product of all the numbers (all of them multiplied). The numbers are small, so the result always
     // fits in an int. An empty list gives 1.
