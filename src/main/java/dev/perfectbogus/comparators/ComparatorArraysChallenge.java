@@ -138,7 +138,7 @@ public class ComparatorArraysChallenge {
     // Example: [Cy 30, Ana 20, Bob 25] becomes [Ana 20, Bob 25, Cy 30]
     //          [Ana 40, Ana 20] stays [Ana 40, Ana 20]
     public static void sortByNameInPlace(Person[] people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Arrays.sort(people, Comparator.comparing(Person::name));
     }
 
     // CHALLENGE 8
