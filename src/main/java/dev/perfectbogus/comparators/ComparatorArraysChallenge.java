@@ -159,7 +159,10 @@ public class ComparatorArraysChallenge {
     //          sortedNullsLast([null, null])   returns [null, null]
     //          sortedNullsLast([])             returns []
     public static String[] sortedNullsLast(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byAlphaNullsEnd = Comparator.nullsLast(String::compareTo);
+        return Arrays.stream(words)
+                .sorted(byAlphaNullsEnd)
+                .toArray(String[]::new);
     }
 
     // CHALLENGE 10
