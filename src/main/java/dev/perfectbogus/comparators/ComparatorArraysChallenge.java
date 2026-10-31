@@ -1,5 +1,6 @@
 package dev.perfectbogus.comparators;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class ComparatorArraysChallenge {
@@ -15,7 +16,9 @@ public class ComparatorArraysChallenge {
     //          sortedByLength([bb, aa, c])     returns [c, bb, aa]
     //          sortedByLength([])              returns []
     public static String[] sortedByLength(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(words)
+                .sorted(Comparator.comparingInt(String::length))
+                .toArray(s -> new String[s]);
     }
 
     // CHALLENGE 2
