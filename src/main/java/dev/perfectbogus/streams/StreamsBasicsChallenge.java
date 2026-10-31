@@ -3,6 +3,7 @@ package dev.perfectbogus.streams;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StreamsBasicsChallenge {
 
@@ -72,6 +73,10 @@ public class StreamsBasicsChallenge {
     //          powersOfTwo(0)  returns []
     public static List<Integer> powersOfTwo(int count) {
         return IntStream.range(0, count).map(i -> (int)Math.pow(2, i)).boxed().toList();
+    }
+
+    public static List<Integer> powersOfTwoSimplified(int count) {
+        return Stream.iterate(1, n -> n * 2).limit(count).toList();
     }
 
     // CHALLENGE 7
