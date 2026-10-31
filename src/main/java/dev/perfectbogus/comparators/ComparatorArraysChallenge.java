@@ -174,6 +174,9 @@ public class ComparatorArraysChallenge {
     //          youngest([Ana 30], 5)                 returns [Ana 30]
     //          youngest([Ana 30], 0)                 returns []
     public static Person[] youngest(Person[] people, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(people)
+                .sorted(Comparator.comparingInt(Person::age).thenComparing(Person::name))
+                .limit(n)
+                .toArray(Person[]::new);
     }
 }
