@@ -98,7 +98,9 @@ public class ComparatorArraysChallenge {
     //          sortedByAge([Ana 30, Bob 30])         returns [Ana 30, Bob 30]
     //          sortedByAge([Bob 30, Ana 30])         returns [Bob 30, Ana 30]
     public static Person[] sortedByAge(Person[] people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(people)
+                .sorted(Comparator.comparingInt(Person::age))
+                .toArray(p -> new Person[p]);
     }
 
     // CHALLENGE 6
