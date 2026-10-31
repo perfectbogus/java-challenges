@@ -35,6 +35,12 @@ public class ComparatorArraysChallenge {
     //          sortedIgnoringCase([b, A, a, B])  returns [A, a, b, B]
     //          sortedIgnoringCase([])            returns []
     public static String[] sortedIgnoringCase(String[] words) {
+        return Arrays.stream(words)
+                .sorted(String::compareToIgnoreCase)
+                .toArray(String[]::new);
+    }
+
+    public static String[] sortedIgnoringCaseExtended(String[] words) {
         Comparator<String> byAlpha = String::compareToIgnoreCase;
         return Arrays.stream(words)
                 .sorted(byAlpha)
