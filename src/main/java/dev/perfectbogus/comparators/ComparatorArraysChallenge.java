@@ -63,6 +63,14 @@ public class ComparatorArraysChallenge {
                 .toArray(String[]::new);
     }
 
+    public static String[] sortedByLastCharacterLarge(String[] words) {
+        Comparator<String> byLastChar = Comparator.comparingInt(s -> s.charAt(s.length() - 1));
+        Comparator<String> byAlpha = String::compareTo;
+        return Arrays.stream(words)
+                .sorted(byLastChar.thenComparing(byAlpha))
+                .toArray(s -> new String[s]);
+    }
+
     // CHALLENGE 4
     // Returns a new array with the longest words first. If two words have the same length, they are ordered
     // alphabetically using the normal comparison of texts. No word is null. The array received is not modified.
