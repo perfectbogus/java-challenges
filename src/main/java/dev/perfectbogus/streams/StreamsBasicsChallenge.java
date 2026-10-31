@@ -47,6 +47,10 @@ public class StreamsBasicsChallenge {
         return numbers.stream().map(i -> i * i).reduce(0, Integer::sum);
     }
 
+    public static int sumOfSquaresSimplified(List<Integer> numbers) {
+        return numbers.stream().mapToInt(i -> i * i).sum();
+    }
+
     // CHALLENGE 5
     // Returns the average of the numbers as a double (the decimals are kept). An empty list gives 0.0.
     // Example: average([1, 2, 4])  returns 2.3333...
