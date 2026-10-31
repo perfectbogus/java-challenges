@@ -1,6 +1,7 @@
 package dev.perfectbogus.streams;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class StreamsBasicsChallenge {
 
@@ -12,7 +13,7 @@ public class StreamsBasicsChallenge {
     //          range(3, 3)    returns [3]
     //          range(5, 2)    returns []
     public static List<Integer> range(int from, int to) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return IntStream.rangeClosed(from, to).boxed().toList();
     }
 
     // CHALLENGE 2
@@ -22,7 +23,7 @@ public class StreamsBasicsChallenge {
     //          uniqueUppercase([x, x, x])        returns [X]
     //          uniqueUppercase([])               returns []
     public static List<String> uniqueUppercase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().map(String::toUpperCase).distinct().toList();
     }
 
     // CHALLENGE 3
