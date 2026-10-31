@@ -117,7 +117,10 @@ public class ComparatorArraysChallenge {
     //          sortedByAgeDescThenName([Cy 30, Bob 30])          returns [Bob 30, Cy 30]
     //          sortedByAgeDescThenName([])                       returns []
     public static Person[] sortedByAgeDescThenName(Person[] people) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(people)
+                .sorted(Comparator.comparing(Person::age, Comparator.reverseOrder())
+                        .thenComparing(Person::name))
+                .toArray(Person[]::new);
     }
 
     // CHALLENGE 7
