@@ -78,7 +78,17 @@ public class ComparatorArraysChallenge {
     //          longestFirstThenAlphabetical([b, a])            returns [a, b]
     //          longestFirstThenAlphabetical([])                returns []
     public static String[] longestFirstThenAlphabetical(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(words)
+                .sorted(Comparator.comparing(String::length, Comparator.reverseOrder()).thenComparing(String::compareTo))
+                .toArray(String[]::new);
+    }
+
+    public static String[] longestFirstThenAlphabeticalExtended(String[] words) {
+        Comparator<String> byLengthDesc = Comparator.comparing(String::length).reversed();
+        Comparator<String> byAlpha = String::compareTo;
+        return Arrays.stream(words)
+                .sorted(byLengthDesc.thenComparing(byAlpha))
+                .toArray(s -> new String[s]);
     }
 
     // CHALLENGE 5

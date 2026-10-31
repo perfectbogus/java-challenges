@@ -231,6 +231,12 @@ class ComparatorArraysChallengeTest {
         }
 
         @Test
+        void testSortsExtended() {
+            assertArrayEquals(words("ccc", "aa", "bb", "a"),
+                    ComparatorArraysChallenge.longestFirstThenAlphabeticalExtended(words("bb", "a", "ccc", "aa")));
+        }
+
+        @Test
         void testSameLengthAlphabetical() {
             assertArrayEquals(words("a", "b"), ComparatorArraysChallenge.longestFirstThenAlphabetical(words("b", "a")));
         }
