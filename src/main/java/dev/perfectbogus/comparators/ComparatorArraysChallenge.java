@@ -21,6 +21,12 @@ public class ComparatorArraysChallenge {
                 .toArray(s -> new String[s]);
     }
 
+    public static String[] sortedByLengthSimplified(String[] words) {
+        return Arrays.stream(words)
+                .sorted(Comparator.comparingInt(String::length))
+                .toArray(String[]::new);
+    }
+
     // CHALLENGE 2
     // Returns a new array with the words in alphabetical order, ignoring the difference between uppercase and
     // lowercase letters. If two words are equal when the case is ignored, they keep the same order they have in
