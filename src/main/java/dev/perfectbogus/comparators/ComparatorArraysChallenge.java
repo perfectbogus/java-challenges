@@ -149,7 +149,7 @@ public class ComparatorArraysChallenge {
     //          byAgeThenName().compare(Bob 20, Ana 20)  returns a positive number
     //          byAgeThenName().compare(Ana 20, Ana 20)  returns 0
     public static Comparator<Person> byAgeThenName() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Comparator.comparingInt(Person::age).thenComparing(Person::name);
     }
 
     // CHALLENGE 9
