@@ -85,7 +85,7 @@ public class StreamsBasicsChallenge {
     //          noneNegative([4, -1, 2])  returns false
     //          noneNegative([])          returns true
     public static boolean noneNegative(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().allMatch(i -> i >= 0);
     }
 
     // CHALLENGE 8
