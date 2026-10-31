@@ -71,7 +71,7 @@ public class StreamsBasicsChallenge {
     //          powersOfTwo(1)  returns [1]
     //          powersOfTwo(0)  returns []
     public static List<Integer> powersOfTwo(int count) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return IntStream.range(0, count).map(i -> (int)Math.pow(2, i)).boxed().toList();
     }
 
     // CHALLENGE 7
