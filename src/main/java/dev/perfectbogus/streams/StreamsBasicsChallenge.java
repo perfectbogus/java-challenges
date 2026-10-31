@@ -44,7 +44,7 @@ public class StreamsBasicsChallenge {
     //          sumOfSquares([-3, 3])    returns 18
     //          sumOfSquares([])         returns 0
     public static int sumOfSquares(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().map(i -> i * i).reduce(0, Integer::sum);
     }
 
     // CHALLENGE 5
