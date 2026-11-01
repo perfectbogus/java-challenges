@@ -12,7 +12,7 @@ public class RegexZeroWidthChallenge {
     //          addThousandsSeparators("999")      returns "999"
     //          addThousandsSeparators("0")        returns "0"
     public static String addThousandsSeparators(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return digits.replaceAll("(?<=\\d)(?=(\\d{3})+$)", ",");
     }
 
     // CHALLENGE 2
