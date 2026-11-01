@@ -43,7 +43,12 @@ public class RegexZeroWidthChallenge {
     //          amountsAfterDollar("$12.50 and 30")  returns [12]
     //          amountsAfterDollar("5$ and $ 7")     returns []
     public static List<String> amountsAfterDollar(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> results = new ArrayList<>();
+        Matcher m = Pattern.compile("(?<=\\$)\\d+").matcher(text);
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 4
