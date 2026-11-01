@@ -1,6 +1,10 @@
 package dev.perfectbogus.regex;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexZeroWidthChallenge {
 
@@ -23,7 +27,12 @@ public class RegexZeroWidthChallenge {
     //          numbersBeforePercent("3.5% and 100 %")    returns [5]
     //          numbersBeforePercent("no numbers")        returns []
     public static List<String> numbersBeforePercent(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> results = new ArrayList<>();
+        Matcher m = Pattern.compile("\\d+(?=%)").matcher(text);
+        while (m.find()) {
+            results.add(m.group());
+        }
+        return results;
     }
 
     // CHALLENGE 3
