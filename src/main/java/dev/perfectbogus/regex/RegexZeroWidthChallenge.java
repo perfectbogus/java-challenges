@@ -87,7 +87,7 @@ public class RegexZeroWidthChallenge {
     //          splitCamelCase("HTTPServer")        returns "HTTPServer"
     //          splitCamelCase("")                  returns ""
     public static String splitCamelCase(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<=[a-z])(?=[A-Z])", " ");
     }
 
     // CHALLENGE 7
