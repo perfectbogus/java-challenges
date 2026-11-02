@@ -80,7 +80,7 @@ public class RegexRearViewChallenge {
     //          censorAfterFirstLetter("a1bc")       returns "a1b*"
     //          censorAfterFirstLetter("")           returns ""
     public static String censorAfterFirstLetter(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<=[a-zA-Z])[a-zA-Z]", "*");
     }
 
     // CHALLENGE 7
