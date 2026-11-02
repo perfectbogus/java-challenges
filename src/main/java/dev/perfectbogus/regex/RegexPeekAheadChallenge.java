@@ -1,6 +1,9 @@
 package dev.perfectbogus.regex;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexPeekAheadChallenge {
 
@@ -13,7 +16,12 @@ public class RegexPeekAheadChallenge {
     //          wordsBeforeColon("key : value")       returns []
     //          wordsBeforeColon("x1:")               returns []
     public static List<String> wordsBeforeColon(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Matcher m = Pattern.compile("[a-zA-Z]+(?=:)").matcher(text);
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 
     // CHALLENGE 2
