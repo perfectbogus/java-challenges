@@ -31,7 +31,7 @@ public class RegexRearViewChallenge {
     //          replaceCommasAfterDigits(",1")        returns ",1"
     //          replaceCommasAfterDigits("a,b")       returns "a,b"
     public static String replaceCommasAfterDigits(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<=\\d),", ";");
     }
 
     // CHALLENGE 3
