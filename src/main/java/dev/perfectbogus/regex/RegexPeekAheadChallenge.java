@@ -43,7 +43,7 @@ public class RegexPeekAheadChallenge {
     //          addSpaceAfterComma("x,")        returns "x,"
     //          addSpaceAfterComma("a,\nb")     returns "a,\nb"
     public static String addSpaceAfterComma(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll(",(?=\\S)", ", ");
     }
 
     // CHALLENGE 4
