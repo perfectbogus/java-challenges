@@ -53,7 +53,12 @@ public class RegexRearViewChallenge {
     //          numbersNotAfterMinus("-35")        returns []
     //          numbersNotAfterMinus("a12 b-7")    returns [12]
     public static List<String> numbersNotAfterMinus(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Matcher m = Pattern.compile("(?<![-\\d])\\d+").matcher(text);
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 
     // CHALLENGE 5
