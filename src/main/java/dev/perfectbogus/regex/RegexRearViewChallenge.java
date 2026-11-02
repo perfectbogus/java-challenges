@@ -92,6 +92,11 @@ public class RegexRearViewChallenge {
     //          wordsAfterThe("the  cat")             returns []
     //          wordsAfterThe("The cat")              returns []
     public static List<String> wordsAfterThe(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Matcher m = Pattern.compile("(?<=\\bthe )[a-z]+").matcher(text);
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 }
