@@ -112,7 +112,7 @@ public class RegexZeroWidthChallenge {
     //          fixArticles("extra apple")            returns "extra apple"
     //          fixArticles("a")                      returns "a"
     public static String fixArticles(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("\\b(a) (?=[aeiou])", "an ");
     }
 
     // CHALLENGE 9
