@@ -99,7 +99,7 @@ public class RegexZeroWidthChallenge {
     //          splitAfterSemicolon("abc")    returns [abc]
     //          splitAfterSemicolon(";;")     returns [;, ;]
     public static List<String> splitAfterSemicolon(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return List.of(text.split("(?<=;)"));
     }
 
     // CHALLENGE 8
