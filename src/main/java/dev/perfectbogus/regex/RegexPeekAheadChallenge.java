@@ -98,7 +98,7 @@ public class RegexPeekAheadChallenge {
     //          isValidUsername("jo")        returns false
     //          isValidUsername("john doe")  returns false
     public static boolean isValidUsername(String username) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return username.matches("(?!\\d)(?!.*__)[a-zA-Z0-9_]{3,12}");
     }
 
     // CHALLENGE 8
