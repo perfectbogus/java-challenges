@@ -32,7 +32,7 @@ public class RegexPeekAheadChallenge {
     //          removeLeadingZeros("000")    returns "0"
     //          removeLeadingZeros("0")      returns "0"
     public static String removeLeadingZeros(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return digits.replaceAll("^0+(?=\\d)", "");
     }
 
     // CHALLENGE 3
