@@ -42,7 +42,7 @@ public class RegexRearViewChallenge {
     //          maskAfterFirstThree("123")      returns "123"
     //          maskAfterFirstThree("12")       returns "12"
     public static String maskAfterFirstThree(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return digits.replaceAll("(?<=\\d{3})\\d", "*");
     }
 
     // CHALLENGE 4
