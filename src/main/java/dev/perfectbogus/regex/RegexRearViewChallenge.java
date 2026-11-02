@@ -1,6 +1,9 @@
 package dev.perfectbogus.regex;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegexRearViewChallenge {
 
@@ -13,7 +16,12 @@ public class RegexRearViewChallenge {
     //          wordsAfterAt("@1ab")               returns []
     //          wordsAfterAt("ana bob")            returns []
     public static List<String> wordsAfterAt(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Matcher m = Pattern.compile("(?<=@)[A-Za-z]+").matcher(text);
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 
     // CHALLENGE 2
