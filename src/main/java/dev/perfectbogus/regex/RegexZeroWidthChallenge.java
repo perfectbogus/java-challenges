@@ -115,6 +115,10 @@ public class RegexZeroWidthChallenge {
         return text.replaceAll("\\b(a) (?=[aeiou])", "an ");
     }
 
+    public static String fixArticlesImproved(String text) {
+        return text.replaceAll("\\ba(?= [aeiou])", "an");
+    }
+
     // CHALLENGE 9
     // Returns, in order of appearance, the sequences of digits that are NOT immediately preceded by a '-'. A sequence
     // is a maximal group of consecutive digits, so in "-34" the sequence is "34" and it is ignored as a whole. If
