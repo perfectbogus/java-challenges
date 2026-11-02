@@ -76,7 +76,7 @@ public class RegexZeroWidthChallenge {
     //          isStrongPassword("Ab1")        returns false  (too short)
     //          isStrongPassword("Ab1!Ab1!")   returns true
     public static boolean isStrongPassword(String password) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return password.matches("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}");
     }
 
     // CHALLENGE 6
