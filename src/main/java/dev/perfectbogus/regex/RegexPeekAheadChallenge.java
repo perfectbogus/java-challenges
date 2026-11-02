@@ -1,6 +1,7 @@
 package dev.perfectbogus.regex;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -109,7 +110,9 @@ public class RegexPeekAheadChallenge {
     //          errorDatabaseLines("mydbserror")                           returns [mydbserror]
     //          errorDatabaseLines("only error\nonly db")                  returns []
     public static List<String> errorDatabaseLines(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(text.split("\n"))
+                .filter(line -> line.matches("(?=.*error)(?=.*db).*"))
+                .toList();
     }
 
     // CHALLENGE 9
