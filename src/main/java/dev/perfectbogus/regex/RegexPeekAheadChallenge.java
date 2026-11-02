@@ -137,6 +137,11 @@ public class RegexPeekAheadChallenge {
     //          countOverlapping("abc", "d")       returns 0
     //          countOverlapping("a.a.a", "a.a")   returns 2
     public static int countOverlapping(String text, String part) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("(?=" + Pattern.quote(part) + ")").matcher(text);
+        int count = 0;
+        while (m.find()) {
+            count++;
+        }
+        return count;
     }
 }
