@@ -81,7 +81,7 @@ public class RegexPeekAheadChallenge {
     //          splitBeforeCapitals("ABC")            returns [A, B, C]
     //          splitBeforeCapitals("hello")          returns [hello]
     public static List<String> splitBeforeCapitals(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return List.of(text.split("(?=[A-Z])"));
     }
 
     // CHALLENGE 7
