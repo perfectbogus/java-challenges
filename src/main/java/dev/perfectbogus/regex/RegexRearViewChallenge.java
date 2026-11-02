@@ -69,7 +69,7 @@ public class RegexRearViewChallenge {
     //          insertUnderscores("getHTTP")        returns "get_HTTP"
     //          insertUnderscores("Hello")          returns "Hello"
     public static String insertUnderscores(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("(?<=[a-z])(?=[A-Z])", "_");
     }
 
     // CHALLENGE 6
