@@ -143,6 +143,6 @@ public class RegexZeroWidthChallenge {
     //          maskEmailUser("ab@x.org")       returns "a*@x.org"
     //          maskEmailUser("a@x.org")        returns "a@x.org"
     public static String maskEmailUser(String email) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return email.replaceAll("(?<=.)[^@](?=.*@)", "*");
     }
 }
