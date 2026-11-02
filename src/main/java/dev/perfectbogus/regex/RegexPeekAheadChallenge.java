@@ -69,7 +69,7 @@ public class RegexPeekAheadChallenge {
     //          groupInFours("12345678")          returns "1234 5678"
     //          groupInFours("1234")              returns "1234"
     public static String groupInFours(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return digits.replaceAll("(\\d{4})(?=\\d)", "$1 ");
     }
 
     // CHALLENGE 6
