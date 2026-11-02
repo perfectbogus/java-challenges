@@ -59,7 +59,12 @@ public class RegexZeroWidthChallenge {
     //          wordsWithoutComma("one two.")              returns [one, two]
     //          wordsWithoutComma("a, b, c,")              returns []
     public static List<String> wordsWithoutComma(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Matcher m = Pattern.compile("\\b[A-Za-z]+\\b(?!,)").matcher(text);
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 
     // CHALLENGE 5
