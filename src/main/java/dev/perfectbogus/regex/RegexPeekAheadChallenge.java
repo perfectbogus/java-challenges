@@ -54,7 +54,12 @@ public class RegexPeekAheadChallenge {
     //          kilogramAmounts("5 kgs and 7 kg.")      returns [7]
     //          kilogramAmounts("5kg and 6  kg")        returns []
     public static List<String> kilogramAmounts(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Matcher m = Pattern.compile("\\d+(?= kg\\b)").matcher(text);
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 
     // CHALLENGE 5
