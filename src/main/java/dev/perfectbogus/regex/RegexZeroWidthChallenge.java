@@ -128,7 +128,12 @@ public class RegexZeroWidthChallenge {
     //          numbersWithoutMinus("3-4")          returns [3]
     //          numbersWithoutMinus("-1 -2")        returns []
     public static List<String> numbersWithoutMinus(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        Matcher m = Pattern.compile("(?<![-\\d])\\d+").matcher(text);
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 
     // CHALLENGE 10
