@@ -124,7 +124,7 @@ public class RegexPeekAheadChallenge {
     //          allDifferentCharacters("a a")  returns false
     //          allDifferentCharacters("")     returns true
     public static boolean allDifferentCharacters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.matches("(?!.*(.).*\\1).*");
     }
 
     // CHALLENGE 10
