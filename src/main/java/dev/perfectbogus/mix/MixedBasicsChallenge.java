@@ -1,6 +1,7 @@
 package dev.perfectbogus.mix;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -71,7 +72,7 @@ public class MixedBasicsChallenge {
     //          longestLength([hello])       returns 5
     //          longestLength([])            returns 0
     public static int longestLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().map(String::length).max(Comparator.naturalOrder()).orElse(0);
     }
 
     // CHALLENGE 6 (Streams)
