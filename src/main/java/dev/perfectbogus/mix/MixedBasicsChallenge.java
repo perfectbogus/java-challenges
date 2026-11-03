@@ -228,6 +228,6 @@ public class MixedBasicsChallenge {
     //          joinedSortedDistinct([b, A])     returns "A, b"
     //          joinedSortedDistinct([])         returns ""
     public static String joinedSortedDistinct(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().distinct().sorted(Comparator.naturalOrder()).collect(Collectors.joining(", "));
     }
 }
