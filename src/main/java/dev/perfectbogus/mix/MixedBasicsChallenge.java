@@ -98,6 +98,11 @@ public class MixedBasicsChallenge {
     //          isPalindrome("A")                  returns true
     //          isPalindrome("ab,ba")              returns true
     public static boolean isPalindrome(String text) {
+        String s = text.replace(" ", "").toLowerCase();
+        return new StringBuilder(s).reverse().toString().equals(s);
+    }
+
+    public static boolean isPalindromeExtended(String text) {
         char[] chars = text.toLowerCase().toCharArray();
         int i = 0;
         int j = chars.length - 1;
@@ -133,7 +138,13 @@ public class MixedBasicsChallenge {
     //          reverseWords("hello")          returns "hello"
     //          reverseWords("")               returns ""
     public static String reverseWords(String sentence) {
-
+        String[] split = sentence.split("\\s");
+        String[] res = new String[split.length];
+        int j = 0;
+        for (int i = split.length - 1; i >= 0; i--) {
+            res[j++] = split[i];
+        }
+        return String.join(" ", res);
     }
 
     // CHALLENGE 9 (Strings)
