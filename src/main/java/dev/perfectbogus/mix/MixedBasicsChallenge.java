@@ -17,6 +17,10 @@ public class MixedBasicsChallenge {
         return (int) text.chars().mapToObj(c -> (char)c).filter(Character::isLetter).count();
     }
 
+    public static int countLettersSimplified(String text) {
+        return (int) text.chars().filter(Character::isLetter).count();
+    }
+
     // CHALLENGE 2 (Characters)
     // Returns the text with every uppercase letter changed to lowercase and every lowercase letter changed to
     // uppercase. The characters that are not letters do not change.
