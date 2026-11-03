@@ -94,7 +94,25 @@ public class MixedBasicsChallenge {
     //          isPalindrome("A")                  returns true
     //          isPalindrome("ab,ba")              returns true
     public static boolean isPalindrome(String text) {
+        char[] chars = text.toLowerCase().toCharArray();
+        int i = 0;
+        int j = chars.length - 1;
+        while (i < j) {
+            if (chars[i] == ' ') {
+                i++;
+                continue;
+            }
+            if (chars[j] == ' ') {
+                j--;
+                continue;
+            }
 
+            if (chars[i] != chars[j]) return false;
+
+            i++;
+            j--;
+        }
+        return true;
     }
 
     public static boolean isPalindromeReversed(String text) {
