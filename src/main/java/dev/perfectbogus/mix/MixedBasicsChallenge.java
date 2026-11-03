@@ -213,7 +213,10 @@ public class MixedBasicsChallenge {
     //          countByFirstLetter([Apple, apple])            returns {A=1, a=1}
     //          countByFirstLetter([])                        returns {}
     public static Map<Character, Long> countByFirstLetter(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                s -> s.charAt(0),
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 12 (Collectors)
