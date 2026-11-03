@@ -48,8 +48,13 @@ public class MixedBasicsChallenge {
     //          digitSum("abc")    returns 0
     //          digitSum("9 9 9")  returns 27
     public static int digitSum(String text) {
+        return text.chars().filter(c -> c >= '0' && c <= '9').map(Character::getNumericValue).sum();
+    }
+
+    public static int digitSumBad(String text) {
         return text.chars().filter(Character::isDigit).map(Character::getNumericValue).sum();
     }
+
 
     // CHALLENGE 4 (Streams)
     // Returns the squares of the even numbers, in the same order they have in the list. Zero is even. The numbers are
