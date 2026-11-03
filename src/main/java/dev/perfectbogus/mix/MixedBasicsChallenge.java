@@ -1,7 +1,9 @@
 package dev.perfectbogus.mix;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class MixedBasicsChallenge {
 
@@ -12,7 +14,7 @@ public class MixedBasicsChallenge {
     //          countLetters("123")     returns 0
     //          countLetters("")        returns 0
     public static int countLetters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (int) text.chars().mapToObj(c -> (char)c).filter(Character::isLetter).count();
     }
 
     // CHALLENGE 2 (Characters)
