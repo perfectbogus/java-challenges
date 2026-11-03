@@ -48,7 +48,7 @@ public class MixedBasicsChallenge {
     //          digitSum("abc")    returns 0
     //          digitSum("9 9 9")  returns 27
     public static int digitSum(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().filter(Character::isDigit).map(Character::getNumericValue).sum();
     }
 
     // CHALLENGE 4 (Streams)
