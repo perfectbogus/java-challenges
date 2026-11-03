@@ -1,6 +1,7 @@
 package dev.perfectbogus.mix;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class MixedBasicsChallenge {
@@ -199,7 +200,9 @@ public class MixedBasicsChallenge {
     //          groupByLength([hello])              returns {5=[hello]}
     //          groupByLength([])                   returns {}
     public static Map<Integer, List<String>> groupByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length
+        ));
     }
 
     // CHALLENGE 11 (Collectors)
