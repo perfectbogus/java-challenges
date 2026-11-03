@@ -159,7 +159,22 @@ public class MixedBasicsChallenge {
     //          compress("aAa")     returns "a1A1a1"
     //          compress("")        returns ""
     public static String compress(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return "";
+
+        int count = 1;
+        char current = text.charAt(0);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < text.length(); i++) {
+            if (text.charAt(i) != current) {
+                sb.append(current).append(count);
+                current = text.charAt(i);
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+        sb.append(current).append(count);
+        return sb.toString();
     }
 
     // CHALLENGE 10 (Collectors)
