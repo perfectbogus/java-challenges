@@ -82,7 +82,7 @@ public class MixedBasicsChallenge {
     //          firstThreeLongWords([abc, abcd])                         returns [abcd]
     //          firstThreeLongWords([])                                  returns []
     public static List<String> firstThreeLongWords(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().filter(s -> s.length() >= 4).limit(3).toList();
     }
 
     // CHALLENGE 7 (Strings)
