@@ -159,6 +159,20 @@ public class MixedBasicsChallenge {
     //          compress("aAa")     returns "a1A1a1"
     //          compress("")        returns ""
     public static String compress(String text) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while (i < text.length()) {
+            int j = i;
+            while (j < text.length() && text.charAt(j) == text.charAt(i)) {
+                j++;
+            }
+            sb.append(text.charAt(i)).append(j - i);
+            i = j;
+        }
+        return sb.toString();
+    }
+
+    public static String compressExtended(String text) {
         if (text.isEmpty()) return "";
 
         int count = 1;
