@@ -1,6 +1,8 @@
 package dev.perfectbogus.sorting;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class SortingComparatorsChallenge {
 
@@ -205,6 +207,11 @@ public class SortingComparatorsChallenge {
     //          indicesSortedByValue([5, 5, 1])     returns [2, 0, 1]
     //          indicesSortedByValue([])            returns []
     public static int[] indicesSortedByValue(int[] values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return IntStream.range(0, values.length)
+                .boxed()
+                .sorted(Comparator.comparingInt((Integer i) -> values[i])
+                        .thenComparing(i -> i))
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 }
