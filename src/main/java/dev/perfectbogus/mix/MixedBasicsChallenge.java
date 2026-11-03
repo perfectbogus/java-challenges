@@ -1,9 +1,6 @@
 package dev.perfectbogus.mix;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class MixedBasicsChallenge {
@@ -138,6 +135,12 @@ public class MixedBasicsChallenge {
     //          reverseWords("hello")          returns "hello"
     //          reverseWords("")               returns ""
     public static String reverseWords(String sentence) {
+        List<String> parts = new ArrayList<>(List.of(sentence.split(" ")));
+        Collections.reverse(parts);
+        return String.join(" ", parts);
+    }
+
+    public static String reverseWordsExtended(String sentence) {
         String[] split = sentence.split("\\s");
         String[] res = new String[split.length];
         int j = 0;
