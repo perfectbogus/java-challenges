@@ -55,7 +55,6 @@ public class MixedBasicsChallenge {
         return text.chars().filter(Character::isDigit).map(Character::getNumericValue).sum();
     }
 
-
     // CHALLENGE 4 (Streams)
     // Returns the squares of the even numbers, in the same order they have in the list. Zero is even. The numbers are
     // between -1000 and 1000. If there are no even numbers, the result is an empty list.
@@ -63,7 +62,7 @@ public class MixedBasicsChallenge {
     //          evenSquares([-2, 0, 5])    returns [4, 0]
     //          evenSquares([1, 3])        returns []
     public static List<Integer> evenSquares(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream().filter(i -> i % 2 == 0).map(i -> i * i).toList();
     }
 
     // CHALLENGE 5 (Streams)
