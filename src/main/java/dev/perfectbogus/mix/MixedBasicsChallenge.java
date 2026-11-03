@@ -94,7 +94,13 @@ public class MixedBasicsChallenge {
     //          isPalindrome("A")                  returns true
     //          isPalindrome("ab,ba")              returns true
     public static boolean isPalindrome(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
+    }
+
+    public static boolean isPalindromeReversed(String text) {
+        StringBuilder sb = new StringBuilder(text).reverse();
+        String reversed = sb.toString();
+        return text.equalsIgnoreCase(reversed);
     }
 
     // CHALLENGE 8 (Strings)
