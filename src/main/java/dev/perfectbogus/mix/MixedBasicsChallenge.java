@@ -32,8 +32,10 @@ public class MixedBasicsChallenge {
         for (char c : text.toCharArray()) {
             if (Character.isUpperCase(c)) {
                 sb.append(Character.toLowerCase(c));
-            } else {
+            } else if (Character.isLowerCase(c)){
                 sb.append(Character.toUpperCase(c));
+            } else {
+                sb.append(c);
             }
         }
         return sb.toString();
