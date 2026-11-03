@@ -28,7 +28,15 @@ public class MixedBasicsChallenge {
     //          swapCase("Hello World") returns "hELLO wORLD"
     //          swapCase("123 !")       returns "123 !"
     public static String swapCase(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        StringBuilder sb = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                sb.append(Character.toLowerCase(c));
+            } else {
+                sb.append(Character.toUpperCase(c));
+            }
+        }
+        return sb.toString();
     }
 
     // CHALLENGE 3 (Characters)
