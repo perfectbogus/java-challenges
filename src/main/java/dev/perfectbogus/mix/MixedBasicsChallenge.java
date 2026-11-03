@@ -71,8 +71,12 @@ public class MixedBasicsChallenge {
     // Example: longestLength([a, abc, ab])  returns 3
     //          longestLength([hello])       returns 5
     //          longestLength([])            returns 0
-    public static int longestLength(List<String> words) {
+    public static int longestLengthExtended(List<String> words) {
         return words.stream().map(String::length).max(Comparator.naturalOrder()).orElse(0);
+    }
+
+    public static int longestLength(List<String> words) {
+        return words.stream().mapToInt(String::length).max().orElse(0);
     }
 
     // CHALLENGE 6 (Streams)
@@ -129,7 +133,7 @@ public class MixedBasicsChallenge {
     //          reverseWords("hello")          returns "hello"
     //          reverseWords("")               returns ""
     public static String reverseWords(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 9 (Strings)
