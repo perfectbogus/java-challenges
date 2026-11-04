@@ -1,9 +1,6 @@
 package dev.perfectbogus.strings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StringWorkoutChallenge {
@@ -69,7 +66,15 @@ public class StringWorkoutChallenge {
     //          removeDuplicateChars("a b a")   returns "a b"
     //          removeDuplicateChars("")        returns ""
     public static String removeDuplicateChars(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Character> seen = new LinkedHashSet<>();
+        for (char c : text.toCharArray()) {
+            seen.add(c);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (char c : seen) {
+            sb.append(c);
+        }
+        return sb.toString();
     }
 
     // CHALLENGE 5
