@@ -65,7 +65,7 @@ public class StringWorkoutChallenge {
     //          removeDuplicateChars("aAa")     returns "aA"
     //          removeDuplicateChars("a b a")   returns "a b"
     //          removeDuplicateChars("")        returns ""
-    public static String removeDuplicateChars(String text) {
+    public static String removeDuplicateCharsExtended(String text) {
         Set<Character> seen = new LinkedHashSet<>();
         for (char c : text.toCharArray()) {
             seen.add(c);
@@ -73,6 +73,16 @@ public class StringWorkoutChallenge {
         StringBuilder sb = new StringBuilder();
         for (char c : seen) {
             sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    public static String removeDuplicateChars(String text) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : text.toCharArray()) {
+            if (sb.indexOf(String.valueOf(c)) < 0) {
+                sb.append(c);
+            }
         }
         return sb.toString();
     }
