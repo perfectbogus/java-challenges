@@ -54,7 +54,11 @@ public class StringWorkoutChallenge {
     //          isAnagram("abc", "abcc")                  returns false
     //          isAnagram("aab", "abb")                   returns false
     public static boolean isAnagram(String first, String second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        char[] charsFirst = first.replaceAll(" ", "").toLowerCase().toCharArray();
+        char[] charsSecond = second.replaceAll(" ", "").toLowerCase().toCharArray();
+        Arrays.sort(charsFirst);
+        Arrays.sort(charsSecond);
+        return Arrays.equals(charsFirst, charsSecond);
     }
 
     // CHALLENGE 4
