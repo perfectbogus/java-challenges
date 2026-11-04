@@ -10,7 +10,8 @@ public class StringWorkoutChallenge {
     //          countVowels("rhythm")       returns 0
     //          countVowels("")             returns 0
     public static int countVowels(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String vowels = "aAeEiIoOuU";
+        return (int) text.chars().filter(c -> vowels.indexOf(c) != -1).count();
     }
 
     // CHALLENGE 2
