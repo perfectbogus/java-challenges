@@ -1,5 +1,11 @@
 package dev.perfectbogus.strings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+
 public class StringWorkoutChallenge {
 
     // CHALLENGE 1
@@ -23,7 +29,20 @@ public class StringWorkoutChallenge {
     //          capitalizeWords("JAVA")         returns "Java"
     //          capitalizeWords("")             returns ""
     public static String capitalizeWords(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (sentence.isEmpty()) return "";
+        return Arrays.stream(sentence.split(" "))
+                .map(s -> s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
+    }
+
+    public static String capitalizeWordsFunctional(String sentence) {
+        if (sentence.isEmpty()) return "";
+        String[] split = sentence.split(" ");
+        List<String> result = new ArrayList<>();
+        for (String s : split) {
+            result.add(s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase());
+        }
+        return String.join(" ", result);
     }
 
     // CHALLENGE 3
