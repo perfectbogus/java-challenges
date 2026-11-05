@@ -146,7 +146,11 @@ public class MapsPracticeChallenge {
     //          countCharsInOrder("aAa")     returns {a=2, A=1}
     //          countCharsInOrder("")        returns {}
     public static LinkedHashMap<Character, Integer> countCharsInOrder(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().mapToObj(c -> (char)c).collect(Collectors.groupingBy(
+                Function.identity(),
+                LinkedHashMap::new,
+                Collectors.summingInt(c -> 1)
+        ));
     }
 
     // CHALLENGE 8 (LinkedHashMap)
