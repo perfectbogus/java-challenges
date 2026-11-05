@@ -96,7 +96,7 @@ public class StringWorkoutChallenge {
     //          longestWord("a")                   returns "a"
     //          longestWord("")                    returns ""
     public static String longestWord(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(sentence.split(" ")).max(Comparator.comparingInt(String::length)).orElse("");
     }
 
     // CHALLENGE 6
