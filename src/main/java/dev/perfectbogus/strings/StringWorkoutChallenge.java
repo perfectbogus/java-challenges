@@ -145,6 +145,15 @@ public class StringWorkoutChallenge {
         return sb.toString();
     }
 
+    public static String padLeftSimplified(String text, int width, char fill) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = text.length(); i < width; i++) {
+            sb.append(fill);
+        }
+        return sb.append(text).toString();
+    }
+
+
     // CHALLENGE 8
     // Returns the character that appears the most times in the text. If two or more characters appear the same
     // number of times, the one that appears first in the text is returned. The text is never empty. The case matters
