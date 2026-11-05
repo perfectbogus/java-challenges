@@ -45,7 +45,12 @@ public class MapsPracticeChallenge {
     //          invert({x=10})      returns {10=x}
     //          invert({})          returns {}
     public static HashMap<Integer, String> invert(Map<String, Integer> original) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return original.entrySet().stream().collect(Collectors.toMap(
+                e -> e.getValue(),
+                e -> e.getKey(),
+                (existing, incoming) -> existing,
+                HashMap::new
+        ));
     }
 
     // CHALLENGE 3 (HashMap)
