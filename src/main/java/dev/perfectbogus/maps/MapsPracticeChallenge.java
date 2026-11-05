@@ -116,6 +116,10 @@ public class MapsPracticeChallenge {
         return res;
     }
 
+    public static List<Integer> valuesForSimplified(Map<String, Integer> map, List<String> keys) {
+        return keys.stream().map(k -> map.getOrDefault(k, 0)).toList();
+    }
+
     // ==========================================================
     // LINKEDHASHMAP
     // ==========================================================
