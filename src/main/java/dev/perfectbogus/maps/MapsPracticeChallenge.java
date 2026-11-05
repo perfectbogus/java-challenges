@@ -53,6 +53,15 @@ public class MapsPracticeChallenge {
         ));
     }
 
+    public static HashMap<Integer, String> invertSimplified(Map<String, Integer> original) {
+        return original.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getValue,
+                Map.Entry::getKey,
+                (existing, incoming) -> existing,
+                HashMap::new
+        ));
+    }
+
     // CHALLENGE 3 (HashMap)
     // Returns a new map with the keys of both maps. If a key is in both maps, its value is the sum of the two values.
     // If a key is in only one map, it keeps its value. Neither of the maps received is modified.
