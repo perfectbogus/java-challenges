@@ -1,6 +1,7 @@
 package dev.perfectbogus.strings;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -166,6 +167,16 @@ public class StringWorkoutChallenge {
     //          mostFrequentChar("aabb")   returns 'a'
     //          mostFrequentChar("bbaa")   returns 'b'
     public static char mostFrequentChar(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Character, Integer> count = new LinkedHashMap<>();
+        for (char c : text.toCharArray()) {
+            count.merge(c, 1, Integer::sum);
+        }
+        char best = text.charAt(0);
+        for (Map.Entry<Character, Integer> e : count.entrySet()) {
+            if (e.getValue() > count.get(best)) {
+                best = e.getKey();
+            }
+        }
+        return best;
     }
 }
