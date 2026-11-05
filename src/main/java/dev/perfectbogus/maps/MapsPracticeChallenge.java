@@ -268,7 +268,8 @@ public class MapsPracticeChallenge {
     //          countInRange(map, 9, 9)   returns 1
     //          countInRange(map, 12, 5)  returns 0
     public static int countInRange(TreeMap<Integer, String> map, int from, int to) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (from > to) return 0;
+        return map.subMap(from, true, to, true).size();
     }
 
     // CHALLENGE 14 (TreeMap)
