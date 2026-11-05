@@ -1,10 +1,6 @@
 package dev.perfectbogus.maps;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -100,8 +96,24 @@ public class MapsPracticeChallenge {
     // Example: valuesFor({a=5, b=7}, [b, x, a, b])  returns [7, 0, 5, 7]
     //          valuesFor({a=5}, [])                 returns []
     //          valuesFor({}, [a])                   returns [0]
+    public static List<Integer> valuesForExtended(Map<String, Integer> map, List<String> keys) {
+        List<Integer> res = new ArrayList<>();
+        for (String k : keys) {
+            if (!map.containsKey(k)) {
+                res.add(0);
+            } else {
+                res.add(map.get(k));
+            }
+        }
+        return res;
+    }
+
     public static List<Integer> valuesFor(Map<String, Integer> map, List<String> keys) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Integer> res = new ArrayList<>();
+        for (String k : keys) {
+            res.add(map.getOrDefault(k, 0));
+        }
+        return res;
     }
 
     // ==========================================================
