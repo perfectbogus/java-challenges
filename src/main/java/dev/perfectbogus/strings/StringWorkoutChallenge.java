@@ -117,6 +117,16 @@ public class StringWorkoutChallenge {
         return i;
     }
 
+    public static int countOccurrencesString(String text, String part) {
+        int count = 0;
+        int index = text.indexOf(part);
+        while (index >= 0) {
+            count++;
+            index = text.indexOf(part, index + part.length());
+        }
+        return count;
+    }
+
     // CHALLENGE 7
     // Returns the text with the character "fill" added at the beginning as many times as needed to reach the given
     // width. If the text already has "width" characters or more, it does not change. The width can be zero or
