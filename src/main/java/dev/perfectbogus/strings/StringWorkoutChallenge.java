@@ -136,7 +136,13 @@ public class StringWorkoutChallenge {
     //          padLeft("abc", 3, '-')   returns "abc"
     //          padLeft("", 2, 'x')      returns "xx"
     public static String padLeft(String text, int width, char fill) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.length() >= width) {
+            return text;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.repeat(String.valueOf(fill), width - text.length());
+        sb.append(text);
+        return sb.toString();
     }
 
     // CHALLENGE 8
