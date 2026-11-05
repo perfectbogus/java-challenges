@@ -217,6 +217,15 @@ public class MapsPracticeChallenge {
         return map;
     }
 
+    public static LinkedHashMap<String, Integer> zipSimplified(List<String> keys, List<Integer> values) {
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        int min = Math.min(keys.size(), values.size());
+        for (int i = 0; i < min; i++) {
+            map.put(keys.get(i), values.get(i));
+        }
+        return map;
+    }
+
     // ==========================================================
     // TREEMAP
     // ==========================================================
