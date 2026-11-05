@@ -206,7 +206,15 @@ public class MapsPracticeChallenge {
     //          zip([a, b, c], [1, 2])     returns {a=1, b=2}
     //          zip([], [1])               returns {}
     public static LinkedHashMap<String, Integer> zip(List<String> keys, List<Integer> values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        int i = 0;
+        while (i < keys.size() && i < values.size()) {
+            String k = keys.get(i);
+            Integer val = values.get(i);
+            map.put(k, val);
+            i++;
+        }
+        return map;
     }
 
     // ==========================================================
