@@ -161,7 +161,16 @@ public class MapsPracticeChallenge {
     //          sortByValue({z=1, y=1, x=1})  returns {x=1, y=1, z=1}
     //          sortByValue({})               returns {}
     public static LinkedHashMap<String, Integer> sortByValue(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Map.Entry<String, Integer>> byValue = Map.Entry.comparingByValue();
+        Comparator<Map.Entry<String, Integer>> byKey = Map.Entry.comparingByKey();
+        return map.entrySet().stream()
+                .sorted(byValue.thenComparing(byKey))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (first, second) -> first,
+                        LinkedHashMap::new
+                ));
     }
 
     // CHALLENGE 9 (LinkedHashMap)
