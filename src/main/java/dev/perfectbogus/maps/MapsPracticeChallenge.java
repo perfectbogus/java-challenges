@@ -281,7 +281,11 @@ public class MapsPracticeChallenge {
     //          caseInsensitiveCounts([B, a, C])      returns {a=1, B=1, C=1}
     //          caseInsensitiveCounts([])             returns {}
     public static TreeMap<String, Integer> caseInsensitiveCounts(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                () -> new TreeMap<>(String::compareToIgnoreCase),
+                Collectors.summingInt(w -> 1)
+        ));
     }
 
     // CHALLENGE 15 (TreeMap)
