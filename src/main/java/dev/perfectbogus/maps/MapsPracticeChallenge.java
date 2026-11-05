@@ -237,7 +237,12 @@ public class MapsPracticeChallenge {
     //          sortedWordCounts([b, A])     returns {A=1, b=1}
     //          sortedWordCounts([])         returns {}
     public static TreeMap<String, Integer> sortedWordCounts(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.toMap(
+                Function.identity(),
+                s -> 1,
+                Integer::sum,
+                TreeMap::new
+        ));
     }
 
     // CHALLENGE 12 (TreeMap)
