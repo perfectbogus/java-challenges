@@ -297,6 +297,11 @@ public class MapsPracticeChallenge {
     //          removeSmallest(map, 0)  returns []         and the map does not change
     //          removeSmallest(map, 5)  returns [a, b, c]  and the map is now {}
     public static List<String> removeSmallest(TreeMap<Integer, String> map, int count) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> res = new ArrayList<>();
+        int min = Math.min(map.size(), count);
+        for (int i = 0; i < min; i++) {
+            res.add(map.pollFirstEntry().getValue());
+        }
+        return res;
     }
 }
