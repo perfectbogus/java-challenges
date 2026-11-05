@@ -872,6 +872,11 @@ class MapsPracticeChallengeTest {
     class LatestBeforeTests {
 
         @Test
+        void testBetweenTwo() {
+            assertEquals("lunch", MapsPracticeChallenge.latestBefore(schedule(), 17));
+        }
+
+        @Test
         void testBetweenTwoKeys() {
             assertEquals("lunch", MapsPracticeChallenge.latestBefore(schedule(), 13));
         }

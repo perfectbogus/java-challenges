@@ -255,7 +255,8 @@ public class MapsPracticeChallenge {
     //          latestBefore(schedule, 7)   returns "none"
     //          latestBefore(schedule, 23)  returns "dinner"
     public static String latestBefore(TreeMap<Integer, String> schedule, int hour) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map.Entry<Integer, String> e = schedule.floorEntry(hour);
+        return e == null ? "none" : e.getValue();
     }
 
     // CHALLENGE 13 (TreeMap)
