@@ -131,7 +131,11 @@ public class MapsPracticeChallenge {
     //          firstIndexOfEachWord([x, x, x])     returns {x=0}
     //          firstIndexOfEachWord([])            returns {}
     public static LinkedHashMap<String, Integer> firstIndexOfEachWord(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        for (int i = 0; i < words.size(); i++) {
+            map.putIfAbsent(words.get(i), i);
+        }
+        return map;
     }
 
     // CHALLENGE 7 (LinkedHashMap)
