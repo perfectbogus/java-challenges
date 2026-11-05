@@ -69,7 +69,9 @@ public class MapsPracticeChallenge {
     //          mergeBalances({a=1}, {})                returns {a=1}
     //          mergeBalances({}, {})                   returns {}
     public static HashMap<String, Integer> mergeBalances(Map<String, Integer> first, Map<String, Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        HashMap<String, Integer> merge = new HashMap<>(first);
+        second.forEach((k, v) -> merge.merge(k, v, Integer::sum));
+        return merge;
     }
 
     // CHALLENGE 4 (HashMap)
