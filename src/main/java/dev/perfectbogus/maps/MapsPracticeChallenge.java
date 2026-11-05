@@ -30,6 +30,14 @@ public class MapsPracticeChallenge {
         ));
     }
 
+    public static HashMap<String, Integer> wordCountsSimplified(List<String> words) {
+        return words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                HashMap::new,
+                Collectors.summingInt(w -> 1)
+        ));
+    }
+
     // CHALLENGE 2 (HashMap)
     // Returns a new map where every value of the original map is a key, and its key is the value. All the values of
     // the original map are different. The original map is not modified. An empty map gives an empty map.
