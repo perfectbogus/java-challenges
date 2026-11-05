@@ -83,7 +83,15 @@ public class MapsPracticeChallenge {
     //          twoSum([3, 3], 6)          returns [0, 1]
     //          twoSum([-1, -2, 5], 4)     returns [0, 2]
     public static int[] twoSum(int[] numbers, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Integer> seen = new HashMap<>();
+        for (int j = 0; j < numbers.length; j++) {
+            Integer i = seen.get(target - numbers[j]);
+            if (i != null) {
+                return new int[]{i, j};
+            }
+            seen.put(numbers[j], j);
+        }
+        throw new UnsupportedOperationException();
     }
 
     // CHALLENGE 5 (HashMap)
