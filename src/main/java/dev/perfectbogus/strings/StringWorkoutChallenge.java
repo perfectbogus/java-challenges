@@ -153,6 +153,9 @@ public class StringWorkoutChallenge {
         return sb.append(text).toString();
     }
 
+    public static String padLeftStream(String text, int width, char fill) {
+        return String.valueOf(fill).repeat(Math.max(0, width - text.length())) + text;
+    }
 
     // CHALLENGE 8
     // Returns the character that appears the most times in the text. If two or more characters appear the same
