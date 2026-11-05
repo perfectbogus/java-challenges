@@ -1,6 +1,8 @@
 package dev.perfectbogus.strings;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class StringWorkoutChallenge {
@@ -107,7 +109,12 @@ public class StringWorkoutChallenge {
     //          countOccurrences("aaa", "aa")     returns 1
     //          countOccurrences("abc", "d")      returns 0
     public static int countOccurrences(String text, String part) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile(Pattern.quote(part)).matcher(text);
+        int i = 0;
+        while (m.find()) {
+            i++;
+        }
+        return i;
     }
 
     // CHALLENGE 7
