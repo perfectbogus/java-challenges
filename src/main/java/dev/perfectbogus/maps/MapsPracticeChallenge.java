@@ -180,8 +180,21 @@ public class MapsPracticeChallenge {
     //          orderByLastAppearance([a, b])        returns {a=1, b=1}
     //          orderByLastAppearance([b, a, b, a])  returns {b=2, a=2}
     //          orderByLastAppearance([])            returns {}
+    public static LinkedHashMap<String, Integer> orderByLastAppearanceExtended(List<String> words) {
+        return words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                () -> new LinkedHashMap<>(16, 0.75f, true),
+                Collectors.summingInt(w -> 1)
+        ));
+    }
+
     public static LinkedHashMap<String, Integer> orderByLastAppearance(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashMap<String, Integer> res = new LinkedHashMap<>();
+        for (String w : words) {
+            Integer old = res.remove(w);
+            res.put(w, old == null ? 1 : old + 1);
+        }
+        return res;
     }
 
     // CHALLENGE 10 (LinkedHashMap)
