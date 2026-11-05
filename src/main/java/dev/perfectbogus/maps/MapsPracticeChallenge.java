@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MapsPracticeChallenge {
 
@@ -20,7 +22,12 @@ public class MapsPracticeChallenge {
     //          wordCounts([a, A])     returns {a=1, A=1}
     //          wordCounts([])         returns {}
     public static HashMap<String, Integer> wordCounts(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.toMap(
+                s -> s,
+                s -> 1,
+                Integer::sum,
+                HashMap::new
+        ));
     }
 
     // CHALLENGE 2 (HashMap)
