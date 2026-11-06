@@ -39,7 +39,9 @@ public class SetsPracticeChallenge {
     //          union({1}, {})            returns {1}
     //          union({}, {})             returns {}
     public static HashSet<Integer> union(Set<Integer> first, Set<Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        HashSet<Integer> set = new HashSet<>(first);
+        set.addAll(second);
+        return set;
     }
 
     // CHALLENGE 3 (HashSet)
