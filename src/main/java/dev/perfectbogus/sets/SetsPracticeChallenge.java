@@ -102,7 +102,11 @@ public class SetsPracticeChallenge {
     //          firstRepeatedWord([x, x, y, y])     returns "x"
     //          firstRepeatedWord([a, A])           returns null
     public static String firstRepeatedWord(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<String> set = new HashSet<>();
+        for (String s : words) {
+            if (!set.add(s)) return s;
+        }
+        return null;
     }
 
     // ==========================================================
