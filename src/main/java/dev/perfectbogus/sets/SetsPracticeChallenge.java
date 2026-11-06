@@ -59,6 +59,20 @@ public class SetsPracticeChallenge {
         return match;
     }
 
+    public static HashSet<Integer> intersectionSimplified(Set<Integer> first, Set<Integer> second) {
+        HashSet<Integer> match = new HashSet<>();
+        for (Integer i : first) {
+            if (second.contains(i)) match.add(i);
+        }
+        return match;
+    }
+
+    public static HashSet<Integer> intersectionSimplifiedV2(Set<Integer> first, Set<Integer> second) {
+        HashSet<Integer> result = new HashSet<>(first);
+        result.retainAll(second);
+        return result;
+    }
+
     // CHALLENGE 4 (HashSet)
     // Returns a new set with the elements that are in the first set and are not in the second set. Neither of the
     // sets received is modified.
