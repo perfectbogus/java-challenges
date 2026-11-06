@@ -270,6 +270,7 @@ public class MapsPracticeChallenge {
     public static int countInRange(TreeMap<Integer, String> map, int from, int to) {
         if (from > to) return 0;
         return map.subMap(from, true, to, true).size();
+
     }
 
     // CHALLENGE 14 (TreeMap)
