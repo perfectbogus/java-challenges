@@ -129,7 +129,9 @@ public class SetsPracticeChallenge {
     //          commonInOrder([5, 6], [7])           returns {}
     //          commonInOrder([1, 2, 3], [3, 2, 1])  returns {1, 2, 3}
     public static LinkedHashSet<Integer> commonInOrder(List<Integer> first, List<Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashSet<Integer> set = new LinkedHashSet<>(first);
+        set.retainAll(second);
+        return set;
     }
 
     // CHALLENGE 8 (LinkedHashSet)
