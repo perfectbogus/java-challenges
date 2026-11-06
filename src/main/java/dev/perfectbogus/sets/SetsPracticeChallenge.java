@@ -50,7 +50,13 @@ public class SetsPracticeChallenge {
     //          intersection({1, 2}, {3, 4})        returns {}
     //          intersection({1, 2}, {})            returns {}
     public static HashSet<Integer> intersection(Set<Integer> first, Set<Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        HashSet<Integer> merge = new HashSet<>(first);
+        HashSet<Integer> match = new HashSet<>();
+        merge.addAll(second);
+        for (Integer i : merge) {
+            if (first.contains(i) && second.contains(i)) match.add(i);
+        }
+        return match;
     }
 
     // CHALLENGE 4 (HashSet)
