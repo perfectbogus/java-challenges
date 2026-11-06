@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class SetsPracticeChallenge {
 
@@ -20,7 +21,7 @@ public class SetsPracticeChallenge {
     //          uniqueWords([x, x, x])  returns {x}
     //          uniqueWords([])         returns {}
     public static HashSet<String> uniqueWords(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.toCollection(() -> new HashSet<>()));
     }
 
     // CHALLENGE 2 (HashSet)
