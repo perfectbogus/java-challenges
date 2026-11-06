@@ -119,7 +119,7 @@ public class SetsPracticeChallenge {
     //          distinctInOrder([x, x])           returns {x}
     //          distinctInOrder([])               returns {}
     public static LinkedHashSet<String> distinctInOrder(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new LinkedHashSet<>(words);
     }
 
     // CHALLENGE 7 (LinkedHashSet)
