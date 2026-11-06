@@ -80,7 +80,12 @@ public class SetsPracticeChallenge {
     //          difference({1, 2}, {1, 2, 3})  returns {}
     //          difference({1, 2}, {})         returns {1, 2}
     public static HashSet<Integer> difference(Set<Integer> first, Set<Integer> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        HashSet<Integer> diff = new HashSet<>();
+        HashSet<Integer> set = new HashSet<>(first);
+        for (Integer i : set) {
+            if (!second.contains(i)) diff.add(i);
+        }
+        return diff;
     }
 
     // CHALLENGE 5 (HashSet)
