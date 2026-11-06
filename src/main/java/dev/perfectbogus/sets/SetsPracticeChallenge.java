@@ -24,6 +24,14 @@ public class SetsPracticeChallenge {
         return words.stream().collect(Collectors.toCollection(() -> new HashSet<>()));
     }
 
+    public static HashSet<String> uniqueWordsSimplifiedV2(List<String> words) {
+        return words.stream().collect(Collectors.toCollection(HashSet::new));
+    }
+
+    public static HashSet<String> uniqueWordsSimplified(List<String> words) {
+        return new HashSet<>(words);
+    }
+
     // CHALLENGE 2 (HashSet)
     // Returns a new set with the elements that are in the first set, in the second set, or in both. Neither of the
     // sets received is modified.
