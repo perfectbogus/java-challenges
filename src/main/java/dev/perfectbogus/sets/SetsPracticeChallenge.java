@@ -88,6 +88,12 @@ public class SetsPracticeChallenge {
         return diff;
     }
 
+    public static HashSet<Integer> differenceSimplified(Set<Integer> first, Set<Integer> second) {
+        HashSet<Integer> result = new HashSet<>(first);
+        result.removeAll(second);
+        return result;
+    }
+
     // CHALLENGE 5 (HashSet)
     // Returns the first word of the list that has already appeared before in the list, that is, the word whose second
     // appearance comes first. If no word is repeated, returns null. The case matters.
