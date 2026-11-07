@@ -224,7 +224,12 @@ public class SetsPracticeChallenge {
     //          nextBigger(set, 9)   returns -1
     //          nextBigger(set, -3)  returns 2
     public static int nextBigger(TreeSet<Integer> set, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Integer i = set.higher(n);
+        if (i == null) {
+            return -1;
+        } else {
+            return i;
+        }
     }
 
     // CHALLENGE 13 (TreeSet)
