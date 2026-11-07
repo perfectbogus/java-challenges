@@ -23,7 +23,7 @@ public class GridPracticeChallenge {
     //          rowSums([[-1, -2]])            returns [-3]
     //          rowSums([])                    returns []
     public static int[] rowSums(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(grid).mapToInt(a -> Arrays.stream(a).sum()).toArray();
     }
 
     // CHALLENGE 3
