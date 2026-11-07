@@ -1,10 +1,6 @@
 package dev.perfectbogus.sets;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SetsPracticeChallenge {
@@ -142,7 +138,11 @@ public class SetsPracticeChallenge {
     //          uniqueChars("a b a")   returns {a, ' ', b}
     //          uniqueChars("")        returns {}
     public static LinkedHashSet<Character> uniqueChars(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashSet<Character> set = new LinkedHashSet<>();
+        for (char c : text.toCharArray()) {
+            set.add(c);
+        }
+        return set;
     }
 
     // CHALLENGE 9 (LinkedHashSet)
