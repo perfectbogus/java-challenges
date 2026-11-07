@@ -260,6 +260,12 @@ public class SetsPracticeChallenge {
         return set;
     }
 
+    public static TreeSet<String> byLengthThenAlphabeticalSimplified(List<String> words) {
+        TreeSet<String> set = new TreeSet<>(Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder()));
+        set.addAll(words);
+        return set;
+    }
+
     // CHALLENGE 15 (TreeSet)
     // Removes from the set the "count" greatest elements, and returns them from the greatest to the smallest. If the
     // set has fewer than "count" elements, all of them are removed. A count of 0 changes nothing. The count is never
