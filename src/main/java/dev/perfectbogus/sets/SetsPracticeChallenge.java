@@ -1,6 +1,7 @@
 package dev.perfectbogus.sets;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SetsPracticeChallenge {
@@ -159,7 +160,18 @@ public class SetsPracticeChallenge {
     //          appearOnce([a, b, c])        returns {a, b, c}
     //          appearOnce([a, a, b, a, c])  returns {b, c}
     public static LinkedHashSet<String> appearOnce(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashMap<String, Long> map = words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                LinkedHashMap::new,
+                Collectors.counting()
+        ));
+
+        LinkedHashSet<String> res = new LinkedHashSet<>();
+        for (Map.Entry<String, Long> e : map.entrySet()) {
+            if (e.getValue() == 1) res.add(e.getKey());
+        }
+
+        return res;
     }
 
     // CHALLENGE 10 (LinkedHashSet)
