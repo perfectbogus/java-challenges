@@ -35,13 +35,12 @@ public class GridPracticeChallenge {
     //          columnSums([])                      returns []
     public static int[] columnSums(int[][] grid) {
         if (grid.length == 0) return new int[0];
-        int m = grid.length;
         int n = grid[0].length;
         int[] res = new int[grid[0].length];
         for (int col = 0; col < n; col++) {
             int sum = 0;
-            for (int row = 0; row < m; row++) {
-                sum += grid[row][col];
+            for (int[] ints : grid) {
+                sum += ints[col];
             }
             res[col] = sum;
         }
@@ -57,7 +56,18 @@ public class GridPracticeChallenge {
     //          transpose([[7]])                   returns [[7]]
     //          transpose([])                      returns []
     public static int[][] transpose(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int m = grid.length;
+        if (m == 0) return new int[0][0];
+        int n = grid[0].length;
+
+        int[][] res = new int[n][m];
+        for (int row = 0; row < m; row++) {
+            for (int col = 0; col < n; col++) {
+                res[col][row] = grid[row][col];
+            }
+        }
+
+        return res;
     }
 
     // CHALLENGE 5
