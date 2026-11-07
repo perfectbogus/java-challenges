@@ -145,6 +145,12 @@ public class SetsPracticeChallenge {
         return set;
     }
 
+    public static LinkedHashSet<Character> uniqueCharsSimplified(String text) {
+        return text.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
     // CHALLENGE 9 (LinkedHashSet)
     // Returns a set with the words that appear exactly once in the list, in the same order they have in the list.
     // The case matters.
