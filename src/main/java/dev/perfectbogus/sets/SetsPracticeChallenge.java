@@ -253,7 +253,11 @@ public class SetsPracticeChallenge {
     //          byLengthThenAlphabetical([b, A])               returns {A, b}
     //          byLengthThenAlphabetical([])                   returns {}
     public static TreeSet<String> byLengthThenAlphabetical(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+        TreeSet<String> set = new TreeSet<>(byLength.thenComparing(byAlpha));
+        set.addAll(words);
+        return set;
     }
 
     // CHALLENGE 15 (TreeSet)
