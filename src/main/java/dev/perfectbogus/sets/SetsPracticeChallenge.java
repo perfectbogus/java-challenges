@@ -241,7 +241,8 @@ public class SetsPracticeChallenge {
     //          countBetween(set, 9, 9)   returns 1
     //          countBetween(set, 12, 5)  returns 0
     public static int countBetween(TreeSet<Integer> set, int from, int to) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (from > to) return 0;
+        return set.subSet(from, true, to, true).size();
     }
 
     // CHALLENGE 14 (TreeSet)
