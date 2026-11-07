@@ -1,5 +1,7 @@
 package dev.perfectbogus.arrays;
 
+import java.util.Arrays;
+
 public class GridPracticeChallenge {
 
     // CHALLENGE 1
@@ -10,7 +12,7 @@ public class GridPracticeChallenge {
     //          sumAll([[-3, 3]])          returns 0
     //          sumAll([])                 returns 0
     public static int sumAll(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(grid).mapToInt(i -> Arrays.stream(i).sum()).sum();
     }
 
     // CHALLENGE 2
