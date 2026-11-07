@@ -34,7 +34,18 @@ public class GridPracticeChallenge {
     //          columnSums([[1], [2], [3]])         returns [6]
     //          columnSums([])                      returns []
     public static int[] columnSums(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (grid.length == 0) return new int[0];
+        int m = grid.length;
+        int n = grid[0].length;
+        int[] res = new int[grid[0].length];
+        for (int col = 0; col < n; col++) {
+            int sum = 0;
+            for (int row = 0; row < m; row++) {
+                sum += grid[row][col];
+            }
+            res[col] = sum;
+        }
+        return res;
     }
 
     // CHALLENGE 4
