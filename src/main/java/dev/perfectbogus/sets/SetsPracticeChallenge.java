@@ -212,7 +212,7 @@ public class SetsPracticeChallenge {
     //          sortedDistinct([-1, 0, -1])   returns {-1, 0}
     //          sortedDistinct([])            returns {}
     public static TreeSet<Integer> sortedDistinct(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new TreeSet<>(numbers);
     }
 
     // CHALLENGE 12 (TreeSet)
