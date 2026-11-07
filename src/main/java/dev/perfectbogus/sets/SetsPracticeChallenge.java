@@ -275,6 +275,11 @@ public class SetsPracticeChallenge {
     //          removeLargest(set, 0)  returns []         and the set does not change
     //          removeLargest(set, 5)  returns [3, 2, 1]  and the set is now {}
     public static List<Integer> removeLargest(TreeSet<Integer> set, int count) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<Integer> res = new ArrayList<>();
+        int min = Math.min(set.size(), count);
+        for (int i = 0; i < min; i++) {
+            res.add(set.pollLast());
+        }
+        return res;
     }
 }
