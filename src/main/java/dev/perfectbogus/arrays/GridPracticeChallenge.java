@@ -1,6 +1,7 @@
 package dev.perfectbogus.arrays;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class GridPracticeChallenge {
 
@@ -78,7 +79,15 @@ public class GridPracticeChallenge {
     //          maxElement([[], [3], []])     returns 3
     //          maxElement([[7]])             returns 7
     public static int maxElement(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int max = Integer.MIN_VALUE;
+        for (int[] row: grid) {
+            for (int val : row) {
+                if (val > max) {
+                    max = val;
+                }
+            }
+        }
+        return max;
     }
 
     // CHALLENGE 6
