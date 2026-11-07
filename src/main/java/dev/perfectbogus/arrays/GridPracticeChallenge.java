@@ -98,7 +98,12 @@ public class GridPracticeChallenge {
     //          mainDiagonal([[7]])                             returns [7]
     //          mainDiagonal([])                                returns []
     public static int[] mainDiagonal(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (grid.length == 0) return new int[0];
+        int[] res = new int[grid.length];
+        for (int i = 0; i < grid.length; i++) {
+            res[i] = grid[i][i];
+        }
+        return res;
     }
 
     // CHALLENGE 7
