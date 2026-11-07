@@ -197,7 +197,9 @@ public class SetsPracticeChallenge {
     //          mergeKeepingOrder({x}, {})            returns {x}
     //          mergeKeepingOrder({}, {y, x})         returns {y, x}
     public static LinkedHashSet<String> mergeKeepingOrder(Set<String> first, Set<String> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashSet<String> res = new LinkedHashSet<>(first);
+        res.addAll(second);
+        return res;
     }
 
     // ==========================================================
