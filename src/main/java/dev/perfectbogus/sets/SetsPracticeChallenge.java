@@ -174,6 +174,21 @@ public class SetsPracticeChallenge {
         return res;
     }
 
+    public static LinkedHashSet<String> appearOnceSimplified(List<String> words) {
+        LinkedHashSet<String> once = new LinkedHashSet<>();
+        Set<String> repeated = new HashSet<>();
+        for (String w : words) {
+            if (repeated.contains(w)) {
+                continue;
+            }
+            if (!once.add(w)) {
+                once.remove(w);
+                repeated.add(w);
+            }
+        }
+        return once;
+    }
+
     // CHALLENGE 10 (LinkedHashSet)
     // Returns a new set with all the elements of the first set, followed by the elements of the second set that are
     // not in the first one. Each group keeps the order in which its set gives its elements. Neither of the sets
