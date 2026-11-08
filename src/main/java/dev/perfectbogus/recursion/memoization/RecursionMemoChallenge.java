@@ -1,5 +1,7 @@
 package dev.perfectbogus.recursion.memoization;
 
+import java.util.Arrays;
+
 public class RecursionMemoChallenge {
 
     // CHALLENGE 1
@@ -11,7 +13,21 @@ public class RecursionMemoChallenge {
     //          fibonacci(7)  returns 13
     //          fibonacci(10) returns 55
     public static long fibonacci(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[] memo = new long[n + 1];
+        Arrays.fill(memo, -1);
+        return helperFibonacci(n, memo);
+    }
+
+    public static long helperFibonacci(int n, long[] memo) {
+        if (n <= 1) return n;
+
+        if (memo[n] != -1) {
+            return memo[n];
+        }
+
+        memo[n] = helperFibonacci(n - 1, memo) + helperFibonacci(n - 2, memo);
+
+        return memo[n];
     }
 
     // CHALLENGE 2
