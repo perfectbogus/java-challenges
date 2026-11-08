@@ -134,6 +134,10 @@ public class GridPracticeChallenge {
         return Arrays.stream(grid).flatMapToInt(a -> Arrays.stream(a)).toArray();
     }
 
+    public static int[] flattenSimplified(int[][] grid) {
+        return Arrays.stream(grid).flatMapToInt(Arrays::stream).toArray();
+    }
+
     // CHALLENGE 9
     // All the rows of the grid have the same length. Returns a new grid with the original rotated 90 degrees
     // clockwise: the first row of the original becomes the last column of the result. The grid received is not
