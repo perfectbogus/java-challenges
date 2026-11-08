@@ -169,6 +169,11 @@ public class GridPracticeChallenge {
     //          findValue([[], [5]], 5)         returns [1, 0]
     //          findValue([[1, 2]], 9)          returns [-1, -1]
     public static int[] findValue(int[][] grid, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == target) return new int[]{i, j};
+            }
+        }
+        return new int[]{-1, -1};
     }
 }
