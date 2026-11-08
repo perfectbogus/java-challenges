@@ -131,7 +131,7 @@ public class GridPracticeChallenge {
     //          flatten([[], []])            returns []
     //          flatten([])                  returns []
     public static int[] flatten(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(grid).flatMapToInt(a -> Arrays.stream(a)).toArray();
     }
 
     // CHALLENGE 9
