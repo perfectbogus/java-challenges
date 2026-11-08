@@ -39,7 +39,18 @@ public class RecursionMemoChallenge {
     //          climbStairs(3)  returns 3     (1+1+1, 1+2, 2+1)
     //          climbStairs(5)  returns 8
     public static long climbStairs(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[] memo = new long[n + 2];
+        return ways(n, memo);
+    }
+
+    public static long ways(int n, long[] memo) {
+        if (n <= 1) return 1;
+
+        if (memo[n] != 0) {
+            return memo[n];
+        }
+        memo[n] = ways(n - 1, memo) + ways(n - 2, memo);
+        return memo[n];
     }
 
     // CHALLENGE 3
