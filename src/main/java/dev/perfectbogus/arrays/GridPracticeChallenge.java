@@ -114,7 +114,13 @@ public class GridPracticeChallenge {
     //          isSymmetric([[1, 2, 3], [2, 5, 6], [3, 6, 9]]) returns true
     //          isSymmetric([])                                returns true
     public static boolean isSymmetric(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (i == j) continue;
+                if (grid[i][j] != grid[j][i]) return false;
+            }
+        }
+        return true;
     }
 
     // CHALLENGE 8
