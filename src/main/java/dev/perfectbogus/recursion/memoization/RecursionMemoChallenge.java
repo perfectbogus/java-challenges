@@ -99,6 +99,21 @@ public class RecursionMemoChallenge {
         return result;
     }
 
+    public static long tribonacciSimplified(int n) {
+        return helperTrib(n, new long[n + 3]);
+    }
+
+    private static long helperTrib(int n, long[] memo) {
+        if (n == 0) return 0;
+        if (n <= 2) return 1;
+
+        if (memo[n] != 0) {
+            return memo[n];
+        }
+        memo[n] = helperTrib(n - 1, memo) + helperTrib(n - 2, memo) + helperTrib(n - 3, memo);
+        return memo[n];
+    }
+
     // CHALLENGE 4
     // A robot is in the top left corner of a grid with "rows" rows and "cols" columns, and it has to reach the
     // bottom right corner. It can only move one cell to the right or one cell down. Returns how many different paths
