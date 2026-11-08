@@ -1,6 +1,7 @@
 package dev.perfectbogus.recursion.memoization;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class RecursionMemoChallenge {
 
@@ -51,6 +52,23 @@ public class RecursionMemoChallenge {
         }
         memo[n] = ways(n - 1, memo) + ways(n - 2, memo);
         return memo[n];
+    }
+
+    public static long climbStairsSimplified(int n) {
+        return helperClimb(n + 1, new HashMap<>());
+    }
+
+    private static long helperClimb(int n, HashMap<Integer, Long> memo) {
+        if (n < 2) return n;
+
+        Long cached = memo.get(n);
+        if (cached != null) {
+            return cached;
+        }
+
+        long result = helperClimb(n - 1, memo) + helperClimb(n - 2, memo);
+        memo.put(n, result);
+        return result;
     }
 
     // CHALLENGE 3
