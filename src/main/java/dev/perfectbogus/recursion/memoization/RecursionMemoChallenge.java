@@ -2,6 +2,7 @@ package dev.perfectbogus.recursion.memoization;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RecursionMemoChallenge {
 
@@ -80,7 +81,22 @@ public class RecursionMemoChallenge {
     //          tribonacci(3)  returns 2
     //          tribonacci(6)  returns 13
     public static long tribonacci(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return helperTribonacci(n, new HashMap<>());
+    }
+
+    public static long helperTribonacci(int n, Map<Integer, Long> memo) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 1;
+
+        Long cached = memo.get(n);
+        if (cached != null) {
+            return cached;
+        }
+
+        long result = helperTribonacci(n - 3, memo) + helperTribonacci(n - 2, memo) + helperTribonacci(n - 1, memo);
+        memo.put(n, result);
+        return result;
     }
 
     // CHALLENGE 4
