@@ -147,7 +147,17 @@ public class GridPracticeChallenge {
     //          rotateClockwise([[7]])                   returns [[7]]
     //          rotateClockwise([])                      returns []
     public static int[][] rotateClockwise(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (grid.length == 0) return new int[0][];
+
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[][] result = new int[cols][rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[j][rows - 1 - i] = grid[i][j];
+            }
+        }
+
     }
 
     // CHALLENGE 10
