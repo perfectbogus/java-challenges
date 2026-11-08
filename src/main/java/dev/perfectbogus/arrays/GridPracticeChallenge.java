@@ -157,7 +157,7 @@ public class GridPracticeChallenge {
                 result[j][rows - 1 - i] = grid[i][j];
             }
         }
-
+        return result;
     }
 
     // CHALLENGE 10
