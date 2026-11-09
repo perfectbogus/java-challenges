@@ -43,6 +43,12 @@ public class AdvancedCollectorsChallenge {
         ));
     }
 
+    public static Map<String, Integer> totalSalaryByDepartmentSimplified(List<Employee> employees) {
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.summingInt(Employee::salary)
+        ));
+    }
     // CHALLENGE 3
     // Returns a map from each department to the average salary of its employees, as a decimal number. An empty list
     // gives an empty map.
