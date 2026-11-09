@@ -217,7 +217,18 @@ public class RecursionMemoChallenge {
     //          maxRobbery([5])              returns 5
     //          maxRobbery([])               returns 0
     public static int maxRobbery(int[] houses) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] memo = new int[houses.length];
+        Arrays.fill(memo, -1);
+        return rob(houses, 0, memo);
+    }
+
+    public static int rob(int[] h, int i, int[] memo) {
+        if (i >= h.length) return 0;
+
+        if (memo[i] != -1) return memo[i];
+
+        memo[i] = Math.max(h[i] + rob(h, i + 2, memo), rob(h,  i + 1, memo));
+        return memo[i];
     }
 
     // CHALLENGE 9
