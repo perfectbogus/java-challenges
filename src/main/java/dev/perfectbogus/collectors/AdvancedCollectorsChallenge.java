@@ -186,6 +186,15 @@ public class AdvancedCollectorsChallenge {
         ));
     }
 
+    public static TreeMap<String, Integer> lowestSalaryByDepartmentSimplified(List<Employee> employees) {
+        return employees.stream().collect(Collectors.toMap(
+                Employee::department,
+                Employee::salary,
+                (existing, incoming) -> existing > incoming ? incoming : existing,
+                TreeMap::new
+        ));
+    }
+
     // CHALLENGE 10
     // Returns a map from each length to the set of the different letters that appear in the words of that length. The
     // letters of all the words with the same length are put together in one set. The case matters ('a' and 'A' are
