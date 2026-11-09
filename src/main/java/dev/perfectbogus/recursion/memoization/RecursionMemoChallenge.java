@@ -297,6 +297,23 @@ public class RecursionMemoChallenge {
     //          waysToClimb(5, [2])        returns 0
     //          waysToClimb(0, [3])        returns 1
     public static long waysToClimb(int n, int[] steps) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[] memo = new long[n + 1];
+        Arrays.fill(memo, -1);
+        return climb(n, steps, memo);
+    }
+
+    private static long climb(int n, int[] steps, long[] memo) {
+        if (n == 0) return 1;
+
+        if (memo[n] != -1) return memo[n];
+
+        long total = 0;
+        for (int s : steps) {
+            if (s <= n) {
+                total += climb(n - s, steps, memo);
+            }
+        }
+        memo[n] = total;
+        return total;
     }
 }
