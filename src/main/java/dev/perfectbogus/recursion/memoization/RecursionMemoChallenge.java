@@ -270,7 +270,21 @@ public class RecursionMemoChallenge {
     //          noConsecutiveOnes(2)  returns 3     (00, 01, 10)
     //          noConsecutiveOnes(4)  returns 8
     public static long noConsecutiveOnes(int length) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return countConsecutive(length, new HashMap<>());
+    }
+
+    private static long countConsecutive(int length, Map<Integer, Long> memo) {
+        if (length == 0) return 1;
+        if (length == 1) return 2;
+
+        Long cached = memo.get(length);
+        if (cached != null) {
+            return cached;
+        }
+
+        long result = countConsecutive(length - 1, memo) + countConsecutive(length - 2, memo);
+        memo.put(length, result);
+        return result;
     }
 
     // CHALLENGE 11
