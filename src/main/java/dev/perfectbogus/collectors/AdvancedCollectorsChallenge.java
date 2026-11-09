@@ -107,7 +107,14 @@ public class AdvancedCollectorsChallenge {
     //          sortedNamesByDepartment([ana(B, 1), ana(B, 2)])                     returns {B=[ana]}
     //          sortedNamesByDepartment([])                                         returns {}
     public static TreeMap<String, TreeSet<String>> sortedNamesByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                TreeMap::new,
+                Collectors.mapping(
+                        Employee::name,
+                        Collectors.toCollection(TreeSet::new)
+                )
+        ));
     }
 
     // CHALLENGE 7
