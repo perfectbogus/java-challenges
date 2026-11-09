@@ -160,7 +160,12 @@ public class AdvancedCollectorsChallenge {
     //          salaryReport([])                                               returns
     //                                                          "count=0 min=0 max=0 sum=0 average=0.0"
     public static String salaryReport(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        IntSummaryStatistics stats = employees.stream().collect(Collectors.summarizingInt(Employee::salary));
+        if (stats.getCount() == 0) {
+            return "count=0 min=0 max=0 sum=0 average=0.0";
+        }
+        return "count=" + stats.getCount() + " min=" + stats.getMin() + " max=" + stats.getMax()
+                + " sum=" + stats.getSum() + " average=" + stats.getAverage();
     }
 
     // CHALLENGE 9
