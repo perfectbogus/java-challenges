@@ -124,7 +124,14 @@ public class AdvancedCollectorsChallenge {
     //          salarySpread([ana(Sales, 1500)])                               returns 0
     //          salarySpread([])                                               returns 0
     public static int salarySpread(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.teeing(
+                Collectors.minBy(Comparator.comparingInt(Employee::salary)),
+                Collectors.maxBy(Comparator.comparingInt(Employee::salary)),
+                (min, max) -> {
+                    if (max.isPresent() && min.isPresent()) return max.get().salary() - min.get().salary();
+                    else return 0;
+                }
+        ));
     }
 
     // CHALLENGE 8
