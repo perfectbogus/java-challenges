@@ -191,7 +191,21 @@ public class RecursionMemoChallenge {
     //          maxTrianglePath([[5]])                     returns 5
     //          maxTrianglePath([[-1], [-5, -2]])          returns -3
     public static int maxTrianglePath(int[][] triangle) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[][] memo = new int[triangle.length][triangle.length];
+        for (int[] row : memo) {
+            Arrays.fill(row, Integer.MIN_VALUE);
+        }
+        return best(triangle, 0, 0, memo);
+    }
+
+    public static int best(int[][] t, int row, int col, int[][] memo) {
+        if (row == t.length - 1) return t[row][col];
+
+        if (memo[row][col] != Integer.MIN_VALUE) return memo[row][col];
+
+        int result = t[row][col] + Math.max(best(t, row + 1, col, memo), best(t, row + 1, col + 1, memo));
+        memo[row][col] = result;
+        return result;
     }
 
     // CHALLENGE 8
