@@ -240,7 +240,26 @@ public class RecursionMemoChallenge {
     //          minCoins([1, 5, 6], 10)  returns 2     (5 + 5)
     //          minCoins([3], 0)         returns 0
     public static int minCoins(int[] coins, int amount) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] memo = new int[amount + 1];
+        Arrays.fill(memo, -2);
+        return count(coins, amount, memo);
+    }
+
+    private static int count(int[] coins, int amount, int[] memo) {
+        if (amount == 0) return 0;
+        if (memo[amount] != -2) return memo[amount];
+
+        int best = -1;
+        for (int coin : coins) {
+            if (coin <= amount) {
+                int sub = count(coins, amount - coin, memo);
+                if (sub != -1 && (best == -1 || sub + 1 < best)) {
+                    best = sub + 1;
+                }
+            }
+        }
+        memo[amount] = best;
+        return best;
     }
 
     // CHALLENGE 10
