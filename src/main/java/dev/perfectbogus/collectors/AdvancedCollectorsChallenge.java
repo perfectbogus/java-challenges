@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class AdvancedCollectorsChallenge {
 
@@ -21,7 +22,13 @@ public class AdvancedCollectorsChallenge {
     //          namesByDepartment([eve(HR, 1500)])                                       returns {HR=[eve]}
     //          namesByDepartment([])                                                    returns {}
     public static Map<String, List<String>> namesByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.mapping(
+                        Employee::name,
+                        Collectors.toList()
+                )
+        ));
     }
 
     // CHALLENGE 2
