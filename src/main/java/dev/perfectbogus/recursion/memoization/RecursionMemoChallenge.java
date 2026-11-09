@@ -145,7 +145,16 @@ public class RecursionMemoChallenge {
     //          binomial(6, 6)  returns 1
     //          binomial(6, 3)  returns 20
     public static long binomial(int n, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return choose(n, k, new long[n + 1][k + 1]);
+    }
+
+    public static long choose(int n, int k, long[][] memo) {
+        if (k == 0 || k == n) return 1;
+
+        if (memo[n][k] != 0) return memo[n][k];
+
+        memo[n][k] = choose(n - 1, k - 1, memo) + choose(n - 1, k, memo);
+        return memo[n][k];
     }
 
     // CHALLENGE 6
