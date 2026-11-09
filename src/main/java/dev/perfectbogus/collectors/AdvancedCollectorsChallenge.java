@@ -143,6 +143,11 @@ public class AdvancedCollectorsChallenge {
         ));
     }
 
+    public static int salarySpreadSimplifiedV2(List<Employee> employees) {
+        IntSummaryStatistics stats = employees.stream().collect(Collectors.summarizingInt(Employee::salary));
+        return employees.isEmpty() ? 0 : stats.getMax() - stats.getMin();
+    }
+
     // CHALLENGE 8
     // Returns a text with the statistics of the salaries, written exactly like this: "count=3 min=1000 max=3000
     // sum=6000 average=2000.0". The count is the number of employees, the min and the max are the lowest and the
