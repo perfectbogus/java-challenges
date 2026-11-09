@@ -57,7 +57,10 @@ public class AdvancedCollectorsChallenge {
     //          averageSalaryByDepartment([eve(HR, 1500)])                                     returns {HR=1500.0}
     //          averageSalaryByDepartment([])                                                  returns {}
     public static Map<String, Double> averageSalaryByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.averagingDouble(Employee::salary)
+        ));
     }
 
     // CHALLENGE 4
