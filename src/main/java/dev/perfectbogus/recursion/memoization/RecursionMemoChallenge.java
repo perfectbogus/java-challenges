@@ -165,7 +165,20 @@ public class RecursionMemoChallenge {
     //          catalan(3)  returns 5
     //          catalan(5)  returns 42
     public static long catalan(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return helperCatalan(n, new long[n + 1]);
+    }
+
+    public static long helperCatalan(int n, long[] memo) {
+        if (n == 0) return 1;
+
+        if (memo[n] != 0) return memo[n];
+
+        long sum = 0L;
+        for (int i = 0; i < n; i++) {
+            sum += helperCatalan(i, memo) * helperCatalan(n - 1 - i, memo);
+        }
+        memo[n] = sum;
+        return memo[n];
     }
 
     // CHALLENGE 7
