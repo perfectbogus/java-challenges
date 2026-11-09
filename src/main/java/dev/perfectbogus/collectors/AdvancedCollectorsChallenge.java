@@ -176,7 +176,14 @@ public class AdvancedCollectorsChallenge {
     //          lowestSalaryByDepartment([eve(HR, 1500)])                                    returns {HR=1500}
     //          lowestSalaryByDepartment([])                                                 returns {}
     public static TreeMap<String, Integer> lowestSalaryByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                TreeMap::new,
+                Collectors.collectingAndThen(
+                        Collectors.minBy(Comparator.comparingInt(Employee::salary)),
+                        opt -> opt.get().salary()
+                )
+        ));
     }
 
     // CHALLENGE 10
