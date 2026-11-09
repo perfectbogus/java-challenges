@@ -1,10 +1,6 @@
 package dev.perfectbogus.collectors;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AdvancedCollectorsChallenge {
@@ -39,7 +35,12 @@ public class AdvancedCollectorsChallenge {
     //          totalSalaryByDepartment([eve(HR, 1500)])                                     returns {HR=1500}
     //          totalSalaryByDepartment([])                                                  returns {}
     public static Map<String, Integer> totalSalaryByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.toMap(
+                Employee::department,
+                Employee::salary,
+                Integer::sum,
+                HashMap::new
+        ));
     }
 
     // CHALLENGE 3
