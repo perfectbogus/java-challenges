@@ -71,7 +71,13 @@ public class AdvancedCollectorsChallenge {
     //          topEarnerByDepartment([ana(Sales, 500), bob(Sales, 500)])                  returns {Sales=ana}
     //          topEarnerByDepartment([])                                                  returns {}
     public static Map<String, String> topEarnerByDepartment(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.collectingAndThen(
+                        Collectors.maxBy(Comparator.comparingInt(Employee::salary)),
+                        opt -> opt.get().name()
+                )
+        ));
     }
 
     // CHALLENGE 5
