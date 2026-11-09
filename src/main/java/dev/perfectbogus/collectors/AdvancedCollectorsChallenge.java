@@ -89,7 +89,13 @@ public class AdvancedCollectorsChallenge {
     //          splitBySalary([ana(Sales, 1000)], 5000)                                returns {false=[ana], true=[]}
     //          splitBySalary([], 100)                                                 returns {false=[], true=[]}
     public static Map<Boolean, List<String>> splitBySalary(List<Employee> employees, int limit) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.partitioningBy(
+                e -> e.salary() >= limit,
+                Collectors.mapping(
+                        Employee::name,
+                        Collectors.toList()
+                )
+        ));
     }
 
     // CHALLENGE 6
