@@ -230,6 +230,12 @@ public class AdvancedCollectorsChallenge {
     //          highEarnersByDepartment([eve(HR, 1500)], 1500)                          returns {HR=1}
     //          highEarnersByDepartment([], 100)                                        returns {}
     public static Map<String, Long> highEarnersByDepartment(List<Employee> employees, int minSalary) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().collect(Collectors.groupingBy(
+                Employee::department,
+                Collectors.filtering(
+                        e -> e.salary() >= minSalary,
+                        Collectors.counting()
+                )
+        ));
     }
 }
