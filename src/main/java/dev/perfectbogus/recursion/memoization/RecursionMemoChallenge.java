@@ -123,7 +123,17 @@ public class RecursionMemoChallenge {
     //          gridPaths(3, 3)  returns 6
     //          gridPaths(2, 5)  returns 5
     public static long gridPaths(int rows, int cols) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return paths(rows, cols, new long[rows + 1][cols + 1]);
+    }
+
+    public static long paths(int r, int c, long[][] memo) {
+        if (r == 1 || c == 1) return 1;
+
+        if (memo[r][c] != 0) return memo[r][c];
+
+        memo[r][c] = paths(r - 1, c, memo) + paths(r, c - 1, memo);
+
+        return memo[r][c];
     }
 
     // CHALLENGE 5
