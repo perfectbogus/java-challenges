@@ -212,7 +212,13 @@ public class AdvancedCollectorsChallenge {
     //          lettersByWordLength([aA, a])           returns {1=[a], 2=[a, A]}
     //          lettersByWordLength([])                returns {}
     public static Map<Integer, Set<Character>> lettersByWordLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length,
+                Collectors.flatMapping(
+                        s -> s.chars().mapToObj(c -> (char)c),
+                        Collectors.toSet()
+                )
+        ));
     }
 
     // CHALLENGE 11
