@@ -17,7 +17,7 @@ public class OptionalFunctionalChallenge {
     //          firstLongWord([hi, yes], 5)           returns Optional.empty
     //          firstLongWord([], 1)                  returns Optional.empty
     public static Optional<String> firstLongWord(List<String> words, int minLength) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().filter(w -> w.length() >= minLength).findFirst();
     }
 
     // CHALLENGE 2
