@@ -74,7 +74,7 @@ public class OptionalFunctionalChallenge {
     //          lengthIfLongEnough(Optional[hi], 3)      returns Optional.empty
     //          lengthIfLongEnough(Optional.empty, 0)    returns Optional.empty
     public static Optional<Integer> lengthIfLongEnough(Optional<String> text, int minLength) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.map(String::length).filter(i -> i >= minLength).or(Optional::empty);
     }
 
     // CHALLENGE 6
