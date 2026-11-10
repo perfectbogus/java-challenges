@@ -43,7 +43,7 @@ public class OptionalFunctionalChallenge {
     //          greeting(Optional.empty)     returns "Hello, stranger!"
     //          greeting(Optional[Mr Smith]) returns "Hello, Mr Smith!"
     public static String greeting(Optional<String> name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return "Hello, " + name.orElse("stranger") + "!";
     }
 
     // CHALLENGE 4
