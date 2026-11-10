@@ -92,6 +92,13 @@ public class OptionalFunctionalChallenge {
         return values.stream().filter(Optional::isPresent).mapToInt(Optional::get).sum();
     }
 
+    public static int sumPresentSimplified(List<Optional<Integer>> values) {
+        return values.stream()
+                .flatMap(Optional::stream)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     // CHALLENGE 7
     // Returns a Predicate that is true for the texts that have more than n characters, and false for the others. The
     // length must be greater than n, not equal. n can be negative.
