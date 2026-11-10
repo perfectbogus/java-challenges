@@ -2,6 +2,7 @@ package dev.perfectbogus.optionals;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -155,7 +156,13 @@ public class OptionalFunctionalChallenge {
     //          with a = counterFrom(0) and b = counterFrom(0):  a.get() returns 0, a.get() returns 1,
     //                                                           b.get() returns 0
     public static Supplier<Integer> counterFrom(int start) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        AtomicInteger counter = new AtomicInteger(start);
+        return counter::getAndIncrement;
+    }
+
+    public static Supplier<Integer> counterFromExtended(int start) {
+        AtomicInteger counter = new AtomicInteger(start);
+        return () -> counter.getAndIncrement();
     }
 
     // CHALLENGE 11
