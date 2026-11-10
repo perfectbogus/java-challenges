@@ -107,7 +107,7 @@ public class OptionalFunctionalChallenge {
     //          longerThan(0).test("")      returns false
     //          longerThan(-1).test("")     returns true
     public static Predicate<String> longerThan(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return (s) -> s.length() > n;
     }
 
     // CHALLENGE 8
