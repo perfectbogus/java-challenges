@@ -110,6 +110,10 @@ public class OptionalFunctionalChallenge {
         return (s) -> s.length() > n;
     }
 
+    public static Predicate<String> longerThanSimplified(int n) {
+        return s -> s.length() > n;
+    }
+
     // CHALLENGE 8
     // Returns a Predicate that is true for the valid user names. A user name is valid if it has between 3 and 10
     // characters (both included) and it does not contain any space character (' '). Other characters are allowed.
