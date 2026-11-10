@@ -122,7 +122,7 @@ public class OptionalFunctionalChallenge {
     //          isValidUsername().test("ana smith")     returns false
     //          isValidUsername().test("abcdefghijk")   returns false
     public static Predicate<String> isValidUsername() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return name -> name.length() >= 3 && name.length() <= 10 && !name.contains(" ");
     }
 
     // CHALLENGE 9
