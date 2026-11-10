@@ -89,7 +89,7 @@ public class OptionalFunctionalChallenge {
     //          sumPresent([Optional[-5], Optional[5], Optional[7]])    returns 7
     //          sumPresent([])                                          returns 0
     public static int sumPresent(List<Optional<Integer>> values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return values.stream().filter(Optional::isPresent).mapToInt(Optional::get).sum();
     }
 
     // CHALLENGE 7
