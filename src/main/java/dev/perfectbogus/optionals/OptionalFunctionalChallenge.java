@@ -174,6 +174,10 @@ public class OptionalFunctionalChallenge {
     //          forEachLongWord([hi, hi], 2, action)               calls the action with hi, then with hi
     //          forEachLongWord([a, b], 5, action)                 never calls the action
     public static void forEachLongWord(List<String> words, int minLength, Consumer<String> action) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (String w : words) {
+            if (w.length() >= minLength) {
+                action.accept(w);
+            }
+        }
     }
 }
