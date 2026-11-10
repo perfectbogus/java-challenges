@@ -140,7 +140,11 @@ public class OptionalFunctionalChallenge {
     //          applyAll([x -> x * 2, x -> x + 1], 3)  returns 7     ((3 * 2) + 1)
     //          applyAll([], 5)                        returns 5
     public static int applyAll(List<Function<Integer, Integer>> steps, int start) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Function<Integer, Integer> all = Function.identity();
+        for (Function<Integer, Integer> f : steps) {
+            all = all.andThen(f);
+        }
+        return all.apply(start);
     }
 
     // CHALLENGE 10
