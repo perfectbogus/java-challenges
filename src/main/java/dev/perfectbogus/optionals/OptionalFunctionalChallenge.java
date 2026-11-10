@@ -53,7 +53,13 @@ public class OptionalFunctionalChallenge {
     //          firstPresent(Optional[a], Optional.empty)        returns Optional[a]
     //          firstPresent(Optional.empty, Optional.empty)     returns Optional.empty
     public static Optional<String> firstPresent(Optional<String> first, Optional<String> second) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (first.isPresent()) {
+            return first;
+        } else if (second.isPresent()) {
+            return second;
+        } else {
+            return Optional.empty();
+        }
     }
 
     // CHALLENGE 5
