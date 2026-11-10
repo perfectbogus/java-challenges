@@ -77,6 +77,10 @@ public class OptionalFunctionalChallenge {
         return text.map(String::length).filter(i -> i >= minLength).or(Optional::empty);
     }
 
+    public static Optional<Integer> lengthIfLongEnoughSimplified(Optional<String> text, int minLength) {
+        return text.filter(t -> t.length() >= minLength).map(String::length);
+    }
+
     // CHALLENGE 6
     // Returns the sum of the numbers that are present in the list of Optionals. The empty Optionals are ignored. If
     // there are no numbers, the result is 0.
