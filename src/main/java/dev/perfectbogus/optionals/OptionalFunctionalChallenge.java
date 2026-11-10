@@ -62,6 +62,10 @@ public class OptionalFunctionalChallenge {
         }
     }
 
+    public static Optional<String> firstPresentSimplified(Optional<String> first, Optional<String> second) {
+        return first.or(() -> second);
+    }
+
     // CHALLENGE 5
     // If the Optional has a text with "minLength" characters or more, returns the length of that text. In any other
     // case (the text is shorter, or the Optional is empty), returns an empty Optional.
