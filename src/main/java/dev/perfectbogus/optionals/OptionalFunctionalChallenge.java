@@ -173,11 +173,15 @@ public class OptionalFunctionalChallenge {
     //          forEachLongWord([hi, hello, a, world], 3, action)  calls the action with hello, then with world
     //          forEachLongWord([hi, hi], 2, action)               calls the action with hi, then with hi
     //          forEachLongWord([a, b], 5, action)                 never calls the action
-    public static void forEachLongWord(List<String> words, int minLength, Consumer<String> action) {
+    public static void forEachLongWordExtended(List<String> words, int minLength, Consumer<String> action) {
         for (String w : words) {
             if (w.length() >= minLength) {
                 action.accept(w);
             }
         }
+    }
+
+    public static void forEachLongWord(List<String> words, int minLength, Consumer<String> action) {
+        words.stream().filter(w -> w.length() >= minLength).forEach(action);
     }
 }
