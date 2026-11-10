@@ -125,6 +125,12 @@ public class OptionalFunctionalChallenge {
         return name -> name.length() >= 3 && name.length() <= 10 && !name.contains(" ");
     }
 
+    public static Predicate<String> isValidUsernameSimplified() {
+        Predicate<String> rightLength = s -> s.length() >= 3 && s.length() <= 10;
+        Predicate<String> hasSpace = s -> s.contains(" ");
+        return rightLength.and(hasSpace.negate());
+    }
+
     // CHALLENGE 9
     // Applies the functions of the list to the number, one after the other and in the order of the list: the first
     // function receives the start number, the second one receives the result of the first one, and so on. Returns the
