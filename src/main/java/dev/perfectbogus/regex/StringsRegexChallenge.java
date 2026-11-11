@@ -138,7 +138,8 @@ public class StringsRegexChallenge {
     //          isValidEmail("a@b.info")             returns false
     //          isValidEmail("a@b.com.mx")           returns false
     public static boolean isValidEmail(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("[a-zA-Z\\d.]+@[a-zA-Z\\d]+\\.[a-zA-Z]{2,3}").matcher(text);
+        return m.matches();
     }
 
     // CHALLENGE 10
