@@ -1,6 +1,7 @@
 package dev.perfectbogus.regex;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,12 +61,16 @@ public class StringsRegexChallenge {
     //          splitWords(" ; , ")        returns []
     //          splitWords("")             returns []
     public static List<String> splitWords(String text) {
-        String[] split = text.split("[,; ]");
+        String[] split = text.split("[,; ]+");
         List<String> res = new ArrayList<>();
         for (String s : split) {
             if (!s.isEmpty()) res.add(s);
         }
         return res;
+    }
+
+    public static List<String> splitWordsSimplified(String text) {
+        return Arrays.stream(text.split("[,; ]+")).filter(s -> !s.isEmpty()).toList();
     }
 
     // CHALLENGE 5
