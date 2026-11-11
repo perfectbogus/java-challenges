@@ -168,6 +168,11 @@ public class StringsRegexChallenge {
     //          extractHashtags("a#b_1 ##c")       returns [b_1, c]
     //          extractHashtags("no tags")         returns []
     public static List<String> extractHashtags(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("(?<=#)([a-zA-Z_\\d]+)").matcher(text);
+        List<String> res = new ArrayList<>();
+        while (m.find()) {
+            res.add(m.group());
+        }
+        return res;
     }
 }
