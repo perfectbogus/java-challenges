@@ -150,7 +150,12 @@ public class StringsRegexChallenge {
     //          camelToSnake("aB")             returns "a_b"
     //          camelToSnake("")               returns ""
     public static String camelToSnake(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("([A-Z])", "_$1").toLowerCase();
+    }
+
+    public static String camelToSnakeExtended(String text) {
+        Matcher m = Pattern.compile("[A-Z]").matcher(text);
+        return m.replaceAll(match -> "_" + match.group().toLowerCase());
     }
 
     // CHALLENGE 11
