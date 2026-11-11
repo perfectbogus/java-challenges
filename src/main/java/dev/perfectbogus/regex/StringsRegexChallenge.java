@@ -85,6 +85,10 @@ public class StringsRegexChallenge {
         return text.matches("(([0-1])([0-9])|(2)([0-3])):([0-5])([0-9])");
     }
 
+    public static boolean isValidTimeSimplified(String text) {
+        return text.matches("([01]\\d|2[0-3]):[0-5]\\d");
+    }
+
     // CHALLENGE 6
     // Rewrites every name written as "Last, First" as "First Last". A name of this kind is a group of letters (a-z and
     // A-Z), a comma, exactly one space, and another group of letters, where each group of letters is taken as long as

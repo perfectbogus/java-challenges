@@ -400,6 +400,11 @@ class StringsRegexChallengeTest {
         }
 
         @Test
+        void testNormalTimeSimplified() {
+            assertTrue(StringsRegexChallenge.isValidTimeSimplified("09:30"));
+        }
+
+        @Test
         void testLastMinuteOfTheDay() {
             assertTrue(StringsRegexChallenge.isValidTime("23:59"));
         }
