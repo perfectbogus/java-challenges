@@ -110,7 +110,12 @@ public class StringsRegexChallenge {
     //          countWholeWord("The the", "the")              returns 1
     //          countWholeWord("the-end, the2", "the")        returns 1
     public static int countWholeWord(String text, String word) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int count = 0;
+        Matcher m = Pattern.compile("\\b" + Pattern.quote(word) + "\\b").matcher(text);
+        while (m.find()) {
+            count++;
+        }
+        return count;
     }
 
     // CHALLENGE 8
