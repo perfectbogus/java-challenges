@@ -98,7 +98,7 @@ public class StringsRegexChallenge {
     //          swapNames("Smith,John")                     returns "Smith,John"
     //          swapNames("ab, cd, ef")                     returns "cd ab, ef"
     public static String swapNames(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("([a-zA-Z]+), ([a-zA-Z]+)", "$2 $1");
     }
 
     // CHALLENGE 7
