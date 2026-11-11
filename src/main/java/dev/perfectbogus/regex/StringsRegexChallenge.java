@@ -12,7 +12,7 @@ public class StringsRegexChallenge {
     //          isHexColor("FF00aa")    returns false
     //          isHexColor("#12345g")   returns false
     public static boolean isHexColor(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.matches("(?i)#[a-f0-9]{6}");
     }
 
     // CHALLENGE 2
