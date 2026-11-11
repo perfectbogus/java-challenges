@@ -81,7 +81,8 @@ public class StringsRegexChallenge {
     //          isValidTime("24:00")   returns false
     //          isValidTime("9:30")    returns false
     public static boolean isValidTime(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.length() != 5) return false;
+        return text.matches("(([0-1])([0-9])|(2)([0-3])):([0-5])([0-9])");
     }
 
     // CHALLENGE 6
