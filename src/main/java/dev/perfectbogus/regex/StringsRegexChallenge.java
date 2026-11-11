@@ -60,7 +60,12 @@ public class StringsRegexChallenge {
     //          splitWords(" ; , ")        returns []
     //          splitWords("")             returns []
     public static List<String> splitWords(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String[] split = text.split("[,; ]");
+        List<String> res = new ArrayList<>();
+        for (String s : split) {
+            if (!s.isEmpty()) res.add(s);
+        }
+        return res;
     }
 
     // CHALLENGE 5
