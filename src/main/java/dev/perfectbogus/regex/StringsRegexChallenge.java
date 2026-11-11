@@ -168,6 +168,15 @@ public class StringsRegexChallenge {
     //          extractHashtags("a#b_1 ##c")       returns [b_1, c]
     //          extractHashtags("no tags")         returns []
     public static List<String> extractHashtags(String text) {
+        List<String> result = new ArrayList<>();
+        Matcher matcher = Pattern.compile("#([A-Za-z\\d_]+)").matcher(text);
+        while (matcher.find()) {
+            result.add(matcher.group(1));
+        }
+        return result;
+    }
+
+    public static List<String> extractHashtagsExtended(String text) {
         Matcher m = Pattern.compile("(?<=#)([a-zA-Z_\\d]+)").matcher(text);
         List<String> res = new ArrayList<>();
         while (m.find()) {
