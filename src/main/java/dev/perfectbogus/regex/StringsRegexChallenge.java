@@ -1,6 +1,9 @@
 package dev.perfectbogus.regex;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringsRegexChallenge {
 
@@ -24,7 +27,12 @@ public class StringsRegexChallenge {
     //          extractNumbers("no numbers")  returns []
     //          extractNumbers("")            returns []
     public static List<Integer> extractNumbers(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("[0-9]+").matcher(text);
+        List<Integer> res = new ArrayList<>();
+        while (m.find()) {
+            res.add(Integer.parseInt(m.group()));
+        }
+        return res;
     }
 
     // CHALLENGE 3
