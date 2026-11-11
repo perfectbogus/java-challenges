@@ -126,7 +126,8 @@ public class StringsRegexChallenge {
     //          hasRepeatedWord("The the")       returns false
     //          hasRepeatedWord("go  go")        returns false
     public static boolean hasRepeatedWord(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Matcher m = Pattern.compile("\\b([a-zA-Z]+) \\1\\b").matcher(text);
+        return m.find();
     }
 
     // CHALLENGE 9
