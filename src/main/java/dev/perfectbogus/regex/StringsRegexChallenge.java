@@ -44,7 +44,11 @@ public class StringsRegexChallenge {
     //          reformatDates("2026-1-1")                     returns "2026-1-1"
     //          reformatDates("no date")                      returns "no date"
     public static String reformatDates(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.replaceAll("([0-9]{4})-([0-9]{2})-([0-9]{2})", "$3/$2/$1");
+    }
+
+    public static String reformateDatesSimplified(String text) {
+        return text.replaceAll("(\\d{4})-(\\d{2})-(\\d{2})","$3/$2/$1");
     }
 
     // CHALLENGE 4
