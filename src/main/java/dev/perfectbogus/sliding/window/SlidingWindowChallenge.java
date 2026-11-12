@@ -11,7 +11,19 @@ public class SlidingWindowChallenge {
     //          maxSumOfSize([5], 1)               returns 5
     //          maxSumOfSize([1, 2, 3], 3)         returns 6
     public static long maxSumOfSize(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+        long greatest = sum;
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i];
+            sum -= nums[i - k];
+            if (sum > greatest) {
+                greatest = sum;
+            }
+        }
+        return greatest;
     }
 
     // CHALLENGE 2
