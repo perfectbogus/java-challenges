@@ -17,8 +17,7 @@ public class SlidingWindowChallenge {
         }
         long greatest = sum;
         for (int i = k; i < nums.length; i++) {
-            sum += nums[i];
-            sum -= nums[i - k];
+            sum += nums[i] - nums[i -k];
             if (sum > greatest) {
                 greatest = sum;
             }
