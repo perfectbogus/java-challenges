@@ -56,7 +56,20 @@ public class SlidingWindowChallenge {
     //          countWindowsWithSumAtLeast([5], 1, 5)           returns 1
     //          countWindowsWithSumAtLeast([-1, -2], 1, -1)     returns 1
     public static int countWindowsWithSumAtLeast(int[] nums, int k, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int count = 0;
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+
+        if (sum >= target) count++;
+
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i] - nums[i - k];
+            if (sum >= target) count++;
+        }
+
+        return count;
     }
 
     // CHALLENGE 4
