@@ -34,7 +34,17 @@ public class SlidingWindowChallenge {
     //          windowSums([4, 5], 1)        returns [4, 5]
     //          windowSums([-1, 1, -1], 2)   returns [0, 0]
     public static int[] windowSums(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] res = new int[nums.length - k + 1];
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+        res[0] = sum;
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i] - nums[i - k];
+            res[i - k + 1] = sum;
+        }
+        return res;
     }
 
     // CHALLENGE 3
