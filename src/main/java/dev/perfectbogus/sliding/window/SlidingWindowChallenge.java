@@ -80,7 +80,21 @@ public class SlidingWindowChallenge {
     //          maxVowelsInWindow("rhythm", 4)     returns 0
     //          maxVowelsInWindow("leetcode", 3)   returns 2
     public static int maxVowelsInWindow(String text, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String map = "aeiou";
+        int vowels = 0;
+        int best = 0;
+        for (int i = 0; i < text.length(); i++) {
+            if (map.indexOf(text.charAt(i)) != -1) {
+                vowels++;
+            }
+            if (i >= k && map.indexOf(text.charAt(i - k)) != -1) {
+                vowels--;
+            }
+            if (i >= k - 1) {
+                best = Math.max(best, vowels);
+            }
+        }
+        return best;
     }
 
     // CHALLENGE 5
