@@ -92,6 +92,15 @@ public class GridSortingChallenge {
         return Arrays.stream(grid).sorted(bySum).toArray(int[][]::new);
     }
 
+    public static int[][] sortRowsBySumExtended(int[][] grid) {
+        Map<int[], Integer> sumMap = new IdentityHashMap<>();
+        for (int[] row : grid) {
+            sumMap.put(row, Arrays.stream(row).sum());
+        }
+        Comparator<int[]> bySum = Comparator.comparingInt(sumMap::get);
+        return Arrays.stream(grid).sorted(bySum).toArray(n -> new int[n][]);
+    }
+
     // CHALLENGE 4
     // Returns a new grid with the same rows, ordered by the number they have in the column "col", from the smallest
     // number to the greatest. The numbers inside each row do not change. Rows with the same number in that column
