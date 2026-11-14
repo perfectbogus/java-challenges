@@ -1,6 +1,7 @@
 package dev.perfectbogus.sorting;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class GridSortingChallenge {
 
@@ -34,7 +35,45 @@ public class GridSortingChallenge {
     //          sortEachColumn([[2], [1]])                returns [[1], [2]]
     //          sortEachColumn([])                        returns []
     public static int[][] sortEachColumn(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (grid.length == 0) return new int[0][];
+
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[][] result = new int[rows][cols];
+        for (int c = 0; c < cols; c++) {
+            int[] column = new int[rows];
+            for (int r = 0; r < rows; r++) {
+                column[r] = grid[r][c];
+            }
+            Arrays.sort(column);
+            for (int r = 0; r < rows; r++) {
+                result[r][c] = column[r];
+            }
+        }
+        return result;
+    }
+
+    public static int[][] sortEachColumnIncomplete(int[][] grid) {
+        int n = grid.length;
+        if (n == 0) return new int[0][];
+        int m = grid[0].length;
+        int[][] res = new int[n][m];
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int[] row : grid) {
+            for (int i : row) {
+                q.add(i);
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                res[i][j] = q.poll();
+            }
+        }
+
+        System.out.println(Arrays.deepToString(res));
+
+        return res;
     }
 
     // CHALLENGE 3
