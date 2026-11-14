@@ -215,7 +215,18 @@ public class SlidingWindowChallenge {
     //          longestSubarrayWithSumAtMost([0, 0, 0], 0)     returns 3
     //          longestSubarrayWithSumAtMost([2, 1, 1, 2], 4)  returns 3
     public static int longestSubarrayWithSumAtMost(int[] nums, int limit) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long sum = 0;
+        int left = 0;
+        int best = 0;
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right];
+            while (sum > limit) {
+                sum -= nums[left];
+                left++;
+            }
+            best = Math.max(best, right - left + 1);
+        }
+        return best;
     }
 
     // CHALLENGE 10
