@@ -132,7 +132,16 @@ public class GridSortingChallenge {
     //          sortRowsLexicographically([[], [0]])                    returns [[], [0]]
     //          sortRowsLexicographically([[2], [1], [2]])              returns [[1], [2], [2]]
     public static int[][] sortRowsLexicographically(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(grid)
+                .sorted((a, b) -> {
+                    int min = Math.min(a.length, b.length);
+                    for (int i = 0; i < min; i++) {
+                        int comp = Integer.compare(a[i], b[i]);
+                        if (comp != 0) return comp;
+                    }
+                    return Integer.compare(a.length, b.length);
+                })
+                .toArray(int[][]::new);
     }
 
     // CHALLENGE 6
