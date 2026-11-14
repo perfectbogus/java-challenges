@@ -111,7 +111,9 @@ public class GridSortingChallenge {
     //          sortRowsByColumn([[4, 2], [4, 1]], 0)          returns [[4, 2], [4, 1]]
     //          sortRowsByColumn([], 0)                        returns []
     public static int[][] sortRowsByColumn(int[][] grid, int col) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<int[]> rows = new ArrayList<>(Arrays.asList(grid));
+        rows.sort(Comparator.comparingInt(row -> row[col]));
+        return rows.toArray(new int[0][]);
     }
 
     // CHALLENGE 5
