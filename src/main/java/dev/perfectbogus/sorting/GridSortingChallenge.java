@@ -116,6 +116,12 @@ public class GridSortingChallenge {
         return rows.toArray(new int[0][]);
     }
 
+    public static int[][] sortRowsByColumnStream(int[][] grid, int col) {
+        return Arrays.stream(grid)
+                .sorted(Comparator.comparingInt(row -> row[0]))
+                .toArray(int[][]::new);
+    }
+
     // CHALLENGE 5
     // Returns a new grid with the same rows, ordered like the words of a dictionary: two rows are compared number by
     // number, and the row with the smaller number in the first position where they are different goes first. If one
