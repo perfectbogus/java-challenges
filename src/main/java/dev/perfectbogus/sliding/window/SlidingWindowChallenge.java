@@ -1,8 +1,6 @@
 package dev.perfectbogus.sliding.window;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class SlidingWindowChallenge {
 
@@ -264,6 +262,18 @@ public class SlidingWindowChallenge {
     //          longestUniqueSubstring("pwwkew")    returns 3     (the group "wke")
     //          longestUniqueSubstring("aAa")       returns 2     (the group "aA")
     public static int longestUniqueSubstring(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Character, Integer> lastSeen = new HashMap<>();
+        int left = 0;
+        int best = 0;
+        for (int right = 0; right < text.length(); right++) {
+            char c = text.charAt(right);
+            Integer previous = lastSeen.get(c);
+            if (previous != null && previous >= left) {
+                left = previous + 1;
+            }
+            lastSeen.put(c, right);
+            best = Math.max(best, right - left + 1);
+        }
+        return best;
     }
 }
