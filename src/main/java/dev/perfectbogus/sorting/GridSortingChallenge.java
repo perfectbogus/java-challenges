@@ -144,6 +144,12 @@ public class GridSortingChallenge {
                 .toArray(int[][]::new);
     }
 
+    public static int[][] sortRowsLexicographicallySimplified(int[][] grid) {
+        return Arrays.stream(grid)
+                .sorted(Arrays::compare)
+                .toArray(int[][]::new);
+    }
+
     // CHALLENGE 6
     // The grid is rectangular: all the rows have the same length. Returns a new grid with the same size, with all the
     // numbers of the original grid sorted from the smallest to the greatest, when the grid is read row by row (the
