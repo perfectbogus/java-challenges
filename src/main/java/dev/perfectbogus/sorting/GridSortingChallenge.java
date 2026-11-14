@@ -1,7 +1,6 @@
 package dev.perfectbogus.sorting;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class GridSortingChallenge {
 
@@ -85,7 +84,12 @@ public class GridSortingChallenge {
     //          sortRowsBySum([[], [-1]])             returns [[-1], []]
     //          sortRowsBySum([])                     returns []
     public static int[][] sortRowsBySum(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<int[], Integer> sumMap = new IdentityHashMap<>();
+        for (int[] row : grid) {
+            sumMap.put(row, Arrays.stream(row).sum());
+        }
+        Comparator<int[]> bySum = Comparator.comparingInt(sumMap::get);
+        return Arrays.stream(grid).sorted(bySum).toArray(int[][]::new);
     }
 
     // CHALLENGE 4
