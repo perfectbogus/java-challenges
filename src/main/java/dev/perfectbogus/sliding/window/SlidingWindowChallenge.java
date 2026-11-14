@@ -1,5 +1,8 @@
 package dev.perfectbogus.sliding.window;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SlidingWindowChallenge {
 
     // CHALLENGE 1
@@ -130,7 +133,17 @@ public class SlidingWindowChallenge {
     //          hasNearbyDuplicate([1, 0, 1, 1], 1)  returns true
     //          hasNearbyDuplicate([1, 1], 0)        returns false
     public static boolean hasNearbyDuplicate(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> window = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (window.contains(nums[i])) {
+                return true;
+            }
+            window.add(nums[i]);
+            if (i >= k) {
+                window.remove(nums[i - k]);
+            }
+        }
+        return false;
     }
 
     // CHALLENGE 7
