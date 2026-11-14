@@ -238,7 +238,22 @@ public class SlidingWindowChallenge {
     //          longestOnes([0, 0], 1)           returns 1
     //          longestOnes([], 3)               returns 0
     public static int longestOnes(int[] bits, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int zeros = 0;
+        int left = 0;
+        int best = 0;
+        for (int right = 0; right < bits.length; right++) {
+            if (bits[right] == 0) {
+                zeros++;
+            }
+            while (zeros > k) {
+                if (bits[left] == 0) {
+                    zeros--;
+                }
+                left++;
+            }
+            best = Math.max(best, right - left + 1);
+        }
+        return best;
     }
 
     // CHALLENGE 11
