@@ -1,5 +1,7 @@
 package dev.perfectbogus.sorting;
 
+import java.util.Arrays;
+
 public class GridSortingChallenge {
 
     // In all the challenges, a grid is an array of rows, and a row is an array of numbers. In the examples, a grid is
@@ -14,7 +16,13 @@ public class GridSortingChallenge {
     //          sortEachRow([[], [2, 1]])         returns [[], [1, 2]]
     //          sortEachRow([])                   returns []
     public static int[][] sortEachRow(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[][] res = new int[grid.length][];
+        for (int i = 0; i < grid.length; i++) {
+            int[] tmp = grid[i].clone();
+            Arrays.sort(tmp);
+            res[i] = tmp;
+        }
+        return res;
     }
 
     // CHALLENGE 2
