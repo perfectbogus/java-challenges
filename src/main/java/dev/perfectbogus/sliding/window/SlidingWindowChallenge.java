@@ -1,5 +1,6 @@
 package dev.perfectbogus.sliding.window;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -155,7 +156,27 @@ public class SlidingWindowChallenge {
     //          containsAnagram("abcd", "ca")         returns false
     //          containsAnagram("ab", "abc")          returns false
     public static boolean containsAnagram(String text, String pattern) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int m = pattern.length();
+        if (m > text.length()) {
+            return false;
+        }
+        int[] need = new int[26];
+        int[] have = new int[26];
+        for (int i = 0; i < m; i++) {
+            need[pattern.charAt(i) - 'a']++;
+            have[text.charAt(i) - 'a']++;
+        }
+        if (Arrays.equals(need, have)) {
+            return true;
+        }
+        for (int i = m; i < text.length(); i++) {
+            have[text.charAt(i) - 'a']++;
+            have[text.charAt(i - m) - 'a']--;
+            if (Arrays.equals(need, have)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // CHALLENGE 8
