@@ -188,8 +188,23 @@ public class SlidingWindowChallenge {
     //          minLengthWithSumAtLeast([10], 5)                returns 1
     //          minLengthWithSumAtLeast([1, 4, 4], 4)           returns 1
     public static int minLengthWithSumAtLeast(int[] nums, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long sum = 0;
+        int left = 0;
+        int best = 0;
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right];
+            while (sum >= target) {
+                int length = right - left + 1;
+                if (best == 0 || length < best) {
+                    best = length;
+                }
+                sum -= nums[left];
+                left++;
+            }
+        }
+        return best;
     }
+
 
     // CHALLENGE 9
     // All the numbers of the array are zero or greater and the limit is zero or greater. Returns the length of the
