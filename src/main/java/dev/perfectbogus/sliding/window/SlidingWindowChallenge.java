@@ -106,7 +106,19 @@ public class SlidingWindowChallenge {
     //          countIncreasingWindows([3, 2, 1], 2)           returns 0
     //          countIncreasingWindows([5, 5], 1)              returns 2
     public static int countIncreasingWindows(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int run = 0;
+        int count = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] > nums[i - 1]) {
+                run++;
+            } else {
+                run = 1;
+            }
+            if (run >= k) {
+                count++;
+            }
+        }
+        return count;
     }
 
     // CHALLENGE 6
