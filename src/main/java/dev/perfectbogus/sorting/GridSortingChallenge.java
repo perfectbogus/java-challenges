@@ -160,7 +160,22 @@ public class GridSortingChallenge {
     //          sortWholeGrid([[2], [1], [3]])   returns [[1], [2], [3]]
     //          sortWholeGrid([])                returns []
     public static int[][] sortWholeGrid(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int n = grid.length;
+        if (n == 0) return new int[0][0];
+        int m = grid[0].length;
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                q.add(grid[i][j]);
+            }
+        }
+        int[][] result = new int[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                result[i][j] = q.poll();
+            }
+        }
+        return result;
     }
 
     // CHALLENGE 7
