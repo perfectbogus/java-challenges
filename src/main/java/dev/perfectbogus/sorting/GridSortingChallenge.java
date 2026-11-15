@@ -211,6 +211,16 @@ public class GridSortingChallenge {
     //          isFullySorted([[1], [], [2, 3]])    returns true
     //          isFullySorted([[3, 4], [5], [4]])   returns false
     public static boolean isFullySorted(int[][] grid) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int prev = Integer.MIN_VALUE;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (prev <= grid[i][j]) {
+                    prev = grid[i][j];
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
