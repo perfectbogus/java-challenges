@@ -178,6 +178,30 @@ public class GridSortingChallenge {
         return result;
     }
 
+    public static int[][] sortWholeGridSimplified(int[][] grid) {
+        if (grid.length == 0) {
+            return new int[0][];
+        }
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[] all = new int[rows * cols];
+        int index = 0;
+        for (int[] row : grid) {
+            for (int value : row) {
+                all[index++] = value;
+            }
+        }
+        Arrays.sort(all);
+        int[][] result = new int[rows][cols];
+        index = 0;
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                result[r][c] = all[index++];
+            }
+        }
+        return result;
+    }
+
     // CHALLENGE 7
     // Returns true if, when the grid is read row by row (the first row from left to right, then the second row, and
     // so on), no number is smaller than the one before it (equal numbers are allowed). The rows can have different
