@@ -84,7 +84,13 @@ public class CollectorsWorkoutChallenge {
     //          customerTotalsByCity([ana(Rome, 7)])        returns {Rome={ana=7}}
     //          customerTotalsByCity([])                    returns {}
     public static Map<String, Map<String, Integer>> customerTotalsByCity(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.stream().collect(Collectors.groupingBy(
+                Order::city,
+                Collectors.groupingBy(
+                        Order::customer,
+                        Collectors.summingInt(Order::amount)
+                )
+        ));
     }
 
     // CHALLENGE 6
