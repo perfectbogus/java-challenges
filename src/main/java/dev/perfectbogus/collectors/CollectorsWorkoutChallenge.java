@@ -110,7 +110,13 @@ public class CollectorsWorkoutChallenge {
     //          customersByCityText([ana(Lima, 1), ana(Lima, 2)])                 returns {Lima=ana, ana}
     //          customersByCityText([])                                           returns {}
     public static Map<String, String> customersByCityText(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.stream().collect(Collectors.groupingBy(
+                Order::city,
+                Collectors.mapping(
+                        Order::customer,
+                        Collectors.joining(", ")
+                )
+        ));
     }
 
     // CHALLENGE 7
