@@ -119,6 +119,14 @@ public class CollectorsWorkoutChallenge {
         ));
     }
 
+    public static Map<String, String> customerByCityTextExtended(List<Order> orders) {
+        Map<String, String> result = new HashMap<>();
+        for (Order order: orders) {
+            result.merge(order.city(), order.customer(), (names, name) -> names + ", " + name);
+        }
+        return result;
+    }
+
     // CHALLENGE 7
     // Splits the orders in two groups: the key true has the orders whose amount is "limit" or more, and the key false
     // has the rest. Returns a map with the sum of the amounts of each group. The map always has both keys, and a
