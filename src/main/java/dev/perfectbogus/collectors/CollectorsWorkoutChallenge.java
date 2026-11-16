@@ -1,9 +1,6 @@
 package dev.perfectbogus.collectors;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -67,7 +64,7 @@ public class CollectorsWorkoutChallenge {
     //          greatestAmount([ana(Lima, 0)])                                   returns 0
     //          greatestAmount([])                                               returns -1
     public static int greatestAmount(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.stream().mapToInt(Order::amount).max().orElse(-1);
     }
 
     // CHALLENGE 5
