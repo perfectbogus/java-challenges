@@ -28,6 +28,10 @@ public class CollectorsWorkoutChallenge {
         return set;
     }
 
+    public static LinkedHashSet<String> firstSeenCitiesStream(List<Order> orders) {
+        return orders.stream().map(Order::city).collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
     // CHALLENGE 2
     // Returns the sum of the amounts of all the orders. Each amount is zero or greater, and the sum can be bigger
     // than an int. An empty list gives 0.
