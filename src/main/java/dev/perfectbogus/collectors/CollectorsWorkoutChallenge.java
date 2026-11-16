@@ -67,6 +67,10 @@ public class CollectorsWorkoutChallenge {
         return orders.stream().mapToInt(Order::amount).max().orElse(-1);
     }
 
+    public static int greatestAmountCollect(List<Order> orders) {
+        return orders.stream().collect(Collectors.reducing(-1, Order::amount, Math::max));
+    }
+
     // CHALLENGE 5
     // Returns a map from each city to another map, which goes from each customer who made orders in that city to the
     // sum of the amounts of that customer's orders in that city. Only the cities and the customers that appear are in
