@@ -38,8 +38,8 @@ public class CollectorsWorkoutChallenge {
     // Example: totalAmount([ana(Lima, 100), bob(Quito, 50)])                        returns 150
     //          totalAmount([ana(Lima, 2000000000), bob(Lima, 2000000000)])          returns 4000000000
     //          totalAmount([])                                                      returns 0
-    public static long totalAmount(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public static long totalAmountMapped(List<Order> orders) {
+        return orders.stream().mapToLong(Order::amount).sum();
     }
 
     // CHALLENGE 3
