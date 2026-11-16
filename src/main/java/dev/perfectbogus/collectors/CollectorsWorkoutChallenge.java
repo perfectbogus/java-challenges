@@ -141,6 +141,22 @@ public class CollectorsWorkoutChallenge {
         ));
     }
 
+    public static Map<Boolean, Integer> totalsAboveAndBelowExtended(List<Order> orders, int limit) {
+        int above = 0;
+        int below = 0;
+        for (Order order : orders) {
+            if (order.amount() >= limit) {
+                above += order.amount();
+            } else {
+                below += order.amount();
+            }
+        }
+        Map<Boolean, Integer> result = new HashMap<>();
+        result.put(true, above);
+        result.put(false, below);
+        return result;
+    }
+
     // CHALLENGE 8
     // Returns the city that has the most orders. If two or more cities have the same (highest) number of orders, the
     // one that appears first in the list is chosen. If the list is empty, the result is the text "none".
