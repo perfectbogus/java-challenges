@@ -53,7 +53,11 @@ public class CollectorsWorkoutChallenge {
     //          orderCountsByCityInOrder([bob(Quito, 2), ana(Lima, 1)])                returns {Quito=1, Lima=1}
     //          orderCountsByCityInOrder([])                                           returns {}
     public static LinkedHashMap<String, Long> orderCountsByCityInOrder(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.stream().collect(Collectors.groupingBy(
+                Order::city,
+                LinkedHashMap::new,
+                Collectors.counting()
+        ));
     }
 
     // CHALLENGE 4
