@@ -93,6 +93,15 @@ public class CollectorsWorkoutChallenge {
         ));
     }
 
+    public static Map<String, Map<String, Integer>> customerTotalByCityExtended(List<Order> orders) {
+        Map<String, Map<String, Integer>> result = new HashMap<>();
+        for (Order order : orders) {
+            Map<String, Integer> customers = result.computeIfAbsent(order.city(), city -> new HashMap<>());
+            customers.merge(order.customer(), order.amount(), Integer::sum);
+        }
+        return result;
+    }
+
     // CHALLENGE 6
     // Returns a map from each city to a text with the names of the customers of its orders, in the same order they
     // have in the list, separated by a comma and a space (", "). A customer who made two orders in the same city
