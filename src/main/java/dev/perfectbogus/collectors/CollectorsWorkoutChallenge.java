@@ -135,7 +135,10 @@ public class CollectorsWorkoutChallenge {
     //          totalsAboveAndBelow([ana(Lima, 10)], 100)                                  returns {false=10, true=0}
     //          totalsAboveAndBelow([], 5)                                                 returns {false=0, true=0}
     public static Map<Boolean, Integer> totalsAboveAndBelow(List<Order> orders, int limit) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.stream().collect(Collectors.partitioningBy(
+                o -> o.amount() >= limit,
+                Collectors.summingInt(Order::amount)
+        ));
     }
 
     // CHALLENGE 8
