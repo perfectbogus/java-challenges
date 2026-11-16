@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class CollectorsWorkoutChallenge {
 
@@ -20,7 +21,11 @@ public class CollectorsWorkoutChallenge {
     //          firstSeenCities([bob(Quito, 50), ana(Lima, 100)])                 returns [Quito, Lima]
     //          firstSeenCities([])                                               returns []
     public static LinkedHashSet<String> firstSeenCities(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        LinkedHashSet<String> set = new LinkedHashSet<>();
+        for (Order o : orders) {
+            set.add(o.city());
+        }
+        return set;
     }
 
     // CHALLENGE 2
