@@ -207,7 +207,7 @@ public class CollectorsWorkoutChallenge {
     //          orders.stream().collect(bigOrderCounter(301))  returns 0
     //          Stream.<Order>empty().collect(bigOrderCounter(0))  returns 0
     public static Collector<Order, ?, Long> bigOrderCounter(int limit) {
-
+        return Collectors.filtering(o -> o.amount() >= limit, Collectors.counting());
     }
 
     // CHALLENGE 10
