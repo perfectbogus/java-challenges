@@ -204,7 +204,16 @@ public class MatrixComparatorsChallenge {
     //          sortedRowIndices([[], [-1]])             returns [1, 0]
     //          sortedRowIndices([])                     returns []
     public static int[] sortedRowIndices(int[][] rows) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Integer[] indices = new Integer[rows.length];
+        for (int i = 0; i < rows.length; i++) {
+            indices[i] = i;
+        }
+        Arrays.sort(indices, Comparator.comparingInt((Integer i) -> Arrays.stream(rows[i]).sum()));
+        int[] result = new int[rows.length];
+        for (int i = 0; i < rows.length; i++) {
+            result[i] = indices[i];
+        }
+        return result;
     }
 
     // CHALLENGE 10
