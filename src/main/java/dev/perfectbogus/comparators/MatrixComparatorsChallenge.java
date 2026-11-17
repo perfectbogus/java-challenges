@@ -180,7 +180,19 @@ public class MatrixComparatorsChallenge {
     //          sortRecordsByName([[ana, Lima], [Ana, LIMA]])                  returns [[ana, Lima], [Ana, LIMA]]
     //          sortRecordsByName([])                                          returns []
     public static String[][] sortRecordsByName(String[][] records) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String[]> byName = (a, b) -> a[0].compareToIgnoreCase(b[0]);
+        Comparator<String[]> byCity = ( a, b) -> a[1].compareToIgnoreCase(b[1]);
+        return Arrays.stream(records)
+                .sorted(byName.thenComparing(byCity))
+                .toArray(String[][]::new);
+    }
+
+    public static String[][] sortRecordsByNameExtended(String[][] records) {
+        Comparator<String[]> byName = Comparator.comparing(s -> s[0], String.CASE_INSENSITIVE_ORDER);
+        Comparator<String[]> byCity = Comparator.comparing(s -> s[1], String.CASE_INSENSITIVE_ORDER);
+        return Arrays.stream(records)
+                .sorted(byName.thenComparing(byCity))
+                .toArray(n -> new String[n][]);
     }
 
     // CHALLENGE 9
