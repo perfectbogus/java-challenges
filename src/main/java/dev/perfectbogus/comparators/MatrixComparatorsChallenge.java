@@ -21,6 +21,10 @@ public class MatrixComparatorsChallenge {
         Arrays.sort(rows, byFirstNum);
     }
 
+    public static void sortByFirstDescendingSimplified(int[][] rows) {
+        Arrays.sort(rows, Comparator.comparing(a -> a[0], Comparator.reverseOrder()));
+    }
+
     // CHALLENGE 2
     // Returns a new grid with the same rows, ordered by their last number from the smallest to the greatest. If two
     // rows have the same last number, the one with the smaller first number goes first. If both numbers are the same,
