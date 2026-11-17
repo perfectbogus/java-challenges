@@ -236,6 +236,8 @@ public class MatrixComparatorsChallenge {
     //          bySecondThenFirst().compare([1, 2], [9, 3]) is negative
     //          bySecondThenFirst().compare([4, 4], [4, 4]) is 0
     public static Comparator<int[]> bySecondThenFirst() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<int[]> byFirst = Comparator.comparingInt(a -> a[1]);
+        Comparator<int[]> bySecond = Comparator.comparingInt(a -> a[0]);
+        return byFirst.thenComparing(bySecond);
     }
 }
