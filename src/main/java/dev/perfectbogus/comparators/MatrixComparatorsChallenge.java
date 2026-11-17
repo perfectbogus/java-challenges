@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MatrixComparatorsChallenge {
 
@@ -203,7 +204,7 @@ public class MatrixComparatorsChallenge {
     //          sortedRowIndices([[1], [1]])             returns [0, 1]
     //          sortedRowIndices([[], [-1]])             returns [1, 0]
     //          sortedRowIndices([])                     returns []
-    public static int[] sortedRowIndices(int[][] rows) {
+    public static int[] sortedRowIndicesExtended(int[][] rows) {
         Integer[] indices = new Integer[rows.length];
         for (int i = 0; i < rows.length; i++) {
             indices[i] = i;
@@ -214,6 +215,14 @@ public class MatrixComparatorsChallenge {
             result[i] = indices[i];
         }
         return result;
+    }
+
+    public static int[] sortedRowIndices(int[][] rows) {
+        return IntStream.range(0, rows.length)
+                .boxed()
+                .sorted(Comparator.comparingInt(i -> Arrays.stream(rows[i]).sum()))
+                .mapToInt(Integer::intValue)
+                .toArray();
     }
 
     // CHALLENGE 10
