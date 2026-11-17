@@ -123,7 +123,14 @@ public class MatrixComparatorsChallenge {
     //          sortByThreeColumns([[2, 2, 2]])                        returns [[2, 2, 2]]
     //          sortByThreeColumns([])                                 returns []
     public static int[][] sortByThreeColumns(int[][] rows) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<int[]> byFirst = Comparator.comparingInt(a -> a[0]);
+        Comparator<int[]> bySecondDesc = Comparator.comparing(a -> a[1], Comparator.reverseOrder());
+        Comparator<int[]> byThird = Comparator.comparingInt(a -> a[2]);
+        return Arrays.stream(rows)
+                .sorted(byFirst
+                        .thenComparing(bySecondDesc)
+                        .thenComparing(byThird))
+                .toArray(int[][]::new);
     }
 
     // CHALLENGE 7
