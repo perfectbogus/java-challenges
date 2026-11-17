@@ -249,6 +249,12 @@ public class CollectorsWorkoutChallenge {
     //          cityTotalsText([bob(Quito, 50), ana(Lima, 1)])                  returns "Quito=50, Lima=1"
     //          cityTotalsText([])                                              returns ""
     public static String cityTotalsText(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> cities = orders.stream().collect(Collectors.groupingBy(
+                Order::city,
+                LinkedHashMap::new,
+                Collectors.summingInt(Order::amount)
+        )).entrySet().stream().map(e -> e.getKey() + "=" + e.getValue()).toList();
+
+        return String.join(", ", cities);
     }
 }
