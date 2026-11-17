@@ -163,8 +163,14 @@ public class CollectorsWorkoutChallenge {
     // Example: cityWithMostOrders([ana(Lima, 1), bob(Quito, 2), cy(Quito, 3)])  returns "Quito"
     //          cityWithMostOrders([ana(Lima, 1), bob(Quito, 2)])                returns "Lima"
     //          cityWithMostOrders([])                                           returns "none"
-    public static String cityWithMostOrders(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public static String cityWithMostOrdersBad(List<Order> orders) {
+        Map<String, Long> map = orders.stream().collect(Collectors.groupingBy(
+                Order::city,
+                Collectors.counting()
+        ));
+        return map.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(e -> e.getKey()).orElse("none");
     }
 
     // CHALLENGE 9
