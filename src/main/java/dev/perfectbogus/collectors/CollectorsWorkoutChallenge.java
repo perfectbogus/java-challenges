@@ -182,6 +182,22 @@ public class CollectorsWorkoutChallenge {
                 .map(e -> e.getKey()).orElse("none");
     }
 
+    public static String cityWithMostOrdersLoop(List<Order> orders) {
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        for (Order order : orders) {
+            counts.merge(order.city(), 1, Integer::sum);
+        }
+        String best = "none";
+        int bestCount = 0;
+        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
+            if (entry.getValue() > bestCount) {
+                best = entry.getKey();
+                bestCount = entry.getValue();
+            }
+        }
+        return best;
+    }
+
     // CHALLENGE 9
     // Returns a Collector that can be used with stream.collect(...) on a stream of orders, and that gives the number of
     // orders whose amount is "limit" or more. For an empty stream, the result is 0. Each call to this method returns a
@@ -191,7 +207,7 @@ public class CollectorsWorkoutChallenge {
     //          orders.stream().collect(bigOrderCounter(301))  returns 0
     //          Stream.<Order>empty().collect(bigOrderCounter(0))  returns 0
     public static Collector<Order, ?, Long> bigOrderCounter(int limit) {
-        throw new UnsupportedOperationException("Not implemented yet");
+
     }
 
     // CHALLENGE 10
