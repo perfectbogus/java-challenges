@@ -233,6 +233,14 @@ public class CollectorsWorkoutChallenge {
         ));
     }
 
+    public static Map<String, String> lastCityByCustomerExtended(List<Order> orders) {
+        Map<String, String> result = new HashMap<>();
+        for (Order order : orders) {
+            result.put(order.customer(), order.city());
+        }
+        return result;
+    }
+
     // CHALLENGE 11
     // Returns a text with the sum of the amounts of each city, written as city=total and separated by a comma and a
     // space (", "), in the same order in which each city appears for the first time in the list. The sums fit in an
