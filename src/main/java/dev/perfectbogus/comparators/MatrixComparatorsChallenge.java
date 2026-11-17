@@ -3,6 +3,8 @@ package dev.perfectbogus.comparators;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class MatrixComparatorsChallenge {
 
@@ -57,11 +59,19 @@ public class MatrixComparatorsChallenge {
     //          sortPointsByDistance([[-5, 0], [0, 5]])          returns [[-5, 0], [0, 5]]
     //          sortPointsByDistance([[3, 3], [0, 5]])           returns [[3, 3], [0, 5]]
     //          sortPointsByDistance([])                         returns []
-    public static int[][] sortPointsByDistance(int[][] points) {
+    public static int[][] sortPointsByDistanceExtended(int[][] points) {
         return Arrays.stream(points)
                 .sorted(Comparator.comparingDouble(a ->
                         Math.abs(Math.sqrt((a[0] * a[0]) + (a[1] * a[1])))))
                 .toArray(int[][]::new);
+    }
+
+    public static int[][] sortPointsByDistance(int[][] points) {
+        Map<int[], Double> pre = Arrays.stream(points).collect(Collectors.toMap(
+                Function.identity(),
+                a -> Math.abs(Math.sqrt((a[0] * a[0]) + (a[1] * a[1])))
+        ));
+        return Arrays.stream(points).sorted(Comparator.comparingDouble(pre::get)).toArray(int[][]::new);
     }
 
     // CHALLENGE 4
