@@ -210,6 +210,15 @@ public class CollectorsWorkoutChallenge {
         return Collectors.filtering(o -> o.amount() >= limit, Collectors.counting());
     }
 
+    public static Collector<Order, ?, Long> bigOrderCounterExtended(int limit) {
+        return Collector.of(
+                () -> new long[1],
+                (count, order) -> { if (order.amount() >= limit) count[0]++; },
+                (a, b) -> { a[0] += b[0]; return a; },
+                count -> count[0]
+        );
+    }
+
     // CHALLENGE 10
     // Returns a map from each customer to the city of the last order of that customer in the list. Only the customers
     // that appear are in the map. An empty list gives an empty map.
