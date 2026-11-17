@@ -1,5 +1,9 @@
 package dev.perfectbogus.strings;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 public class StringSortMixChallenge {
 
     // CHALLENGE 1
@@ -13,7 +17,9 @@ public class StringSortMixChallenge {
     //          sortWordsOfSentence("b B a")                returns "B a b"
     //          sortWordsOfSentence("")                     returns ""
     public static String sortWordsOfSentence(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(sentence.split(" "))
+                .sorted(Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder()))
+                .collect(Collectors.joining(" "));
     }
 
     // CHALLENGE 2
