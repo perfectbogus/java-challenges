@@ -2,6 +2,7 @@ package dev.perfectbogus.comparators;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Map;
 
 public class MatrixComparatorsChallenge {
 
@@ -57,7 +58,10 @@ public class MatrixComparatorsChallenge {
     //          sortPointsByDistance([[3, 3], [0, 5]])           returns [[3, 3], [0, 5]]
     //          sortPointsByDistance([])                         returns []
     public static int[][] sortPointsByDistance(int[][] points) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(points)
+                .sorted(Comparator.comparingDouble(a ->
+                        Math.abs(Math.sqrt((a[0] * a[0]) + (a[1] * a[1])))))
+                .toArray(int[][]::new);
     }
 
     // CHALLENGE 4
