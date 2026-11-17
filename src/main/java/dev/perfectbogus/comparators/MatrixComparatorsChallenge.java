@@ -85,7 +85,8 @@ public class MatrixComparatorsChallenge {
     public static int[][] sortIntervals(int[][] intervals) {
         return Arrays.stream(intervals)
                 .sorted(Comparator.<int[]>comparingInt(a -> a[0])
-                        .thenComparingInt(a -> a[1])).toArray(int[][]::new);
+                        .thenComparingInt(a -> a[1]))
+                .toArray(int[][]::new);
     }
 
     // CHALLENGE 5
@@ -97,8 +98,19 @@ public class MatrixComparatorsChallenge {
     //          sortByColumn([[3, 1], [1, 9], [2, 5]], 0, true)   returns [[3, 1], [2, 5], [1, 9]]
     //          sortByColumn([[4, 2], [4, 1]], 0, true)           returns [[4, 2], [4, 1]]
     //          sortByColumn([], 0, false)                        returns []
+    public static int[][] sortByColumnBad(int[][] rows, int col, boolean descending) {
+        Comparator<int[]> byCol = Comparator.comparingInt(a -> a[col]);
+        if (descending) {
+            byCol = byCol.reversed();
+        }
+        return Arrays.stream(rows).sorted(byCol).toArray(int[][]::new);
+    }
+
     public static int[][] sortByColumn(int[][] rows, int col, boolean descending) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<int[]> byCol = descending ?
+                Comparator.<int[]>comparingInt(a -> a[col]).reversed() :
+                Comparator.comparingInt(a -> a[col]);
+        return Arrays.stream(rows).sorted(byCol).toArray(int[][]::new);
     }
 
     // CHALLENGE 6
