@@ -585,6 +585,12 @@ class MatrixComparatorsChallengeTest {
         }
 
         @Test
+        void testThreeRowsSimplified() {
+            assertArrayEquals(new int[][] {{0, 0, 0}, {1, 5, 0}, {1, 2, 3}},
+                    MatrixComparatorsChallenge.sortByThreeColumnsSimplified(new int[][] {{1, 2, 3}, {1, 5, 0}, {0, 0, 0}}));
+        }
+
+        @Test
         void testThirdColumnAscending() {
             assertArrayEquals(new int[][] {{1, 2, 3}, {1, 2, 9}},
                     MatrixComparatorsChallenge.sortByThreeColumns(new int[][] {{1, 2, 9}, {1, 2, 3}}));

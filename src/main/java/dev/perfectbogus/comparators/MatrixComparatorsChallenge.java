@@ -133,6 +133,14 @@ public class MatrixComparatorsChallenge {
                 .toArray(int[][]::new);
     }
 
+    public static int[][] sortByThreeColumnsSimplified(int[][] rows) {
+        return Arrays.stream(rows)
+                .sorted(Comparator.<int[]>comparingInt(a -> a[0])
+                        .thenComparing(a -> a[1], Comparator.reverseOrder())
+                        .thenComparingInt(a -> a[2]))
+                .toArray(int[][]::new);
+    }
+
     // CHALLENGE 7
     // Returns a new grid with the same rows, ordered by their length (how many numbers they have) from the longest to
     // the shortest. If two rows have the same length, the one with the smaller sum goes first. If they also have the
