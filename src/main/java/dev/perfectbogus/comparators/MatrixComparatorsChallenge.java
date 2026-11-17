@@ -40,6 +40,13 @@ public class MatrixComparatorsChallenge {
         return Arrays.stream(rows).sorted(byLast.thenComparing(byFirst)).toArray(int[][]::new);
     }
 
+    public static int[][] sortByLastThenFirstSimplified(int[][] rows) {
+        int[][] result = rows.clone();
+        Arrays.sort(result, Comparator.<int[]>comparingInt(row -> row[row.length - 1])
+                .thenComparingInt(row -> row[0]));
+        return result;
+    }
+
     // CHALLENGE 3
     // Each row of the grid is a point of the plane, written as [x, y]. Returns a new grid with the same points,
     // ordered by their distance to the point [0, 0], from the closest to the farthest. Two points at the same distance
