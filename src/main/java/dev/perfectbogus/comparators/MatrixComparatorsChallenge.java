@@ -83,7 +83,9 @@ public class MatrixComparatorsChallenge {
     //          sortIntervals([[-1, 0], [-5, 3]])        returns [[-5, 3], [-1, 0]]
     //          sortIntervals([])                        returns []
     public static int[][] sortIntervals(int[][] intervals) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(intervals)
+                .sorted(Comparator.<int[]>comparingInt(a -> a[0])
+                        .thenComparingInt(a -> a[1])).toArray(int[][]::new);
     }
 
     // CHALLENGE 5
