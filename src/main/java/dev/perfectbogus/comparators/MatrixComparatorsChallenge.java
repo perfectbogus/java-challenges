@@ -1,5 +1,6 @@
 package dev.perfectbogus.comparators;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class MatrixComparatorsChallenge {
@@ -16,7 +17,8 @@ public class MatrixComparatorsChallenge {
     //          rows = [[7]]                     becomes  [[7]]
     //          rows = []                        becomes  []
     public static void sortByFirstDescending(int[][] rows) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<int[]> byFirstNum = Comparator.comparing(a -> a[0], Comparator.reverseOrder());
+        Arrays.sort(rows, byFirstNum);
     }
 
     // CHALLENGE 2
