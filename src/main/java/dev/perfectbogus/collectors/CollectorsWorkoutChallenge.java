@@ -226,7 +226,11 @@ public class CollectorsWorkoutChallenge {
     //          lastCityByCustomer([ana(Lima, 1), ana(Lima, 2)])                 returns {ana=Lima}
     //          lastCityByCustomer([])                                           returns {}
     public static Map<String, String> lastCityByCustomer(List<Order> orders) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return orders.stream().collect(Collectors.toMap(
+                Order::customer,
+                Order::city,
+                (existing, incoming) -> incoming
+        ));
     }
 
     // CHALLENGE 11
