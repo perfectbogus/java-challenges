@@ -35,7 +35,9 @@ public class MatrixComparatorsChallenge {
     //          sortByLastThenFirst([[1, 9, 2], [1, 0, 2]])       returns [[1, 9, 2], [1, 0, 2]]
     //          sortByLastThenFirst([])                           returns []
     public static int[][] sortByLastThenFirst(int[][] rows) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<int[]> byLast = Comparator.comparingInt(a -> a[a.length - 1]);
+        Comparator<int[]> byFirst = Comparator.comparingInt(a -> a[0]);
+        return Arrays.stream(rows).sorted(byLast.thenComparing(byFirst)).toArray(int[][]::new);
     }
 
     // CHALLENGE 3
