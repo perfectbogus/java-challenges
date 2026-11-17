@@ -257,4 +257,14 @@ public class CollectorsWorkoutChallenge {
 
         return String.join(", ", cities);
     }
+
+    public static String cityTotalsTextSimplified(List<Order> orders) {
+        return orders.stream().collect(Collectors.groupingBy(
+                Order::city,
+                LinkedHashMap::new,
+                Collectors.summingInt(Order::amount)
+        )).entrySet().stream()
+                .map(e -> e.getKey() + "=" + e.getValue())
+                .collect(Collectors.joining(", "));
+    }
 }
