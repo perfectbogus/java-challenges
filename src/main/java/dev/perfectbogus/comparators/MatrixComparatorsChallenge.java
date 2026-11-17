@@ -242,6 +242,6 @@ public class MatrixComparatorsChallenge {
     }
 
     public static Comparator<int[]> bySecondThenFirstSimplified() {
-        return Comparator.<int[]>comparingInt(a -> a[1]).thenComparing(Comparator.comparingInt(a -> a[0]));
+        return Comparator.<int[]>comparingInt(a -> a[1]).thenComparingInt(a -> a[0]);
     }
 }
