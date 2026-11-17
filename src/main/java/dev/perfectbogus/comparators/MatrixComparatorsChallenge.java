@@ -151,6 +151,13 @@ public class MatrixComparatorsChallenge {
     //          sortByLengthThenSum([[], [0]])                returns [[0], []]
     //          sortByLengthThenSum([[1, 2], [2, 1], [0, 3]]) returns [[1, 2], [2, 1], [0, 3]]
     //          sortByLengthThenSum([])                       returns []
+    public static int[][] sortByLengthThenSum(int[][] rows) {
+        return Arrays.stream(rows)
+                .sorted(Comparator.comparing((int[] a) -> a.length, Comparator.reverseOrder())
+                        .thenComparingInt(a -> Arrays.stream(a).sum()))
+                .toArray(int[][]::new);
+    }
+
     public static int[][] sortByLengthThenSumPerformance(int[][] rows) {
         Map<int[], Integer> map = Arrays.stream(rows).collect(Collectors.groupingBy(
                 Function.identity(),
