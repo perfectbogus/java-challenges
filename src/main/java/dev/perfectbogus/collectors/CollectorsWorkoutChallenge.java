@@ -163,6 +163,15 @@ public class CollectorsWorkoutChallenge {
     // Example: cityWithMostOrders([ana(Lima, 1), bob(Quito, 2), cy(Quito, 3)])  returns "Quito"
     //          cityWithMostOrders([ana(Lima, 1), bob(Quito, 2)])                returns "Lima"
     //          cityWithMostOrders([])                                           returns "none"
+    public static String cityWithMostOrders(List<Order> orders) {
+        return orders.stream()
+                .collect(Collectors.groupingBy(Order::city, LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("none");
+    }
+
     public static String cityWithMostOrdersBad(List<Order> orders) {
         Map<String, Long> map = orders.stream().collect(Collectors.groupingBy(
                 Order::city,
