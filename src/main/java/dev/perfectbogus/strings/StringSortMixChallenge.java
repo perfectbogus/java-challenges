@@ -274,6 +274,12 @@ public class StringSortMixChallenge {
     //          rankByScore(["b:1", "B:1"])                  returns [B, b]
     //          rankByScore([])                              returns []
     public static String[] rankByScore(String[] entries) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(entries)
+                .sorted(Comparator.comparing(
+                            (String s) -> Integer.parseInt(s.split(":")[1]),
+                            Comparator.reverseOrder())
+                        .thenComparing(s -> s.split(":")[0]))
+                .map(s -> s.split(":")[0])
+                .toArray(String[]::new);
     }
 }
