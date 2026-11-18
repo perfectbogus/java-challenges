@@ -257,6 +257,13 @@ public class StringSortMixChallenge {
                 .toArray(String[]::new);
     }
 
+    public static String[] sortNumbersAsTextSimplified(String[] numbers) {
+        return Arrays.stream(numbers)
+                .sorted(Comparator.comparingInt(String::length)
+                        .thenComparing(Comparator.naturalOrder()))
+                .toArray(String[]::new);
+    }
+
     // CHALLENGE 10
     // Each entry is written as "name:score", where the name has no colon and the score is a whole number between 0 and
     // 1000. Returns a new array with only the names, ordered by score from the highest to the lowest. Entries with the

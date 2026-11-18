@@ -822,6 +822,12 @@ class StringSortMixChallengeTest {
         }
 
         @Test
+        void testFourNumbersSimplified() {
+            assertArrayEquals(new String[] {"1", "9", "10", "100"},
+                    StringSortMixChallenge.sortNumbersAsTextSimplified(new String[] {"10", "9", "100", "1"}));
+        }
+
+        @Test
         void testSameLength() {
             assertArrayEquals(new String[] {"12", "21", "30"},
                     StringSortMixChallenge.sortNumbersAsText(new String[] {"30", "12", "21"}));
