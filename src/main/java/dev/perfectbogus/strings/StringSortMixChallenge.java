@@ -31,7 +31,12 @@ public class StringSortMixChallenge {
     //          sortedByVowelCount(["aab", "ea"])                        returns [aab, ea]
     //          sortedByVowelCount([])                                   returns []
     public static String[] sortedByVowelCount(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String vowels = "aeiou";
+        return Arrays.stream(words)
+                .sorted(Comparator.comparing(
+                        (String a) -> a.chars().filter(c -> vowels.indexOf(c) != -1).count(),
+                        Comparator.reverseOrder()).thenComparing(String::compareTo)
+                ).toArray(String[]::new);
     }
 
     // CHALLENGE 3
