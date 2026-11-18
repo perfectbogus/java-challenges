@@ -188,7 +188,11 @@ public class StringSortMixChallenge {
     //          sortVersions(["9.0.0", "10.0.0"])           returns [9.0.0, 10.0.0]
     //          sortVersions([])                            returns []
     public static String[] sortVersions(String[] versions) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(versions)
+                .sorted(Comparator.<String, Integer>comparing(s -> Integer.parseInt(s.split("\\.")[0]))
+                        .thenComparing(s -> Integer.parseInt(s.split("\\.")[1]))
+                        .thenComparing(s -> Integer.parseInt(s.split("\\.")[2])))
+                .toArray(String[]::new);
     }
 
     // CHALLENGE 8
