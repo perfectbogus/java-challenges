@@ -1,5 +1,7 @@
 package dev.perfectbogus.characters;
 
+import java.util.Arrays;
+
 public class CharArraySortChallenge {
 
     // ==========================================================
@@ -13,7 +15,9 @@ public class CharArraySortChallenge {
     //   ['z', 'y']       ->  ['y', 'z']
     //   []               ->  []
     public static char[] sortChars(char[] chars) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        char[] clone = chars.clone();
+        Arrays.sort(clone);
+        return clone;
     }
 
     // ==========================================================
