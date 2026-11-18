@@ -137,7 +137,12 @@ public class StringSortMixChallenge {
     //          topLongestWords(["ccc", "aaa", "bbb"], 2)      returns [aaa, bbb]
     //          topLongestWords(["a", "bb"], 0)                returns []
     public static String[] topLongestWords(String[] words, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byLengthDesc = Comparator.comparing(String::length, Comparator.reverseOrder());
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+        return Arrays.stream(words)
+                .sorted(byLengthDesc.thenComparing(byAlpha))
+                .limit(n)
+                .toArray(String[]::new);
     }
 
     // CHALLENGE 6
