@@ -195,6 +195,15 @@ public class StringSortMixChallenge {
                 .toArray(String[]::new);
     }
 
+    public static String[] sortVersionsSimplified(String[] versions) {
+        return Arrays.stream(versions)
+                .sorted(Comparator.comparing((String s) -> Integer.parseInt(s.split("\\.")[0]))
+                        .thenComparing(s -> Integer.parseInt(s.split("\\.")[1]))
+                        .thenComparing(s -> Integer.parseInt(s.split("\\.")[2])))
+                .toArray(String[]::new);
+    }
+
+
     // CHALLENGE 8
     // Each sentence has one or more words separated by exactly one space, with no space at the start or at the end.
     // Returns a new array with the same sentences, ordered by their last word alphabetically, ignoring the case. If two
