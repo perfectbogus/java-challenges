@@ -145,6 +145,13 @@ public class StringSortMixChallenge {
                 .toArray(String[]::new);
     }
 
+    public static String[] topLongestWordsSimplified(String[] words, int n) {
+        return Arrays.stream(words)
+                .sorted(Comparator.comparing(String::length, Comparator.reverseOrder()))
+                .limit(n)
+                .toArray(String[]::new);
+    }
+
     // CHALLENGE 6
     // Each file name has exactly one dot, with at least one character before it and at least one after it, like
     // "report.txt". The part after the dot is the extension. Returns a new array with the same names, ordered by
