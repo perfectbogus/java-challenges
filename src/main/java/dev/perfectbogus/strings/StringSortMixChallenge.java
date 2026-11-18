@@ -114,7 +114,10 @@ public class StringSortMixChallenge {
     //          sortByCustomOrder("aab", "ba")      returns "baa"
     //          sortByCustomOrder("", "x")          returns ""
     public static String sortByCustomOrder(String text, String order) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().mapToObj(c -> (char)c)
+                .sorted(Comparator.comparing(c -> order.indexOf(c)))
+                .map(String::valueOf)
+                .collect(Collectors.joining());
     }
 
     // CHALLENGE 5
