@@ -203,6 +203,15 @@ public class StringSortMixChallenge {
                 .toArray(String[]::new);
     }
 
+    public static String[] sortVersionsSimplifiedV2(String[] versions) {
+        Comparator<String> byFirst = Comparator.comparing(s -> Integer.parseInt(s.split("\\.")[0]));
+        Comparator<String> bySecond = Comparator.comparing(s -> Integer.parseInt(s.split("\\.")[1]));
+        Comparator<String> byThird = Comparator.comparing(s -> Integer.parseInt(s.split("\\.")[2]));
+        Comparator<String> rules = byFirst.thenComparing(bySecond).thenComparing(byThird);
+        return Arrays.stream(versions)
+                .sorted(rules)
+                .toArray(String[]::new);
+    }
 
     // CHALLENGE 8
     // Each sentence has one or more words separated by exactly one space, with no space at the start or at the end.

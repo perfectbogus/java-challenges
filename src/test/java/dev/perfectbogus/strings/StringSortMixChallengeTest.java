@@ -617,6 +617,12 @@ class StringSortMixChallengeTest {
         }
 
         @Test
+        void testThreeVersionsSimplifiedV2() {
+            assertArrayEquals(new String[] {"0.9.9", "1.2.0", "1.10.0"},
+                    StringSortMixChallenge.sortVersionsSimplifiedV2(new String[] {"1.10.0", "1.2.0", "0.9.9"}));
+        }
+
+        @Test
         void testThirdNumberIsNumeric() {
             assertArrayEquals(new String[] {"1.0.9", "1.0.10"},
                     StringSortMixChallenge.sortVersions(new String[] {"1.0.10", "1.0.9"}));
