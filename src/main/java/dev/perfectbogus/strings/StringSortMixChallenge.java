@@ -91,6 +91,19 @@ public class StringSortMixChallenge {
         return result.toString();
     }
 
+    public static String sortCharactersByFrequencyStream(String text) {
+        Map<Character, Long> counts = text.chars().mapToObj(c -> (char) c).collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()
+        ));
+
+        return text.chars().mapToObj(c -> (char) c)
+                .sorted(Comparator.comparing((Character c) -> counts.get(c)).reversed()
+                        .thenComparing(Comparator.naturalOrder()))
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+    }
+
     // CHALLENGE 4
     // The "order" text has different characters, and it says the position of each character in a made-up alphabet (the
     // first character of "order" is the first letter of that alphabet). The text has only characters that appear in

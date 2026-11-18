@@ -228,6 +228,11 @@ class StringSortMixChallengeTest {
         }
 
         @Test
+        void testTreeStream() {
+            assertEquals("eert", StringSortMixChallenge.sortCharactersByFrequencyStream("tree"));
+        }
+
+        @Test
         void testBanana() {
             assertEquals("aaannb", StringSortMixChallenge.sortCharactersByFrequency("banana"));
         }
