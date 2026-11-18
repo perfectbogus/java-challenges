@@ -39,6 +39,16 @@ public class StringSortMixChallenge {
                 ).toArray(String[]::new);
     }
 
+    public static String[] sortedByVowelsCountExtended(String[] words) {
+        String vowels = "aeiou";
+        Comparator<String> byVowelsDesc = Comparator.comparing(
+                a -> a.chars().filter(c -> vowels.indexOf(c) != -1).count(),
+                Comparator.reverseOrder());
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+        return Arrays.stream(words)
+                .sorted(byVowelsDesc.thenComparing(byAlpha))
+                .toArray(String[]::new);
+    }
     // CHALLENGE 3
     // The text has only lowercase letters (a-z). Returns a text with the same characters, where the letters that appear
     // more times in the text come first. Letters that appear the same number of times are in alphabetical order. All
