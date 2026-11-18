@@ -109,6 +109,18 @@ class StringSortMixChallengeTest {
         }
 
         @Test
+        void testFourWordsExtended() {
+            assertArrayEquals(new String[] {"audio", "banana", "tree", "sky"},
+                    StringSortMixChallenge.sortedByVowelsCountExtended(new String[] {"sky", "banana", "tree", "audio"}));
+        }
+
+        @Test
+        void testFourWordsPerformance() {
+            assertArrayEquals(new String[] {"audio", "banana", "tree", "sky"},
+                    StringSortMixChallenge.sortedByVowelsCountPerformance(new String[] {"sky", "banana", "tree", "audio"}));
+        }
+
+        @Test
         void testTiesAreAlphabetical() {
             assertArrayEquals(new String[] {"ab", "ba"},
                     StringSortMixChallenge.sortedByVowelCount(new String[] {"ba", "ab"}));

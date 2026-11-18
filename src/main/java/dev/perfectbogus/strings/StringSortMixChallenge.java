@@ -2,6 +2,8 @@ package dev.perfectbogus.strings;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class StringSortMixChallenge {
@@ -49,6 +51,22 @@ public class StringSortMixChallenge {
                 .sorted(byVowelsDesc.thenComparing(byAlpha))
                 .toArray(String[]::new);
     }
+
+    public static String[] sortedByVowelsCountPerformance(String[] words) {
+        String vowels = "aeiou";
+        Map<String, Long> map = Arrays.stream(words).collect(Collectors.toMap(
+                Function.identity(),
+                s -> s.chars().filter(a -> vowels.indexOf(a) != -1).count()
+        ));
+
+        Comparator<String> byVowelsDesc = Comparator.comparing(map::get, Comparator.reverseOrder());
+        Comparator<String> byAlpha = Comparator.naturalOrder();
+
+        return Arrays.stream(words)
+                .sorted(byVowelsDesc.thenComparing(byAlpha))
+                .toArray(String[]::new);
+    }
+
     // CHALLENGE 3
     // The text has only lowercase letters (a-z). Returns a text with the same characters, where the letters that appear
     // more times in the text come first. Letters that appear the same number of times are in alphabetical order. All
