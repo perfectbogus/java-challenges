@@ -223,7 +223,12 @@ public class StringSortMixChallenge {
     //          sortByLastWord(["x ab", "y a"])                      returns [y a, x ab]
     //          sortByLastWord([])                                   returns []
     public static String[] sortByLastWord(String[] sentences) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(sentences)
+                .sorted(Comparator.comparing(s -> {
+                    String[] split = s.split(" ");
+                    return split[split.length - 1];
+                }, String.CASE_INSENSITIVE_ORDER))
+                .toArray(String[]::new);
     }
 
     // CHALLENGE 9
