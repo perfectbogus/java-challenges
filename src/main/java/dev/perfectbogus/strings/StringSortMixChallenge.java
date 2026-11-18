@@ -163,7 +163,11 @@ public class StringSortMixChallenge {
     //          sortFilesByExtension(["a.TXT", "a.txt"])                    returns [a.TXT, a.txt]
     //          sortFilesByExtension([])                                    returns []
     public static String[] sortFilesByExtension(String[] fileNames) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(fileNames)
+                .sorted(Comparator.comparing(
+                        (String s) -> s.split("\\.")[1])
+                        .thenComparing(s -> s.split("\\.")[0])
+                ).toArray(String[]::new);
     }
 
     // CHALLENGE 7
