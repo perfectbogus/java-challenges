@@ -508,6 +508,12 @@ class StringSortMixChallengeTest {
         }
 
         @Test
+        void testFourFilesExtended() {
+            assertArrayEquals(new String[] {"c.doc", "a.txt", "b.txt", "a.zip"},
+                    StringSortMixChallenge.sortFilesByExtension(new String[] {"b.txt", "a.zip", "c.doc", "a.txt"}));
+        }
+
+        @Test
         void testNameIsComparedWithoutTheExtension() {
             assertArrayEquals(new String[] {"a.x", "a-b.x"},
                     StringSortMixChallenge.sortFilesByExtension(new String[] {"a-b.x", "a.x"}));

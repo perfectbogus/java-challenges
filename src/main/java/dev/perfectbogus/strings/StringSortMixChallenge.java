@@ -170,6 +170,14 @@ public class StringSortMixChallenge {
                 ).toArray(String[]::new);
     }
 
+    public static String[] sortFilesByExtensionExtended(String[] fileNames) {
+        Comparator<String> byExtension = Comparator.comparing(s -> s.split("\\.")[1]);
+        Comparator<String> byName = Comparator.comparing(s -> s.split("\\.")[0]);
+        return Arrays.stream(fileNames)
+                .sorted(byExtension.thenComparing(byName))
+                .toArray(String[]::new);
+    }
+
     // CHALLENGE 7
     // Each version has 3 numbers separated by dots, like "1.10.2". Each number is between 0 and 999999 and has no
     // leading zeros. Returns a new array with the same versions, ordered from the oldest to the newest: first by the
