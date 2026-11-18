@@ -120,6 +120,13 @@ public class StringSortMixChallenge {
                 .collect(Collectors.joining());
     }
 
+    public static String sortByCustomOrderSimplified(String text, String order) {
+        return text.chars().mapToObj(c -> (char)c)
+                .sorted(Comparator.comparing(order::indexOf))
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+    }
+
     // CHALLENGE 5
     // Returns a new array with the "n" longest words, ordered by length from the longest to the shortest. Words with
     // the same length are ordered alphabetically (the normal comparison of texts), and that order also decides which

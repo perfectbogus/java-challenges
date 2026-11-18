@@ -316,6 +316,11 @@ class StringSortMixChallengeTest {
         }
 
         @Test
+        void testHelloSimplified() {
+            assertEquals("llohe", StringSortMixChallenge.sortByCustomOrderSimplified("hello", "lohe"));
+        }
+
+        @Test
         void testReversedAlphabet() {
             assertEquals("cba", StringSortMixChallenge.sortByCustomOrder("abc", "cba"));
         }
