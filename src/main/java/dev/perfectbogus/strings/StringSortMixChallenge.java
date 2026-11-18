@@ -241,7 +241,20 @@ public class StringSortMixChallenge {
     //          sortNumbersAsText(["10", "0", "5"])         returns [0, 5, 10]
     //          sortNumbersAsText([])                       returns []
     public static String[] sortNumbersAsText(String[] numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byChar = (a, b) -> {
+            if (a.length() != b.length()) {
+                return Integer.compare(a.length(), b.length());
+            }
+            for (int i = 0; i < a.length(); i++) {
+                if (a.charAt(i) != b.charAt(i)) {
+                    return Character.compare(a.charAt(i), b.charAt(i));
+                }
+            }
+            return 0;
+        };
+        return Arrays.stream(numbers)
+                .sorted(byChar)
+                .toArray(String[]::new);
     }
 
     // CHALLENGE 10
