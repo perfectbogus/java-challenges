@@ -1,0 +1,153 @@
+package dev.perfectbogus.characters;
+
+public class CharArraySortChallenge {
+
+    // ==========================================================
+    // CHALLENGE 1
+    // ==========================================================
+    // Returns a new array with the same characters ordered by their character code (the normal order of chars, so
+    // uppercase letters come before lowercase ones). The original array is not modified.
+    //
+    // Examples:
+    //   ['b', 'A', 'a']  ->  ['A', 'a', 'b']
+    //   ['z', 'y']       ->  ['y', 'z']
+    //   []               ->  []
+    public static char[] sortChars(char[] chars) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 2
+    // ==========================================================
+    // The array only has letters. Returns a new array ordered alphabetically ignoring the case, so 'a' and 'A' are the
+    // same letter. Letters that are equal ignoring the case keep the order they had in the original array.
+    //
+    // Examples:
+    //   ['b', 'A', 'a', 'B']  ->  ['A', 'a', 'b', 'B']
+    //   ['a', 'A']            ->  ['a', 'A']
+    //   ['A', 'a']            ->  ['A', 'a']
+    //   ['c', 'B', 'a']       ->  ['a', 'B', 'c']
+    public static char[] sortIgnoringCase(char[] letters) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 3
+    // ==========================================================
+    // Returns a new array with the same characters ordered by their character code from the biggest to the smallest.
+    // The original array is not modified.
+    //
+    // Examples:
+    //   ['a', 'c', 'b']  ->  ['c', 'b', 'a']
+    //   ['a', 'A']       ->  ['a', 'A']
+    //   ['x', 'x']       ->  ['x', 'x']
+    public static char[] sortDescending(char[] chars) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 4
+    // ==========================================================
+    // The array only has lowercase letters from 'a' to 'z'. Returns a new array where the vowels (a, e, i, o, u) come
+    // first and then the consonants. Inside each group the letters are in alphabetical order.
+    //
+    // Examples:
+    //   ['b', 'a', 'c', 'e']  ->  ['a', 'e', 'b', 'c']
+    //   ['z', 'u', 'a']       ->  ['a', 'u', 'z']
+    //   ['d', 'c']            ->  ['c', 'd']
+    //   []                    ->  []
+    public static char[] vowelsFirst(char[] letters) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 5
+    // ==========================================================
+    // Returns a new array with the same letters ordered by how far their character code is from the code of target,
+    // the closest first. If two letters are at the same distance, the one with the smaller code goes first.
+    //
+    // Examples:
+    //   (['a', 'd', 'b'], 'c')  ->  ['b', 'd', 'a']
+    //   (['z', 'x'], 'y')       ->  ['x', 'z']
+    //   (['m', 'a'], 'm')       ->  ['m', 'a']
+    //   ([], 'k')               ->  []
+    public static char[] sortByDistance(char[] letters, char target) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 6
+    // ==========================================================
+    // The array only has letters. Returns a new array where the lowercase letters come first and then the uppercase
+    // ones. Inside each group the letters are in alphabetical order (the normal order of chars).
+    //
+    // Examples:
+    //   ['b', 'A', 'a', 'B']  ->  ['a', 'b', 'A', 'B']
+    //   ['Z', 'y']            ->  ['y', 'Z']
+    //   ['C', 'B']            ->  ['B', 'C']
+    //   []                    ->  []
+    public static char[] lowerBeforeUpper(char[] letters) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 7
+    // ==========================================================
+    // Returns a new array with the k biggest characters (by character code) ordered from the biggest to the smallest.
+    // Repeated characters count each time they appear. k is between 0 and the length of the array.
+    //
+    // Examples:
+    //   (['a', 'c', 'b'], 2)  ->  ['c', 'b']
+    //   (['a', 'a', 'b'], 2)  ->  ['b', 'a']
+    //   (['a', 'b'], 0)       ->  []
+    //   (['q'], 1)            ->  ['q']
+    public static char[] topLargest(char[] chars, int k) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 8
+    // ==========================================================
+    // Every word has at least one character. Returns a new array ordered by the last character of each word. Words
+    // that end with the same character are ordered alphabetically (the normal comparison of texts).
+    //
+    // Examples:
+    //   ["ab", "ca", "bb"]  ->  ["ca", "ab", "bb"]
+    //   ["bb", "ab"]        ->  ["ab", "bb"]
+    //   ["Zb", "aa"]        ->  ["aa", "Zb"]
+    //   []                  ->  []
+    public static String[] sortWordsByLastChar(String[] words) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 9
+    // ==========================================================
+    // Every word has an odd number of characters, so it has one character exactly in the middle. Returns a new array
+    // ordered by that middle character. Words with the same middle character keep the order they had in the original.
+    //
+    // Examples:
+    //   ["abc", "xay", "zzb"]  ->  ["xay", "abc", "zzb"]
+    //   ["xbx", "aba"]         ->  ["xbx", "aba"]
+    //   ["z", "a"]             ->  ["a", "z"]
+    //   []                     ->  []
+    public static String[] sortByMiddleChar(String[] words) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+
+    // ==========================================================
+    // CHALLENGE 10
+    // ==========================================================
+    // Every row has at least one character. Returns a new array with the same rows ordered by their first character.
+    // Rows with the same first character are ordered by length, the shorter first. Rows that are still equal keep the
+    // order they had. The rows themselves are not modified.
+    //
+    // Examples:
+    //   [['b'], ['a', 'z'], ['a']]    ->  [['a'], ['a', 'z'], ['b']]
+    //   [['a', 'y'], ['a', 'x']]      ->  [['a', 'y'], ['a', 'x']]
+    //   [['c', 'a', 'a'], ['b']]      ->  [['b'], ['c', 'a', 'a']]
+    //   []                            ->  []
+    public static char[][] sortRows(char[][] rows) {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+}
