@@ -147,7 +147,8 @@ public class StringSortMixChallenge {
 
     public static String[] topLongestWordsSimplified(String[] words, int n) {
         return Arrays.stream(words)
-                .sorted(Comparator.comparing(String::length, Comparator.reverseOrder()))
+                .sorted(Comparator.comparing(String::length, Comparator.reverseOrder())
+                        .thenComparing(Comparator.naturalOrder()))
                 .limit(n)
                 .toArray(String[]::new);
     }

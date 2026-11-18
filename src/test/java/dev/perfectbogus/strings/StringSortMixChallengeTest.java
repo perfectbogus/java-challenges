@@ -404,6 +404,12 @@ class StringSortMixChallengeTest {
         }
 
         @Test
+        void testTwoOfFourSimplified() {
+            assertArrayEquals(new String[] {"aaa", "ccc"},
+                    StringSortMixChallenge.topLongestWordsSimplified(new String[] {"a", "ccc", "bb", "aaa"}, 2));
+        }
+
+        @Test
         void testAllTheWords() {
             assertArrayEquals(new String[] {"bb", "a"},
                     StringSortMixChallenge.topLongestWords(new String[] {"a", "bb"}, 2));
