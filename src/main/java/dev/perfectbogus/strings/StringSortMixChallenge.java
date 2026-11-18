@@ -76,7 +76,19 @@ public class StringSortMixChallenge {
     //          sortCharactersByFrequency("zzzaaa")  returns "aaazzz"
     //          sortCharactersByFrequency("")        returns ""
     public static String sortCharactersByFrequency(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] counts = new int[26];
+        Character[] chars = new Character[text.length()];
+        for (int i = 0; i < text.length(); i++) {
+            counts[text.charAt(i) - 'a']++;
+            chars[i] = text.charAt(i);
+        }
+        Arrays.sort(chars, Comparator.comparing((Character c) -> counts[c - 'a'], Comparator.reverseOrder())
+                .thenComparing(Comparator.naturalOrder()));
+        StringBuilder result = new StringBuilder();
+        for (char c : chars) {
+            result.append(c);
+        }
+        return result.toString();
     }
 
     // CHALLENGE 4
