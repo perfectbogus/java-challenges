@@ -1,6 +1,7 @@
 package dev.perfectbogus.characters;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class CharArraySortChallenge {
 
@@ -31,8 +32,17 @@ public class CharArraySortChallenge {
     //   ['a', 'A']            ->  ['a', 'A']
     //   ['A', 'a']            ->  ['A', 'a']
     //   ['c', 'B', 'a']       ->  ['a', 'B', 'c']
-    public static char[] sortIgnoringCase(char[] letters) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public static char[] sortIgnoringCaseExtended(char[] letters) {
+        Character[] boxed = new Character[letters.length];
+        for (int i = 0; i < letters.length; i++) {
+            boxed[i] = letters[i];
+        }
+        Arrays.sort(boxed, Comparator.comparing(c -> Character.toLowerCase(c)));
+        char[] result = new char[boxed.length];
+        for (int i = 0; i < boxed.length; i++) {
+            result[i] = boxed[i];
+        }
+        return result;
     }
 
     // ==========================================================
