@@ -117,9 +117,15 @@ public class CharArraySortChallenge {
     //   (['z', 'x'], 'y')       ->  ['x', 'z']
     //   (['m', 'a'], 'm')       ->  ['m', 'a']
     //   ([], 'k')               ->  []
-    public static char[] sortByDistance(char[] letters, char target) {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
+        public static char[] sortByDistance(char[] letters, char target) {
+            return new String(letters).chars()
+                    .mapToObj(c -> (char)c)
+                    .sorted(Comparator.comparing((Character c) -> Math.abs(target - c))
+                            .thenComparing(Comparator.naturalOrder()))
+                    .map(String::valueOf)
+                    .collect(Collectors.joining())
+                    .toCharArray();
+        }
 
     // ==========================================================
     // CHALLENGE 6
