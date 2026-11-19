@@ -188,6 +188,11 @@ class CharArraySortChallengeTest {
         }
 
         @Test
+        void testThreeLettersSimplified() {
+            assertArrayEquals(chars("cba"), CharArraySortChallenge.sortDescendingSimplified(chars("acb")));
+        }
+
+        @Test
         void testLowercaseBeforeUppercase() {
             assertArrayEquals(chars("aA"), CharArraySortChallenge.sortDescending(chars("Aa")));
             assertArrayEquals(chars("aA"), CharArraySortChallenge.sortDescending(chars("aA")));

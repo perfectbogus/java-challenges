@@ -74,6 +74,17 @@ public class CharArraySortChallenge {
                 .toCharArray();
     }
 
+    public static char[] sortDescendingSimplified(char[] chars) {
+        char[] result = chars.clone();
+        Arrays.sort(result);
+        for (int i = 0, j = result.length - 1; i < j; i++, j--) {
+            char temp = result[i];
+            result[i] = result[j];
+            result[j] = temp;
+        }
+        return result;
+    }
+
     // ==========================================================
     // CHALLENGE 4
     // ==========================================================
