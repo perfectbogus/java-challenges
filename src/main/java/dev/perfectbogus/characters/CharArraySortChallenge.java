@@ -66,7 +66,12 @@ public class CharArraySortChallenge {
     //   ['a', 'A']       ->  ['a', 'A']
     //   ['x', 'x']       ->  ['x', 'x']
     public static char[] sortDescending(char[] chars) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new String(chars).chars()
+                .mapToObj(c -> (char)c)
+                .sorted(Comparator.reverseOrder())
+                .map(String::valueOf)
+                .collect(Collectors.joining())
+                .toCharArray();
     }
 
     // ==========================================================
