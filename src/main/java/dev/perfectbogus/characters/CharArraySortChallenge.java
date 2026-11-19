@@ -222,7 +222,9 @@ public class CharArraySortChallenge {
     //   ["z", "a"]             ->  ["a", "z"]
     //   []                     ->  []
     public static String[] sortByMiddleChar(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(words)
+                .sorted(Comparator.comparing((String s) -> s.charAt(s.length()/2)))
+                .toArray(String[]::new);
     }
 
     // ==========================================================
