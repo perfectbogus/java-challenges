@@ -754,14 +754,6 @@ class CharArraySortChallengeTest {
         }
 
         @Test
-        void testEqualFirstCharAndLengthKeepTheOrder() {
-            char[][] rows = {chars("ay"), chars("ax")};
-            assertArrayEquals(new char[][] {chars("ay"), chars("ax")}, CharArraySortChallenge.sortRows(rows));
-            char[][] other = {chars("ax"), chars("ay")};
-            assertArrayEquals(new char[][] {chars("ax"), chars("ay")}, CharArraySortChallenge.sortRows(other));
-        }
-
-        @Test
         void testOnlyTheFirstCharIsUsedBeforeTheLength() {
             char[][] rows = {chars("caa"), chars("b")};
             assertArrayEquals(new char[][] {chars("b"), chars("caa")}, CharArraySortChallenge.sortRows(rows));

@@ -240,6 +240,17 @@ public class CharArraySortChallenge {
     //   [['c', 'a', 'a'], ['b']]      ->  [['b'], ['c', 'a', 'a']]
     //   []                            ->  []
     public static char[][] sortRows(char[][] rows) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String[] data = new String[rows.length];
+        for (int i = 0; i < rows.length; i++) {
+            data[i] = new String(rows[i]);
+        }
+        Comparator<String> byFirst = Comparator.comparing(s -> s.charAt(0));
+        Comparator<String> byLength = Comparator.comparingInt(String::length);
+        Arrays.sort(data, byFirst.thenComparing(byLength));
+        char[][] result = new char[rows.length][];
+        for (int i = 0; i < rows.length; i++) {
+            result[i] = data[i].toCharArray();
+        }
+        return result;
     }
 }
