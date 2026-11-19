@@ -97,7 +97,13 @@ public class CharArraySortChallenge {
     //   ['d', 'c']            ->  ['c', 'd']
     //   []                    ->  []
     public static char[] vowelsFirst(char[] letters) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String custom = "aeioubcdfghjklmnpqrstvwxyz";
+        return new String(letters).chars()
+                .mapToObj(c -> (char)c)
+                .sorted(Comparator.comparing(custom::indexOf))
+                .map(String::valueOf)
+                .collect(Collectors.joining())
+                .toCharArray();
     }
 
     // ==========================================================
