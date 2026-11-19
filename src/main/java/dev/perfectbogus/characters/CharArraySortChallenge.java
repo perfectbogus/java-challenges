@@ -253,4 +253,10 @@ public class CharArraySortChallenge {
         }
         return result;
     }
+
+    public static char[][] sortRowsSimplified(char[][] rows) {
+        char[][] result = rows.clone();
+        Arrays.sort(result, Comparator.comparing((char[] row) -> row[0]).thenComparingInt(row -> row.length));
+        return result;
+    }
 }

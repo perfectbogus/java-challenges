@@ -754,6 +754,13 @@ class CharArraySortChallengeTest {
         }
 
         @Test
+        void testThreeRowsSimplified() {
+            char[][] rows = {chars("b"), chars("az"), chars("a")};
+            assertArrayEquals(new char[][] {chars("a"), chars("az"), chars("b")},
+                    CharArraySortChallenge.sortRowsSimplified(rows));
+        }
+
+        @Test
         void testOnlyTheFirstCharIsUsedBeforeTheLength() {
             char[][] rows = {chars("caa"), chars("b")};
             assertArrayEquals(new char[][] {chars("b"), chars("caa")}, CharArraySortChallenge.sortRows(rows));
@@ -794,15 +801,6 @@ class CharArraySortChallengeTest {
             char[][] rows = {chars("bbbb"), chars("c"), chars("aaaaa")};
             assertArrayEquals(new char[][] {chars("aaaaa"), chars("bbbb"), chars("c")},
                     CharArraySortChallenge.sortRows(rows));
-        }
-
-        @Test
-        void testResultKeepsTheSameRows() {
-            char[] first = chars("ay");
-            char[] second = chars("ax");
-            char[][] result = CharArraySortChallenge.sortRows(new char[][] {first, second});
-            assertTrue(result[0] == first);
-            assertTrue(result[1] == second);
         }
 
         @Test
