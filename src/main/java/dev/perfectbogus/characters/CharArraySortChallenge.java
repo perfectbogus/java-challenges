@@ -198,7 +198,10 @@ public class CharArraySortChallenge {
     //   ["Zb", "aa"]        ->  ["aa", "Zb"]
     //   []                  ->  []
     public static String[] sortWordsByLastChar(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(words)
+                .sorted(Comparator.comparing((String s) -> s.charAt(s.length() - 1))
+                        .thenComparing(Comparator.naturalOrder()))
+                .toArray(String[]::new);
     }
 
     // ==========================================================
