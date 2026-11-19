@@ -160,6 +160,17 @@ public class CharArraySortChallenge {
                 .toCharArray();
     }
 
+    public static char[] lowerBeforeUpperSimplified(char[] letters) {
+        Comparator<Character> byLower = Comparator.comparing(Character::isUpperCase);
+        Comparator<Character> byAlpha = Comparator.naturalOrder();
+        return new String(letters).chars()
+                .mapToObj(c -> (char)c)
+                .sorted(byLower.thenComparing(byAlpha))
+                .map(String::valueOf)
+                .collect(Collectors.joining())
+                .toCharArray();
+    }
+
     // ==========================================================
     // CHALLENGE 7
     // ==========================================================

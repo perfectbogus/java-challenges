@@ -425,6 +425,11 @@ class CharArraySortChallengeTest {
         }
 
         @Test
+        void testMixedSimplified() {
+            assertArrayEquals(chars("abAB"), CharArraySortChallenge.lowerBeforeUpperSimplified(chars("bAaB")));
+        }
+
+        @Test
         void testTwoLetters() {
             assertArrayEquals(chars("yZ"), CharArraySortChallenge.lowerBeforeUpper(chars("Zy")));
         }
