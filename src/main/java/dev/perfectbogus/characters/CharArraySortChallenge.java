@@ -139,7 +139,25 @@ public class CharArraySortChallenge {
     //   ['C', 'B']            ->  ['B', 'C']
     //   []                    ->  []
     public static char[] lowerBeforeUpper(char[] letters) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Character> byLowerCase = ( a, b) -> {
+            if (Character.isLowerCase(a) && Character.isLowerCase(b)) {
+                return Character.compare(a, b);
+            } else if (Character.isUpperCase(a) && Character.isUpperCase(b)) {
+                return Character.compare(a, b);
+            } else if (Character.isLowerCase(a) && !Character.isLowerCase(b)) {
+                return -1;
+            } else if (!Character.isLowerCase(a) && Character.isLowerCase(b)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        };
+        return new String(letters).chars()
+                .mapToObj(c -> (char)c)
+                .sorted(byLowerCase)
+                .map(String::valueOf)
+                .collect(Collectors.joining())
+                .toCharArray();
     }
 
     // ==========================================================
