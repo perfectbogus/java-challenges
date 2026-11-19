@@ -183,7 +183,13 @@ public class CharArraySortChallenge {
     //   (['a', 'b'], 0)       ->  []
     //   (['q'], 1)            ->  ['q']
     public static char[] topLargest(char[] chars, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return new String(chars).chars()
+                .mapToObj(c -> (char)c)
+                .sorted(Comparator.reverseOrder())
+                .limit(k)
+                .map(String::valueOf)
+                .collect(Collectors.joining())
+                .toCharArray();
     }
 
     // ==========================================================
