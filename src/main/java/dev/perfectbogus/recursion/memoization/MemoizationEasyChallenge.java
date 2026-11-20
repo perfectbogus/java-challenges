@@ -1,5 +1,7 @@
 package dev.perfectbogus.recursion.memoization;
 
+import java.util.Arrays;
+
 public class MemoizationEasyChallenge {
 
     // Solve every challenge with recursion and memoization. The big tests are too slow for a plain recursion.
@@ -16,7 +18,20 @@ public class MemoizationEasyChallenge {
     //   10  ->  55
     //   20  ->  6765
     public static long fibonacci(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[] memo = new long[n + 1];
+        Arrays.fill(memo, -1);
+        return helperFib(n, memo);
+    }
+
+    private static long helperFib(int n, long[] memo) {
+        if (n <= 1) return n;
+
+        if (memo[n] != -1) {
+            return memo[n];
+        }
+
+        memo[n] = helperFib(n - 1, memo) + helperFib(n - 2, memo);
+        return memo[n];
     }
 
     // ==========================================================
