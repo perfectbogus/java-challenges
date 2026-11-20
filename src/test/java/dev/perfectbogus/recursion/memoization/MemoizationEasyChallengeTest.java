@@ -368,6 +368,11 @@ class MemoizationEasyChallengeTest {
         }
 
         @Test
+        void testZeroZeroArrays() {
+            assertEquals(1L, MemoizationEasyChallenge.binomialArray(0, 0));
+        }
+
+        @Test
         void testChooseNone() {
             assertEquals(1L, MemoizationEasyChallenge.binomial(5, 0));
             assertEquals(1L, MemoizationEasyChallenge.binomial(60, 0));

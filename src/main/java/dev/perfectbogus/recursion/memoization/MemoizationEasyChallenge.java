@@ -179,11 +179,26 @@ public class MemoizationEasyChallenge {
     private static long helperBinomial(int n, int k, Map<String, Long> memo) {
         if (k == 0 || n == k) return 1;
 
-        final String key = String.valueOf(n) + k;
+        final String key = n + "," + k;
         if (memo.containsKey(key)) return memo.get(key);
 
         long result = helperBinomial(n - 1, k - 1, memo) + helperBinomial(n - 1, k, memo);
         memo.put(key, result);
+        return result;
+    }
+
+    public static long binomialArray(int n, int k) {
+        long[][] memo = new long[n + 1][k + 1];
+        return helperBinomialArray(n, k, memo);
+    }
+
+    public static long helperBinomialArray(int n, int k, long[][] memo) {
+        if (k == 0 || n == k) return 1;
+
+        if (memo[n][k] != 0) return memo[n][k];
+
+        long result = helperBinomialArray(n - 1, k - 1, memo) + helperBinomialArray(n - 1, k, memo);
+        memo[n][k] = result;
         return result;
     }
 
