@@ -1,6 +1,8 @@
 package dev.perfectbogus.recursion.memoization;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MemoizationEasyChallenge {
 
@@ -46,7 +48,18 @@ public class MemoizationEasyChallenge {
     //   2  ->  2   (1+1, 2)
     //   5  ->  8
     public static long climbStairs(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Long> memo = new HashMap<>();
+        return helperClimb(n, memo);
+    }
+
+    private static long helperClimb(int n, Map<Integer, Long> memo) {
+        if (n == 0 || n == 1) return 1;
+
+        if (memo.containsKey(n)) return memo.get(n);
+
+        long result = helperClimb(n - 1, memo) + helperClimb(n - 2, memo);
+        memo.put(n, result);
+        return result;
     }
 
     // ==========================================================
