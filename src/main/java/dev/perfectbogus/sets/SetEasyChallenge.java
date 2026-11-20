@@ -18,6 +18,10 @@ public class SetEasyChallenge {
     //   [4, -4]             ->  2
     //   []                  ->  0
     public static int countDistinct(int[] nums) {
+        return (int) Arrays.stream(nums).distinct().count();
+    }
+
+    public static int countDistinctExtended(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int i : nums) {
             set.add(i);
