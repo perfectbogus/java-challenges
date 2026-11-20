@@ -262,7 +262,22 @@ public class MemoizationEasyChallenge {
     //   13  ->  2   (4 + 9)
     //   7   ->  4   (4 + 1 + 1 + 1)
     public static int minSquares(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] memo = new int[n + 1];
+        Arrays.fill(memo, -1);
+        return helperSquares(n, memo);
+    }
+
+    private static int helperSquares(int n, int[] memo) {
+        if (n == 0) return 0;
+
+        if (memo[n] != -1) return memo[n];
+
+        int best = Integer.MAX_VALUE;
+        for (int i = 1; i * i <= n; i++) {
+            best = Math.min(best, 1 + helperSquares(n - i * i, memo));
+        }
+        memo[n] = best;
+        return best;
     }
 
     // ==========================================================
