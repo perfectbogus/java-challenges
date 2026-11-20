@@ -1,8 +1,6 @@
 package dev.perfectbogus.sets;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SetEasyChallenge {
@@ -62,7 +60,7 @@ public class SetEasyChallenge {
     //   ([], [1])               ->  {}
     public static Set<Integer> commonElements(int[] a, int[] b) {
         Set<Integer> res = new HashSet<>(Arrays.stream(a).boxed().toList());
-        res.retainAll(Arrays.stream(b).boxed().toList());
+        res.retainAll(new HashSet<>(Arrays.stream(b).boxed().toList()));
         return res;
     }
 
@@ -78,7 +76,14 @@ public class SetEasyChallenge {
     //   "Zed"                ->  ["zed"]
     //   ""                   ->  []
     public static String[] sortedUniqueWords(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return new String[0];
+
+        String[] split = text.split(" ");
+        Set<String> res = new TreeSet<>();
+        for (String w : split) {
+            res.add(w.toLowerCase());
+        }
+        return res.stream().toArray(String[]::new);
     }
 
     // ==========================================================
