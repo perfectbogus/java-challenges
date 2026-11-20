@@ -443,6 +443,11 @@ class MemoizationEasyChallengeTest {
         }
 
         @Test
+        void testZeroArray() {
+            assertEquals(1L, MemoizationEasyChallenge.catalanArray(0));
+        }
+
+        @Test
         void testOne() {
             assertEquals(1L, MemoizationEasyChallenge.catalan(1));
         }
@@ -456,6 +461,17 @@ class MemoizationEasyChallengeTest {
             assertEquals(132L, MemoizationEasyChallenge.catalan(6));
             assertEquals(429L, MemoizationEasyChallenge.catalan(7));
             assertEquals(1430L, MemoizationEasyChallenge.catalan(8));
+        }
+
+        @Test
+        void testSmallNumbersArray() {
+            assertEquals(2L, MemoizationEasyChallenge.catalanArray(2));
+            assertEquals(5L, MemoizationEasyChallenge.catalanArray(3));
+            assertEquals(14L, MemoizationEasyChallenge.catalanArray(4));
+            assertEquals(42L, MemoizationEasyChallenge.catalanArray(5));
+            assertEquals(132L, MemoizationEasyChallenge.catalanArray(6));
+            assertEquals(429L, MemoizationEasyChallenge.catalanArray(7));
+            assertEquals(1430L, MemoizationEasyChallenge.catalanArray(8));
         }
 
         @Test

@@ -232,6 +232,24 @@ public class MemoizationEasyChallenge {
         return sum;
     }
 
+    public static long catalanArray(int n) {
+        long[] memo = new long[n + 1];
+        return helperCatalanArray(n, memo);
+    }
+
+    private static long helperCatalanArray(int n, long[] memo) {
+        if (n == 0) return 1;
+
+        if (memo[n] != 0) return memo[n];
+
+        long result = 0;
+        for (int i = 0; i < n; i++) {
+            result += helperCatalanArray(i, memo) * helperCatalanArray(n - 1 - i, memo);
+        }
+        memo[n] = result;
+        return result;
+    }
+
     // ==========================================================
     // CHALLENGE 8
     // ==========================================================
