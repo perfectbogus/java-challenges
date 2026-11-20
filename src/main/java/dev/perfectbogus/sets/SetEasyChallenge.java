@@ -106,7 +106,10 @@ public class SetEasyChallenge {
     //   ([1, 2], [1, 2, 3])     ->  {}
     //   ([], [1, 2])            ->  {}
     public static Set<Integer> onlyInFirst(int[] a, int[] b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> setA = new HashSet<>(Arrays.stream(a).boxed().toList());
+        Set<Integer> setB = new HashSet<>(Arrays.stream(b).boxed().toList());
+        setA.removeAll(setB);
+        return setA;
     }
 
     // ==========================================================
