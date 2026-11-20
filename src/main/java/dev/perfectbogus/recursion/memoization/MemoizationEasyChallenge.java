@@ -172,7 +172,19 @@ public class MemoizationEasyChallenge {
     //   (5, 0)  ->  1
     //   (5, 5)  ->  1
     public static long binomial(int n, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Long> memo = new HashMap<>();
+        return helperBinomial(n, k, memo);
+    }
+
+    private static long helperBinomial(int n, int k, Map<String, Long> memo) {
+        if (k == 0 || n == k) return 1;
+
+        final String key = String.valueOf(n) + k;
+        if (memo.containsKey(key)) return memo.get(key);
+
+        long result = helperBinomial(n - 1, k - 1, memo) + helperBinomial(n - 1, k, memo);
+        memo.put(key, result);
+        return result;
     }
 
     // ==========================================================
