@@ -145,7 +145,11 @@ public class SetEasyChallenge {
     //   [5, 5]           ->  5
     //   []               ->  -1
     public static int firstRepeated(int[] nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> set = new HashSet<>();
+        for (int i : nums) {
+            if (!set.add(i)) return i;
+        }
+        return -1;
     }
 
     // ==========================================================
