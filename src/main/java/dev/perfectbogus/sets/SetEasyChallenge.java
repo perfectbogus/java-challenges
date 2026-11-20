@@ -61,7 +61,9 @@ public class SetEasyChallenge {
     //   ([1, 2], [3, 4])        ->  {}
     //   ([], [1])               ->  {}
     public static Set<Integer> commonElements(int[] a, int[] b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> res = new HashSet<>(Arrays.stream(a).boxed().toList());
+        res.retainAll(Arrays.stream(b).boxed().toList());
+        return res;
     }
 
     // ==========================================================
