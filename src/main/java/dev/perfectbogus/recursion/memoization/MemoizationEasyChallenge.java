@@ -101,7 +101,19 @@ public class MemoizationEasyChallenge {
     //   2  ->  3   ("00", "01", "10")
     //   5  ->  13
     public static long countWithoutConsecutiveOnes(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Long> memo = new HashMap<>();
+        return helperCount(n, memo);
+    }
+
+    private static long helperCount(int n, Map<Integer, Long> memo) {
+        if (n == 0) return 1;
+        if (n == 1) return 2;
+
+        if (memo.containsKey(n)) return memo.get(n);
+
+        long result = helperCount(n - 1, memo) + helperCount(n - 2, memo);
+        memo.put(n, result);
+        return result;
     }
 
     // ==========================================================
