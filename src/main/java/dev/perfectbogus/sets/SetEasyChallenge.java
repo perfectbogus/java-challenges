@@ -180,7 +180,12 @@ public class SetEasyChallenge {
     //   ([1, 4], [1, 2, 3])  ->  false
     //   ([], [])             ->  true
     public static boolean isSubset(int[] small, int[] big) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> setSmall = new HashSet<>(Arrays.stream(small).boxed().toList());
+        Set<Integer> setBig = new HashSet<>(Arrays.stream(big).boxed().toList());
+        for (Integer i : setSmall) {
+            if (!setBig.contains(i)) return false;
+        }
+        return true;
     }
 
     // ==========================================================
