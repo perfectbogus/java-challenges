@@ -124,7 +124,13 @@ public class SetEasyChallenge {
     //   "aab"                                  ->  every letter from 'c' to 'z'
     //   ""                                     ->  all the 26 letters
     public static Set<Character> missingLetters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Character> set = new HashSet<>(text.chars().mapToObj(c -> (char)c).toList());
+        String abc = "abcdefghijklmnopqrstuvwxyz";
+        Set<Character> notAppear = new HashSet<>();
+        for (char c : abc.toCharArray()) {
+            if (!set.contains(c)) notAppear.add(c);
+        }
+        return notAppear;
     }
 
     // ==========================================================
