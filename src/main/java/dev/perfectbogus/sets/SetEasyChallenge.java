@@ -1,6 +1,9 @@
 package dev.perfectbogus.sets;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class SetEasyChallenge {
 
@@ -15,7 +18,11 @@ public class SetEasyChallenge {
     //   [4, -4]             ->  2
     //   []                  ->  0
     public static int countDistinct(int[] nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> set = new HashSet<>();
+        for (int i : nums) {
+            set.add(i);
+        }
+        return set.size();
     }
 
     // ==========================================================
