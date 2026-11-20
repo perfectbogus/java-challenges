@@ -41,7 +41,13 @@ public class SetEasyChallenge {
     //   ["x"]            ->  false
     //   []               ->  false
     public static boolean hasDuplicates(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<String> set = new HashSet<>();
+        for (String w : words) {
+            if (!set.add(w)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // ==========================================================

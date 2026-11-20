@@ -43,6 +43,11 @@ class SetEasyChallengeTest {
         }
 
         @Test
+        void testRepeatedValuesExtended() {
+            assertEquals(3, SetEasyChallenge.countDistinctExtended(new int[] {1, 2, 2, 3, 3, 3}));
+        }
+
+        @Test
         void testAllTheSame() {
             assertEquals(1, SetEasyChallenge.countDistinct(new int[] {5, 5, 5}));
         }
