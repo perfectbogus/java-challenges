@@ -214,7 +214,22 @@ public class MemoizationEasyChallenge {
     //   4  ->  14
     //   5  ->  42
     public static long catalan(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Long> memo = new HashMap<>();
+        return helperCatalan(n, memo);
+    }
+
+    private static long helperCatalan(int n, Map<Integer, Long> memo) {
+        if (n == 0) return 1;
+
+        if (memo.containsKey(n)) return memo.get(n);
+
+        long sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += helperCatalan(i, memo) * helperCatalan(n - 1 - i, memo);
+        }
+
+        memo.put(n, sum);
+        return sum;
     }
 
     // ==========================================================
