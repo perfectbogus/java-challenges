@@ -2,6 +2,7 @@ package dev.perfectbogus.recursion.memoization;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 
 public class MemoizationEasyChallenge {
@@ -129,7 +130,17 @@ public class MemoizationEasyChallenge {
     //   (3, 7)  ->  28
     //   (4, 4)  ->  20
     public static long gridPaths(int rows, int cols) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[][] memo = new long[rows + 1][cols + 1];
+        return helperGrid(rows, cols, memo);
+    }
+
+    private static long helperGrid(int rows, int cols, long[][] memo) {
+        if (rows == 1 || cols == 1) return 1;
+
+        if (memo[rows][cols] != 0) return memo[rows][cols];
+
+        memo[rows][cols] = helperGrid(rows - 1, cols, memo) + helperGrid(rows, cols - 1, memo);
+        return memo[rows][cols];
     }
 
     // ==========================================================
