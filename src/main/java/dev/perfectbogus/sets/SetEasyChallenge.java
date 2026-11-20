@@ -200,6 +200,18 @@ public class SetEasyChallenge {
     //   ([1], [2])           ->  {1, 2}
     //   ([], [5])            ->  {5}
     public static Set<Integer> symmetricDifference(int[] a, int[] b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Integer> setA = new HashSet<>(Arrays.stream(a).boxed().toList());
+        Set<Integer> setB = new HashSet<>(Arrays.stream(b).boxed().toList());
+        Set<Integer> res = new HashSet<>();
+
+        for (Integer i : setA) {
+            if (!setB.contains(i)) res.add(i);
+        }
+
+        for (Integer i : setB) {
+            if (!setA.contains(i)) res.add(i);
+        }
+
+        return res;
     }
 }
