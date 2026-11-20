@@ -143,6 +143,22 @@ public class MemoizationEasyChallenge {
         return memo[rows][cols];
     }
 
+    public static long gridPathsString(int rows, int cols) {
+        Map<String, Long> memo = new HashMap<>();
+        return helperGridString(rows, cols, memo);
+    }
+
+    private static long helperGridString(int rows, int cols, Map<String, Long> memo) {
+        if (rows == 1 || cols == 1) return 1;
+
+        final String key = String.valueOf(rows) + cols;
+        if (memo.containsKey(key)) return memo.get(key);
+
+        long result = helperGridString(rows - 1, cols, memo) + helperGridString(rows, cols - 1, memo);
+        memo.put(key, result);
+        return result;
+    }
+
     // ==========================================================
     // CHALLENGE 6
     // ==========================================================

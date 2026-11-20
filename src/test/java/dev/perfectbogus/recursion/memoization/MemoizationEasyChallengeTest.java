@@ -290,6 +290,11 @@ class MemoizationEasyChallengeTest {
         }
 
         @Test
+        void testOneCellString() {
+            assertEquals(1L, MemoizationEasyChallenge.gridPathsString(1, 1));
+        }
+
+        @Test
         void testOneRowOrOneColumn() {
             assertEquals(1L, MemoizationEasyChallenge.gridPaths(1, 5));
             assertEquals(1L, MemoizationEasyChallenge.gridPaths(5, 1));
