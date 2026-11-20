@@ -164,7 +164,8 @@ public class SetEasyChallenge {
     //   ["x", "x", "x"]            ->  ["x"]
     //   []                         ->  []
     public static String[] uniqueInOrder(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<String> set = new LinkedHashSet<>(Arrays.stream(words).toList());
+        return set.toArray(String[]::new);
     }
 
     // ==========================================================
