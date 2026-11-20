@@ -282,6 +282,11 @@ class SetEasyChallengeTest {
         }
 
         @Test
+        void testRepeatedWordWithDifferentCaseSimplified() {
+            assertArrayEquals(new String[] {"hello", "world"}, SetEasyChallenge.sortedUniqueWordsSimplified("Hello hello World"));
+        }
+
+        @Test
         void testOrderIgnoresTheCase() {
             assertArrayEquals(new String[] {"a", "b"}, SetEasyChallenge.sortedUniqueWords("b A a"));
         }

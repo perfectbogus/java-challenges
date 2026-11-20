@@ -86,6 +86,15 @@ public class SetEasyChallenge {
         return res.stream().toArray(String[]::new);
     }
 
+    public static String[] sortedUniqueWordsSimplified(String text) {
+        if (text.isEmpty()) return new String[0];
+        Set<String> res = new TreeSet<>();
+        for (String s : text.split(" ")) {
+            res.add(s.toLowerCase());
+        }
+        return res.toArray(String[]::new);
+    }
+
     // ==========================================================
     // CHALLENGE 5
     // ==========================================================
