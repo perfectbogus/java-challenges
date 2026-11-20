@@ -74,7 +74,19 @@ public class MemoizationEasyChallenge {
     //   4  ->  4
     //   7  ->  24
     public static long tribonacci(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Long> memo = new HashMap<>();
+        return helperTri(n, memo);
+    }
+
+    private static long helperTri(int n, Map<Integer, Long> memo) {
+        if (n == 0) return 0;
+        if (n == 1 || n == 2) return 1;
+
+        if (memo.containsKey(n)) return memo.get(n);
+
+        long result = helperTri(n - 1, memo) + helperTri(n - 2, memo) + helperTri(n - 3, memo);
+        memo.put(n, result);
+        return result;
     }
 
     // ==========================================================
