@@ -360,7 +360,27 @@ public class MemoizationEasyChallenge {
     //   ([1, 3, 4], 6)   ->  2    (3 + 3)
     //   ([5], 0)         ->  0
     public static int minCoins(int[] coins, int amount) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[] memo = new int[amount + 1];
+        Arrays.fill(memo, -2);
+        return helperMinCoins(coins, amount, memo);
+    }
+
+    private static int helperMinCoins(int[] coins, int amount, int[] memo) {
+        if (amount == 0) return 0;
+
+        if (memo[amount] != -2) return memo[amount];
+
+        int best = -1;
+        for (int coin : coins) {
+            if (coin <= amount) {
+                int rest = helperMinCoins(coins, amount - coin, memo);
+                if (rest != -1 && (best == -1 || rest + 1 < best)) {
+                    best = rest + 1;
+                }
+            }
+        }
+        memo[amount] = best;
+        return best;
     }
 
     // ==========================================================
