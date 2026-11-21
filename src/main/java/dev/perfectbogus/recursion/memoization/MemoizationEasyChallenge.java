@@ -462,7 +462,22 @@ public class MemoizationEasyChallenge {
     //   [[true]]                                                              ->  0
     //   [[false]]                                                             ->  1
     public static long gridPathsWithBlocks(boolean[][] blocked) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[][] memo = new long[blocked.length][blocked[0].length];
+        for (long[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+        return blockedPaths(blocked, blocked.length - 1, blocked[0].length - 1, memo);
+    }
+
+    private static long blockedPaths(boolean[][] blocked, int r, int c, long[][] memo) {
+        if (r < 0 || c < 0 || blocked[r][c]) return 0;
+
+        if (r == 0 && c == 0) return 1;
+
+        if (memo[r][c] != -1) return memo[r][c];
+
+        memo[r][c] = blockedPaths(blocked, r - 1, c, memo) + blockedPaths(blocked, r, c - 1, memo);
+        return memo[r][c];
     }
 
     // ==========================================================
