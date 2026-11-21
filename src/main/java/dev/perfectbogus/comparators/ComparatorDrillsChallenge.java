@@ -37,7 +37,7 @@ public class ComparatorDrillsChallenge {
     //   ["bb", "aa", "c"]   ->  ["bb", "aa", "c"]
     //   ["aa", "b", "cc"]   ->  ["aa", "cc", "b"]
     public static List<String> sortLongestFirst(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().sorted(Comparator.comparing(String::length, Comparator.reverseOrder())).toList();
     }
 
     // ==========================================================
