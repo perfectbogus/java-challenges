@@ -310,7 +310,22 @@ public class MemoizationEasyChallenge {
     //   [5]              ->  5
     //   []               ->  0
     public static long houseRobber(int[] values) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[] memo = new long[values.length];
+        Arrays.fill(memo, -1);
+        return helperHouseRobber(values, 0, memo);
+    }
+
+    private static long helperHouseRobber(int[] values, int i, long[] memo) {
+        if (i >= values.length) return 0;
+
+        if (memo[i] != -1) return memo[i];
+
+        memo[i] = Math.max(
+                values[i] + helperHouseRobber(values, i + 2, memo),
+                helperHouseRobber(values, i + 1, memo)
+        );
+
+        return memo[i];
     }
 
     // ==========================================================
