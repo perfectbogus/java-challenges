@@ -80,7 +80,7 @@ public class ComparatorDrillsChallenge {
     //   [-3, -2, -1, 0]    ->  [-2, 0, -3, -1]
     //   [5]                ->  [5]
     public static List<Integer> sortEvenBeforeOdd(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().sorted(Comparator.comparing((Integer i) -> i % 2 != 0).thenComparing(Comparator.naturalOrder())).toList();
     }
 
     // ==========================================================
