@@ -429,7 +429,23 @@ public class MemoizationEasyChallenge {
     //   ([], 0)                    ->  true
     //   ([5], 0)                   ->  true
     public static boolean canMakeSum(int[] nums, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Boolean> memo = new HashMap<>();
+        return subset(nums, 0, target, memo);
+    }
+
+    private static boolean subset(int[] nums, int i, int remaining, Map<String, Boolean> memo) {
+        if (remaining == 0) return true;
+
+        if (i == nums.length || remaining < 0) {
+            return false;
+        }
+
+        String key = i + "," + remaining;
+        if (memo.containsKey(key)) return memo.get(key);
+
+        boolean result = subset(nums, i + 1, remaining - nums[i], memo) || subset(nums, i + 1, remaining, memo);
+        memo.put(key, result);
+        return result;
     }
 
     // ==========================================================
