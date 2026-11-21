@@ -493,7 +493,24 @@ public class MemoizationEasyChallenge {
     //   [[1], [2, 3]]                           ->  4
     //   [[0], [0, 0]]                           ->  0
     public static int maxTrianglePath(int[][] triangle) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[][] memo = new int[triangle.length][];
+        for (int i = 0; i < triangle.length; i++) {
+            memo[i] = new int[triangle[i].length];
+            Arrays.fill(memo[i], -1);
+        }
+        return bestTriangle(triangle, 0, 0, memo);
+    }
+
+    private static int bestTriangle(int[][] triangle, int row, int col, int[][] memo) {
+        if (row == triangle.length) return 0;
+
+        if (memo[row][col] != -1) return memo[row][col];
+
+        memo[row][col] = triangle[row][col] + Math.max(
+                bestTriangle(triangle, row + 1, col, memo),
+                bestTriangle(triangle, row + 1, col + 1, memo)
+        );
+        return memo[row][col];
     }
 
     // ==========================================================
