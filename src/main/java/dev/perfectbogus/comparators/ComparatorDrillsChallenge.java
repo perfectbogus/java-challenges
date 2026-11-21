@@ -3,6 +3,7 @@ package dev.perfectbogus.comparators;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class ComparatorDrillsChallenge {
 
@@ -65,7 +66,7 @@ public class ComparatorDrillsChallenge {
     //   [5, -5]            ->  [-5, 5]
     //   [0, -1]            ->  [0, -1]
     public static List<Integer> sortByAbsoluteValue(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream().sorted(Comparator.<Integer>comparingInt(Math::abs).thenComparingInt(i -> i)).toList();
     }
 
     // ==========================================================
