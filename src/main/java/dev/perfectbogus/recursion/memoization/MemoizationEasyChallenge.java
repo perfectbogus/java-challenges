@@ -526,6 +526,23 @@ public class MemoizationEasyChallenge {
     //   ("", "abc")              ->  0
     //   ("AGGTAB", "GXTXAYB")    ->  4   ("GTAB")
     public static int longestCommonSubsequence(String a, String b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int[][] memo = new int[a.length() + 1][b.length() + 1];
+        for (int[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+        return lcs(a, b, 0, 0, memo);
+    }
+
+    private static int lcs(String a, String b, int i, int j, int[][] memo) {
+        if (i == a.length() || j == b.length()) return 0;
+
+        if (memo[i][j] != -1) return memo[i][j];
+
+        if (a.charAt(i) == b.charAt(j)) {
+            memo[i][j] = 1 + lcs(a, b, i + 1, j + 1, memo);
+        } else {
+            memo[i][j] = Math.max(lcs(a, b, i + 1, j, memo), lcs(a, b, i, j + 1, memo));
+        }
+        return memo[i][j];
     }
 }
