@@ -396,7 +396,24 @@ public class MemoizationEasyChallenge {
     //   (5, [2])     ->  0
     //   (0, [3])     ->  1
     public static long countWays(int n, int[] steps) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        long[] memo = new long[n + 1];
+        Arrays.fill(memo, -1);
+        return ways(n, steps, memo);
+    }
+
+    private static long ways(int n, int[] steps, long[] memo) {
+        if (n == 0) return 1;
+
+        if (memo[n] != -1) return memo[n];
+
+        long total = 0;
+        for (int step : steps) {
+            if (step <= n) {
+                total += ways(n - step, steps, memo);
+            }
+        }
+        memo[n] = total;
+        return total;
     }
 
     // ==========================================================
