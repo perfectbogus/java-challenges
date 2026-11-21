@@ -533,6 +533,14 @@ class MemoizationEasyChallengeTest {
         }
 
         @Test
+        void testSmallNumbersMap() {
+            assertEquals(1, MemoizationEasyChallenge.minSquaresMap(1));
+            assertEquals(2, MemoizationEasyChallenge.minSquaresMap(2));
+            assertEquals(3, MemoizationEasyChallenge.minSquaresMap(3));
+            assertEquals(1, MemoizationEasyChallenge.minSquaresMap(4));
+        }
+
+        @Test
         void testSeven() {
             assertEquals(4, MemoizationEasyChallenge.minSquares(7));
         }

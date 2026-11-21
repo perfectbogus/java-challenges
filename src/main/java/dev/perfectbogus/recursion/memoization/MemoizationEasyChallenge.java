@@ -280,6 +280,24 @@ public class MemoizationEasyChallenge {
         return best;
     }
 
+    public static int minSquaresMap(int n) {
+        Map<Integer, Integer> memo = new HashMap<>();
+        return helperMinSquareMap(n, memo);
+    }
+
+    public static int helperMinSquareMap(int n, Map<Integer, Integer> memo) {
+        if (n == 0) return 0;
+
+        if (memo.containsKey(n)) return memo.get(n);
+
+        int best = Integer.MAX_VALUE;
+        for (int i = 1; i * i <= n; i++) {
+            best = Math.min(best, 1 + helperMinSquareMap(n - i * i, memo));
+        }
+        memo.put(n, best);
+        return best;
+    }
+
     // ==========================================================
     // CHALLENGE 9
     // ==========================================================
