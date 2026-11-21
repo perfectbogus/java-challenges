@@ -51,7 +51,7 @@ public class ComparatorDrillsChallenge {
     //   ["Banana", "apple", "Cherry"]      ->  ["apple", "Banana", "Cherry"]
     //   ["a", "A"]                         ->  ["a", "A"]
     public static List<String> sortIgnoringCase(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().sorted(String.CASE_INSENSITIVE_ORDER).toList();
     }
 
     // ==========================================================
