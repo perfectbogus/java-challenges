@@ -23,7 +23,7 @@ public class ComparatorDrillsChallenge {
     //   ["bb", "aa", "c"]   ->  ["c", "bb", "aa"]
     //   []                  ->  []
     public static List<String> sortByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().sorted(Comparator.comparingInt(String::length)).toList();
     }
 
     // ==========================================================
