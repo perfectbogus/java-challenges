@@ -622,6 +622,13 @@ class MemoizationEasyChallengeTest {
         }
 
         @Test
+        void testTwoHousesMap() {
+            assertEquals(5L, MemoizationEasyChallenge.houseRobberMap(new int[] {5, 3}));
+            assertEquals(5L, MemoizationEasyChallenge.houseRobberMap(new int[] {3, 5}));
+            assertEquals(5L, MemoizationEasyChallenge.houseRobberMap(new int[] {5, 5}));
+        }
+
+        @Test
         void testFiveHouses() {
             assertEquals(12L, MemoizationEasyChallenge.houseRobber(new int[] {2, 7, 9, 3, 1}));
         }

@@ -328,6 +328,25 @@ public class MemoizationEasyChallenge {
         return memo[i];
     }
 
+    public static long houseRobberMap(int[] values) {
+        Map<Integer, Long> memo = new HashMap<>();
+        return helperHouseRobberMap(values, 0, memo);
+    }
+
+    private static long helperHouseRobberMap(int[] values, int i, Map<Integer, Long> memo) {
+        if (i >= values.length) return 0;
+
+        if (memo.containsKey(i)) return memo.get(i);
+
+        long result = Math.max(
+                values[i] + helperHouseRobberMap(values, i + 2, memo),
+                helperHouseRobberMap(values, i + 1, memo)
+        );
+        memo.put(i, result);
+
+        return result;
+    }
+
     // ==========================================================
     // CHALLENGE 10
     // ==========================================================
