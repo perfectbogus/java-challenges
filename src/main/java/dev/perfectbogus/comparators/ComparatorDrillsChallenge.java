@@ -172,7 +172,9 @@ public class ComparatorDrillsChallenge {
     //   ["x y", "a b"]         ->  ["x y", "a b"]
     //   ["a", ""]              ->  ["", "a"]
     public static List<String> sortByWordCount(List<String> sentences) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return sentences.stream()
+                .sorted(Comparator.comparing(s -> s.isEmpty() ? 0 : s.split(" ").length))
+                .toList();
     }
 
     // ==========================================================
