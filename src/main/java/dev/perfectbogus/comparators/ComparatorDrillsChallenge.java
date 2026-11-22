@@ -211,7 +211,9 @@ public class ComparatorDrillsChallenge {
     //   ["B", "a"]        ->  ["B", "a"]
     //   []                ->  []
     public static List<String> sortNullsLast(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream()
+                .sorted(Comparator.nullsLast(Comparator.naturalOrder()))
+                .toList();
     }
 
     // ==========================================================
