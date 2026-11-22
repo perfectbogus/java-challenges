@@ -227,7 +227,12 @@ public class ComparatorDrillsChallenge {
     //   {"x": 5}                  ->  ["x"]
     //   {}                        ->  []
     public static List<String> sortKeysByValue(Map<String, Integer> scores) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Map.Entry<String, Integer>> byValue = Map.Entry.<String, Integer>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Integer>> byAlpha = Map.Entry.comparingByKey();
+        return scores.entrySet().stream()
+                .sorted(byValue.thenComparing(byAlpha))
+                .map(e -> e.getKey())
+                .toList();
     }
 
     // ==========================================================
