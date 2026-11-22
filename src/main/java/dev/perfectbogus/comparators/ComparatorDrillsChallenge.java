@@ -1,5 +1,6 @@
 package dev.perfectbogus.comparators;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -126,7 +127,24 @@ public class ComparatorDrillsChallenge {
     //   [ana 70]                 ->  ana 70
     //   [cy 85, ana 85]          ->  ana 85
     public static Student topStudent(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Collections.min(
+                students,
+                Comparator.comparing(Student::grade, Comparator.reverseOrder()).thenComparing(Student::grade)
+        );
+    }
+
+    public static Student topStudentSimplified(List<Student> students) {
+        return students.stream()
+                .min(Comparator.comparing(Student::grade, Comparator.reverseOrder()).thenComparing(Student::name))
+                .get();
+    }
+
+    public static Student topStudentExtended(List<Student> students) {
+        List<Student> sorted = students.stream()
+                .sorted(Comparator.comparing(Student::grade, Comparator.reverseOrder())
+                        .thenComparing(Student::name))
+                .toList();
+        return sorted.get(0);
     }
 
     // ==========================================================
