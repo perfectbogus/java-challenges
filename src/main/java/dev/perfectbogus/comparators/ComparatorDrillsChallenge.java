@@ -112,7 +112,7 @@ public class ComparatorDrillsChallenge {
     //   compare(ana 80, ana 80)  ->  0
     //   sorting [bob 90, ana 80, cy 80] with it gives [ana 80, cy 80, bob 90]
     public static Comparator<Student> byGradeThenName() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Comparator.comparingInt(Student::grade).thenComparing(Student::name);
     }
 
     // ==========================================================
