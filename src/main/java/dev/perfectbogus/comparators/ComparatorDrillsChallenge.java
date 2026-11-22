@@ -158,7 +158,7 @@ public class ComparatorDrillsChallenge {
     //   ["xb", "ya", "za"]  ->  ["ya", "za", "xb"]
     //   ["bb", "ab"]        ->  ["bb", "ab"]
     public static List<String> sortByLastLetter(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().sorted(Comparator.comparing(s -> s.charAt(s.length() - 1))).toList();
     }
 
     // ==========================================================
