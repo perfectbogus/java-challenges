@@ -1,9 +1,6 @@
 package dev.perfectbogus.comparators;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 public class ComparatorDrillsChallenge {
@@ -188,7 +185,18 @@ public class ComparatorDrillsChallenge {
     //   [5, 14]            ->  [5, 14]
     //   [0, 10]            ->  [0, 10]
     public static List<Integer> sortByDigitSum(List<Integer> nums) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return nums.stream()
+                .sorted(Comparator.comparingInt((Integer i) -> digitSum(i)).thenComparing(Comparator.naturalOrder()))
+                .toList();
+    }
+
+    private static int digitSum(int n ) {
+        int sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
     }
 
     // ==========================================================
