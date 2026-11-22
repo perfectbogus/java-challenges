@@ -94,7 +94,9 @@ public class ComparatorDrillsChallenge {
     //   [cy 80, ana 80]          ->  [ana 80, cy 80]
     //   []                       ->  []
     public static List<Student> sortByGradeDescending(List<Student> students) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return students.stream()
+                .sorted(Comparator.comparing(Student::grade, Comparator.reverseOrder()).thenComparing(Student::name))
+                .toList();
     }
 
     // ==========================================================
