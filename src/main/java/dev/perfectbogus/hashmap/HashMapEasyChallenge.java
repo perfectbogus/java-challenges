@@ -208,7 +208,17 @@ public class HashMapEasyChallenge {
     //   "aabb"          ->  -1
     //   ""              ->  -1
     public static int firstUniqueIndex(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Character> read = new HashSet<>();
+        LinkedHashMap<Character, Integer> map = new LinkedHashMap<>();
+        for (int i = 0; i < text.length(); i++) {
+            if (read.add(text.charAt(i))) {
+                map.put(text.charAt(i), i);
+            } else {
+                map.remove(text.charAt(i));
+            }
+        }
+        if (map.isEmpty()) return -1;
+        return map.pollFirstEntry().getValue();
     }
 
     // ==========================================================
