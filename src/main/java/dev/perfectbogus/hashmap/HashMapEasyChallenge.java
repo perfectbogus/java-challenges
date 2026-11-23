@@ -284,7 +284,24 @@ public class HashMapEasyChallenge {
     //   ("aa", "ab")  ->  false
     //   ("", "")      ->  true
     public static boolean canBuildNote(String note, String magazine) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Character, Integer> have = magazine.chars().mapToObj(c -> (char)c).collect(Collectors.toMap(
+                c -> c,
+                c -> 1,
+                Integer::sum
+        ));
+        Map<Character, Integer> needed = note.chars().mapToObj(c -> (char)c).collect(Collectors.toMap(
+                c -> c,
+                c -> 1,
+                Integer::sum
+        ));
+
+        for (Map.Entry<Character, Integer> entry : needed.entrySet()) {
+            if (!have.containsKey(entry.getKey())) return false;
+            int available = have.get(entry.getKey());
+            int charNeeded = entry.getValue();
+            if (charNeeded > available) return false;
+        }
+        return true;
     }
 
     // ==========================================================
