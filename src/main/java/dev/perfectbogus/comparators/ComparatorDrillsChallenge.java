@@ -257,7 +257,9 @@ public class ComparatorDrillsChallenge {
     public static List<String> sortByFrequency(List<String> words) {
         Map<String, Long> map = words.stream().collect(Collectors.groupingBy(
                 Function.identity(),
-                Collectors.counting()));
+                Collectors.counting())
+        );
+
         Comparator<Map.Entry<String, Long>> byValueDesc = Map.Entry.<String, Long>comparingByValue().reversed();
         Comparator<Map.Entry<String, Long>> byAlpha = Map.Entry.comparingByKey();
         return map.entrySet().stream()
@@ -278,6 +280,11 @@ public class ComparatorDrillsChallenge {
     //   (["bb", "a"], comparing by length)           ->  false
     //   (["b", "a"], reverse natural order)          ->  true
     public static boolean isSorted(List<String> words, Comparator<String> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> copy = new ArrayList<>(words);
+        List<String> sorted = copy.stream().sorted(comparator).toList();
+        for (int i = 0; i < sorted.size(); i++) {
+            if (!words.get(i).equals(sorted.get(i))) return false;
+        }
+        return true;
     }
 }
