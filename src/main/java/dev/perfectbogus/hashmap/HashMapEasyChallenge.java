@@ -138,6 +138,23 @@ public class HashMapEasyChallenge {
         return true;
     }
 
+    public static boolean areAnagramsSimplified(String a, String b) {
+        if (a.length() != b.length()) return false;
+
+        Map<Character, Integer> mapA = helperMap(a);
+        Map<Character, Integer> mapB = helperMap(b);
+
+        return mapA.equals(mapB);
+    }
+
+    private static Map<Character, Integer> helperMap(String s) {
+        return s.chars().mapToObj(c -> (char)c).collect(Collectors.toMap(
+                Function.identity(),
+                c -> 1,
+                Integer::sum
+        ));
+    }
+
     // ==========================================================
     // CHALLENGE 7
     // ==========================================================
