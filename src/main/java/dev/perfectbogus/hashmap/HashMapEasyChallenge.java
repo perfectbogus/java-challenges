@@ -93,7 +93,10 @@ public class HashMapEasyChallenge {
     //   {x=0}       ->  {0=x}
     //   {}          ->  {}
     public static Map<Integer, String> invert(Map<String, Integer> map) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.entrySet().stream().collect(Collectors.toMap(
+                e -> e.getValue(),
+                e -> e.getKey()
+        ));
     }
 
     // ==========================================================
