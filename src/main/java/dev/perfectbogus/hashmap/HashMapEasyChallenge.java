@@ -256,7 +256,11 @@ public class HashMapEasyChallenge {
     //   ["a:1", "A:2"]                ->  {a=1, A=2}
     //   []                            ->  {}
     public static Map<String, Integer> totalsByName(String[] entries) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(entries).collect(Collectors.toMap(
+                s -> s.split(":")[0],
+                s -> Integer.valueOf(s.split(":")[1]),
+                Integer::sum
+        ));
     }
 
     // ==========================================================
