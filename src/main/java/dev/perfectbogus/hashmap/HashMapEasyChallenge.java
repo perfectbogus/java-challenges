@@ -232,7 +232,10 @@ public class HashMapEasyChallenge {
     //   ({a=2}, 2)            ->  {a=2}
     //   ({}, 0)               ->  {}
     public static Map<String, Integer> removeBelow(Map<String, Integer> map, int min) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return map.entrySet().stream().filter(e -> e.getValue() >= min).collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue
+        ));
     }
 
     // ==========================================================
