@@ -191,7 +191,9 @@ public class HashMapEasyChallenge {
     //   ["x", "x"]              ->  {1=[x, x]}
     //   []                      ->  {}
     public static Map<Integer, List<String>> groupByLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream().collect(Collectors.groupingBy(
+                String::length
+        ));
     }
 
     // ==========================================================
