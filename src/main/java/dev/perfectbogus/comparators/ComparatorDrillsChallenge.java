@@ -235,6 +235,13 @@ public class ComparatorDrillsChallenge {
                 .toList();
     }
 
+    public static List<String> sortKeysByValueSimplified(Map<String, Integer> scores) {
+        return scores.keySet().stream()
+                .sorted(Comparator.comparing((String k) -> scores.get(k)).reversed()
+                        .thenComparing(Comparator.naturalOrder()))
+                .toList();
+    }
+
     // ==========================================================
     // CHALLENGE 14
     // ==========================================================
