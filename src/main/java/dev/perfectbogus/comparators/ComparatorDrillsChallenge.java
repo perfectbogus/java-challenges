@@ -2,6 +2,7 @@ package dev.perfectbogus.comparators;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ComparatorDrillsChallenge {
 
@@ -254,7 +255,15 @@ public class ComparatorDrillsChallenge {
     //   ["y", "x"]                      ->  ["x", "y"]
     //   []                              ->  []
     public static List<String> sortByFrequency(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Long> map = words.stream().collect(Collectors.groupingBy(
+                Function.identity(),
+                Collectors.counting()));
+        Comparator<Map.Entry<String, Long>> byValueDesc = Map.Entry.<String, Long>comparingByValue().reversed();
+        Comparator<Map.Entry<String, Long>> byAlpha = Map.Entry.comparingByKey();
+        return map.entrySet().stream()
+                .sorted(byValueDesc.thenComparing(byAlpha))
+                .map(e -> e.getKey())
+                .toList();
     }
 
     // ==========================================================
