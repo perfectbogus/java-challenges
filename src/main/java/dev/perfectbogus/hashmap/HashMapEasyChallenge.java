@@ -75,7 +75,11 @@ public class HashMapEasyChallenge {
     //   ({x=1}, {})               ->  {x=1}
     //   ({}, {})                  ->  {}
     public static Map<String, Integer> mergeMaps(Map<String, Integer> a, Map<String, Integer> b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Integer> merge = new HashMap<>(a);
+        for (Map.Entry<String, Integer> entry : b.entrySet()) {
+            merge.merge(entry.getKey(), entry.getValue(), Integer::sum);
+        }
+        return merge;
     }
 
     // ==========================================================
