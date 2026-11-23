@@ -859,6 +859,17 @@ class HashMapEasyChallengeTest {
         }
 
         @Test
+        void testRepeatedNameExtended() {
+            assertEquals(map("ana", 17, "bob", 5),
+                    HashMapEasyChallenge.totalsByNameExtended(new String[] {"ana:10", "bob:5", "ana:7"}));
+        }
+
+        @Test
+        void testZeroAmountExtended() {
+            assertEquals(map("x", 0), HashMapEasyChallenge.totalsByNameExtended(new String[] {"x:0"}));
+        }
+
+        @Test
         void testTheCaseMatters() {
             assertEquals(map("a", 1, "A", 2), HashMapEasyChallenge.totalsByName(new String[] {"a:1", "A:2"}));
         }

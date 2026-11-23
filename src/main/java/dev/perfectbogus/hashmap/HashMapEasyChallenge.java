@@ -263,6 +263,15 @@ public class HashMapEasyChallenge {
         ));
     }
 
+    public static Map<String, Integer> totalsByNameExtended(String[] entries) {
+        Map<String, Integer> totals = new HashMap<>();
+        for (String entry : entries) {
+            int colon = entry.indexOf(":");
+            totals.merge(entry.substring(0, colon), Integer.parseInt(entry.substring(colon + 1)), Integer::sum);
+        }
+        return totals;
+    }
+
     // ==========================================================
     // CHALLENGE 12
     // ==========================================================
