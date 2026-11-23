@@ -770,6 +770,16 @@ class HashMapEasyChallengeTest {
         }
 
         @Test
+        void testSomeEntriesAreRemovedSimplified() {
+            assertEquals(map("b", 5, "c", 3), HashMapEasyChallenge.removeBelowSimplified(map("a", 1, "b", 5, "c", 3), 3));
+        }
+
+        @Test
+        void testEverythingIsRemovedSimplified() {
+            assertEquals(map(), HashMapEasyChallenge.removeBelowSimplified(map("a", 1), 2));
+        }
+
+        @Test
         void testValueEqualToMinIsKept() {
             assertEquals(map("a", 2), HashMapEasyChallenge.removeBelow(map("a", 2), 2));
         }

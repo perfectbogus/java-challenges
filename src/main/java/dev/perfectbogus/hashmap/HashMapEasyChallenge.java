@@ -238,6 +238,12 @@ public class HashMapEasyChallenge {
         ));
     }
 
+    public static Map<String, Integer> removeBelowSimplified(Map<String, Integer> map, int min) {
+        Map<String, Integer> result = new HashMap<>(map);
+        result.values().removeIf(v -> v < min);
+        return result;
+    }
+
     // ==========================================================
     // CHALLENGE 11
     // ==========================================================
