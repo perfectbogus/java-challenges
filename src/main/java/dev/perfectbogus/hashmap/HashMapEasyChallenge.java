@@ -1,7 +1,10 @@
 package dev.perfectbogus.hashmap;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class HashMapEasyChallenge {
 
@@ -17,7 +20,11 @@ public class HashMapEasyChallenge {
     //   ["A", "a"]       ->  {A=1, a=1}
     //   []               ->  {}
     public static Map<String, Integer> countWords(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(words).collect(Collectors.toMap(
+                Function.identity(),
+                e -> 1,
+                Integer::sum
+        ));
     }
 
     // ==========================================================
