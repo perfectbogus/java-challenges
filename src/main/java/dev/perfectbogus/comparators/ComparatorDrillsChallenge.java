@@ -287,4 +287,11 @@ public class ComparatorDrillsChallenge {
         }
         return true;
     }
+
+    public static boolean isSortedSimplified(List<String> words, Comparator<String> comparator) {
+        for (int i = 1; i < words.size(); i++) {
+            if (comparator.compare(words.get(i - 1), words.get(i)) > 0) return false;
+        }
+        return true;
+    }
 }
