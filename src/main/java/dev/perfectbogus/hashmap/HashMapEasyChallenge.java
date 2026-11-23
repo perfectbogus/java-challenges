@@ -1,8 +1,6 @@
 package dev.perfectbogus.hashmap;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -58,7 +56,12 @@ public class HashMapEasyChallenge {
     //   ["x", "y", "y", "x"]       ->  "x"
     //   ["z", "y", "y"]            ->  "y"
     public static String mostFrequent(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<Map.Entry<String, Integer>> byValue = Map.Entry.comparingByValue();
+        Comparator<Map.Entry<String, Integer>> byKeyDesc = Map.Entry.<String, Integer>comparingByKey().reversed();
+        return Arrays.stream(words).collect(Collectors.toMap(
+                Function.identity(),
+                s -> 1,
+                Integer::sum)).entrySet().stream().max(byValue.thenComparing(byKeyDesc)).get().getKey();
     }
 
     // ==========================================================
