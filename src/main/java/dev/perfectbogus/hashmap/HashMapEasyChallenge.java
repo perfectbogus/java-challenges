@@ -118,7 +118,24 @@ public class HashMapEasyChallenge {
     //   ("aab", "abb")        ->  false
     //   ("", "")              ->  true
     public static boolean areAnagrams(String a, String b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (a.length() != b.length()) return false;
+
+        Map<Character, Integer> mapA = a.chars().mapToObj(c ->(char)c).collect(Collectors.toMap(
+                Function.identity(),
+                s -> 1,
+                Integer::sum
+        ));
+        Map<Character, Integer> mapB = b.chars().mapToObj(c ->(char)c).collect(Collectors.toMap(
+                Function.identity(),
+                s -> 1,
+                Integer::sum
+        ));
+
+        for (Map.Entry<Character, Integer> entry : mapA.entrySet()) {
+            if (mapB.get(entry.getKey()) == null) return false;
+            if (!mapB.get(entry.getKey()).equals(entry.getValue())) return false;
+        }
+        return true;
     }
 
     // ==========================================================
