@@ -99,6 +99,13 @@ public class HashMapEasyChallenge {
         ));
     }
 
+    public static Map<Integer, String> invertReduced(Map<String, Integer> map) {
+        return map.entrySet().stream().collect(Collectors.toMap(
+                Map.Entry::getValue,
+                Map.Entry::getKey
+        ));
+    }
+
     // ==========================================================
     // CHALLENGE 6
     // ==========================================================
