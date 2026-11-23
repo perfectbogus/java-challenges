@@ -39,7 +39,11 @@ public class HashMapEasyChallenge {
     //   "aA"     ->  {a=1, A=1}
     //   ""       ->  {}
     public static Map<Character, Integer> countLetters(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().mapToObj(c ->(char)c).collect(Collectors.toMap(
+                Function.identity(),
+                c -> 1,
+                Integer::sum
+        ));
     }
 
     // ==========================================================
