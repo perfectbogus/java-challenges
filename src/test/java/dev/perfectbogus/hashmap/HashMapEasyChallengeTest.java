@@ -436,6 +436,16 @@ class HashMapEasyChallengeTest {
         }
 
         @Test
+        void testAnagramsSimplified() {
+            assertTrue(HashMapEasyChallenge.areAnagramsSimplified("listen", "silent"));
+        }
+
+        @Test
+        void testDifferentLettersSimplified() {
+            assertFalse(HashMapEasyChallenge.areAnagramsSimplified("abc", "abd"));
+        }
+
+        @Test
         void testDifferentLetters() {
             assertFalse(HashMapEasyChallenge.areAnagrams("abc", "abd"));
         }

@@ -168,7 +168,16 @@ public class HashMapEasyChallenge {
     //   ([3, 3], 6)                       ->  [0, 1]
     //   ([-1, -2, -3, -4, -5], -8)        ->  [2, 4]
     public static int[] twoSum(int[] nums, int target) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Integer> seen = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int diff = target - nums[i];
+            if (seen.containsKey(diff)) {
+                return new int[] {seen.get(diff), i};
+            } else {
+                seen.put(nums[i], i);
+            }
+        }
+        throw new IllegalStateException();
     }
 
     // ==========================================================
