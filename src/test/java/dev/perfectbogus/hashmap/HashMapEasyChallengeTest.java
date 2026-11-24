@@ -1125,6 +1125,11 @@ class HashMapEasyChallengeTest {
         }
 
         @Test
+        void testRepeatedCharacterUnperform() {
+            assertEquals(charMap('a', 0, 'b', 1, 'c', 2), HashMapEasyChallenge.firstIndexOfEachCharUnperform("abca"));
+        }
+
+        @Test
         void testRepeatedAtTheStart() {
             assertEquals(charMap('a', 0, 'b', 2), HashMapEasyChallenge.firstIndexOfEachChar("aab"));
         }

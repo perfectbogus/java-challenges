@@ -3,6 +3,7 @@ package dev.perfectbogus.hashmap;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class HashMapEasyChallenge {
 
@@ -349,6 +350,14 @@ public class HashMapEasyChallenge {
     //   "zz"    ->  {z=0}
     //   ""      ->  {}
     public static Map<Character, Integer> firstIndexOfEachChar(String text) {
+        return IntStream.range(0, text.length()).boxed().collect(Collectors.toMap(
+                i -> text.charAt(i),
+                i -> i,
+                (existing, incoming) -> existing
+        ));
+    }
+
+    public static Map<Character, Integer> firstIndexOfEachCharUnperform(String text) {
         return text.chars().mapToObj(c -> (char)c).collect(Collectors.toMap(
                 c -> c,
                 c -> text.indexOf(c),
