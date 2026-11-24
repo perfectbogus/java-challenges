@@ -325,6 +325,19 @@ public class HashMapEasyChallenge {
         return copy;
     }
 
+    public static Map<String, Integer> updateStockExtended(Map<String, Integer> stock, String[] sold) {
+        Map<String, Integer> result = new HashMap<>(stock);
+        for (String item : sold) {
+            int left = result.get(item) - 1;
+            if (left == 0) {
+                result.remove(item);
+            } else {
+                result.put(item, left);
+            }
+        }
+        return result;
+    }
+
     // ==========================================================
     // CHALLENGE 14
     // ==========================================================
@@ -336,7 +349,11 @@ public class HashMapEasyChallenge {
     //   "zz"    ->  {z=0}
     //   ""      ->  {}
     public static Map<Character, Integer> firstIndexOfEachChar(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return text.chars().mapToObj(c -> (char)c).collect(Collectors.toMap(
+                c -> c,
+                c -> text.indexOf(c),
+                (existing, incoming) -> existing
+        ));
     }
 
     // ==========================================================

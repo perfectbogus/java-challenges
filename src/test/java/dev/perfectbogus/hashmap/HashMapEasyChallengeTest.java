@@ -1024,6 +1024,17 @@ class HashMapEasyChallengeTest {
         }
 
         @Test
+        void testSeveralSalesExtended() {
+            assertEquals(map("apple", 1), HashMapEasyChallenge.updateStockExtended(map("apple", 3, "pear", 1),
+                    new String[] {"apple", "pear", "apple"}));
+        }
+
+        @Test
+        void testNoSalesExtended() {
+            assertEquals(map("a", 1), HashMapEasyChallenge.updateStockExtended(map("a", 1), new String[] {}));
+        }
+
+        @Test
         void testOneSale() {
             assertEquals(map("a", 2, "b", 1),
                     HashMapEasyChallenge.updateStock(map("a", 2, "b", 2), new String[] {"b"}));
