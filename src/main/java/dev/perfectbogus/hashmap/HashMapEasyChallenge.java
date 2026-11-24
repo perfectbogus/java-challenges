@@ -320,8 +320,8 @@ public class HashMapEasyChallenge {
         Map<String, Integer> copy = new HashMap<>(stock);
         for (String s : sold) {
             copy.computeIfPresent(s, (a, b) -> b - 1);
+            copy.remove(s, 0);
         }
-        copy.values().removeIf(v -> v == 0);
         return copy;
     }
 
