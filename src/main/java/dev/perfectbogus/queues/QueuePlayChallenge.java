@@ -104,7 +104,16 @@ public class QueuePlayChallenge {
     // ([3, 3, 1], 2)        -> [1, 3]
     // ([9], 1)              -> [9]
     public static int[] kSmallest(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for (int n : nums) {
+            heap.add(n);
+        }
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            int p = heap.poll();
+            result[i] = p;
+        }
+        return result;
     }
 
     // ==========================================================
