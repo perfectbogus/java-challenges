@@ -1,6 +1,9 @@
 package dev.perfectbogus.queues;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 15 easy challenges about queues: Queue, Deque, ArrayDeque and PriorityQueue.
@@ -21,7 +24,25 @@ public class QueuePlayChallenge {
     // ["serve", "arrive x", "serve"]                                                -> [x]
     // []                                                                            -> []
     public static List<String> serveInOrder(String[] commands) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> served = new ArrayList<>();
+        Queue<String> q = new ArrayDeque<>();
+        for (String s : commands) {
+            String[] split = s.split(" ");
+            switch (split[0]) {
+                case "arrive":
+                    q.add(split[1]);
+                    break;
+                case "serve":
+                    String serve = q.poll();
+                    if (serve != null) {
+                        served.add(serve);
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown command");
+            }
+        }
+        return served;
     }
 
     // ==========================================================
