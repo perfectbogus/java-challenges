@@ -127,7 +127,7 @@ public class ComparatorDrillsChallenge {
     public static Student topStudent(List<Student> students) {
         return Collections.min(
                 students,
-                Comparator.comparing(Student::grade, Comparator.reverseOrder()).thenComparing(Student::grade)
+                Comparator.comparing(Student::grade, Comparator.reverseOrder()).thenComparing(Student::name)
         );
     }
 
