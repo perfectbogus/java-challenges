@@ -74,7 +74,24 @@ public class QueuePlayChallenge {
     // "a(b)c"   -> true
     // ""        -> true
     public static boolean areBracketsBalanced(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Character, Character> map = Map.of('}', '{', ')', '(', ']', '[');
+        ArrayDeque<Character> q = new ArrayDeque<>();
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            switch (c) {
+                case '[':
+                case '(':
+                case '{':
+                    q.add(c);
+                    break;
+                case ']':
+                case '}':
+                case ')':
+                    if (!map.get(c).equals(q.pollLast())) return false;
+
+            }
+        }
+        return q.isEmpty();
     }
 
     // ==========================================================
