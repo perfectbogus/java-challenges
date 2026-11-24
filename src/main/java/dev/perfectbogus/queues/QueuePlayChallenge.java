@@ -1,9 +1,6 @@
 package dev.perfectbogus.queues;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * 15 easy challenges about queues: Queue, Deque, ArrayDeque and PriorityQueue.
@@ -56,7 +53,12 @@ public class QueuePlayChallenge {
     // "one"          -> "one"
     // ""             -> ""
     public static String reverseWords(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        ArrayDeque<String> q = new ArrayDeque<>(Arrays.asList(sentence.split(" ")));
+        List<String> result = new ArrayList<>();
+        while (!q.isEmpty()) {
+            result.add(q.pollLast());
+        }
+        return String.join(" ", result);
     }
 
     // ==========================================================
