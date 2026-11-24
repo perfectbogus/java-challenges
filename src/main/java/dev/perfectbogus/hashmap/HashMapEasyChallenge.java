@@ -377,6 +377,12 @@ public class HashMapEasyChallenge {
     //   ([1, 2, 3, 1, 2, 3], 2)     ->  false
     //   ([1, 1], 0)                 ->  false
     public static boolean containsNearbyDuplicate(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<Integer, Integer> lastIndex = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            Integer previous = lastIndex.get(nums[i]);
+            if (previous != null && i - previous <= k) return true;
+            lastIndex.put(nums[i], i);
+        }
+        return false;
     }
 }
