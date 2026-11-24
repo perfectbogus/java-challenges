@@ -317,7 +317,12 @@ public class HashMapEasyChallenge {
     //   ({a=2, b=2}, [b])                          ->  {a=2, b=1}
     //   ({a=1}, [a])                               ->  {}
     public static Map<String, Integer> updateStock(Map<String, Integer> stock, String[] sold) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Integer> copy = new HashMap<>(stock);
+        for (String s : sold) {
+            copy.computeIfPresent(s, (a, b) -> b - 1);
+        }
+        copy.values().removeIf(v -> v == 0);
+        return copy;
     }
 
     // ==========================================================
