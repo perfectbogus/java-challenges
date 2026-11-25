@@ -126,7 +126,12 @@ public class QueuePlayChallenge {
     // ([3, 2, 3, 1, 2, 4, 5, 5, 6], 4)  -> 4
     // ([7], 1)                          -> 7
     public static int kthLargest(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int n : nums) {
+            minHeap.add(n);
+            if (minHeap.size() > k) minHeap.poll();
+        }
+        return minHeap.peek();
     }
 
     // ==========================================================
