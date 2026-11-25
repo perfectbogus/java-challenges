@@ -256,7 +256,18 @@ public class QueuePlayChallenge {
     // ([5, -1, 2], 1)       -> [5, -1, 2]
     // ([1, 1, 1], 10)       -> [1, 2, 3]
     public static int[] movingSum(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Queue<Integer> window = new ArrayDeque<>();
+        int[] result = new int[nums.length];
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            window.add(nums[i]);
+            sum += nums[i];
+            if (window.size() > k) {
+                sum -= window.poll();
+            }
+            result[i] = sum;
+        }
+        return result;
     }
 
     // ==========================================================
