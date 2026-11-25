@@ -1,6 +1,7 @@
 package dev.perfectbogus.queues;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 15 easy challenges about queues: Queue, Deque, ArrayDeque and PriorityQueue.
@@ -359,7 +360,20 @@ public class QueuePlayChallenge {
     // ([b, a, c], 2)           -> [a, b]
     // ([z, y, y], 1)           -> [y]
     public static String[] topKFrequent(String[] words, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Map<String, Integer> counts = Arrays.stream(words).collect(Collectors.toMap(
+                s -> s,
+                s -> 1,
+                Integer::sum
+        ));
+        PriorityQueue<Map.Entry<String, Integer>> heap = new PriorityQueue<>(
+                Map.Entry.<String, Integer>comparingByValue().reversed().thenComparing(Map.Entry.comparingByKey())
+        );
+        heap.addAll(counts.entrySet());
+        String[] result = new String[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = heap.poll().getKey();
+        }
+        return result;
     }
 
     // ==========================================================
