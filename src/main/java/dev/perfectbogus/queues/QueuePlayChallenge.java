@@ -218,6 +218,24 @@ public class QueuePlayChallenge {
     // ["a:1", "b:2", "c:1", "d:2"] -> [b, d, a, c]
     // []                           -> []
     public static List<String> runTasks(String[] tasks) {
+        PriorityQueue<Object[]> heap = new PriorityQueue<>((x, y) -> {
+            int byPriority = Integer.compare((int) y[1], (int) x[1]);
+            return byPriority != 0 ? byPriority : Integer.compare((int) x[2], (int) y[2]);
+        });
+
+        for (int i = 0; i < tasks.length; i++) {
+            int colon = tasks[i].indexOf(":");
+            heap.add(new Object[] {tasks[i].substring(0, colon), Integer.parseInt(tasks[i].substring(colon + 1)), i});
+        }
+
+        List<String> order = new ArrayList<>();
+        while (!heap.isEmpty()) {
+            order.add((String) heap.poll()[0]);
+        }
+        return order;
+    }
+
+    public static List<String> runTasksWrong(String[] tasks) {
         PriorityQueue<String> q = new PriorityQueue<>(Comparator.comparing(s -> Integer.parseInt(s.split(":")[1]), Comparator.reverseOrder()));
         q.addAll(Arrays.asList(tasks));
         List<String> result = new ArrayList<>();
