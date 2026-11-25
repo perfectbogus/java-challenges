@@ -305,7 +305,18 @@ public class QueuePlayChallenge {
     // 1  -> [1]
     // 0  -> []
     public static List<String> binaryNumbers(int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> result = new ArrayList<>();
+        Queue<String> queue = new ArrayDeque<>();
+        if (n > 0) {
+            queue.add("1");
+        }
+        while (result.size() < n) {
+            String current = queue.poll();
+            result.add(current);
+            queue.add(current + "0");
+            queue.add(current + "1");
+        }
+        return result;
     }
 
     // ==========================================================
