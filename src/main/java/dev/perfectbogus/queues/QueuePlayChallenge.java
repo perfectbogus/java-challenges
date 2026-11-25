@@ -218,7 +218,13 @@ public class QueuePlayChallenge {
     // ["a:1", "b:2", "c:1", "d:2"] -> [b, d, a, c]
     // []                           -> []
     public static List<String> runTasks(String[] tasks) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PriorityQueue<String> q = new PriorityQueue<>(Comparator.comparing(s -> Integer.parseInt(s.split(":")[1]), Comparator.reverseOrder()));
+        q.addAll(Arrays.asList(tasks));
+        List<String> result = new ArrayList<>();
+        while (!q.isEmpty()) {
+            result.add(q.poll().split(":")[0]);
+        }
+        return result;
     }
 
     // ==========================================================
