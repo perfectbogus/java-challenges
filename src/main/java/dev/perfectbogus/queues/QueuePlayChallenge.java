@@ -192,7 +192,18 @@ public class QueuePlayChallenge {
     // ([a, b, c, d, e], 1)  -> e      (a, b, c and d leave)
     // ([x], 5)              -> x
     public static String lastSurvivor(String[] names, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<String> d = new ArrayDeque<>(Arrays.asList(names));
+        int count = 0;
+        while (d.size() > 1) {
+            String move = d.pollFirst();
+            count++;
+            if (count < k) {
+                d.addLast(move);
+            } else {
+                count = 0;
+            }
+        }
+        return d.poll();
     }
 
     // ==========================================================
