@@ -331,7 +331,21 @@ public class QueuePlayChallenge {
     // ([1, 2, 3], 4)        -> [3, 1, 2]
     // ([], 5)               -> []
     public static int[] rotateRight(int[] nums, int k) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<Integer> deque = new ArrayDeque<>();
+        for (int n : nums) {
+            deque.addLast(n);
+        }
+        if (nums.length > 0) {
+            for (int i = 0; i < k % nums.length; i++) {
+                deque.addFirst(deque.pollLast());
+            }
+        }
+        int[] result = new int[nums.length];
+        int i = 0;
+        for (int n : deque) {
+            result[i++] = n;
+        }
+        return result;
     }
 
     // ==========================================================
