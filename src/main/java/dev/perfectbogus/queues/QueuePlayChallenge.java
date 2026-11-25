@@ -169,7 +169,16 @@ public class QueuePlayChallenge {
     // "Aa"       -> false
     // ""         -> true
     public static boolean isPalindrome(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<Character> q = new ArrayDeque<>();
+        for (int i = 0; i < text.length(); i++) {
+            q.addLast(text.charAt(i));
+        }
+
+        while (q.size() > 1) {
+            if (!q.pollFirst().equals(q.pollLast())) return false;
+        }
+
+        return true;
     }
 
     // ==========================================================
