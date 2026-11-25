@@ -144,7 +144,18 @@ public class QueuePlayChallenge {
     // [[], [1], []]                   -> [1]
     // []                              -> []
     public static int[] mergeSortedArrays(int[][] arrays) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        for (int[] array : arrays) {
+            for (int num : array) {
+                q.add(num);
+            }
+        }
+        int[] result = new int[q.size()];
+        int i = 0;
+        while (!q.isEmpty()) {
+            result[i++] = q.poll();
+        }
+        return result;
     }
 
     // ==========================================================
