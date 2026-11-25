@@ -282,7 +282,17 @@ public class QueuePlayChallenge {
     // []            -> 0
     // [1, 1]        -> 2
     public static long minCostToConnect(int[] ropes) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PriorityQueue<Long> heap = new PriorityQueue<>();
+        for (int r : ropes) {
+            heap.add((long) r);
+        }
+        long cost = 0;
+        while (heap.size() > 1) {
+            long joined = heap.poll() + heap.poll();
+            cost += joined;
+            heap.add(joined);
+        }
+        return cost;
     }
 
     // ==========================================================
