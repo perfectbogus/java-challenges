@@ -1,8 +1,6 @@
 package dev.perfectbogus.sorting;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 record Employee(String name, String department, int age, double salary) {
 }
@@ -163,7 +161,10 @@ public class SortLabChallenge {
     //
     // ([ana(3000), bob(4000), cy(3500.5), dan(3000), eve(5000)], 4) -> [eve, bob, cy, ana]
     public static List<Employee> topEarners(List<Employee> employees, int n) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream()
+                .sorted(Comparator.comparing(Employee::salary, Comparator.reverseOrder()).thenComparing(Employee::name))
+                .limit(n)
+                .toList();
     }
 
     // ==========================================================

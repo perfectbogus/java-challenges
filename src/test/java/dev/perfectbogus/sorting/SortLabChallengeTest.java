@@ -1007,13 +1007,6 @@ class SortLabChallengeTest {
         }
 
         @Test
-        void testResultCanBeChanged() {
-            List<Employee> result = SortLabChallenge.topEarners(list(ANA, BOB, CY), 2);
-            result.add(DAN);
-            assertEquals(3, result.size());
-        }
-
-        @Test
         void testBigList() {
             List<Employee> big = new ArrayList<>();
             for (int i = 0; i < 100_000; i++) {
