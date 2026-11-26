@@ -54,7 +54,11 @@ public class SortLabChallenge {
     // [ana(Sales, 3000), bob(IT, 4000), cy(Sales, 3500.5), eve(IT, 5000)]
     //   -> [eve(IT, 5000), bob(IT, 4000), cy(Sales, 3500.5), ana(Sales, 3000)]
     public static List<Employee> sortByDepartmentThenSalary(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream()
+                .sorted(Comparator.comparing(Employee::department)
+                        .thenComparing(Employee::salary, Comparator.reverseOrder())
+                                .thenComparing(Employee::name))
+                .toList();
     }
 
     // ==========================================================
