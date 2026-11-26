@@ -178,7 +178,26 @@ public class SortLabChallenge {
     // ([c, a], [d, b], reverse order)                       -> [d, c, b, a]
     // ([a, C], [B, c], ignoring the case)                   -> [a, B, C, c]
     public static List<String> mergeSortedLists(List<String> a, List<String> b, Comparator<String> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        List<String> result = new ArrayList<>(a.size() + b.size());
+        int i = 0;
+        int j = 0;
+        while (i < a.size() && j < b.size()) {
+            if (comparator.compare(a.get(i), b.get(j)) <= 0) {
+                result.add(a.get(i++));
+            } else {
+                result.add(b.get(j++));
+            }
+        }
+
+        while (i < a.size()) {
+            result.add(a.get(i++));
+        }
+
+        while (j < b.size()) {
+            result.add(b.get(j++));
+        }
+
+        return result;
     }
 
     // ==========================================================
