@@ -124,7 +124,9 @@ public class SortLabChallenge {
     // [5, 2, 8, 1, 4, 3]       -> [2, 4, 8, 1, 3, 5]
     // [-3, -2, -1, 0, 1, 2]    -> [-2, 0, 2, -3, -1, 1]
     public static List<Integer> sortEvenBeforeOdd(List<Integer> numbers) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return numbers.stream()
+                .sorted(Comparator.comparing((Integer n) -> n % 2 != 0).thenComparing(Comparator.naturalOrder()))
+                .toList();
     }
 
     // ==========================================================
