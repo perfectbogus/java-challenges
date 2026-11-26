@@ -389,6 +389,16 @@ public class QueuePlayChallenge {
     // ["type a", "undo", "undo"]                -> ""
     // []                                        -> ""
     public static String applyEditor(String[] ops) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Deque<String> q = new ArrayDeque<>();
+        for (String op : ops) {
+            String[] split = op.split(" ");
+            String command = split[0];
+            if (command.equals("type")) {
+                q.add(split[1]);
+            } else if (command.equals("undo")) {
+                q.pollLast();
+            }
+        }
+        return String.join("", q);
     }
 }
