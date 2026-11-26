@@ -1,5 +1,6 @@
 package dev.perfectbogus.sorting;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -71,7 +72,9 @@ public class SortLabChallenge {
     // ([[3, 1], [1, 2], [2, 0]], 0) -> [[1, 2], [2, 0], [3, 1]]
     // ([[3, 1], [1, 2], [2, 0]], 1) -> [[2, 0], [3, 1], [1, 2]]
     public static int[][] sortRowsByColumn(int[][] rows, int column) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(rows)
+                .sorted(Comparator.comparingInt(row -> row[column]))
+                .toArray(int[][]::new);
     }
 
     // ==========================================================
