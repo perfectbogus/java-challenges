@@ -31,7 +31,7 @@ public class SortLabChallenge {
     //
     // [ana(3000), bob(4000.5), cy(4000.25)] -> [bob, cy, ana]
     public static List<Employee> sortBySalaryDescending(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().sorted(Comparator.comparingDouble(Employee::salary).reversed()).toList();
     }
 
     // ==========================================================
