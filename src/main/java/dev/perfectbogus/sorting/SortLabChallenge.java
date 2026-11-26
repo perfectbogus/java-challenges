@@ -151,7 +151,7 @@ public class SortLabChallenge {
     // [ana(30), bob(25), dan(40), eve(40)] -> dan
     // [ana(30), eve(30)]                   -> ana
     public static Employee oldest(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().max(Comparator.comparingInt(Employee::age)).get();
     }
 
     // ==========================================================
