@@ -237,6 +237,10 @@ public class SortLabChallenge {
     // [25/12/2020, 01/01/2021, 31/01/2020, 15/06/2020] -> [31/01/2020, 15/06/2020, 25/12/2020, 01/01/2021]
     // [02/03/2020, 01/04/2020, 03/02/2020]             -> [03/02/2020, 02/03/2020, 01/04/2020]
     public static List<String> sortDates(List<String> dates) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return dates.stream()
+                .sorted(Comparator.comparingInt((String s) -> Integer.parseInt(s.split("/")[2]))
+                        .thenComparingInt(s -> Integer.parseInt(s.split("/")[1]))
+                        .thenComparingInt(s -> Integer.parseInt(s.split("/")[0])))
+                .toList();
     }
 }
