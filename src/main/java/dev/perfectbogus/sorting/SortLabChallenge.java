@@ -209,7 +209,12 @@ public class SortLabChallenge {
     // ([bob(25), cy(25), ana(30)], by age)   -> true
     // ([ana(30), bob(25)], by age)           -> false
     public static boolean isSortedBy(List<Employee> employees, Comparator<Employee> comparator) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        for (int i = 1; i < employees.size(); i++) {
+            if (comparator.compare(employees.get(i - 1), employees.get(i)) > 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // ==========================================================
