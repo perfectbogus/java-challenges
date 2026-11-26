@@ -251,7 +251,8 @@ public class SortLabChallenge {
                 s -> {
                     String[] split = s.split("/");
                     return new int[] { Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])};
-                }
+                },
+                (existing, incoming) -> existing
         ));
         Comparator<String> byYear = Comparator.comparing(s -> map.get(s)[2]);
         Comparator<String> byMonth = Comparator.comparing(s -> map.get(s)[1]);
