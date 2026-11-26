@@ -137,7 +137,9 @@ public class SortLabChallenge {
     //
     // [bb, null, a, null, ccc, aa]  -> [null, null, a, aa, bb, ccc]
     public static List<String> sortNullsFirstThenLength(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream()
+                .sorted(Comparator.nullsFirst(Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder())))
+                .toList();
     }
 
     // ==========================================================
