@@ -225,7 +225,7 @@ public class SortLabChallenge {
     //
     // [ana(30), bob(25), cy(25), dan(40), eve(30)] -> [dan(40), ana(30), eve(30), bob(25), cy(25)]
     public static Comparator<Employee> byAgeDescendingThenName() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Comparator.comparing(Employee::age, Comparator.reverseOrder()).thenComparing(Employee::name);
     }
 
     // ==========================================================
