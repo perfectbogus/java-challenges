@@ -109,6 +109,12 @@ public class SortLabChallenge {
         return words.stream().sorted(byAlphaIgnore).toList();
     }
 
+    public static List<String> sortIgnoringCaseLowerFirstSimplified(List<String> words) {
+        Comparator<String> byAlphaIgnoreCase = String.CASE_INSENSITIVE_ORDER;
+        Comparator<String> byAlphaDesc = Comparator.reverseOrder();
+        return words.stream().sorted(byAlphaIgnoreCase.thenComparing(byAlphaDesc)).toList();
+    }
+
     // ==========================================================
     // CHALLENGE 8: sortEvenBeforeOdd
     // ==========================================================

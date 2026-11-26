@@ -596,6 +596,18 @@ class SortLabChallengeTest {
         }
 
         @Test
+        void testLettersSimplified() {
+            assertEquals(words("a", "A", "b", "B"),
+                    SortLabChallenge.sortIgnoringCaseLowerFirstSimplified(words("b", "A", "a", "B")));
+        }
+
+        @Test
+        void testWordsSimplified() {
+            assertEquals(words("apple", "apple", "Apple", "Banana", "cherry"),
+                    SortLabChallenge.sortIgnoringCaseLowerFirstSimplified(words("Banana", "apple", "Apple", "cherry", "apple")));
+        }
+
+        @Test
         void testEmpty() {
             assertEquals(words(), SortLabChallenge.sortIgnoringCaseLowerFirst(words()));
         }
