@@ -21,7 +21,7 @@ public class SortLabChallenge {
     //
     // [ana(30), bob(25), cy(25), dan(40)] -> [bob(25), cy(25), ana(30), dan(40)]
     public static List<Employee> sortByAge(List<Employee> employees) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return employees.stream().sorted(Comparator.comparingInt(Employee::age)).toList();
     }
 
     // ==========================================================

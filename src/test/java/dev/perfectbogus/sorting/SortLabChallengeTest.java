@@ -1365,6 +1365,6 @@ class SortLabChallengeTest {
             assertEquals(100_000, result.size());
             assertEquals("01/01/1000", result.get(0));
             assertEquals("12/08/1297", result.get(99_999));
-        }
+}
     }
 }
