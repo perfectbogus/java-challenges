@@ -1,6 +1,7 @@
 package dev.perfectbogus.sorting;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 record Employee(String name, String department, int age, double salary) {
 }
@@ -242,5 +243,19 @@ public class SortLabChallenge {
                         .thenComparingInt(s -> Integer.parseInt(s.split("/")[1]))
                         .thenComparingInt(s -> Integer.parseInt(s.split("/")[0])))
                 .toList();
+    }
+
+    public static List<String> sortDatesPre(List<String> dates) {
+        Map<String, int[]> map = dates.stream().collect(Collectors.toMap(
+                s -> s,
+                s -> {
+                    String[] split = s.split("/");
+                    return new int[] { Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2])};
+                }
+        ));
+        Comparator<String> byYear = Comparator.comparing(s -> map.get(s)[2]);
+        Comparator<String> byMonth = Comparator.comparing(s -> map.get(s)[1]);
+        Comparator<String> byDay = Comparator.comparing(s -> map.get(s)[0]);
+        return dates.stream().sorted(byYear.thenComparing(byMonth).thenComparing(byDay)).toList();
     }
 }

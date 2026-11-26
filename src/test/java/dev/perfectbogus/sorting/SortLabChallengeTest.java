@@ -1308,6 +1308,18 @@ class SortLabChallengeTest {
         }
 
         @Test
+        void testExampleOnePre() {
+            assertEquals(words("31/01/2020", "15/06/2020", "25/12/2020", "01/01/2021"),
+                    SortLabChallenge.sortDatesPre(words("25/12/2020", "01/01/2021", "31/01/2020", "15/06/2020")));
+        }
+
+        @Test
+        void testExampleTwoPre() {
+            assertEquals(words("03/02/2020", "02/03/2020", "01/04/2020"),
+                    SortLabChallenge.sortDatesPre(words("02/03/2020", "01/04/2020", "03/02/2020")));
+        }
+
+        @Test
         void testEmpty() {
             assertEquals(words(), SortLabChallenge.sortDates(words()));
         }
