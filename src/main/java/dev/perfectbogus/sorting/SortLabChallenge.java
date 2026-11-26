@@ -99,7 +99,14 @@ public class SortLabChallenge {
     // [b, A, a, B]                              -> [a, A, b, B]
     // [Banana, apple, Apple, cherry, apple]     -> [apple, apple, Apple, Banana, cherry]
     public static List<String> sortIgnoringCaseLowerFirst(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Comparator<String> byAlphaIgnore = (a, b) -> {
+            int res = a.compareToIgnoreCase(b);
+            if (res == 0) {
+                return b.compareTo(a);
+            }
+            return res;
+        };
+        return words.stream().sorted(byAlphaIgnore).toList();
     }
 
     // ==========================================================
