@@ -85,7 +85,9 @@ public class SortLabChallenge {
     // [bb, a, ccc, aa, b] -> [a, b, aa, bb, ccc]
     // [b, A, a, B]        -> [A, B, a, b]
     public static List<String> sortByLengthThenAlphabetical(List<String> words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return words.stream()
+                .sorted(Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder()))
+                .toList();
     }
 
     // ==========================================================
