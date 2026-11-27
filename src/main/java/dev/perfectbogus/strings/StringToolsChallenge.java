@@ -57,7 +57,20 @@ public class StringToolsChallenge {
     // "aaaaaaaaaaaa"  -> "a12"
     // ""              -> ""
     public static String compress(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int i = 0;
+        StringBuilder sb = new StringBuilder();
+        while (i < text.length()) {
+            char c = text.charAt(i);
+            int count = 1;
+            int j = i + 1;
+            while (j < text.length() && c == text.charAt(j)) {
+                count++;
+                j++;
+            }
+            sb.append(c).append(count);
+            i = j;
+        }
+        return sb.toString();
     }
 
     // ==========================================================
