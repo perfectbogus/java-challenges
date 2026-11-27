@@ -1,6 +1,7 @@
 package dev.perfectbogus.strings;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -100,7 +101,7 @@ public class StringToolsChallenge {
     // "hi, there!"           -> "there!"
     // ""                     -> ""
     public static String longestWord(String sentence) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return Arrays.stream(sentence.split(" ")).max(Comparator.comparingInt(String::length)).get();
     }
 
     // ==========================================================
