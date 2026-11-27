@@ -85,7 +85,7 @@ public class StringToolsChallenge {
     // ("abc", "abcd")     -> false
     // ("", "")            -> true
     public static boolean isRotation(String a, String b) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return a.length() == b.length() && (a + a).contains(b);
     }
 
     // ==========================================================
