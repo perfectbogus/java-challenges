@@ -1,6 +1,8 @@
 package dev.perfectbogus.strings;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -39,7 +41,8 @@ public class StringToolsChallenge {
     // "rhythm"       -> 0
     // ""             -> 0
     public static int countVowels(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+        return (int) text.chars().mapToObj(c -> (char)c).filter(vowels::contains).count();
     }
 
     // ==========================================================
