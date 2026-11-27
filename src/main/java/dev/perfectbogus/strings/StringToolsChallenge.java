@@ -1,5 +1,8 @@
 package dev.perfectbogus.strings;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * 15 easy challenges about Strings.
  *
@@ -20,7 +23,10 @@ public class StringToolsChallenge {
     // "mIxEd cAsE"   -> "Mixed Case"
     // ""             -> ""
     public static String capitalizeWords(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.isEmpty()) return "";
+        return Arrays.stream(text.split(" "))
+                .map(s -> s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase())
+                .collect(Collectors.joining(" "));
     }
 
     // ==========================================================
