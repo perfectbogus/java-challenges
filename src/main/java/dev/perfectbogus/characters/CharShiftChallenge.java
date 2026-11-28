@@ -20,7 +20,17 @@ public class CharShiftChallenge {
     // 'Y' -> 'Z'
     // 'Z' -> 'A'
     public static char nextLetter(char c) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (c >= 'a' && c <= 'y') {
+            return (char) (c + 1);
+        } else if (c == 'z') {
+            return 'a';
+        } else if (c >= 'A' && c <= 'Y') {
+            return (char) (c + 1);
+        } else if (c == 'Z') {
+            return 'A';
+        } else {
+            return c;
+        }
     }
 
     // ==========================================================
