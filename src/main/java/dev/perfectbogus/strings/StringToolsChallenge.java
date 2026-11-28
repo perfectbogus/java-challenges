@@ -118,7 +118,19 @@ public class StringToolsChallenge {
     // ("abc", -1)            -> "zab"
     // ("abc", 27)            -> "bcd"
     public static String caesar(String text, int shift) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int move = Math.floorMod(shift, 26);
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c >= 'a' && c <= 'z') {
+                result.append((char) ('a' + (c - 'a' + move) % 26));
+            } else if (c >= 'A' && c <= 'Z') {
+                result.append((char) ('A' + (c - 'A' + move) % 26));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 
     // ==========================================================
