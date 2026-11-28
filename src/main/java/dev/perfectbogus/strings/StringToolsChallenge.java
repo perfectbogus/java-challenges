@@ -146,7 +146,13 @@ public class StringToolsChallenge {
     // "hello"         -> "hello"
     // ""              -> ""
     public static String toCamelCase(String snake) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (snake.isEmpty()) return "";
+        String[] words = snake.split("_");
+        StringBuilder sb = new StringBuilder(words[0]);
+        for (int i = 1; i < words.length; i++) {
+            sb.append(words[i].substring(0, 1).toUpperCase()).append(words[i].substring(1));
+        }
+        return sb.toString();
     }
 
     // ==========================================================
