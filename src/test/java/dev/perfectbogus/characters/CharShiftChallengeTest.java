@@ -36,6 +36,18 @@ class CharShiftChallengeTest {
         }
 
         @Test
+        void testFirstLettersSimplified() {
+            assertEquals('b', CharShiftChallenge.nextLetterSimplified('a'));
+            assertEquals('c', CharShiftChallenge.nextLetterSimplified('b'));
+        }
+
+        @Test
+        void testMiddleLetterSimplified() {
+            assertEquals('n', CharShiftChallenge.nextLetterSimplified('m'));
+            assertEquals('N', CharShiftChallenge.nextLetterSimplified('M'));
+        }
+
+        @Test
         void testWrapLowercase() {
             assertEquals('a', CharShiftChallenge.nextLetter('z'));
         }

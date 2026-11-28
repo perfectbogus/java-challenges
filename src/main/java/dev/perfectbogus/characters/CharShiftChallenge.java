@@ -33,6 +33,12 @@ public class CharShiftChallenge {
         }
     }
 
+    public static char nextLetterSimplified(char c) {
+        if (c == 'z') return 'a';
+        if (c == 'Z') return 'A';
+        return (char)(c + 1);
+    }
+
     // ==========================================================
     // CHALLENGE 2: previousLetter
     // ==========================================================
