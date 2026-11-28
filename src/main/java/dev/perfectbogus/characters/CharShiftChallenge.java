@@ -66,7 +66,7 @@ public class CharShiftChallenge {
     // "0"     -> 0
     // ""      -> 0
     public static int sumOfDigits(String digits) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return digits.chars().mapToObj(c -> (char)c).mapToInt(c -> c - '0').sum();
     }
 
     // ==========================================================
