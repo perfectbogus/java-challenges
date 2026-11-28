@@ -275,7 +275,8 @@ public class StringToolsChallenge {
     // ("abcd", 2, '0')   -> "abcd"
     // ("", 3, 'x')       -> "xxx"
     public static String padLeft(String text, int width, char pad) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (text.length() >= width) return text;
+        return String.valueOf(pad).repeat(width - text.length()) + text;
     }
 
     // ==========================================================
