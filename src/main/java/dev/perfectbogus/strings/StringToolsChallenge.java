@@ -313,6 +313,11 @@ public class StringToolsChallenge {
     // ("ab", 5)       -> [ab]
     // ("", 3)         -> []
     public static String[] splitIntoChunks(String text, int size) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int parts = (text.length() + size - 1) / size;
+        String[] result = new String[parts];
+        for (int i = 0; i < parts; i++) {
+            result[i] = text.substring(i * size, Math.min(text.length(), (i + 1) * size));
+        }
+        return result;
     }
 }
