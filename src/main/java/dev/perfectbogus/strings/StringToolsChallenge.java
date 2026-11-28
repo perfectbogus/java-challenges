@@ -188,7 +188,17 @@ public class StringToolsChallenge {
     // [abc]                   -> "abc"
     // []                      -> ""
     public static String longestCommonPrefix(String[] words) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (words.length == 0) return "";
+
+        String prefix = words[0];
+        for (String word : words) {
+            int i = 0;
+            while (i < prefix.length() && i < word.length() && prefix.charAt(i) == word.charAt(i)) {
+                i++;
+            }
+            prefix = prefix.substring(0, i);
+        }
+        return prefix;
     }
 
     // ==========================================================
