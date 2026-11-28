@@ -229,7 +229,13 @@ public class StringToolsChallenge {
     // ("hello", "xyz")      -> 0
     // ("Aa", "a")           -> 1
     public static int countOccurrences(String text, String pattern) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int count = 0;
+        int from = text.indexOf(pattern);
+        while (from >= 0) {
+            count++;
+            from = text.indexOf(pattern, from + 1);
+        }
+        return count;
     }
 
     // ==========================================================
