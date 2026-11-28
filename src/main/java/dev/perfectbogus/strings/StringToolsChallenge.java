@@ -212,7 +212,9 @@ public class StringToolsChallenge {
     // "1234"              -> "1234"
     // ""                  -> ""
     public static String maskCard(String number) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (number.length() <= 4) return number;
+
+        return "*".repeat(number.length() - 4) + number.substring(number.length() - 4);
     }
 
     // ==========================================================
