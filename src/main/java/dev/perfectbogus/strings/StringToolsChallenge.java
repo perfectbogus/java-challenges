@@ -290,7 +290,16 @@ public class StringToolsChallenge {
     // "abcdefghijklmnopqrstuvwxy"                    -> false
     // ""                                             -> false
     public static boolean isPangram(String text) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        boolean[] seen = new boolean[26];
+        int count = 0;
+        for (int i = 0; i < text.length(); i++) {
+            char c = Character.toLowerCase(text.charAt(i));
+            if (c >= 'a' && c <= 'z' && !seen[c - 'a']) {
+                seen[c - 'a'] = true;
+                count++;
+            }
+        }
+        return count == 26;
     }
 
     // ==========================================================
