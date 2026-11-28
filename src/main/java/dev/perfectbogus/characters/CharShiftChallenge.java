@@ -51,7 +51,9 @@ public class CharShiftChallenge {
     // 'Z' -> 'Y'
     // 'A' -> 'Z'
     public static char previousLetter(char c) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (c == 'a') return 'z';
+        if (c == 'A') return 'Z';
+        return (char)(c - 1);
     }
 
     // ==========================================================
