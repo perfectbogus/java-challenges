@@ -168,7 +168,12 @@ public class StringToolsChallenge {
     // "hello"        -> "hello"
     // ""             -> ""
     public static String toSnakeCase(String camel) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        String[] words = camel.split("(?<=[a-zA-Z0-9])(?=[A-Z])");
+        StringBuilder sb = new StringBuilder(words[0]);
+        for (int i = 1; i < words.length; i++) {
+            sb.append("_").append(words[i].toLowerCase());
+        }
+        return sb.toString();
     }
 
     // ==========================================================
